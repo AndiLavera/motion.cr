@@ -21,7 +21,7 @@ module ViewComponent::Assignable
   #   needs should_show_sidebar : Bool = true
   # end
   # ```
-  macro needs(*type_declarations)
+  macro props(*type_declarations)
     {% for declaration in type_declarations %}
       {% unless declaration.is_a?(TypeDeclaration) %}
         {% raise "'needs' expects a type declaration like 'name : String', instead got: '#{declaration}'" %}

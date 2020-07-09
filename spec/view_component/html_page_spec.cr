@@ -8,13 +8,6 @@ class TestRender
     view.to_s
   end
 
-  def r : String
-    hi = form(action: "/posts", method: "get") do
-    end
-    puts hi
-    view.to_s
-  end
-
   private def render_complicated_html
     header({class: "header"}) do
       style "body { font-size: 2em; }"
@@ -60,7 +53,7 @@ abstract class MainLayout
 end
 
 class InnerPage < MainLayout
-  needs foo : String
+  props foo : String
 
   def inner
     text "Inner text"
@@ -73,11 +66,11 @@ class InnerPage < MainLayout
 end
 
 class LessNeedyDefaultsPage < MainLayout
-  needs a_string : String = "string default"
-  needs bool : Bool = false
-  needs nil_default : String? = nil
-  needs inferred_nil_default : String?
-  needs inferred_nil_default2 : String | Nil
+  props a_string : String = "string default"
+  props bool : Bool = false
+  props nil_default : String? = nil
+  props inferred_nil_default : String?
+  props inferred_nil_default2 : String | Nil
 
   def inner
     div @a_string
@@ -129,7 +122,6 @@ describe ViewComponent::Base do
   end
 
   it "renders complicated HTML syntax" do
-    puts TestRender.new.r
     TestRender.new.render.should be_a(String)
   end
 
@@ -144,7 +136,7 @@ describe ViewComponent::Base do
     end
   end
 
-  describe "needs with defaults" do
+  describe "props with defaults" do
     it "allows default values to needs" do
       LessNeedyDefaultsPage.new.render.should contain %(<div>string default</div>)
     end
