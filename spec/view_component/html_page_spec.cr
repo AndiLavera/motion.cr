@@ -12,11 +12,12 @@ class TestRender < ViewComponent::Base
       text "my text"
       h1 "h1"
       br
-      div class: "empty-contents"
-      br({class: "br"})
-      br class: "br"
-      img({src: "src"})
-      h2 "A bit smaller", {class: "peculiar"}
+      div class: "empty-contents" do
+        br({class: "br"})
+        br class: "br"
+        img({src: "src"})
+        h2 "A bit smaller", {class: "peculiar"}
+      end
       h6 class: "h6" do
         small "super tiny", class: "so-small"
         span "wow"

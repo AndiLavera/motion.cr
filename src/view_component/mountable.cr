@@ -1,6 +1,6 @@
 module ViewComponent::Mountable
   # :nodoc:
-  macro mount(view)
-    {{view}}.new.render
+  def mount(view : ViewComponent::Base.class, *args, **named_args)
+    view.new(*args, **named_args).render
   end
 end
