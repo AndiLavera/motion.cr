@@ -1,8 +1,6 @@
 require "../spec_helper"
 
-class TestRender
-  include ViewComponent::Base
-
+class TestRender < ViewComponent::Base
   def render : String
     render_complicated_html
     view.to_s
@@ -27,18 +25,14 @@ class TestRender
   end
 end
 
-class UnsafePage
-  include ViewComponent::Base
-
+class UnsafePage < ViewComponent::Base
   def render
     text "<script>not safe</span>"
     view.to_s
   end
 end
 
-abstract class MainLayout
-  include ViewComponent::Base
-
+abstract class MainLayout < ViewComponent::Base
   def render
     title page_title
 

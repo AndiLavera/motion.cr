@@ -1,8 +1,6 @@
 require "./tags/**"
 require "./page_helpers/**"
-require "./mount_component"
-require "./assignable"
-require "./**"
+require "./*"
 
 module ViewComponent::HTMLBuilder
   include ViewComponent::BaseTags
