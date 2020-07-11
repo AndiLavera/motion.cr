@@ -1,3 +1,4 @@
+# TODO:
 module ViewComponent::MountComponent
   # Appends the `component` to the view.
   #
