@@ -32,18 +32,23 @@ module ViewComponent::Motion
 
     private def transform_root(component, html)
       fragment = Myhtml::Parser.new(html)
-      root = fragment.root!
 
-      yield root
+      if fragment.body!.children.size != 1
+        raise "Error" # MultipleRootsError, component
+      end
 
-      fragment.to_html
-      # fragment = Nokogiri::HTML::DocumentFragment.parse(html)
-      # root, *unexpected_others = fragment.children
-      # if !root || unexpected_others.any?(&:present?)
-      #   raise MultipleRootsError, component
-      # end
-      # yield root
-      # fragment.to_html.html_safe
+      # `Myhtml::Parser.new` adds missing elements such as `html`, `head` & `body`.
+      # Because of this, we need to build a new string as the return value.
+      #
+      # `fragment.body!` returns everything inside the body including the body tag.
+      # However, `.children` returns the first child of the body
+      # tag, which is the componment that we are trying to process.
+      String.build do |io|
+        fragment.body!.children.each do |root|
+          yield root
+          root.to_html(io)
+        end
+      end
     end
   end
 end
