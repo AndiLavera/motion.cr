@@ -12,6 +12,12 @@ dependencies:
     github: luckyframework/wordsmith
     version: ~> 0.2.0
 
+  crystalizer:
+    github: j8r/crystalizer
+
+  myhtml:
+    github: kostya/myhtml
+
 # development_dependencies:
 #   webmock:
 #     github: manastech/webmock.cr

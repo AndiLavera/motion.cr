@@ -1,4 +1,5 @@
 require "./html_builder"
+require "./motion"
 
 class ViewComponent::Base
   # TODO:
@@ -7,6 +8,7 @@ class ViewComponent::Base
   # end
 
   include ViewComponent::HTMLBuilder
+  include ViewComponent::Motion
   getter view = IO::Memory.new
 
   def to_s(io)

@@ -1,0 +1,9 @@
+name: crystalizer
+version: 0.4.1
+
+authors:
+  - Julien Reichardt <contact@jrei.ch>
+
+description: A Crystal [de]serializer
+
+license: ISC

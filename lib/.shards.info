@@ -4,3 +4,9 @@ shards:
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
     version: 0.2.0
+  crystalizer:
+    git: https://github.com/j8r/crystalizer.git
+    version: 0.4.1
+  myhtml:
+    git: https://github.com/kostya/myhtml.git
+    version: 1.5.1
