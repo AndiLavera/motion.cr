@@ -10,6 +10,7 @@ class ViewComponent::Base
   include ViewComponent::HTMLBuilder
   include ViewComponent::Motion
   getter view = IO::Memory.new
+  property map_motion : Bool = false
 
   def to_s(io)
     io << view

@@ -1,16 +1,13 @@
-# require "nokogiri"
-# require "active_support/core_ext/object/blank"
-
-# require "motion"
+require "myhtml"
 
 module ViewComponent::Motion
   class HTMLTransformer
-    setter serializer : ViewComponent::Motion::Serializer
-    setter key_attribute : String
-    setter state_attribute : String
+    property serializer : ViewComponent::Motion::Serializer
+    property key_attribute : String
+    property state_attribute : String
 
     def initialize(
-      serializer = Motion.serializer,
+      serializer = Serializer.new,     # Motion.serializer,
       key_attribute = "motion-key",    # TODO: Motion.config.key_attribute,
       state_attribute = "motion-state" # TODO: Motion.config.state_attribute
     )
@@ -22,7 +19,7 @@ module ViewComponent::Motion
     def add_state_to_html(component, html)
       return if html.blank?
 
-      key, state = serializer.serialize(component)
+      key, state = ["1234", "5678"] # TODO: serializer.serialize(component)
 
       transform_root(component, html) do |root|
         root[key_attribute] = key
@@ -34,7 +31,7 @@ module ViewComponent::Motion
       fragment = Myhtml::Parser.new(html)
 
       if fragment.body!.children.size != 1
-        raise "Error" # MultipleRootsError, component
+        raise "MultipleRootsError" # MultipleRootsError, component
       end
 
       # `Myhtml::Parser.new` adds missing elements such as `html`, `head` & `body`.

@@ -1,5 +1,6 @@
-# require "./motions/*"
-# require "./html_transformer"
+require "./motions/*"
+require "./html_transformer"
+require "./serializer"
 
 module ViewComponent
   module Motion
