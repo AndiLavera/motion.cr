@@ -28,7 +28,7 @@ module ViewComponent::Motion
       fragment = Myhtml::Parser.new(html)
 
       if fragment.body!.children.size != 1
-        raise MultipleRootsError.new(component) # MultipleRootsError, component
+        raise MultipleRootsError.new(component)
       end
 
       # `Myhtml::Parser.new` adds missing elements such as `html`, `head` & `body`.

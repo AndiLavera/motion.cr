@@ -28,12 +28,15 @@ module ViewComponent::Motion
       ]
     end
 
-    def deserialize(encoded_component, digest)
+    # TODO:
+    # Possibly accept `digest` & ensure the digests match
+    def deserialize(encoded_component : String)
       state_with_class = decode(encoded_component)
-      raise "BadDigestError" unless salted_digest(state_with_class) == digest
+      # raise "BadDigestError" unless salted_digest(state_with_class) == digest
 
       state, component_class = state_with_class.split(NULL_BYTE)
-      # component = load(state)
+
+      component = load(state, component_class)
 
       # if revision == serialized_revision
       #   component
@@ -43,15 +46,16 @@ module ViewComponent::Motion
 
     end
 
-    private def dump(component)
+    private def dump(component : ViewComponent::Base)
       serialized_comp = Crystalizer::JSON.serialize(component)
-      # rescue e : StandardError
-      #   raise "UnrepresentableStateError" # TODO: .new(component, e.message)
+    rescue e : Exception
+      raise UnrepresentableStateError.new(component, e.message)
     end
 
-    private def load(state, klass)
-      # TODO:
-      Crystalizer::JSON.deserialize(state, to: KLASSES[klass])
+    private def load(state : String, klass : String) : Nil
+      klass = ViewComponent::Base.subclasses[klass]
+
+      Crystalizer::JSON.deserialize(state, to: klass)
     end
 
     private def hash(state)
@@ -62,12 +66,11 @@ module ViewComponent::Motion
       Base64.strict_encode(state)
     end
 
-    private def decode(state)
+    private def decode(state : String)
       Base64.decode_string(state)
     end
 
     def salted_digest(input)
-      # TODO: Change to OpenSSL::Digest.base64digest
       Base64.strict_encode(hash_salt + input)
     end
 

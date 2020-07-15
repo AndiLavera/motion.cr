@@ -1,4 +1,5 @@
 require "../spec_helper"
+require "myhtml"
 
 class MotionRender < ViewComponent::Base
   def render
@@ -46,24 +47,30 @@ class UnsafeMultipleRootsMount < ViewComponent::Base
   end
 end
 
-describe ViewComponent::Motion::HTMLTransformer do
-  it "can transform markup" do
-    MotionRender.new.render.includes?("motion-state").should be_true
-  end
+# describe ViewComponent::Motion::HTMLTransformer do
+#   it "can transform markup" do
+#     MotionRender.new.render.includes?("motion-state").should be_true
+#   end
 
-  it "throws error when component has multiple roots" do
-    expect_raises(ViewComponent::Motion::MultipleRootsError) do
-      UnsafeMultipleRootsRender.new.render
-    end
-  end
+#   it "throws error when component has multiple roots" do
+#     expect_raises(ViewComponent::Motion::MultipleRootsError) do
+#       UnsafeMultipleRootsRender.new.render
+#     end
+#   end
+# end
 
-  # it "can deserialize component" do
-  #   # TODO:
-  #   json = Crystalizer::JSON.serialize UnsafeMotionRender.new
-  #   klass = ViewComponent::Base.subclasses["UnsafeMotionRender"]
-  #   # puts klass
-  #   c = Crystalizer::JSON.deserialize(json, to: klass)
-  #   puts c.inspect
-  #   # MotionRender.new.render
-  # end
+describe ViewComponent::Motion::Serializer do
+  it "can deserialize component" do
+    fragment = Myhtml::Parser.new(MotionRender.new.render)
+    node_with_state = fragment.body!.children.to_a[0]
+    state = node_with_state.attribute_by("motion-state")
+
+    raise "Could not find motion-state" if state.nil?
+
+    puts ViewComponent::Motion::Serializer.new.deserialize(state)
+    # json = Crystalizer::JSON.serialize MotionRender.new
+    # klass = ViewComponent::Base.fetch_subclass("MotionRender")
+    # component = Crystalizer::JSON.deserialize(json, to: klass)
+    # puts c.inspect
+  end
 end

@@ -25,6 +25,26 @@ module ViewComponent
       end
     end
 
+    class InvalidComponentStateError < ComponentError; end
+
+    class UnrepresentableStateError < InvalidComponentStateError
+      def initialize(component, cause)
+        super(
+          component,
+          "Some state prevented `#{component.class}` from being serialized " \
+          "into a string. Motion components must be serializable using " \
+          "`Crystalizer::JSON.serialize`. " \
+          "See the documentation for `Crystalizer::JSON.serialize` for more information.\n" \
+          "https://github.com/j8r/crystalizer\n" \
+          "\n" \
+          "The specific error from Crystalizer::JSON.serialize` was: #{cause}\n" \
+          "\n" \
+          "Hint: Ensure that any exotic state variables in " \
+          "`#{component.class}` are removed or replaced."
+        )
+      end
+    end
+
     # class MotionNotMapped < ComponentError
     #   attr_reader :motion
 
@@ -57,26 +77,6 @@ module ViewComponent
     #     super(component, <<~MSG)
     #       Rendering #{component.class} was aborted by a callback.
     #     MSG
-    #   end
-    # end
-
-    # class InvalidComponentStateError < ComponentError; end
-
-    # class UnrepresentableStateError < InvalidComponentStateError
-    #   def initialize(component, cause)
-    #     super(
-    #       component,
-    #       "Some state prevented `#{component.class}` from being serialized " \
-    #       "into a string. Motion components must be serializable using " \
-    #       "`Marshal.dump`. Many types of objects are not serializable " \
-    #       "including procs, references to anonymous classes, and more. See the " \
-    #       "documentation for `Marshal.dump` for more information.\n" \
-    #       "\n" \
-    #       "The specific error from `Marshal.dump` was: #{cause}\n" \
-    #       "\n" \
-    #       "Hint: Ensure that any exotic state variables in " \
-    #       "`#{component.class}` are removed or replaced."
-    #     )
     #   end
     # end
 

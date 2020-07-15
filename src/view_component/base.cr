@@ -20,10 +20,10 @@ class ViewComponent::Base
   end
 
   macro subclasses
-    {% classes = {} of String => ViewComponent::Base %}
+    {
     {% for subclass in @type.subclasses %}
-      {% classes[subclass.stringify] = subclass %}
+      {{subclass}}: {{subclass.id}},
     {% end %}
-    {{ classes }}
+    }
   end
 end
