@@ -1,5 +1,5 @@
 module Amber::Controller::Helpers
   module Render
-    include ViewComponent::Mountable
+    include ViewComponent::MountComponent
   end
 end
