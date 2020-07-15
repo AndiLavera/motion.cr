@@ -48,9 +48,7 @@ end
 
 describe ViewComponent::Motion::HTMLTransformer do
   it "can transform markup" do
-    # raise ViewComponent::Motion::ComponentError.new(MotionRender.new, "You fucked up")
-    MotionRender.new.render.includes?("motion-key").should be_true
-    # puts ViewComponent::Base.subclasses
+    MotionRender.new.render.includes?("motion-state").should be_true
   end
 
   it "throws error when component has multiple roots" do

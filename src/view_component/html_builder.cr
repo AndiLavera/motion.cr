@@ -4,7 +4,6 @@ require "./allowed_in_tags"
 require "./asset_helpers"
 require "./assignable"
 require "./mount_component"
-require "./mountable"
 
 module ViewComponent::HTMLBuilder
   include ViewComponent::BaseTags
