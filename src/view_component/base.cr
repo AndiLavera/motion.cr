@@ -1,6 +1,7 @@
 require "./html_builder"
 require "./motion"
 require "./exceptions"
+require "json"
 
 class ViewComponent::Base
   # TODO:
@@ -10,8 +11,9 @@ class ViewComponent::Base
 
   include ViewComponent::HTMLBuilder
   include ViewComponent::Motion
+  include JSON::Serializable
 
-  @[Crystalizer::Field(ignore: true)]
+  @[JSON::Field(ignore: true)]
   getter view = IO::Memory.new
   property map_motion : Bool = false
 

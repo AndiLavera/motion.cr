@@ -10,7 +10,7 @@ end
 
 class MotionMount < ViewComponent::Base
   props map_motion : Bool = true
-  props hello : String = "hello"
+  props test_prop : String = "Test Prop"
 
   def render
     div do
@@ -47,17 +47,17 @@ class UnsafeMultipleRootsMount < ViewComponent::Base
   end
 end
 
-# describe ViewComponent::Motion::HTMLTransformer do
-#   it "can transform markup" do
-#     MotionRender.new.render.includes?("motion-state").should be_true
-#   end
+describe ViewComponent::Motion::HTMLTransformer do
+  it "can transform markup" do
+    MotionRender.new.render.includes?("motion-state").should be_true
+  end
 
-#   it "throws error when component has multiple roots" do
-#     expect_raises(ViewComponent::Motion::MultipleRootsError) do
-#       UnsafeMultipleRootsRender.new.render
-#     end
-#   end
-# end
+  it "throws error when component has multiple roots" do
+    expect_raises(ViewComponent::Motion::MultipleRootsError) do
+      UnsafeMultipleRootsRender.new.render
+    end
+  end
+end
 
 describe ViewComponent::Motion::Serializer do
   it "can deserialize component" do
@@ -67,10 +67,8 @@ describe ViewComponent::Motion::Serializer do
 
     raise "Could not find motion-state" if state.nil?
 
-    puts ViewComponent::Motion::Serializer.new.deserialize(state)
-    # json = Crystalizer::JSON.serialize MotionRender.new
-    # klass = ViewComponent::Base.fetch_subclass("MotionRender")
-    # component = Crystalizer::JSON.deserialize(json, to: klass)
-    # puts c.inspect
+    component = ViewComponent::Motion::Serializer.new.deserialize(state)
+    component.inspect.to_s.includes?("@test_prop=\"Test Prop\"").should be_true
+    component.inspect.to_s.includes?("@map_motion=true").should be_true
   end
 end
