@@ -1,8 +1,4 @@
-# require "digest"
-# require "active_support/message_encryptor"
-
-# require "motion"
-require "crystalizer/json"
+require "json"
 require "base64"
 require "crypto/bcrypt"
 
@@ -47,15 +43,13 @@ module ViewComponent::Motion
     end
 
     private def dump(component : ViewComponent::Base)
-      serialized_comp = Crystalizer::JSON.serialize(component)
+      serialized_comp = component.to_json
     rescue e : Exception
       raise UnrepresentableStateError.new(component, e.message)
     end
 
-    private def load(state : String, klass : String) : Nil
-      klass = ViewComponent::Base.subclasses[klass]
-
-      Crystalizer::JSON.deserialize(state, to: klass)
+    private def load(state : String, klass : String) : ViewComponent::Base
+      ViewComponent::Base.subclasses[klass].from_json(state)
     end
 
     private def hash(state)
