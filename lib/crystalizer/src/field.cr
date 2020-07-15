@@ -1,2 +1,0 @@
-annotation Crystalizer::Field
-end
