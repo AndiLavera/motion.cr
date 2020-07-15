@@ -58,7 +58,7 @@ struct Crystalizer::Deserializer::Object(T, N)
         {% end %}
         {% i = i + 1 %}
       {% end %}
-      else raise Exception.new "Missing key in {{T}}: #{key}"
+      else raise Exception.new "Unknown key in {{T}}: #{key}"
       end
     {% end %}
   end
@@ -71,9 +71,9 @@ struct Crystalizer::Deserializer::Object(T, N)
       {% unless ann && ann[:ignore] %}
       if !@found[{{i}}]
         {% if ivar.has_default_value? %}
-          @object_instance.@{{ivar}} = {{ivar.default_value}}
+          pointerof(@object_instance.@{{ivar}}).value = {{ivar.default_value}}
         {% elsif !ivar.type.nilable? %}
-          raise Exception.new "Missing {{ivar}} value in {{T}}."
+          raise Exception.new "Missing instance variable value in {{T}}: {{ivar}}"
         {% end %}
       end
       {% end %}

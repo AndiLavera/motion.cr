@@ -2,24 +2,21 @@ require "myhtml"
 
 module ViewComponent::Motion
   class HTMLTransformer
-    property serializer : ViewComponent::Motion::Serializer
-    property key_attribute : String
-    property state_attribute : String
+    private property serializer : ViewComponent::Motion::Serializer
+    private property key_attribute : String
+    private property state_attribute : String
 
     def initialize(
-      serializer = Serializer.new,     # Motion.serializer,
-      key_attribute = "motion-key",    # TODO: Motion.config.key_attribute,
-      state_attribute = "motion-state" # TODO: Motion.config.state_attribute
+      @serializer = Serializer.new,     # Motion.serializer,
+      @key_attribute = "motion-key",    # TODO: Motion.config.key_attribute,
+      @state_attribute = "motion-state" # TODO: Motion.config.state_attribute
     )
-      @serializer = serializer
-      @key_attribute = key_attribute
-      @state_attribute = state_attribute
     end
 
     def add_state_to_html(component, html)
       return if html.blank?
 
-      key, state = ["1234", "5678"] # TODO: serializer.serialize(component)
+      key, state = serializer.serialize(component)
 
       transform_root(component, html) do |root|
         root[key_attribute] = key
@@ -31,7 +28,7 @@ module ViewComponent::Motion
       fragment = Myhtml::Parser.new(html)
 
       if fragment.body!.children.size != 1
-        raise "MultipleRootsError" # MultipleRootsError, component
+        raise MultipleRootsError.new(component) # MultipleRootsError, component
       end
 
       # `Myhtml::Parser.new` adds missing elements such as `html`, `head` & `body`.

@@ -14,7 +14,7 @@ end
 
 describe Crystalizer::YAML do
   describe "struct" do
-    point = Point.new 1, "a"
+    point = Point.new 1
     yaml_point = <<-E
     ---
     x: 1
@@ -122,7 +122,7 @@ describe Crystalizer::YAML do
   end
 
   describe Time do
-    assert_yaml_serialization Time.utc(2020, 1, 2, 3), "--- 2020-01-02 03:00:00\n"
+    assert_yaml_serialization Time.utc(2020, 1, 2, 3), "--- 2020-01-02 03:00:00.000000000\n"
   end
 
   describe Slice(UInt8) do

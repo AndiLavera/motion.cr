@@ -3,9 +3,9 @@ require "../src/field.cr"
 struct Point
   getter x : Int32
   @[Crystalizer::Field(key: "Y")]
-  getter y : String
+  getter y : String = "a"
 
-  def initialize(@x, @y)
+  def initialize(@x)
   end
 end
 

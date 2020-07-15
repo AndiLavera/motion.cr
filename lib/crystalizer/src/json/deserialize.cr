@@ -195,6 +195,7 @@ module Crystalizer::JSON
           end
         end
       end
+
       deserializer.object_instance
     {% end %}
   end

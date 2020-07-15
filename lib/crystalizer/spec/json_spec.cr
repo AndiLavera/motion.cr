@@ -14,7 +14,7 @@ end
 
 describe Crystalizer::JSON do
   describe "struct" do
-    point = Point.new 1, "a"
+    point = Point.new 1
     json_point = %({"x":1,"Y":"a"})
 
     assert_json_serialization point, json_point

@@ -8,7 +8,8 @@ class MotionRender < ViewComponent::Base
 end
 
 class MotionMount < ViewComponent::Base
-  property map_motion : Bool = true
+  props map_motion : Bool = true
+  props hello : String = "hello"
 
   def render
     div do
@@ -20,11 +21,51 @@ class MotionMount < ViewComponent::Base
   end
 end
 
+class UnsafeMultipleRootsRender < ViewComponent::Base
+  property hello : String = "Name"
+
+  def render
+    m UnsafeMultipleRootsMount
+    view.to_s
+  end
+end
+
+class UnsafeMultipleRootsMount < ViewComponent::Base
+  property map_motion : Bool = true
+
+  def render
+    div do
+      div data_motion: "add" do
+        h2 "Subheading"
+      end
+    end
+    div do
+      h1 "hi"
+    end
+    view.to_s
+  end
+end
+
 describe ViewComponent::Motion::HTMLTransformer do
   it "can transform markup" do
-    MotionRender.new.render.should eq(<<-HTML
-    <!-- BEGIN: MotionMount --><div motion-key="1234" motion-state="5678"><div data-motion="add"><h2>Subheading</h2></div></div><!-- END: MotionMount -->
-    HTML
-    )
+    # raise ViewComponent::Motion::ComponentError.new(MotionRender.new, "You fucked up")
+    MotionRender.new.render.includes?("motion-key").should be_true
+    # puts ViewComponent::Base.subclasses
   end
+
+  it "throws error when component has multiple roots" do
+    expect_raises(ViewComponent::Motion::MultipleRootsError) do
+      UnsafeMultipleRootsRender.new.render
+    end
+  end
+
+  # it "can deserialize component" do
+  #   # TODO:
+  #   json = Crystalizer::JSON.serialize UnsafeMotionRender.new
+  #   klass = ViewComponent::Base.subclasses["UnsafeMotionRender"]
+  #   # puts klass
+  #   c = Crystalizer::JSON.deserialize(json, to: klass)
+  #   puts c.inspect
+  #   # MotionRender.new.render
+  # end
 end
