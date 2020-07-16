@@ -1,7 +1,3 @@
-require "./motions/*"
-require "./html_transformer"
-require "./serializer"
-
 module ViewComponent
   module Motion
     # def self.configure(&block)
@@ -40,3 +36,9 @@ module ViewComponent
     end
   end
 end
+
+require "./motions/*"
+require "./html_transformer"
+require "./serializer"
+require "./component_connection"
+require "./motion_channel"
