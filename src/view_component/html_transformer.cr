@@ -14,7 +14,7 @@ module ViewComponent::Motion
     end
 
     def add_state_to_html(component, html)
-      return if html.blank?
+      return if html.nil?
 
       key, state = serializer.serialize(component)
 

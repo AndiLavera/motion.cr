@@ -11,11 +11,17 @@ end
 class MotionMount < ViewComponent::Base
   props map_motion : Bool = true
   props test_prop : String = "Test Prop"
+  props count : Int32 = 0
+
+  @[Invokeable]
+  def add
+    @count += 1
+  end
 
   def render
     div do
       div data_motion: "add" do
-        h2 "Subheading"
+        h2 @count.to_s
       end
     end
     view.to_s
@@ -61,14 +67,18 @@ end
 
 describe ViewComponent::Motion::Serializer do
   it "can deserialize component" do
-    fragment = Myhtml::Parser.new(MotionRender.new.render)
+    puts component = MotionRender.new.render
+    fragment = Myhtml::Parser.new(component)
     node_with_state = fragment.body!.children.to_a[0]
     state = node_with_state.attribute_by("motion-state")
 
     raise "Could not find motion-state" if state.nil?
+    deserialized_component = ViewComponent::Motion::Serializer.new.deserialize(state)
 
-    component = ViewComponent::Motion::Serializer.new.deserialize(state)
-    component.inspect.to_s.includes?("@test_prop=\"Test Prop\"").should be_true
-    component.inspect.to_s.includes?("@map_motion=true").should be_true
+    deserialized_component.inspect.to_s.includes?("@test_prop=\"Test Prop\"").should be_true
+    deserialized_component.inspect.to_s.includes?("@map_motion=true").should be_true
+    deserialized_component.invoke("add")
+    deserialized_component.inspect.to_s.includes?("@count=1").should be_true
+    puts deserialized_component.render
   end
 end

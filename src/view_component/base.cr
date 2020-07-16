@@ -3,6 +3,8 @@ require "./motion"
 require "./exceptions"
 require "json"
 
+annotation Invokeable; end
+
 class ViewComponent::Base
   # TODO:
   # Habitat.create do
@@ -19,6 +21,29 @@ class ViewComponent::Base
 
   def to_s(io)
     io << view
+  end
+
+  def invoke(method : String)
+    # TODO: Real Error
+    raise "ViewComponent::Base#invoke"
+  end
+
+  def render
+    raise "ViewComponent::Base#render"
+  end
+
+  macro inherited
+    def invoke(method : String)
+      {% verbatim do %}
+          {% begin %}
+            case method
+            {% for method in @type.methods.select &.annotation(Invokeable) %}
+              when {{method.name.id.stringify}} then return self.{{method.name.id}}    
+            {% end %}
+            end
+        {% end %}
+      {% end %}
+    end
   end
 
   macro subclasses

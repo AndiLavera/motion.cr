@@ -25,6 +25,7 @@ module ViewComponent::HTMLBuilder
   include ViewComponent::WithDefaults
 
   abstract def view
+  abstract def render
 
   macro setup_initializer_hook
     macro finished
@@ -56,14 +57,10 @@ module ViewComponent::HTMLBuilder
            has_explicit_value ? 1 : 0
          } %}
 
+      # Generate JSON::Serilizable annotions
       {% for declaration in sorted_assigns %}
         {% var = declaration.var %}
-        {% type = declaration.type %}
-        {% value = declaration.value %}
-        {% value = nil if type.stringify.ends_with?("Nil") && !value %}
-        {% has_default = value || value == false || value == nil %}
         {{ "@".id }}[JSON::Field(key: {{ var.stringify }})]
-        property {{ var.id }} : {{ type }}{% if has_default %} = {{ value }}{% end %}
       {% end %}
 
       def initialize(
