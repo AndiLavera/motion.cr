@@ -25,7 +25,7 @@ class Connection {
       data.connected()
       this.channel = this.socket.channel(data.channel);
 
-      this.channel.join();
+      this.channel.join({ identifier: data.identifier });
 
       this.channel.on('message_new', function (payload) {
         data.received()

@@ -28,17 +28,17 @@ module ViewComponent::Motion
       # end
     end
 
-    # def close
-    #   timing("Disconnected") do
-    #     component.process_disconnect
-    #   end
+    def close
+      #   timing("Disconnected") do
+      #     component.process_disconnect
+      #   end
 
-    #   true
-    # rescue => error
-    #   handle_error(error, "disconnecting the component")
+      #   true
+      # rescue => error
+      #   handle_error(error, "disconnecting the component")
 
-    #   false
-    # end
+      #   false
+    end
 
     # def process_motion(motion, event = nil)
     #   timing("Proccessed #{motion}") do

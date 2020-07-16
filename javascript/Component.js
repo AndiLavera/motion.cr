@@ -14,7 +14,7 @@ export default class Component {
     //debugger
     this._subscription = this.client.consumer.subscriptions.create(
       {
-        channel: 'motion:123',
+        channel: `motion:${Math.floor(Math.random() * 10000)}`,
         version: "0.2.2", // import version
         state: this.element.getAttribute(this.client.stateAttribute)
       },

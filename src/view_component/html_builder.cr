@@ -60,7 +60,12 @@ module ViewComponent::HTMLBuilder
       # Generate JSON::Serilizable annotions
       {% for declaration in sorted_assigns %}
         {% var = declaration.var %}
+        {% type = declaration.type %}
+        {% value = declaration.value %}
+        {% value = nil if type.stringify.ends_with?("Nil") && !value %}
+        {% has_default = value || value == false || value == nil %}
         {{ "@".id }}[JSON::Field(key: {{ var.stringify }})]
+        property {{ var.id }} : {{ type }}{% if has_default %} = {{ value }}{% end %}
       {% end %}
 
       def initialize(
@@ -72,10 +77,12 @@ module ViewComponent::HTMLBuilder
           {% has_default = value || value == false || value == nil %}
           @{{ var.id }} : {{ type }}{% if has_default %} = {{ value }}{% end %},
         {% end %}
+        {{debug}}
         **unused_exposures
         )
       end
     {% end %}
+    {{debug}}
   end
 
   macro generate_getters

@@ -9,7 +9,7 @@ module ViewComponent::Motion
     private property hash_salt : String?
     getter secret = "Motion"
 
-    def serialize(component)
+    def serialize(component : ViewComponent::Base)
       state = dump(component)
 
       # [
@@ -24,6 +24,10 @@ module ViewComponent::Motion
       ]
     end
 
+    def weak_digest(component : ViewComponent::Base) : String
+      hash(dump(component)).to_s
+    end
+
     # TODO:
     # Possibly accept `digest` & ensure the digests match
     def deserialize(encoded_component : String)
@@ -31,6 +35,7 @@ module ViewComponent::Motion
       # raise "BadDigestError" unless salted_digest(state_with_class) == digest
 
       state, component_class = state_with_class.split(NULL_BYTE)
+      puts state
 
       component = load(state, component_class)
 
