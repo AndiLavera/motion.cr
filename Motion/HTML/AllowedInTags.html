@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="motion.cr">
-  <title>Motion::Exceptions::ComponentRenderingError - motion.cr master</title>
+  <title>Motion::HTML::AllowedInTags - motion.cr master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -66,7 +66,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
+  <li class="parent " data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
       <a href="../../Motion/Exceptions.html">Exceptions</a>
       
         <ul>
@@ -81,7 +81,7 @@
       
     </li>
   
-  <li class=" current" data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
       <a href="../../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
       
     </li>
@@ -106,12 +106,12 @@
       
     </li>
   
-  <li class="parent " data-id="motion.cr/Motion/HTML" data-name="motion::html">
+  <li class="parent open current" data-id="motion.cr/Motion/HTML" data-name="motion::html">
       <a href="../../Motion/HTML.html">HTML</a>
       
         <ul>
   
-  <li class=" " data-id="motion.cr/Motion/HTML/AllowedInTags" data-name="motion::html::allowedintags">
+  <li class=" current" data-id="motion.cr/Motion/HTML/AllowedInTags" data-name="motion::html::allowedintags">
       <a href="../../Motion/HTML/AllowedInTags.html">AllowedInTags</a>
       
     </li>
@@ -265,37 +265,53 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Motion::Exceptions::ComponentRenderingError
+  <span class="kind">module</span> Motion::HTML::AllowedInTags
 
 </h1>
-
-
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Motion/Exceptions/ComponentRenderingError.html">Motion::Exceptions::ComponentRenderingError</a></li><li class="superclass"><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></li><li class="superclass"><a href="../../Motion/Exceptions/BaseError.html">Motion::Exceptions::BaseError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
-
-
-
-
-
-
-
 
 
 
 
 
   <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+    <a id="overview" class="anchor" href="#overview">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Direct Known Subclasses
+    Overview
   </h2>
-  <ul class="other-types-list">
-    
-      <li class="other-type"><a href="../../Motion/Exceptions/MultipleRootsError.html">Motion::Exceptions::MultipleRootsError</a></li>
-    
-  </ul>
+
+  <p>Include this module in a type to allow it to be output in tags</p>
+
+<p>Lucky already includes this in a few common types like <code>Int</code> and <code>Bool</code>.
+Typically this is enough but if you have a type you want to allow in tags, you
+can do so.</p>
+
+<p>For example:</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">EmailAddress</span>
+  <span class="k">include</span> <span class="t">Lucky</span><span class="t">::</span><span class="t">AllowedInTags</span>
+
+  <span class="k">def</span> <span class="m">initialize</span>(@value : <span class="t">String</span>)
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="m">to_s</span>(io)
+    io.puts @value
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>Now an <code>EmailAddress</code> can be used for tag content without calling <code>to_s</code>:</p>
+
+<pre><code>h1 <span class="t">EmailAddress</span>.<span class="k">new</span>(<span class="s">&quot;myemail.com&quot;</span>)</code></pre>
+
+
+
+
+
+
+
+
 
 
 
@@ -312,8 +328,8 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/exceptions.cr#L13" target="_blank">
-        motion/exceptions.cr
+      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/allowed_in_tags.cr#L27" target="_blank">
+        motion/html/allowed_in_tags.cr
       </a>
     
     <br/>
@@ -332,74 +348,6 @@
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#component:Motion::Base-instance-method" class="tooltip">
-      <span>component : Motion::Base</span>
-    component</a>
-    
-  
-
-
-    
-
-  <h3>Constructor methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#new(component,message=nil)-class-method" class="tooltip">
-      <span>new(component, message = <span class="n">nil</span>)</span>
-    new</a>
-    
-  
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
 </div>
 

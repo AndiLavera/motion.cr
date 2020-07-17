@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="motion.cr">
-  <title>Motion::Exceptions::ComponentRenderingError - motion.cr master</title>
+  <title>Motion::HTML::AssetHelpers - motion.cr master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -66,7 +66,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
+  <li class="parent " data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
       <a href="../../Motion/Exceptions.html">Exceptions</a>
       
         <ul>
@@ -81,7 +81,7 @@
       
     </li>
   
-  <li class=" current" data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
       <a href="../../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
       
     </li>
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class="parent " data-id="motion.cr/Motion/HTML" data-name="motion::html">
+  <li class="parent open current" data-id="motion.cr/Motion/HTML" data-name="motion::html">
       <a href="../../Motion/HTML.html">HTML</a>
       
         <ul>
@@ -116,7 +116,7 @@
       
     </li>
   
-  <li class=" " data-id="motion.cr/Motion/HTML/AssetHelpers" data-name="motion::html::assethelpers">
+  <li class=" current" data-id="motion.cr/Motion/HTML/AssetHelpers" data-name="motion::html::assethelpers">
       <a href="../../Motion/HTML/AssetHelpers.html">AssetHelpers</a>
       
     </li>
@@ -265,13 +265,29 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Motion::Exceptions::ComponentRenderingError
+  <span class="kind">module</span> Motion::HTML::AssetHelpers
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Motion/Exceptions/ComponentRenderingError.html">Motion::Exceptions::ComponentRenderingError</a></li><li class="superclass"><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></li><li class="superclass"><a href="../../Motion/Exceptions/BaseError.html">Motion::Exceptions::BaseError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Methods for returning the path to assets</p>
+
+<p>These methods will return fingerprinted paths, check assets at compile time,
+and allow for setting a CDN.</p>
+
+<p>For an in-depth guide check: https://luckyframework.org/guides/frontend/asset-handling</p>
 
 
 
@@ -284,20 +300,18 @@
 
 
   <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+    <a id="direct-including-types" class="anchor" href="#direct-including-types">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Direct Known Subclasses
+    Direct including types
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type"><a href="../../Motion/Exceptions/MultipleRootsError.html">Motion::Exceptions::MultipleRootsError</a></li>
+      <li class="other-type"><a href="../../Motion/HTML/Engine.html">Motion::HTML::Engine</a></li>
     
   </ul>
-
-
 
 
 
@@ -312,8 +326,8 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/exceptions.cr#L13" target="_blank">
-        motion/exceptions.cr
+      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/asset_helpers.cr#L7" target="_blank">
+        motion/html/asset_helpers.cr
       </a>
     
     <br/>
@@ -321,6 +335,29 @@
 
 
 
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="ASSET_MANIFEST">
+        <strong>ASSET_MANIFEST</strong> = <code>{} <span class="k">of</span> <span class="t">String</span> => <span class="t">String</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="CONFIG">
+        <strong>CONFIG</strong> = <code>{has_loaded_manifest: <span class="n">false</span>}</code>
+      </dt>
+      
+    
+  </dl>
 
 
 
@@ -328,78 +365,54 @@
 
 
 
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#dynamic_asset(path)-instance-method" class="signature"><strong>#dynamic_asset</strong>(path)</a>
+        
+          <div class="summary"><p>Return the string path to an asset (allows string interpolation)</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>
+    <a id="macro-summary" class="anchor" href="#macro-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Macro Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#asset(path)-macro" class="signature"><strong>asset</strong>(path)</a>
+        
+          <div class="summary"><p>Return the string path to an asset</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#load_manifest-macro" class="signature"><strong>load_manifest</strong></a>
+        
+      </li>
+    
+  </ul>
 
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#component:Motion::Base-instance-method" class="tooltip">
-      <span>component : Motion::Base</span>
-    component</a>
-    
-  
-
-
-    
-
-  <h3>Constructor methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#new(component,message=nil)-class-method" class="tooltip">
-      <span>new(component, message = <span class="n">nil</span>)</span>
-    new</a>
-    
-  
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
 </div>
 
@@ -408,7 +421,111 @@
 
 
 
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="dynamic_asset(path)-instance-method">
+      <div class="signature">
+        
+        def <strong>dynamic_asset</strong>(path)
 
+        <a class="method-permalink" href="#dynamic_asset(path)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Return the string path to an asset (allows string interpolation)</p>
+
+<pre><code><span class="c"># In a page or component</span>
+<span class="c"># Will find the asset in `public/assets/images/logo.png`</span>
+img src: asset(<span class="s">&quot;images/logo.png&quot;</span>)
+
+<span class="c"># Can also be used elsewhere by prepending Lucky::AssetHelpers</span>
+<span class="t">Lucky</span><span class="t">::</span><span class="t">AssetHelpers</span>.asset(<span class="s">&quot;images/logo.png&quot;</span>)</code></pre>
+
+<p><span class="flag purple">NOTE</span>  This method does <em>not</em> check assets at compile time. The asset path
+is found at runtime so it is possible the asset does not exist. Be sure to
+manually test that the asset is returned as expected.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/asset_helpers.cr#L86" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>
+    <a id="macro-detail" class="anchor" href="#macro-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Macro Detail
+  </h2>
+  
+    <div class="entry-detail" id="asset(path)-macro">
+      <div class="signature">
+        
+        macro <strong>asset</strong>(path)
+
+        <a class="method-permalink" href="#asset(path)-macro">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Return the string path to an asset</p>
+
+<pre><code><span class="c"># In a page or component:</span>
+<span class="c"># Will find the asset in `public/assets/images/logo.png`</span>
+img src: asset(<span class="s">&quot;images/logo.png&quot;</span>)
+
+<span class="c"># Can also be used elsewhere by prepending Lucky::AssetHelpers</span>
+<span class="t">Lucky</span><span class="t">::</span><span class="t">AssetHelpers</span>.asset(<span class="s">&quot;images/logo.png&quot;</span>)</code></pre>
+
+<p>Note that assets are checked at compile time so if it is not found, Lucky
+will let you know. It will also let you know if you had a typo and suggest an
+asset that is close to what you typed.</p>
+
+<p><span class="flag purple">NOTE</span>  This macro requires a <code>StringLiteral</code>. That means you cannot
+interpolate strings like this: <code><a href="../../Motion/HTML/AssetHelpers.html#asset(path)-macro">asset("images/icon-#{service_name}.png")</a></code>.
+instead use <code><a href="../../Motion/HTML/AssetHelpers.html#dynamic_asset(path)-instance-method">#dynamic_asset</a></code> if you need string interpolation.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/asset_helpers.cr#L34" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="load_manifest-macro">
+      <div class="signature">
+        
+        macro <strong>load_manifest</strong>
+
+        <a class="method-permalink" href="#load_manifest-macro">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/asset_helpers.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 </div>

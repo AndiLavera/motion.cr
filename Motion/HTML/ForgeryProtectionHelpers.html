@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="motion.cr">
-  <title>Motion::Exceptions::ComponentRenderingError - motion.cr master</title>
+  <title>Motion::HTML::ForgeryProtectionHelpers - motion.cr master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -66,7 +66,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
+  <li class="parent " data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
       <a href="../../Motion/Exceptions.html">Exceptions</a>
       
         <ul>
@@ -81,7 +81,7 @@
       
     </li>
   
-  <li class=" current" data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
       <a href="../../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
       
     </li>
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class="parent " data-id="motion.cr/Motion/HTML" data-name="motion::html">
+  <li class="parent open current" data-id="motion.cr/Motion/HTML" data-name="motion::html">
       <a href="../../Motion/HTML.html">HTML</a>
       
         <ul>
@@ -146,7 +146,7 @@
       
     </li>
   
-  <li class=" " data-id="motion.cr/Motion/HTML/ForgeryProtectionHelpers" data-name="motion::html::forgeryprotectionhelpers">
+  <li class=" current" data-id="motion.cr/Motion/HTML/ForgeryProtectionHelpers" data-name="motion::html::forgeryprotectionhelpers">
       <a href="../../Motion/HTML/ForgeryProtectionHelpers.html">ForgeryProtectionHelpers</a>
       
     </li>
@@ -265,12 +265,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Motion::Exceptions::ComponentRenderingError
+  <span class="kind">module</span> Motion::HTML::ForgeryProtectionHelpers
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Motion/Exceptions/ComponentRenderingError.html">Motion::Exceptions::ComponentRenderingError</a></li><li class="superclass"><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></li><li class="superclass"><a href="../../Motion/Exceptions/BaseError.html">Motion::Exceptions::BaseError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
 
 
 
@@ -284,20 +284,18 @@
 
 
   <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+    <a id="direct-including-types" class="anchor" href="#direct-including-types">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Direct Known Subclasses
+    Direct including types
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type"><a href="../../Motion/Exceptions/MultipleRootsError.html">Motion::Exceptions::MultipleRootsError</a></li>
+      <li class="other-type"><a href="../../Motion/HTML/Engine.html">Motion::HTML::Engine</a></li>
     
   </ul>
-
-
 
 
 
@@ -312,8 +310,8 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/exceptions.cr#L13" target="_blank">
-        motion/exceptions.cr
+      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/tags/forgery_protection_helpers.cr#L1" target="_blank">
+        motion/html/tags/forgery_protection_helpers.cr
       </a>
     
     <br/>
@@ -327,79 +325,37 @@
 
 
 
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#csrf_hidden_input:Nil-instance-method" class="signature"><strong>#csrf_hidden_input</strong> : Nil</a>
+        
+          <div class="summary"><p>Generate a hidden input with the request CSRF token</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#csrf_meta_tags:Nil-instance-method" class="signature"><strong>#csrf_meta_tags</strong> : Nil</a>
+        
+          <div class="summary"><p>Meta tags used for submitting AJAX links and forms</p></div>
+        
+      </li>
+    
+  </ul>
+
 
 
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#component:Motion::Base-instance-method" class="tooltip">
-      <span>component : Motion::Base</span>
-    component</a>
-    
-  
-
-
-    
-
-  <h3>Constructor methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#new(component,message=nil)-class-method" class="tooltip">
-      <span>new(component, message = <span class="n">nil</span>)</span>
-    new</a>
-    
-  
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
 </div>
 
@@ -407,6 +363,67 @@
 
 
 
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="csrf_hidden_input:Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>csrf_hidden_input</strong> : Nil
+
+        <a class="method-permalink" href="#csrf_hidden_input:Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Generate a hidden input with the request CSRF token</p>
+
+<p>This input is automatically generated when using
+<code>Motion::FormHelpers#form_for</code>. It creates a hidden input with the CSRF
+token. THis ensures that the form is safe. If you try to submit a form
+without a CSRF token it will fail with a 403 forbidden status code.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/tags/forgery_protection_helpers.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="csrf_meta_tags:Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>csrf_meta_tags</strong> : Nil
+
+        <a class="method-permalink" href="#csrf_meta_tags:Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Meta tags used for submitting AJAX links and forms</p>
+
+<p>These tags are automatically added to MainLayout when generating a new
+project. They are used by Rails UJS to safely submit forms and non-GET AJAX
+requests</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/tags/forgery_protection_helpers.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

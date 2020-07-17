@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="motion.cr">
-  <title>Motion::Exceptions::ComponentRenderingError - motion.cr master</title>
+  <title>Motion::HTML::NumberToCurrency - motion.cr master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -66,7 +66,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
+  <li class="parent " data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
       <a href="../../Motion/Exceptions.html">Exceptions</a>
       
         <ul>
@@ -81,7 +81,7 @@
       
     </li>
   
-  <li class=" current" data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
       <a href="../../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
       
     </li>
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class="parent " data-id="motion.cr/Motion/HTML" data-name="motion::html">
+  <li class="parent open current" data-id="motion.cr/Motion/HTML" data-name="motion::html">
       <a href="../../Motion/HTML.html">HTML</a>
       
         <ul>
@@ -166,7 +166,7 @@
       
     </li>
   
-  <li class=" " data-id="motion.cr/Motion/HTML/NumberToCurrency" data-name="motion::html::numbertocurrency">
+  <li class=" current" data-id="motion.cr/Motion/HTML/NumberToCurrency" data-name="motion::html::numbertocurrency">
       <a href="../../Motion/HTML/NumberToCurrency.html">NumberToCurrency</a>
       
     </li>
@@ -265,12 +265,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Motion::Exceptions::ComponentRenderingError
+  <span class="kind">module</span> Motion::HTML::NumberToCurrency
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Motion/Exceptions/ComponentRenderingError.html">Motion::Exceptions::ComponentRenderingError</a></li><li class="superclass"><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></li><li class="superclass"><a href="../../Motion/Exceptions/BaseError.html">Motion::Exceptions::BaseError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
 
 
 
@@ -284,20 +284,18 @@
 
 
   <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+    <a id="direct-including-types" class="anchor" href="#direct-including-types">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Direct Known Subclasses
+    Direct including types
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type"><a href="../../Motion/Exceptions/MultipleRootsError.html">Motion::Exceptions::MultipleRootsError</a></li>
+      <li class="other-type"><a href="../../Motion/HTML/Engine.html">Motion::HTML::Engine</a></li>
     
   </ul>
-
-
 
 
 
@@ -312,8 +310,8 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/exceptions.cr#L13" target="_blank">
-        motion/exceptions.cr
+      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/number_to_currency.cr#L1" target="_blank">
+        motion/html/page_helpers/number_to_currency.cr
       </a>
     
     <br/>
@@ -321,11 +319,72 @@
 
 
 
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="DEFAULT_DELIMITER">
+        <strong>DEFAULT_DELIMITER</strong> = <code><span class="s">&quot;,&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="DEFAULT_DELIMITER_REGEX">
+        <strong>DEFAULT_DELIMITER_REGEX</strong> = <code><span class="s">/(\d)(?=(\d\d\d)+(?!\d))/</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="DEFAULT_FORMAT">
+        <strong>DEFAULT_FORMAT</strong> = <code><span class="s">&quot;%u%n&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="DEFAULT_PRECISION">
+        <strong>DEFAULT_PRECISION</strong> = <code><span class="n">2</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="DEFAULT_SEPARATOR">
+        <strong>DEFAULT_SEPARATOR</strong> = <code><span class="s">&quot;.&quot;</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="DEFAULT_UNIT">
+        <strong>DEFAULT_UNIT</strong> = <code><span class="s">&quot;$&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
 
 
 
 
 
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#number_to_currency(value:Float%7CInt32%7CString,precision:Int32=DEFAULT_PRECISION,unit:String=DEFAULT_UNIT,separator:String=DEFAULT_SEPARATOR,delimiter:String=DEFAULT_DELIMITER,delimiter_pattern:Regex=DEFAULT_DELIMITER_REGEX,format:String=DEFAULT_FORMAT,negative_format:String=DEFAULT_FORMAT):String-instance-method" class="signature"><strong>#number_to_currency</strong>(value : Float | Int32 | String, precision : Int32 = <span class="t">DEFAULT_PRECISION</span>, unit : String = <span class="t">DEFAULT_UNIT</span>, separator : String = <span class="t">DEFAULT_SEPARATOR</span>, delimiter : String = <span class="t">DEFAULT_DELIMITER</span>, delimiter_pattern : Regex = <span class="t">DEFAULT_DELIMITER_REGEX</span>, format : String = <span class="t">DEFAULT_FORMAT</span>, negative_format : String = <span class="t">DEFAULT_FORMAT</span>) : String</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -333,80 +392,38 @@
 
 <div class="methods-inherited">
   
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#component:Motion::Base-instance-method" class="tooltip">
-      <span>component : Motion::Base</span>
-    component</a>
-    
-  
-
-
-    
-
-  <h3>Constructor methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#new(component,message=nil)-class-method" class="tooltip">
-      <span>new(component, message = <span class="n">nil</span>)</span>
-    new</a>
-    
-  
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
 
 
 
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="number_to_currency(value:Float|Int32|String,precision:Int32=DEFAULT_PRECISION,unit:String=DEFAULT_UNIT,separator:String=DEFAULT_SEPARATOR,delimiter:String=DEFAULT_DELIMITER,delimiter_pattern:Regex=DEFAULT_DELIMITER_REGEX,format:String=DEFAULT_FORMAT,negative_format:String=DEFAULT_FORMAT):String-instance-method">
+      <div class="signature">
+        
+        def <strong>number_to_currency</strong>(value : Float | Int32 | String, precision : Int32 = <span class="t">DEFAULT_PRECISION</span>, unit : String = <span class="t">DEFAULT_UNIT</span>, separator : String = <span class="t">DEFAULT_SEPARATOR</span>, delimiter : String = <span class="t">DEFAULT_DELIMITER</span>, delimiter_pattern : Regex = <span class="t">DEFAULT_DELIMITER_REGEX</span>, format : String = <span class="t">DEFAULT_FORMAT</span>, negative_format : String = <span class="t">DEFAULT_FORMAT</span>) : String
+
+        <a class="method-permalink" href="#number_to_currency(value:Float%7CInt32%7CString,precision:Int32=DEFAULT_PRECISION,unit:String=DEFAULT_UNIT,separator:String=DEFAULT_SEPARATOR,delimiter:String=DEFAULT_DELIMITER,delimiter_pattern:Regex=DEFAULT_DELIMITER_REGEX,format:String=DEFAULT_FORMAT,negative_format:String=DEFAULT_FORMAT):String-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/number_to_currency.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

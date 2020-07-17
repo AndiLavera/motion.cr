@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="motion.cr">
-  <title>Motion::Exceptions::ComponentRenderingError - motion.cr master</title>
+  <title>Motion::HTML::CustomTags - motion.cr master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -66,7 +66,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
+  <li class="parent " data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
       <a href="../../Motion/Exceptions.html">Exceptions</a>
       
         <ul>
@@ -81,7 +81,7 @@
       
     </li>
   
-  <li class=" current" data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
       <a href="../../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
       
     </li>
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class="parent " data-id="motion.cr/Motion/HTML" data-name="motion::html">
+  <li class="parent open current" data-id="motion.cr/Motion/HTML" data-name="motion::html">
       <a href="../../Motion/HTML.html">HTML</a>
       
         <ul>
@@ -136,7 +136,7 @@
       
     </li>
   
-  <li class=" " data-id="motion.cr/Motion/HTML/CustomTags" data-name="motion::html::customtags">
+  <li class=" current" data-id="motion.cr/Motion/HTML/CustomTags" data-name="motion::html::customtags">
       <a href="../../Motion/HTML/CustomTags.html">CustomTags</a>
       
     </li>
@@ -265,15 +265,9 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Motion::Exceptions::ComponentRenderingError
+  <span class="kind">module</span> Motion::HTML::CustomTags
 
 </h1>
-
-
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Motion/Exceptions/ComponentRenderingError.html">Motion::Exceptions::ComponentRenderingError</a></li><li class="superclass"><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></li><li class="superclass"><a href="../../Motion/Exceptions/BaseError.html">Motion::Exceptions::BaseError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
-
-
-
 
 
 
@@ -284,20 +278,38 @@
 
 
   <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+    <a id="included-modules" class="anchor" href="#included-modules">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Direct Known Subclasses
+    Included Modules
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type"><a href="../../Motion/Exceptions/MultipleRootsError.html">Motion::Exceptions::MultipleRootsError</a></li>
+      <li class="other-type">Motion::HTML::CheckTagContent</li>
     
   </ul>
 
 
+
+
+
+
+
+  <h2>
+    <a id="direct-including-types" class="anchor" href="#direct-including-types">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct including types
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../../Motion/HTML/Engine.html">Motion::HTML::Engine</a></li>
+    
+  </ul>
 
 
 
@@ -312,8 +324,8 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/exceptions.cr#L13" target="_blank">
-        motion/exceptions.cr
+      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/tags/custom_tags.cr#L1" target="_blank">
+        motion/html/tags/custom_tags.cr
       </a>
     
     <br/>
@@ -321,75 +333,70 @@
 
 
 
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="EMPTY_HTML_ATTRS">
+        <strong>EMPTY_HTML_ATTRS</strong> = <code>{} <span class="k">of</span> <span class="t">String</span> => <span class="t">String</span></code>
+      </dt>
+      
+    
+  </dl>
 
 
 
 
 
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#empty_tag(name:String,options=EMPTY_HTML_ATTRS,**other_options):Nil-instance-method" class="signature"><strong>#empty_tag</strong>(name : String, options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil</a>
+        
+          <div class="summary"><p>Outputs a custom tag with no tag closing.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tag(name:String,content:Motion::HTML::AllowedInTags%7CString?=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="signature"><strong>#tag</strong>(name : String, content : Motion::HTML::AllowedInTags | String? = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tag(name:String,content:String%7CMotion::HTML::AllowedInTags):Nil-instance-method" class="signature"><strong>#tag</strong>(name : String, content : String | Motion::HTML::AllowedInTags) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tag(name:String,attrs:Array(Symbol)=[]ofSymbol,options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="signature"><strong>#tag</strong>(name : String, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</a>
+        
+      </li>
+    
+  </ul>
 
 
 
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#component:Motion::Base-instance-method" class="tooltip">
-      <span>component : Motion::Base</span>
-    component</a>
-    
-  
-
-
-    
-
-  <h3>Constructor methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#new(component,message=nil)-class-method" class="tooltip">
-      <span>new(component, message = <span class="n">nil</span>)</span>
-    new</a>
-    
-  
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
     
 
@@ -407,6 +414,86 @@
 
 
 
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="empty_tag(name:String,options=EMPTY_HTML_ATTRS,**other_options):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>empty_tag</strong>(name : String, options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil
+
+        <a class="method-permalink" href="#empty_tag(name:String,options=EMPTY_HTML_ATTRS,**other_options):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Outputs a custom tag with no tag closing.
+<code>empty_tag("br")</code> => <code><br></code></p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/tags/custom_tags.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="tag(name:String,content:Motion::HTML::AllowedInTags|String?=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>tag</strong>(name : String, content : <a href="../../Motion/HTML/AllowedInTags.html">Motion::HTML::AllowedInTags</a> | String? = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil
+
+        <a class="method-permalink" href="#tag(name:String,content:Motion::HTML::AllowedInTags%7CString?=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/tags/custom_tags.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="tag(name:String,content:String|Motion::HTML::AllowedInTags):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>tag</strong>(name : String, content : String | <a href="../../Motion/HTML/AllowedInTags.html">Motion::HTML::AllowedInTags</a>) : Nil
+
+        <a class="method-permalink" href="#tag(name:String,content:String%7CMotion::HTML::AllowedInTags):Nil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/tags/custom_tags.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="tag(name:String,attrs:Array(Symbol)=[]ofSymbol,options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>tag</strong>(name : String, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil
+
+        <a class="method-permalink" href="#tag(name:String,attrs:Array(Symbol)=[]ofSymbol,options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/tags/custom_tags.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

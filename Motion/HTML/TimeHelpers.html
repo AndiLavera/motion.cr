@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="motion.cr">
-  <title>Motion::Exceptions::ComponentRenderingError - motion.cr master</title>
+  <title>Motion::HTML::TimeHelpers - motion.cr master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -66,7 +66,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
+  <li class="parent " data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
       <a href="../../Motion/Exceptions.html">Exceptions</a>
       
         <ul>
@@ -81,7 +81,7 @@
       
     </li>
   
-  <li class=" current" data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
       <a href="../../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
       
     </li>
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class="parent " data-id="motion.cr/Motion/HTML" data-name="motion::html">
+  <li class="parent open current" data-id="motion.cr/Motion/HTML" data-name="motion::html">
       <a href="../../Motion/HTML.html">HTML</a>
       
         <ul>
@@ -201,7 +201,7 @@
       
     </li>
   
-  <li class=" " data-id="motion.cr/Motion/HTML/TimeHelpers" data-name="motion::html::timehelpers">
+  <li class=" current" data-id="motion.cr/Motion/HTML/TimeHelpers" data-name="motion::html::timehelpers">
       <a href="../../Motion/HTML/TimeHelpers.html">TimeHelpers</a>
       
     </li>
@@ -265,12 +265,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Motion::Exceptions::ComponentRenderingError
+  <span class="kind">module</span> Motion::HTML::TimeHelpers
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Motion/Exceptions/ComponentRenderingError.html">Motion::Exceptions::ComponentRenderingError</a></li><li class="superclass"><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></li><li class="superclass"><a href="../../Motion/Exceptions/BaseError.html">Motion::Exceptions::BaseError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
 
 
 
@@ -284,20 +284,18 @@
 
 
   <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+    <a id="direct-including-types" class="anchor" href="#direct-including-types">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Direct Known Subclasses
+    Direct including types
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type"><a href="../../Motion/Exceptions/MultipleRootsError.html">Motion::Exceptions::MultipleRootsError</a></li>
+      <li class="other-type"><a href="../../Motion/HTML/Engine.html">Motion::HTML::Engine</a></li>
     
   </ul>
-
-
 
 
 
@@ -312,8 +310,8 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/exceptions.cr#L13" target="_blank">
-        motion/exceptions.cr
+      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/time_helpers.cr#L1" target="_blank">
+        motion/html/page_helpers/time_helpers.cr
       </a>
     
     <br/>
@@ -327,79 +325,37 @@
 
 
 
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#distance_of_time_in_words(from:Time,to:Time):String-instance-method" class="signature"><strong>#distance_of_time_in_words</strong>(from : Time, to : Time) : String</a>
+        
+          <div class="summary"><p>Returns a <code>String</code> with approximate distance in time between <code>from</code> and <code>to</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#time_ago_in_words(from:Time):String-instance-method" class="signature"><strong>#time_ago_in_words</strong>(from : Time) : String</a>
+        
+          <div class="summary"><p>Returns a <code>String</code> with approximate distance in time between <code>from</code> and current moment.</p></div>
+        
+      </li>
+    
+  </ul>
+
 
 
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#component:Motion::Base-instance-method" class="tooltip">
-      <span>component : Motion::Base</span>
-    component</a>
-    
-  
-
-
-    
-
-  <h3>Constructor methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#new(component,message=nil)-class-method" class="tooltip">
-      <span>new(component, message = <span class="n">nil</span>)</span>
-    new</a>
-    
-  
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
 </div>
 
@@ -407,6 +363,77 @@
 
 
 
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="distance_of_time_in_words(from:Time,to:Time):String-instance-method">
+      <div class="signature">
+        
+        def <strong>distance_of_time_in_words</strong>(from : Time, to : Time) : String
+
+        <a class="method-permalink" href="#distance_of_time_in_words(from:Time,to:Time):String-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns a <code>String</code> with approximate distance in time between <code>from</code> and <code>to</code>.</p>
+
+<pre><code>distance_of_time_in_words(<span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">14</span>, <span class="n">10</span>, <span class="n">0</span>, <span class="n">0</span>), <span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">14</span>, <span class="n">10</span>, <span class="n">0</span>, <span class="n">5</span>))
+<span class="c"># =&gt; &quot;5 seconds&quot;</span>
+distance_of_time_in_words(<span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">14</span>, <span class="n">10</span>, <span class="n">0</span>), <span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">14</span>, <span class="n">10</span>, <span class="n">25</span>))
+<span class="c"># =&gt; &quot;25 minutes&quot;</span>
+distance_of_time_in_words(<span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">14</span>, <span class="n">10</span>), <span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">14</span>, <span class="n">11</span>))
+<span class="c"># =&gt; &quot;an hour&quot;</span>
+distance_of_time_in_words(<span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">14</span>), <span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">16</span>))
+<span class="c"># =&gt; &quot;2 days&quot;</span>
+distance_of_time_in_words(<span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">14</span>), <span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">10</span>, <span class="n">4</span>))
+<span class="c"># =&gt; &quot;about a month&quot;</span>
+distance_of_time_in_words(<span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">14</span>), <span class="t">Time</span>.utc(<span class="n">2061</span>, <span class="n">10</span>, <span class="n">4</span>))
+<span class="c"># =&gt; &quot;almost 42 years&quot;</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/time_helpers.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="time_ago_in_words(from:Time):String-instance-method">
+      <div class="signature">
+        
+        def <strong>time_ago_in_words</strong>(from : Time) : String
+
+        <a class="method-permalink" href="#time_ago_in_words(from:Time):String-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns a <code>String</code> with approximate distance in time between <code>from</code> and current moment.</p>
+
+<pre><code>time_ago_in_words(<span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">30</span>)) <span class="c"># =&gt; &quot;about a month&quot;</span>
+<span class="c"># gives the same result as:</span>
+distance_of_time_in_words(<span class="t">Time</span>.utc(<span class="n">2019</span>, <span class="n">8</span>, <span class="n">30</span>), <span class="t">Time</span>.utc) <span class="c"># =&gt; &quot;about a month&quot;</span></code></pre>
+
+<p>See more examples in <code><a href="../../Motion/HTML/TimeHelpers.html#distance_of_time_in_words(from:Time,to:Time):String-instance-method">#distance_of_time_in_words</a></code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/time_helpers.cr#L39" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

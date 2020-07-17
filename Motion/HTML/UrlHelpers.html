@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="motion.cr">
-  <title>Motion::Exceptions::ComponentRenderingError - motion.cr master</title>
+  <title>Motion::HTML::UrlHelpers - motion.cr master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -66,7 +66,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
+  <li class="parent " data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
       <a href="../../Motion/Exceptions.html">Exceptions</a>
       
         <ul>
@@ -81,7 +81,7 @@
       
     </li>
   
-  <li class=" current" data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
       <a href="../../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
       
     </li>
@@ -106,7 +106,7 @@
       
     </li>
   
-  <li class="parent " data-id="motion.cr/Motion/HTML" data-name="motion::html">
+  <li class="parent open current" data-id="motion.cr/Motion/HTML" data-name="motion::html">
       <a href="../../Motion/HTML.html">HTML</a>
       
         <ul>
@@ -206,7 +206,7 @@
       
     </li>
   
-  <li class=" " data-id="motion.cr/Motion/HTML/UrlHelpers" data-name="motion::html::urlhelpers">
+  <li class=" current" data-id="motion.cr/Motion/HTML/UrlHelpers" data-name="motion::html::urlhelpers">
       <a href="../../Motion/HTML/UrlHelpers.html">UrlHelpers</a>
       
     </li>
@@ -265,12 +265,11 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Motion::Exceptions::ComponentRenderingError
+  <span class="kind">module</span> Motion::HTML::UrlHelpers
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Motion/Exceptions/ComponentRenderingError.html">Motion::Exceptions::ComponentRenderingError</a></li><li class="superclass"><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></li><li class="superclass"><a href="../../Motion/Exceptions/BaseError.html">Motion::Exceptions::BaseError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -281,21 +280,6 @@
 
 
 
-
-
-  <h2>
-    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Direct Known Subclasses
-  </h2>
-  <ul class="other-types-list">
-    
-      <li class="other-type"><a href="../../Motion/Exceptions/MultipleRootsError.html">Motion::Exceptions::MultipleRootsError</a></li>
-    
-  </ul>
 
 
 
@@ -312,8 +296,8 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/exceptions.cr#L13" target="_blank">
-        motion/exceptions.cr
+      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/url_helpers.cr#L1" target="_blank">
+        motion/html/page_helpers/url_helpers.cr
       </a>
     
     <br/>
@@ -327,79 +311,37 @@
 
 
 
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#current_page?(value:String,check_query_params:Bool=false):Bool-instance-method" class="signature"><strong>#current_page?</strong>(value : String, check_query_params : Bool = <span class="n">false</span>) : Bool</a>
+        
+          <div class="summary"><p>Tests if the given path matches the current request path.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#current_page?(action:Motion::Action.class%7CMotion::RouteHelper,check_query_params:Bool=false):Bool-instance-method" class="signature"><strong>#current_page?</strong>(action : <span class="t">Motion</span><span class="t">::</span><span class="t">Action</span>.<span class="k">class</span> | Motion::RouteHelper, check_query_params : Bool = <span class="n">false</span>) : Bool</a>
+        
+          <div class="summary"><p>Tests if the given path matches the current request path.</p></div>
+        
+      </li>
+    
+  </ul>
+
 
 
 
 
 <div class="methods-inherited">
-  
-    
-
-  <h3>Instance methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#component:Motion::Base-instance-method" class="tooltip">
-      <span>component : Motion::Base</span>
-    component</a>
-    
-  
-
-
-    
-
-  <h3>Constructor methods inherited from class <code><a href="../../Motion/Exceptions/ComponentError.html">Motion::Exceptions::ComponentError</a></code></h3>
-  
-  
-    <a href="../../Motion/Exceptions/ComponentError.html#new(component,message=nil)-class-method" class="tooltip">
-      <span>new(component, message = <span class="n">nil</span>)</span>
-    new</a>
-    
-  
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
 </div>
 
@@ -407,6 +349,100 @@
 
 
 
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="current_page?(value:String,check_query_params:Bool=false):Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>current_page?</strong>(value : String, check_query_params : Bool = <span class="n">false</span>) : Bool
+
+        <a class="method-permalink" href="#current_page?(value:String,check_query_params:Bool=false):Bool-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Tests if the given path matches the current request path.</p>
+
+<pre><code><span class="c"># Let&#39;s say we are visiting https://example.com/shop/products?order=desc&amp;page=1</span>
+current_page?(<span class="s">&quot;/shop/checkout&quot;</span>)
+<span class="c"># =&gt; false</span>
+current_page?(<span class="s">&quot;/shop/products&quot;</span>)
+<span class="c"># =&gt; true</span>
+current_page?(<span class="s">&quot;/shop/products/&quot;</span>)
+<span class="c"># =&gt; true</span>
+current_page?(<span class="s">&quot;/shop/products?order=desc&amp;page=1&quot;</span>)
+<span class="c"># =&gt; true</span>
+current_page?(<span class="s">&quot;/shop/products&quot;</span>, check_query_params: <span class="n">true</span>)
+<span class="c"># =&gt; false</span>
+current_page?(<span class="s">&quot;/shop/products?order=desc&amp;page=1&quot;</span>, check_query_params: <span class="n">true</span>)
+<span class="c"># =&gt; true</span>
+current_page?(<span class="s">&quot;https://example.com/shop/products&quot;</span>)
+<span class="c"># =&gt; true</span>
+current_page?(<span class="s">&quot;https://example.io/shop/products&quot;</span>)
+<span class="c"># =&gt; false</span>
+current_page?(<span class="s">&quot;https://example.com/shop/products&quot;</span>, check_query_params: <span class="n">true</span>)
+<span class="c"># =&gt; false</span>
+current_page?(<span class="s">&quot;https://example.com/shop/products?order=desc&amp;page=1&quot;</span>)
+<span class="c"># =&gt; true</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/url_helpers.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="current_page?(action:Motion::Action.class|Motion::RouteHelper,check_query_params:Bool=false):Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>current_page?</strong>(action : <span class="t">Motion</span><span class="t">::</span><span class="t">Action</span>.<span class="k">class</span> | Motion::RouteHelper, check_query_params : Bool = <span class="n">false</span>) : Bool
+
+        <a class="method-permalink" href="#current_page?(action:Motion::Action.class%7CMotion::RouteHelper,check_query_params:Bool=false):Bool-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Tests if the given path matches the current request path.</p>
+
+<pre><code><span class="c"># Visiting https://example.com/pages/123</span>
+current_page?(<span class="t">Pages</span><span class="t">::</span><span class="t">Show</span>.<span class="k">with</span>(<span class="n">123</span>))
+<span class="c"># =&gt; true</span>
+current_page?(<span class="t">Posts</span><span class="t">::</span><span class="t">Show</span>.<span class="k">with</span>(<span class="n">123</span>))
+<span class="c"># =&gt; false</span>
+<span class="c"># Visiting https://example.com/pages</span>
+current_page?(<span class="t">Pages</span><span class="t">::</span><span class="t">Index</span>)
+<span class="c"># =&gt; true</span>
+current_page?(<span class="t">Blog</span><span class="t">::</span><span class="t">Index</span>)
+<span class="c"># =&gt; false</span>
+<span class="c"># Visiting https://example.com/pages?page=2</span>
+current_page?(<span class="t">Pages</span><span class="t">::</span><span class="t">Index</span>.<span class="k">with</span>)
+<span class="c"># =&gt; true</span>
+current_page?(<span class="t">Pages</span><span class="t">::</span><span class="t">Index</span>.<span class="k">with</span>(page: <span class="n">2</span>))
+<span class="c"># =&gt; true</span>
+current_page?(<span class="t">Pages</span><span class="t">::</span><span class="t">Index</span>.<span class="k">with</span>, check_query_params: <span class="n">true</span>)
+<span class="c"># =&gt; false</span>
+current_page?(<span class="t">Pages</span><span class="t">::</span><span class="t">Index</span>.<span class="k">with</span>(page: <span class="n">2</span>), check_query_params: <span class="n">true</span>)
+<span class="c"># =&gt; true</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/url_helpers.cr#L81" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 

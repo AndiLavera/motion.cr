@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="motion.cr">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="motion.cr">
+  <title>Motion::HTML::HTMLTextHelpers - motion.cr master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../../index.html">
+          motion.cr
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="motion.cr/Motion" data-name="motion">
+      <a href="../../Motion.html">Motion</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/Base" data-name="motion::base">
+      <a href="../../Motion/Base.html">Base</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Channel" data-name="motion::channel">
+      <a href="../../Motion/Channel.html">Channel</a>
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
+      <a href="../../Motion/Exceptions.html">Exceptions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/BaseError" data-name="motion::exceptions::baseerror">
+      <a href="../../Motion/Exceptions/BaseError.html">BaseError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentError" data-name="motion::exceptions::componenterror">
+      <a href="../../Motion/Exceptions/ComponentError.html">ComponentError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
+      <a href="../../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/InvalidComponentStateError" data-name="motion::exceptions::invalidcomponentstateerror">
+      <a href="../../Motion/Exceptions/InvalidComponentStateError.html">InvalidComponentStateError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/MultipleRootsError" data-name="motion::exceptions::multiplerootserror">
+      <a href="../../Motion/Exceptions/MultipleRootsError.html">MultipleRootsError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/UnrepresentableStateError" data-name="motion::exceptions::unrepresentablestateerror">
+      <a href="../../Motion/Exceptions/UnrepresentableStateError.html">UnrepresentableStateError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent open current" data-id="motion.cr/Motion/HTML" data-name="motion::html">
+      <a href="../../Motion/HTML.html">HTML</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/AllowedInTags" data-name="motion::html::allowedintags">
+      <a href="../../Motion/HTML/AllowedInTags.html">AllowedInTags</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/AssetHelpers" data-name="motion::html::assethelpers">
+      <a href="../../Motion/HTML/AssetHelpers.html">AssetHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/Assignable" data-name="motion::html::assignable">
+      <a href="../../Motion/HTML/Assignable.html">Assignable</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/BaseTags" data-name="motion::html::basetags">
+      <a href="../../Motion/HTML/BaseTags.html">BaseTags</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/CatchUnpermittedAttribute" data-name="motion::html::catchunpermittedattribute">
+      <a href="../../Motion/HTML/CatchUnpermittedAttribute.html">CatchUnpermittedAttribute</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/CustomTags" data-name="motion::html::customtags">
+      <a href="../../Motion/HTML/CustomTags.html">CustomTags</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/Engine" data-name="motion::html::engine">
+      <a href="../../Motion/HTML/Engine.html">Engine</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/ForgeryProtectionHelpers" data-name="motion::html::forgeryprotectionhelpers">
+      <a href="../../Motion/HTML/ForgeryProtectionHelpers.html">ForgeryProtectionHelpers</a>
+      
+    </li>
+  
+  <li class=" current" data-id="motion.cr/Motion/HTML/HTMLTextHelpers" data-name="motion::html::htmltexthelpers">
+      <a href="../../Motion/HTML/HTMLTextHelpers.html">HTMLTextHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/InputHelpers" data-name="motion::html::inputhelpers">
+      <a href="../../Motion/HTML/InputHelpers.html">InputHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/LabelHelpers" data-name="motion::html::labelhelpers">
+      <a href="../../Motion/HTML/LabelHelpers.html">LabelHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/NumberToCurrency" data-name="motion::html::numbertocurrency">
+      <a href="../../Motion/HTML/NumberToCurrency.html">NumberToCurrency</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/RenderIfDefined" data-name="motion::html::renderifdefined">
+      <a href="../../Motion/HTML/RenderIfDefined.html">RenderIfDefined</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/SelectHelpers" data-name="motion::html::selecthelpers">
+      <a href="../../Motion/HTML/SelectHelpers.html">SelectHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/SpecialtyTags" data-name="motion::html::specialtytags">
+      <a href="../../Motion/HTML/SpecialtyTags.html">SpecialtyTags</a>
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/HTML/TextHelpers" data-name="motion::html::texthelpers">
+      <a href="../../Motion/HTML/TextHelpers.html">TextHelpers</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/TextHelpers/Cycle" data-name="motion::html::texthelpers::cycle">
+      <a href="../../Motion/HTML/TextHelpers/Cycle.html">Cycle</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/TimeHelpers" data-name="motion::html::timehelpers">
+      <a href="../../Motion/HTML/TimeHelpers.html">TimeHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/UrlHelpers" data-name="motion::html::urlhelpers">
+      <a href="../../Motion/HTML/UrlHelpers.html">UrlHelpers</a>
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/HTML/WithDefaults" data-name="motion::html::withdefaults">
+      <a href="../../Motion/HTML/WithDefaults.html">WithDefaults</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/HTML/WithDefaults/OptionMerger" data-name="motion::html::withdefaults::optionmerger(t, v)">
+      <a href="../../Motion/HTML/WithDefaults/OptionMerger.html">OptionMerger</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/Motions" data-name="motion::motions">
+      <a href="../../Motion/Motions.html">Motions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/Motions/Rendering" data-name="motion::motions::rendering">
+      <a href="../../Motion/Motions/Rendering.html">Rendering</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/MountComponent" data-name="motion::mountcomponent">
+      <a href="../../Motion/MountComponent.html">MountComponent</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">module</span> Motion::HTML::HTMLTextHelpers
+
+</h1>
+
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>These helper methods will write directly to the view.</p>
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="direct-including-types" class="anchor" href="#direct-including-types">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct including types
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../../Motion/HTML/Engine.html">Motion::HTML::Engine</a></li>
+    
+  </ul>
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/html_text_helpers.cr#L2" target="_blank">
+        motion/html/page_helpers/html_text_helpers.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#highlight(text:String,phrases:Array(String%7CRegex),highlighter:Proc%7CString=&quot;&lt;mark&gt;%5C%5C1&lt;/mark&gt;&quot;,escape:Bool=true):Nil-instance-method" class="signature"><strong>#highlight</strong>(text : String, phrases : Array(String | Regex), highlighter : Proc | String = <span class="s">&quot;&lt;mark&gt;\\1&lt;/mark&gt;&quot;</span>, escape : Bool = <span class="n">true</span>) : Nil</a>
+        
+          <div class="summary"><p>Wrap phrases to make them stand out</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#highlight(text:String,phrases:Array(String%7CRegex),escape:Bool=false,&block:String-%3E_):Nil-instance-method" class="signature"><strong>#highlight</strong>(text : String, phrases : Array(String | Regex), escape : Bool = <span class="n">false</span>, &block : String -> _) : Nil</a>
+        
+          <div class="summary"><p>Highlight a single phrase</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#highlight(text:String,phrase:String%7CRegex,highlighter:Proc%7CString=&quot;&lt;mark&gt;%5C%5C1&lt;/mark&gt;&quot;,escape:Bool=true):Nil-instance-method" class="signature"><strong>#highlight</strong>(text : String, phrase : String | Regex, highlighter : Proc | String = <span class="s">&quot;&lt;mark&gt;\\1&lt;/mark&gt;&quot;</span>, escape : Bool = <span class="n">true</span>) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#highlight(text:String,phrase:String%7CRegex,escape:Bool=true,&block:String-%3E_):Nil-instance-method" class="signature"><strong>#highlight</strong>(text : String, phrase : String | Regex, escape : Bool = <span class="n">true</span>, &block : String -> _) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#simple_format(text:String,&block:String-%3E_):Nil-instance-method" class="signature"><strong>#simple_format</strong>(text : String, &block : String -> _) : Nil</a>
+        
+          <div class="summary"><p>Wraps text in whatever you'd like based on line breaks</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#simple_format(text:String,escape:Bool=true,**html_options):Nil-instance-method" class="signature"><strong>#simple_format</strong>(text : String, escape : Bool = <span class="n">true</span>, **html_options) : Nil</a>
+        
+          <div class="summary"><p>Wraps text in paragraphs based on line breaks</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#truncate(text:String,length:Int32=30,omission:String=&quot;...&quot;,separator:String?=nil,escape:Bool=true,blk:Proc?=nil):Nil-instance-method" class="signature"><strong>#truncate</strong>(text : String, length : Int32 = <span class="n">30</span>, omission : String = <span class="s">&quot;...&quot;</span>, separator : String? = <span class="n">nil</span>, escape : Bool = <span class="n">true</span>, blk : Proc? = <span class="n">nil</span>) : Nil</a>
+        
+          <div class="summary"><p>Shortens text after a length point and inserts content afterward</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#truncate(text:String,length:Int32=30,omission:String=&quot;...&quot;,separator:String?=nil,escape:Bool=true,&block:-%3E_):Nil-instance-method" class="signature"><strong>#truncate</strong>(text : String, length : Int32 = <span class="n">30</span>, omission : String = <span class="s">&quot;...&quot;</span>, separator : String? = <span class="n">nil</span>, escape : Bool = <span class="n">true</span>, &block :  -> _) : Nil</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+</div>
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="highlight(text:String,phrases:Array(String|Regex),highlighter:Proc|String=&quot;&lt;mark&gt;\\1&lt;/mark&gt;&quot;,escape:Bool=true):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>highlight</strong>(text : String, phrases : Array(String | Regex), highlighter : Proc | String = <span class="s">&quot;&lt;mark&gt;\\1&lt;/mark&gt;&quot;</span>, escape : Bool = <span class="n">true</span>) : Nil
+
+        <a class="method-permalink" href="#highlight(text:String,phrases:Array(String%7CRegex),highlighter:Proc%7CString=&quot;&lt;mark&gt;%5C%5C1&lt;/mark&gt;&quot;,escape:Bool=true):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Wrap phrases to make them stand out</p>
+
+<p>This will wrap all the phrases inside a piece of <code>text</code> specified by the
+<code>phrases</code> array. The default is to wrap each with the <code><mark></code> element.
+This can be customized with the <code>highlighter</code> argument.</p>
+
+<p><strong>Note: This method writes HTML directly to the page. It does not return a
+String</strong></p>
+
+<pre><code class="language-crystal">highlight(<span class="s">&quot;Crystal is type-safe and compiled.&quot;</span>, phrases: [<span class="s">&quot;type-safe&quot;</span>, <span class="s">&quot;compiled&quot;</span>])</code></pre>
+
+<p>outputs:</p>
+
+<pre><code class="language-html">Crystal is &lt;mark>type-safe&lt;/mark> and &lt;mark>compiled&lt;/mark>.</code></pre>
+
+<p><strong>With a custom highlighter</strong></p>
+
+<pre><code class="language-crystal">highlight(
+  <span class="s">&quot;You&#39;re such a nice and attractive person.&quot;</span>,
+  phrases: [<span class="s">&quot;nice&quot;</span>, <span class="s">&quot;attractive&quot;</span>],
+  highlighter: <span class="s">&quot;&lt;strong&gt;\\1&lt;/strong&gt;&quot;</span>
+)</code></pre>
+
+<p>outputs:</p>
+
+<pre><code class="language-html">You're such a &lt;strong>nice&lt;/strong> and &lt;strong>attractive&lt;/strong> person.</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/html_text_helpers.cr#L73" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="highlight(text:String,phrases:Array(String|Regex),escape:Bool=false,&block:String->_):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>highlight</strong>(text : String, phrases : Array(String | Regex), escape : Bool = <span class="n">false</span>, &block : String -> _) : Nil
+
+        <a class="method-permalink" href="#highlight(text:String,phrases:Array(String%7CRegex),escape:Bool=false,&block:String-%3E_):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Highlight a single phrase</p>
+
+<p>Exactly the same as the <code><a href="../../Motion/HTML/HTMLTextHelpers.html#highlight(text:String,phrases:Array(String%7CRegex),highlighter:Proc%7CString=&quot;&lt;mark&gt;%5C%5C1&lt;/mark&gt;&quot;,escape:Bool=true):Nil-instance-method">#highlight</a></code> that takes multiple phrases, but with a
+singular <code>phrase</code> argument for readability.</p>
+
+<pre><code></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/html_text_helpers.cr#L96" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="highlight(text:String,phrase:String|Regex,highlighter:Proc|String=&quot;&lt;mark&gt;\\1&lt;/mark&gt;&quot;,escape:Bool=true):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>highlight</strong>(text : String, phrase : String | Regex, highlighter : Proc | String = <span class="s">&quot;&lt;mark&gt;\\1&lt;/mark&gt;&quot;</span>, escape : Bool = <span class="n">true</span>) : Nil
+
+        <a class="method-permalink" href="#highlight(text:String,phrase:String%7CRegex,highlighter:Proc%7CString=&quot;&lt;mark&gt;%5C%5C1&lt;/mark&gt;&quot;,escape:Bool=true):Nil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/html_text_helpers.cr#L100" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="highlight(text:String,phrase:String|Regex,escape:Bool=true,&block:String->_):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>highlight</strong>(text : String, phrase : String | Regex, escape : Bool = <span class="n">true</span>, &block : String -> _) : Nil
+
+        <a class="method-permalink" href="#highlight(text:String,phrase:String%7CRegex,escape:Bool=true,&block:String-%3E_):Nil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/html_text_helpers.cr#L105" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="simple_format(text:String,&block:String->_):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>simple_format</strong>(text : String, &block : String -> _) : Nil
+
+        <a class="method-permalink" href="#simple_format(text:String,&block:String-%3E_):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Wraps text in whatever you'd like based on line breaks</p>
+
+<p><strong>Note: This method writes HTML directly to the page. It does not return a
+String</strong></p>
+
+<pre><code class="language-crystal">simple_format(<span class="s">&quot;foo\n\nbar\n\nbaz&quot;</span>) <span class="k">do</span> <span class="o">|</span>paragraph<span class="o">|</span>
+  text paragraph
+  hr
+<span class="k">end</span></code></pre>
+
+<p>outputs:</p>
+
+<pre><code class="language-html">foo&lt;hr>
+
+bar&lt;hr>
+
+baz&lt;hr></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/html_text_helpers.cr#L129" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="simple_format(text:String,escape:Bool=true,**html_options):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>simple_format</strong>(text : String, escape : Bool = <span class="n">true</span>, **html_options) : Nil
+
+        <a class="method-permalink" href="#simple_format(text:String,escape:Bool=true,**html_options):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Wraps text in paragraphs based on line breaks</p>
+
+<pre><code class="language-crystal">simple_format(<span class="s">&quot;foo\n\nbar\n\nbaz&quot;</span>)</code></pre>
+
+<p>outputs:</p>
+
+<pre><code class="language-html">&lt;p>foo&lt;/p>
+
+&lt;p>bar&lt;/p>
+
+&lt;p>baz&lt;/p></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/html_text_helpers.cr#L154" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="truncate(text:String,length:Int32=30,omission:String=&quot;...&quot;,separator:String?=nil,escape:Bool=true,blk:Proc?=nil):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>truncate</strong>(text : String, length : Int32 = <span class="n">30</span>, omission : String = <span class="s">&quot;...&quot;</span>, separator : String? = <span class="n">nil</span>, escape : Bool = <span class="n">true</span>, blk : Proc? = <span class="n">nil</span>) : Nil
+
+        <a class="method-permalink" href="#truncate(text:String,length:Int32=30,omission:String=&quot;...&quot;,separator:String?=nil,escape:Bool=true,blk:Proc?=nil):Nil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Shortens text after a length point and inserts content afterward</p>
+
+<p><strong>Note: This method writes HTML directly to the page. It does not return a
+String.</strong></p>
+
+<p>This is ideal if you want an action associated with shortened text, like
+"Read more".</p>
+
+<ul><li><code>length</code> (default: <code>30</code>) will control the maximum length of the text,
+including the <code>omission</code>.</li><li><code>omission</code> (default: <code>...</code>) will insert itself at the end of the
+truncated text.</li><li><code>separator</code> (default: nil) is where words are cut off. This is often
+overridden to break on word boundaries by setting the separator to a space
+<code>" "</code>. Keep in mind this, may cause your text to be truncated before your
+<code>length</code> value if the <code>length</code> - <code>omission</code> is before the <code>separator</code>.</li><li><code>escape</code> (default: true) weather or not to HTML escape the truncated
+string.</li><li><code>blk</code> (default: nil) A block to run after the text has been truncated.
+Often used to add an action to read more text, like a "Read more" link.</li></ul>
+
+<pre><code class="language-crystal">truncate(<span class="s">&quot;Four score and seven years ago&quot;</span>, length: <span class="n">20</span>) <span class="k">do</span>
+  link <span class="s">&quot;Read more&quot;</span>, to: <span class="s">&quot;#&quot;</span>
+<span class="k">end</span></code></pre>
+
+<p>outputs:</p>
+
+<pre><code class="language-html">"Four score and se...&lt;a href="#">Read more&lt;/a>"</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/html_text_helpers.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="truncate(text:String,length:Int32=30,omission:String=&quot;...&quot;,separator:String?=nil,escape:Bool=true,&block:->_):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>truncate</strong>(text : String, length : Int32 = <span class="n">30</span>, omission : String = <span class="s">&quot;...&quot;</span>, separator : String? = <span class="n">nil</span>, escape : Bool = <span class="n">true</span>, &block :  -> _) : Nil
+
+        <a class="method-permalink" href="#truncate(text:String,length:Int32=30,omission:String=&quot;...&quot;,separator:String?=nil,escape:Bool=true,&block:-%3E_):Nil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/cd55fe3f77ef80d9dcceb84692e6013b2c88fbb1/src/motion/html/page_helpers/html_text_helpers.cr#L39" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
