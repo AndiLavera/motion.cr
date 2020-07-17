@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-class TestRender < ViewComponent::Base
+class TestRender < Motion::Base
   def render : String
     render_complicated_html
     view.to_s
@@ -26,14 +26,14 @@ class TestRender < ViewComponent::Base
   end
 end
 
-class UnsafePage < ViewComponent::Base
+class UnsafePage < Motion::Base
   def render
     text "<script>not safe</span>"
     view.to_s
   end
 end
 
-abstract class MainLayout < ViewComponent::Base
+abstract class MainLayout < Motion::Base
   def render
     title page_title
 
@@ -80,7 +80,7 @@ class LessNeedyDefaultsPage < MainLayout
   end
 end
 
-describe ViewComponent::Base do
+describe Motion::Base do
   describe "tags that contain contents" do
     it "can be called with various arguments" do
       view(&.header("text")).should eq %(<header>text</header>)

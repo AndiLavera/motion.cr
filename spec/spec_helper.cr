@@ -5,4 +5,4 @@ require "http"
 class Amber::WebSockets::Channel
 end
 
-require "../src/view_component"
+require "../src/motion"
