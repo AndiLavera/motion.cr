@@ -87,8 +87,9 @@ module Motion
       # end
     end
 
+    # TODO: pass error in as an argument: , error: error
     private def handle_error(error, context)
-      logger.error("An error occurred while #{context}", error: error)
+      logger.error("An error occurred while #{context}")
     end
 
     private def logger
