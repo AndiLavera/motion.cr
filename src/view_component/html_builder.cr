@@ -77,12 +77,10 @@ module ViewComponent::HTMLBuilder
           {% has_default = value || value == false || value == nil %}
           @{{ var.id }} : {{ type }}{% if has_default %} = {{ value }}{% end %},
         {% end %}
-        {{debug}}
         **unused_exposures
         )
       end
     {% end %}
-    {{debug}}
   end
 
   macro generate_getters

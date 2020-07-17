@@ -1,31 +1,23 @@
 module ViewComponent::Motion
   class ComponentConnection
-    def self.from_state(
-      state,
-      serializer = Serializer.new, # TODO: Motion.serializer,
-      log_helper = nil             # LogHelper.new,
-      # **named_args
-    )
+    # TODO: Motion.serializer,
+    def self.from_state(state, serializer = Serializer.new, logger = ViewComponent::Logger.new)
       component = serializer.deserialize(state)
 
-      new(component,
-        log_helper: nil, # log_helper.for_component(component),
-        # **named_args
-      )
+      # TODO: logger.for_component(component)
+      new(component: component, logger: logger)
     end
 
     getter component : ViewComponent::Base
+    getter render_hash : String?
+    getter logger : ViewComponent::Logger
 
-    def initialize(component : ViewComponent::Base,
-                   log_helper = nil # TOOD: LogHelper.for_component(component)
-                   )
-      @component = component
-      # @log_helper = log_helper
-
-      # timing("Connected") do
-      #   @render_hash = component.render_hash
-      #   component.process_connect
-      # end
+    # TOOD: LogHelper.for_component(component)
+    def initialize(@component : ViewComponent::Base, @logger = ViewComponent::Logger.new)
+      timing("Connected") do
+        @render_hash = component.render_hash
+        # component.process_connect
+      end
     end
 
     def close
@@ -99,16 +91,12 @@ module ViewComponent::Motion
     #   component.periodic_timers
     # end
 
-    # private
+    private def timing(context, &block)
+      logger.timing(context, &block)
+    end
 
-    # attr_reader :log_helper
-
-    # def timing(context, &block)
-    #   log_helper.timing(context, &block)
-    # end
-
-    # def handle_error(error, context)
-    #   log_helper.error("An error occurred while #{context}", error: error)
+    # private def handle_error(error, context)
+    #   logger.error("An error occurred while #{context}", error: error)
     # end
   end
 end

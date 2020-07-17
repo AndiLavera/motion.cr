@@ -1,7 +1,8 @@
-require "./html_builder"
-require "./motion"
-require "./exceptions"
 require "json"
+require "./html_builder"
+require "./logger"
+require "./exceptions"
+require "./motion"
 
 annotation Invokeable; end
 
