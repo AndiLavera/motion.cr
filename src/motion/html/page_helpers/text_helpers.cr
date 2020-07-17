@@ -1,5 +1,5 @@
 # These helper methods will return a `String`.
-module Motion::TextHelpers
+module Motion::HTML::TextHelpers
   @@_cycles = Hash(String, Cycle).new
 
   # Shorten text after a length point.

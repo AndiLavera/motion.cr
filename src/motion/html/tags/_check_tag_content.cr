@@ -1,5 +1,5 @@
 # :nodoc:
-module Motion::CheckTagContent
+module Motion::HTML::CheckTagContent
   # If a tag has a nested tag (`IO`) or nil
   # then return that content.
   # ```

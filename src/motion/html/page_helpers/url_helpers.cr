@@ -1,4 +1,4 @@
-module Motion::UrlHelpers
+module Motion::HTML::UrlHelpers
   # Tests if the given path matches the current request path.
   #
   # ```

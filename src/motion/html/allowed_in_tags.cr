@@ -24,5 +24,5 @@
 # ```
 # h1 EmailAddress.new("myemail.com")
 # ```
-module Motion::AllowedInTags
+module Motion::HTML::AllowedInTags
 end

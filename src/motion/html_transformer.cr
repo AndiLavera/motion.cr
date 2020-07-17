@@ -1,6 +1,7 @@
 require "myhtml"
 
 module Motion
+  # :nodoc:
   class HTMLTransformer
     private property serializer : Motion::Serializer
     private property key_attribute : String

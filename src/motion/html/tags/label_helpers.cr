@@ -1,4 +1,4 @@
-module Motion::LabelHelpers
+module Motion::HTML::LabelHelpers
   def label_for(field : Avram::PermittedAttribute, text : String? = nil, **html_options) : Nil
     label(
       text || guess_label_name(field),

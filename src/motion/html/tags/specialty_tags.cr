@@ -1,4 +1,4 @@
-module Motion::SpecialtyTags
+module Motion::HTML::SpecialtyTags
   # Generates an HTML5 doctype tag.
   def html_doctype : Nil
     view << "<!DOCTYPE html>"

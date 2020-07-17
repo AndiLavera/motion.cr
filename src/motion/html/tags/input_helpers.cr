@@ -1,4 +1,4 @@
-module Motion::InputHelpers
+module Motion::HTML::InputHelpers
   EMPTY_BOOLEAN_ATTRIBUTES = [] of Symbol
 
   macro error_message_for_unallowed_field

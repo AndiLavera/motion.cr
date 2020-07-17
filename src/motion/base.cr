@@ -1,5 +1,5 @@
 require "json"
-require "./html_builder"
+require "./html_engine"
 require "./logger"
 require "./exceptions"
 require "./motions"
@@ -13,7 +13,7 @@ class Motion::Base
   #   setting render_component_comments : Bool = false
   # end
 
-  include Motion::HTMLBuilder
+  include Motion::HTML::Engine
   include Motion::Motions
   include JSON::Serializable
 

@@ -1,6 +1,7 @@
 require "log"
 
 module Motion
+  # :nodoc:
   class Logger
     Log = ::Log.for("Motion")
 
