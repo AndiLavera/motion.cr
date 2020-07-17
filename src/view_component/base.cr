@@ -13,8 +13,7 @@ class ViewComponent::Base
   # end
 
   include ViewComponent::HTMLBuilder
-  include ViewComponent::Motion
-  include ViewComponent::Motion::Component
+  include ViewComponent::Motions
   include JSON::Serializable
 
   @[JSON::Field(ignore: true)]

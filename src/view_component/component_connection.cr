@@ -1,4 +1,4 @@
-module ViewComponent::Motion
+module ViewComponent
   class ComponentConnection
     # TODO: Motion.serializer,
     def self.from_state(state, serializer = Serializer.new, logger = ViewComponent::Logger.new)

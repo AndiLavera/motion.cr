@@ -2,7 +2,7 @@ require "json"
 require "base64"
 require "crypto/bcrypt"
 
-module ViewComponent::Motion
+module ViewComponent
   class Serializer
     private HASH_PEPPER = "Motion"
     private NULL_BYTE   = "\0"

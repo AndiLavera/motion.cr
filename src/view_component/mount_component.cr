@@ -53,7 +53,7 @@ module ViewComponent::MountComponent
     html = component.render
 
     if component.map_motion
-      html = Motion::HTMLTransformer.new.add_state_to_html(component, html)
+      html = ViewComponent::HTMLTransformer.new.add_state_to_html(component, html)
     end
     view << html
   end

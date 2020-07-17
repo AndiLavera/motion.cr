@@ -53,32 +53,30 @@ class UnsafeMultipleRootsMount < ViewComponent::Base
   end
 end
 
-describe ViewComponent::Motion::HTMLTransformer do
+describe ViewComponent::HTMLTransformer do
   it "can transform markup" do
     MotionRender.new.render.includes?("motion-state").should be_true
   end
 
   it "throws error when component has multiple roots" do
-    expect_raises(ViewComponent::Motion::MultipleRootsError) do
+    expect_raises(ViewComponent::MultipleRootsError) do
       UnsafeMultipleRootsRender.new.render
     end
   end
 end
 
-describe ViewComponent::Motion::Serializer do
+describe ViewComponent::Serializer do
   it "can deserialize component" do
-    puts component = MotionRender.new.render
-    fragment = Myhtml::Parser.new(component)
+    fragment = Myhtml::Parser.new(MotionRender.new.render)
     node_with_state = fragment.body!.children.to_a[0]
     state = node_with_state.attribute_by("motion-state")
 
     raise "Could not find motion-state" if state.nil?
-    deserialized_component = ViewComponent::Motion::Serializer.new.deserialize(state)
+    deserialized_component = ViewComponent::Serializer.new.deserialize(state)
 
     deserialized_component.inspect.to_s.includes?("@test_prop=\"Test Prop\"").should be_true
     deserialized_component.inspect.to_s.includes?("@map_motion=true").should be_true
     deserialized_component.invoke("add")
     deserialized_component.inspect.to_s.includes?("@count=1").should be_true
-    puts deserialized_component.render
   end
 end

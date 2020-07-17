@@ -1,6 +1,6 @@
 require "json"
 
-module ViewComponent::Motion
+module ViewComponent
   class MotionChannel < Amber::WebSockets::Channel
     # include ActionCableExtentions::DeclarativeNotifications
     # include ActionCableExtentions::DeclarativeStreams
@@ -16,7 +16,7 @@ module ViewComponent::Motion
     #   ACTION_METHODS
     # end
 
-    getter component_connection : ViewComponent::Motion::ComponentConnection?
+    getter component_connection : ViewComponent::ComponentConnection?
 
     def handle_joined(client_socket, message)
       pp "handle joined"

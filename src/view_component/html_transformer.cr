@@ -1,8 +1,8 @@
 require "myhtml"
 
-module ViewComponent::Motion
+module ViewComponent
   class HTMLTransformer
-    private property serializer : ViewComponent::Motion::Serializer
+    private property serializer : ViewComponent::Serializer
     private property key_attribute : String
     private property state_attribute : String
 
