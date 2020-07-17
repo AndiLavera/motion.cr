@@ -4,6 +4,7 @@ require "./logger"
 require "./exceptions"
 require "./motions"
 
+# :nodoc:
 annotation Invokeable; end
 
 class Motion::Base

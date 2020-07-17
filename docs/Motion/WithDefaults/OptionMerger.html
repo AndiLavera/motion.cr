@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="crystal_docs.project_version" content="master-dev">
+<meta name="crystal_docs.project_name" content="motion.cr">
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="motion.cr">
+  <title>Motion::WithDefaults::OptionMerger(T, V) - motion.cr master-dev</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../../index.html">
+          motion.cr
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master-dev
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="motion.cr/Motion" data-name="motion">
+      <a href="../../Motion.html">Motion</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/AllowedInTags" data-name="motion::allowedintags">
+      <a href="../../Motion/AllowedInTags.html">AllowedInTags</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/AssetHelpers" data-name="motion::assethelpers">
+      <a href="../../Motion/AssetHelpers.html">AssetHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Assignable" data-name="motion::assignable">
+      <a href="../../Motion/Assignable.html">Assignable</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Base" data-name="motion::base">
+      <a href="../../Motion/Base.html">Base</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/BaseTags" data-name="motion::basetags">
+      <a href="../../Motion/BaseTags.html">BaseTags</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/CatchUnpermittedAttribute" data-name="motion::catchunpermittedattribute">
+      <a href="../../Motion/CatchUnpermittedAttribute.html">CatchUnpermittedAttribute</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Channel" data-name="motion::channel">
+      <a href="../../Motion/Channel.html">Channel</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/ComponentConnection" data-name="motion::componentconnection">
+      <a href="../../Motion/ComponentConnection.html">ComponentConnection</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/CustomTags" data-name="motion::customtags">
+      <a href="../../Motion/CustomTags.html">CustomTags</a>
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
+      <a href="../../Motion/Exceptions.html">Exceptions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/BaseError" data-name="motion::exceptions::baseerror">
+      <a href="../../Motion/Exceptions/BaseError.html">BaseError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentError" data-name="motion::exceptions::componenterror">
+      <a href="../../Motion/Exceptions/ComponentError.html">ComponentError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
+      <a href="../../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/InvalidComponentStateError" data-name="motion::exceptions::invalidcomponentstateerror">
+      <a href="../../Motion/Exceptions/InvalidComponentStateError.html">InvalidComponentStateError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/MultipleRootsError" data-name="motion::exceptions::multiplerootserror">
+      <a href="../../Motion/Exceptions/MultipleRootsError.html">MultipleRootsError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/UnrepresentableStateError" data-name="motion::exceptions::unrepresentablestateerror">
+      <a href="../../Motion/Exceptions/UnrepresentableStateError.html">UnrepresentableStateError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/ForgeryProtectionHelpers" data-name="motion::forgeryprotectionhelpers">
+      <a href="../../Motion/ForgeryProtectionHelpers.html">ForgeryProtectionHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTMLBuilder" data-name="motion::htmlbuilder">
+      <a href="../../Motion/HTMLBuilder.html">HTMLBuilder</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTMLTextHelpers" data-name="motion::htmltexthelpers">
+      <a href="../../Motion/HTMLTextHelpers.html">HTMLTextHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTMLTransformer" data-name="motion::htmltransformer">
+      <a href="../../Motion/HTMLTransformer.html">HTMLTransformer</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/InputHelpers" data-name="motion::inputhelpers">
+      <a href="../../Motion/InputHelpers.html">InputHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/LabelHelpers" data-name="motion::labelhelpers">
+      <a href="../../Motion/LabelHelpers.html">LabelHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Logger" data-name="motion::logger">
+      <a href="../../Motion/Logger.html">Logger</a>
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/Motions" data-name="motion::motions">
+      <a href="../../Motion/Motions.html">Motions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/Motions/Rendering" data-name="motion::motions::rendering">
+      <a href="../../Motion/Motions/Rendering.html">Rendering</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/MountComponent" data-name="motion::mountcomponent">
+      <a href="../../Motion/MountComponent.html">MountComponent</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/NumberToCurrency" data-name="motion::numbertocurrency">
+      <a href="../../Motion/NumberToCurrency.html">NumberToCurrency</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/RenderIfDefined" data-name="motion::renderifdefined">
+      <a href="../../Motion/RenderIfDefined.html">RenderIfDefined</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/SelectHelpers" data-name="motion::selecthelpers">
+      <a href="../../Motion/SelectHelpers.html">SelectHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Serializer" data-name="motion::serializer">
+      <a href="../../Motion/Serializer.html">Serializer</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/SpecialtyTags" data-name="motion::specialtytags">
+      <a href="../../Motion/SpecialtyTags.html">SpecialtyTags</a>
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/TextHelpers" data-name="motion::texthelpers">
+      <a href="../../Motion/TextHelpers.html">TextHelpers</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/TextHelpers/Cycle" data-name="motion::texthelpers::cycle">
+      <a href="../../Motion/TextHelpers/Cycle.html">Cycle</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/TimeHelpers" data-name="motion::timehelpers">
+      <a href="../../Motion/TimeHelpers.html">TimeHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/UrlHelpers" data-name="motion::urlhelpers">
+      <a href="../../Motion/UrlHelpers.html">UrlHelpers</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="motion.cr/Motion/WithDefaults" data-name="motion::withdefaults">
+      <a href="../../Motion/WithDefaults.html">WithDefaults</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="motion.cr/Motion/WithDefaults/OptionMerger" data-name="motion::withdefaults::optionmerger(t, v)">
+      <a href="../../Motion/WithDefaults/OptionMerger.html">OptionMerger</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Motion::WithDefaults::OptionMerger(T, V)
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Motion/WithDefaults/OptionMerger.html">Motion::WithDefaults::OptionMerger(T, V)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(page_context:T,named_args:V)-class-method" class="signature"><strong>.new</strong>(page_context : T, named_args : V)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#run(&)-instance-method" class="signature"><strong>#run</strong>(&)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>
+    <a id="macro-summary" class="anchor" href="#macro-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Macro Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#method_missing(call)-macro" class="signature"><strong>method_missing</strong>(call)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(page_context:T,named_args:V)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(page_context : T, named_args : V)
+
+        <a class="method-permalink" href="#new(page_context:T,named_args:V)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="run(&)-instance-method">
+      <div class="signature">
+        
+        def <strong>run</strong>(&)
+
+        <a class="method-permalink" href="#run(&)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>
+    <a id="macro-detail" class="anchor" href="#macro-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Macro Detail
+  </h2>
+  
+    <div class="entry-detail" id="method_missing(call)-macro">
+      <div class="signature">
+        
+        macro <strong>method_missing</strong>(call)
+
+        <a class="method-permalink" href="#method_missing(call)-macro">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+</div>
+
+</body>
+</html>

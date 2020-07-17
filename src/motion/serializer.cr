@@ -50,7 +50,7 @@ module Motion
     private def dump(component : Motion::Base)
       serialized_comp = component.to_json
     rescue e : Exception
-      raise UnrepresentableStateError.new(component, e.message)
+      raise Exceptions::UnrepresentableStateError.new(component, e.message)
     end
 
     private def load(state : String, klass : String) : Motion::Base

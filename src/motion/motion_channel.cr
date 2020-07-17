@@ -1,5 +1,8 @@
 require "json"
 
+# :nodoc:
+abstract class Amber::WebSockets::Channel; end
+
 module Motion
   class Channel < Amber::WebSockets::Channel
     # include ActionCableExtentions::DeclarativeNotifications

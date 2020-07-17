@@ -59,7 +59,7 @@ describe Motion::HTMLTransformer do
   end
 
   it "throws error when component has multiple roots" do
-    expect_raises(Motion::MultipleRootsError) do
+    expect_raises(Motion::Exceptions::MultipleRootsError) do
       UnsafeMultipleRootsRender.new.render
     end
   end
