@@ -1,3 +1,8 @@
 require "spec"
 require "http"
-require "../src/view_component"
+
+# Mock the channel
+class Amber::WebSockets::Channel
+end
+
+require "../src/motion"

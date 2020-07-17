@@ -1,5 +1,9 @@
 version: 2.0
 shards:
+  myhtml:
+    git: https://github.com/kostya/myhtml.git
+    version: 1.5.1
+
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
     version: 0.2.0

@@ -1,4 +1,4 @@
-name: view_component
+name: motion.cr
 version: 0.1.0
 
 # authors:
@@ -11,6 +11,9 @@ dependencies:
   wordsmith:
     github: luckyframework/wordsmith
     version: ~> 0.2.0
+
+  myhtml:
+    github: kostya/myhtml
 
 # development_dependencies:
 #   webmock:
