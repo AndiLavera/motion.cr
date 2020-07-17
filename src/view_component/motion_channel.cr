@@ -25,18 +25,16 @@ module ViewComponent
 
       state, client_version = params["state"].to_s, params["version"].to_s
 
+      # TODO: Ensure npm & shard versions are the same
       # if Gem::Version.new(Motion::VERSION) < Gem::Version.new(client_version)
       #   raise IncompatibleClientError.new(Motion::VERSION, client_version)
       # end
 
+      # TODO: Pass in Motion.config.log_helper
       @component_connection =
-        ComponentConnection.from_state(state,
-          log_helper: nil # log_helper
-        )
+        ComponentConnection.from_state(state)
 
-      # synchronize
-
-
+      synchronize
     rescue e : Exception
       # reject
 
@@ -73,24 +71,25 @@ module ViewComponent
     #   synchronize
     # end
 
-    # private def synchronize
-    #   streaming_from component_connection.broadcasts,
-    #     to: :process_broadcast
+    private def synchronize
+      puts "synchronizing"
+      # streaming_from component_connection.broadcasts,
+      #   to: :process_broadcast
 
-    #   periodically_notify component_connection.periodic_timers,
-    #     via: :process_periodic_timer
+      # periodically_notify component_connection.periodic_timers,
+      #   via: :process_periodic_timer
 
-    #   component_connection.if_render_required do |component|
-    #     transmit(renderer.render(component))
-    #   end
-    # end
-
-    private def handle_error(error, context)
-      # log_helper.error("An error occurred while #{context}", error: error)
+      # component_connection.if_render_required do |component|
+      #   transmit(renderer.render(component))
+      # end
     end
 
-    private def log_helper
-      # @log_helper ||= LogHelper.for_channel(self)
+    private def handle_error(error, context)
+      logger.error("An error occurred while #{context}", error: error)
+    end
+
+    private def logger
+      @log_helper ||= ViewComponent::Logger.new # TODO: .for_channel(self)
     end
 
     # Memoize the renderer on the connection so that it can be shared accross
