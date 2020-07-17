@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="crystal_docs.project_version" content="master-dev">
+<meta name="crystal_docs.project_name" content="motion.cr">
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="motion.cr">
+  <title>Motion::HTMLBuilder - motion.cr master-dev</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          motion.cr
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master-dev
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="motion.cr/Motion" data-name="motion">
+      <a href="../Motion.html">Motion</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/AllowedInTags" data-name="motion::allowedintags">
+      <a href="../Motion/AllowedInTags.html">AllowedInTags</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/AssetHelpers" data-name="motion::assethelpers">
+      <a href="../Motion/AssetHelpers.html">AssetHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Assignable" data-name="motion::assignable">
+      <a href="../Motion/Assignable.html">Assignable</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Base" data-name="motion::base">
+      <a href="../Motion/Base.html">Base</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/BaseTags" data-name="motion::basetags">
+      <a href="../Motion/BaseTags.html">BaseTags</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/CatchUnpermittedAttribute" data-name="motion::catchunpermittedattribute">
+      <a href="../Motion/CatchUnpermittedAttribute.html">CatchUnpermittedAttribute</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Channel" data-name="motion::channel">
+      <a href="../Motion/Channel.html">Channel</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/ComponentConnection" data-name="motion::componentconnection">
+      <a href="../Motion/ComponentConnection.html">ComponentConnection</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/CustomTags" data-name="motion::customtags">
+      <a href="../Motion/CustomTags.html">CustomTags</a>
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/Exceptions" data-name="motion::exceptions">
+      <a href="../Motion/Exceptions.html">Exceptions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/BaseError" data-name="motion::exceptions::baseerror">
+      <a href="../Motion/Exceptions/BaseError.html">BaseError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentError" data-name="motion::exceptions::componenterror">
+      <a href="../Motion/Exceptions/ComponentError.html">ComponentError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
+      <a href="../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/InvalidComponentStateError" data-name="motion::exceptions::invalidcomponentstateerror">
+      <a href="../Motion/Exceptions/InvalidComponentStateError.html">InvalidComponentStateError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/MultipleRootsError" data-name="motion::exceptions::multiplerootserror">
+      <a href="../Motion/Exceptions/MultipleRootsError.html">MultipleRootsError</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Exceptions/UnrepresentableStateError" data-name="motion::exceptions::unrepresentablestateerror">
+      <a href="../Motion/Exceptions/UnrepresentableStateError.html">UnrepresentableStateError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/ForgeryProtectionHelpers" data-name="motion::forgeryprotectionhelpers">
+      <a href="../Motion/ForgeryProtectionHelpers.html">ForgeryProtectionHelpers</a>
+      
+    </li>
+  
+  <li class=" current" data-id="motion.cr/Motion/HTMLBuilder" data-name="motion::htmlbuilder">
+      <a href="../Motion/HTMLBuilder.html">HTMLBuilder</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTMLTextHelpers" data-name="motion::htmltexthelpers">
+      <a href="../Motion/HTMLTextHelpers.html">HTMLTextHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/HTMLTransformer" data-name="motion::htmltransformer">
+      <a href="../Motion/HTMLTransformer.html">HTMLTransformer</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/InputHelpers" data-name="motion::inputhelpers">
+      <a href="../Motion/InputHelpers.html">InputHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/LabelHelpers" data-name="motion::labelhelpers">
+      <a href="../Motion/LabelHelpers.html">LabelHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Logger" data-name="motion::logger">
+      <a href="../Motion/Logger.html">Logger</a>
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/Motions" data-name="motion::motions">
+      <a href="../Motion/Motions.html">Motions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/Motions/Rendering" data-name="motion::motions::rendering">
+      <a href="../Motion/Motions/Rendering.html">Rendering</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/MountComponent" data-name="motion::mountcomponent">
+      <a href="../Motion/MountComponent.html">MountComponent</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/NumberToCurrency" data-name="motion::numbertocurrency">
+      <a href="../Motion/NumberToCurrency.html">NumberToCurrency</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/RenderIfDefined" data-name="motion::renderifdefined">
+      <a href="../Motion/RenderIfDefined.html">RenderIfDefined</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/SelectHelpers" data-name="motion::selecthelpers">
+      <a href="../Motion/SelectHelpers.html">SelectHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/Serializer" data-name="motion::serializer">
+      <a href="../Motion/Serializer.html">Serializer</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/SpecialtyTags" data-name="motion::specialtytags">
+      <a href="../Motion/SpecialtyTags.html">SpecialtyTags</a>
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/TextHelpers" data-name="motion::texthelpers">
+      <a href="../Motion/TextHelpers.html">TextHelpers</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/TextHelpers/Cycle" data-name="motion::texthelpers::cycle">
+      <a href="../Motion/TextHelpers/Cycle.html">Cycle</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/TimeHelpers" data-name="motion::timehelpers">
+      <a href="../Motion/TimeHelpers.html">TimeHelpers</a>
+      
+    </li>
+  
+  <li class=" " data-id="motion.cr/Motion/UrlHelpers" data-name="motion::urlhelpers">
+      <a href="../Motion/UrlHelpers.html">UrlHelpers</a>
+      
+    </li>
+  
+  <li class="parent " data-id="motion.cr/Motion/WithDefaults" data-name="motion::withdefaults">
+      <a href="../Motion/WithDefaults.html">WithDefaults</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion.cr/Motion/WithDefaults/OptionMerger" data-name="motion::withdefaults::optionmerger(t, v)">
+      <a href="../Motion/WithDefaults/OptionMerger.html">OptionMerger</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">module</span> Motion::HTMLBuilder
+
+</h1>
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../Motion/AssetHelpers.html">Motion::AssetHelpers</a></li>
+    
+      <li class="other-type"><a href="../Motion/Assignable.html">Motion::Assignable</a></li>
+    
+      <li class="other-type"><a href="../Motion/BaseTags.html">Motion::BaseTags</a></li>
+    
+      <li class="other-type"><a href="../Motion/CustomTags.html">Motion::CustomTags</a></li>
+    
+      <li class="other-type"><a href="../Motion/ForgeryProtectionHelpers.html">Motion::ForgeryProtectionHelpers</a></li>
+    
+      <li class="other-type">Motion::HelpfulParagraphError</li>
+    
+      <li class="other-type"><a href="../Motion/HTMLTextHelpers.html">Motion::HTMLTextHelpers</a></li>
+    
+      <li class="other-type"><a href="../Motion/InputHelpers.html">Motion::InputHelpers</a></li>
+    
+      <li class="other-type"><a href="../Motion/LabelHelpers.html">Motion::LabelHelpers</a></li>
+    
+      <li class="other-type"><a href="../Motion/MountComponent.html">Motion::MountComponent</a></li>
+    
+      <li class="other-type"><a href="../Motion/NumberToCurrency.html">Motion::NumberToCurrency</a></li>
+    
+      <li class="other-type"><a href="../Motion/RenderIfDefined.html">Motion::RenderIfDefined</a></li>
+    
+      <li class="other-type"><a href="../Motion/SelectHelpers.html">Motion::SelectHelpers</a></li>
+    
+      <li class="other-type"><a href="../Motion/SpecialtyTags.html">Motion::SpecialtyTags</a></li>
+    
+      <li class="other-type"><a href="../Motion/TextHelpers.html">Motion::TextHelpers</a></li>
+    
+      <li class="other-type"><a href="../Motion/TimeHelpers.html">Motion::TimeHelpers</a></li>
+    
+      <li class="other-type"><a href="../Motion/WithDefaults.html">Motion::WithDefaults</a></li>
+    
+  </ul>
+
+
+
+
+
+
+
+  <h2>
+    <a id="direct-including-types" class="anchor" href="#direct-including-types">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct including types
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../Motion/Base.html">Motion::Base</a></li>
+    
+  </ul>
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="ASSIGNS">
+        <strong>ASSIGNS</strong> = <code><span class="o">[]</span> <span class="k">of</span> <span class="t">Nil</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="SETTINGS">
+        <strong>SETTINGS</strong> = <code>{} <span class="k">of</span> <span class="t">Nil</span> => <span class="t">Nil</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#perform_render:IO-instance-method" class="signature"><strong>#perform_render</strong> : IO</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#render-instance-method" class="signature"><strong>#render</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#view-instance-method" class="signature"><strong>#view</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>
+    <a id="macro-summary" class="anchor" href="#macro-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Macro Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#generate_getters-macro" class="signature"><strong>generate_getters</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#generate_needy_initializer-macro" class="signature"><strong>generate_needy_initializer</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#setup_initializer_hook-macro" class="signature"><strong>setup_initializer_hook</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+<div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/WithDefaults.html">Motion::WithDefaults</a></code></h3>
+  
+  
+    <a href="../Motion/WithDefaults.html#with_defaults(**named_args,&)-instance-method" class="tooltip">
+      <span>with_defaults(**named_args, &)</span>
+    with_defaults</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/MountComponent.html">Motion::MountComponent</a></code></h3>
+  
+  
+    <a href="../Motion/MountComponent.html#m(component_class:Motion::Base.class,*args,**named_args):Nil-instance-method" class="tooltip">
+      <span>m(component_class : <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>.<span class="k">class</span>, *args, **named_args) : Nil<br/>m(component_class : <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>.<span class="k">class</span>, *args, **named_args, &) : Nil</span>
+    m</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/ForgeryProtectionHelpers.html">Motion::ForgeryProtectionHelpers</a></code></h3>
+  
+  
+    <a href="../Motion/ForgeryProtectionHelpers.html#csrf_hidden_input:Nil-instance-method" class="tooltip">
+      <span>csrf_hidden_input : Nil</span>
+    csrf_hidden_input</a>, 
+    
+  
+    <a href="../Motion/ForgeryProtectionHelpers.html#csrf_meta_tags:Nil-instance-method" class="tooltip">
+      <span>csrf_meta_tags : Nil</span>
+    csrf_meta_tags</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/TimeHelpers.html">Motion::TimeHelpers</a></code></h3>
+  
+  
+    <a href="../Motion/TimeHelpers.html#distance_of_time_in_words(from:Time,to:Time):String-instance-method" class="tooltip">
+      <span>distance_of_time_in_words(from : Time, to : Time) : String</span>
+    distance_of_time_in_words</a>, 
+    
+  
+    <a href="../Motion/TimeHelpers.html#time_ago_in_words(from:Time):String-instance-method" class="tooltip">
+      <span>time_ago_in_words(from : Time) : String</span>
+    time_ago_in_words</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/HTMLTextHelpers.html">Motion::HTMLTextHelpers</a></code></h3>
+  
+  
+    <a href="../Motion/HTMLTextHelpers.html#highlight(text:String,phrases:Array(String%7CRegex),highlighter:Proc%7CString=&quot;&lt;mark&gt;%5C%5C1&lt;/mark&gt;&quot;,escape:Bool=true):Nil-instance-method" class="tooltip">
+      <span>highlight(text : String, phrases : Array(String | Regex), highlighter : Proc | String = <span class="s">&quot;&lt;mark&gt;\\1&lt;/mark&gt;&quot;</span>, escape : Bool = <span class="n">true</span>) : Nil<br/>highlight(text : String, phrases : Array(String | Regex), escape : Bool = <span class="n">false</span>, &block : String -> _) : Nil<br/>highlight(text : String, phrase : String | Regex, highlighter : Proc | String = <span class="s">&quot;&lt;mark&gt;\\1&lt;/mark&gt;&quot;</span>, escape : Bool = <span class="n">true</span>) : Nil<br/>highlight(text : String, phrase : String | Regex, escape : Bool = <span class="n">true</span>, &block : String -> _) : Nil</span>
+    highlight</a>, 
+    
+  
+    <a href="../Motion/HTMLTextHelpers.html#simple_format(text:String,&block:String-%3E_):Nil-instance-method" class="tooltip">
+      <span>simple_format(text : String, &block : String -> _) : Nil<br/>simple_format(text : String, escape : Bool = <span class="n">true</span>, **html_options) : Nil</span>
+    simple_format</a>, 
+    
+  
+    <a href="../Motion/HTMLTextHelpers.html#truncate(text:String,length:Int32=30,omission:String=&quot;...&quot;,separator:String?=nil,escape:Bool=true,blk:Proc?=nil):Nil-instance-method" class="tooltip">
+      <span>truncate(text : String, length : Int32 = <span class="n">30</span>, omission : String = <span class="s">&quot;...&quot;</span>, separator : String? = <span class="n">nil</span>, escape : Bool = <span class="n">true</span>, blk : Proc? = <span class="n">nil</span>) : Nil<br/>truncate(text : String, length : Int32 = <span class="n">30</span>, omission : String = <span class="s">&quot;...&quot;</span>, separator : String? = <span class="n">nil</span>, escape : Bool = <span class="n">true</span>, &block :  -> _) : Nil</span>
+    truncate</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/TextHelpers.html">Motion::TextHelpers</a></code></h3>
+  
+  
+    <a href="../Motion/TextHelpers.html#current_cycle(name:String=&quot;default&quot;)-instance-method" class="tooltip">
+      <span>current_cycle(name : String = <span class="s">&quot;default&quot;</span>)</span>
+    current_cycle</a>, 
+    
+  
+    <a href="../Motion/TextHelpers.html#cycle(values:Array,name=&quot;default&quot;):String-instance-method" class="tooltip">
+      <span>cycle(values : Array, name = <span class="s">&quot;default&quot;</span>) : String<br/>cycle(*values, name : String = <span class="s">&quot;default&quot;</span>) : String</span>
+    cycle</a>, 
+    
+  
+    <a href="../Motion/TextHelpers.html#excerpt(text:String,phrase:Regex%7CString,separator:String=&quot;&quot;,radius:Int32=100,omission:String=&quot;...&quot;):String-instance-method" class="tooltip">
+      <span>excerpt(text : String, phrase : Regex | String, separator : String = <span class="s">&quot;&quot;</span>, radius : Int32 = <span class="n">100</span>, omission : String = <span class="s">&quot;...&quot;</span>) : String</span>
+    excerpt</a>, 
+    
+  
+    <a href="../Motion/TextHelpers.html#pluralize(count:Int%7CString%7CNil,singular:String,plural=nil):String-instance-method" class="tooltip">
+      <span>pluralize(count : Int | String | Nil, singular : String, plural = <span class="n">nil</span>) : String</span>
+    pluralize</a>, 
+    
+  
+    <a href="../Motion/TextHelpers.html#reset_cycle(name:String=&quot;default&quot;)-instance-method" class="tooltip">
+      <span>reset_cycle(name : String = <span class="s">&quot;default&quot;</span>)</span>
+    reset_cycle</a>, 
+    
+  
+    <a href="../Motion/TextHelpers.html#reset_cycles-instance-method" class="tooltip">
+      <span>reset_cycles</span>
+    reset_cycles</a>, 
+    
+  
+    <a href="../Motion/TextHelpers.html#to_sentence(list:Enumerable,word_connector:String=&quot;,&quot;,two_word_connector:String=&quot;and&quot;,last_word_connector:String=&quot;,and&quot;):String-instance-method" class="tooltip">
+      <span>to_sentence(list : Enumerable, word_connector : String = <span class="s">&quot;, &quot;</span>, two_word_connector : String = <span class="s">&quot; and &quot;</span>, last_word_connector : String = <span class="s">&quot;, and &quot;</span>) : String</span>
+    to_sentence</a>, 
+    
+  
+    <a href="../Motion/TextHelpers.html#truncate_text(text:String,length:Int32=30,omission:String=&quot;...&quot;,separator:String?=nil):String-instance-method" class="tooltip">
+      <span>truncate_text(text : String, length : Int32 = <span class="n">30</span>, omission : String = <span class="s">&quot;...&quot;</span>, separator : String? = <span class="n">nil</span>) : String</span>
+    truncate_text</a>, 
+    
+  
+    <a href="../Motion/TextHelpers.html#word_wrap(text:String,line_width:Int32=80,break_sequence:String=&quot;%5Cn&quot;):String-instance-method" class="tooltip">
+      <span>word_wrap(text : String, line_width : Int32 = <span class="n">80</span>, break_sequence : String = <span class="s">&quot;\n&quot;</span>) : String</span>
+    word_wrap</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/NumberToCurrency.html">Motion::NumberToCurrency</a></code></h3>
+  
+  
+    <a href="../Motion/NumberToCurrency.html#number_to_currency(value:Float%7CInt32%7CString,precision:Int32=DEFAULT_PRECISION,unit:String=DEFAULT_UNIT,separator:String=DEFAULT_SEPARATOR,delimiter:String=DEFAULT_DELIMITER,delimiter_pattern:Regex=DEFAULT_DELIMITER_REGEX,format:String=DEFAULT_FORMAT,negative_format:String=DEFAULT_FORMAT):String-instance-method" class="tooltip">
+      <span>number_to_currency(value : Float | Int32 | String, precision : Int32 = <span class="t">DEFAULT_PRECISION</span>, unit : String = <span class="t">DEFAULT_UNIT</span>, separator : String = <span class="t">DEFAULT_SEPARATOR</span>, delimiter : String = <span class="t">DEFAULT_DELIMITER</span>, delimiter_pattern : Regex = <span class="t">DEFAULT_DELIMITER_REGEX</span>, format : String = <span class="t">DEFAULT_FORMAT</span>, negative_format : String = <span class="t">DEFAULT_FORMAT</span>) : String</span>
+    number_to_currency</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/AssetHelpers.html">Motion::AssetHelpers</a></code></h3>
+  
+  
+    <a href="../Motion/AssetHelpers.html#dynamic_asset(path)-instance-method" class="tooltip">
+      <span>dynamic_asset(path)</span>
+    dynamic_asset</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/SpecialtyTags.html">Motion::SpecialtyTags</a></code></h3>
+  
+  
+    <a href="../Motion/SpecialtyTags.html#canonical_link(href:String):Nil-instance-method" class="tooltip">
+      <span>canonical_link(href : String) : Nil</span>
+    canonical_link</a>, 
+    
+  
+    <a href="../Motion/SpecialtyTags.html#css_link(href,**options):Nil-instance-method" class="tooltip">
+      <span>css_link(href, **options) : Nil</span>
+    css_link</a>, 
+    
+  
+    <a href="../Motion/SpecialtyTags.html#html_doctype:Nil-instance-method" class="tooltip">
+      <span>html_doctype : Nil</span>
+    html_doctype</a>, 
+    
+  
+    <a href="../Motion/SpecialtyTags.html#js_link(src,**options):Nil-instance-method" class="tooltip">
+      <span>js_link(src, **options) : Nil</span>
+    js_link</a>, 
+    
+  
+    <a href="../Motion/SpecialtyTags.html#nbsp(how_many:Int32=1):Nil-instance-method" class="tooltip">
+      <span>nbsp(how_many : Int32 = <span class="n">1</span>) : Nil</span>
+    nbsp</a>, 
+    
+  
+    <a href="../Motion/SpecialtyTags.html#raw(string:String):Nil-instance-method" class="tooltip">
+      <span>raw(string : String) : Nil</span>
+    raw</a>, 
+    
+  
+    <a href="../Motion/SpecialtyTags.html#responsive_meta_tag(**options):Nil-instance-method" class="tooltip">
+      <span>responsive_meta_tag(**options) : Nil</span>
+    responsive_meta_tag</a>, 
+    
+  
+    <a href="../Motion/SpecialtyTags.html#utf8_charset:Nil-instance-method" class="tooltip">
+      <span>utf8_charset : Nil</span>
+    utf8_charset</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/SelectHelpers.html">Motion::SelectHelpers</a></code></h3>
+  
+  
+    <a href="../Motion/SelectHelpers.html#options_for_select(field:Avram::PermittedAttribute(T),select_options:Array(Tuple(String,T)),**html_options):NilforallT-instance-method" class="tooltip">
+      <span>options_for_select(field : Avram::PermittedAttribute(T), select_options : Array(Tuple(String, T)), **html_options) : Nil forall T</span>
+    options_for_select</a>, 
+    
+  
+    <a href="../Motion/SelectHelpers.html#select_input(field:Avram::PermittedAttribute,**html_options,&):Nil-instance-method" class="tooltip">
+      <span>select_input(field : Avram::PermittedAttribute, **html_options, &) : Nil</span>
+    select_input</a>, 
+    
+  
+    <a href="../Motion/SelectHelpers.html#select_prompt(label:String):Nil-instance-method" class="tooltip">
+      <span>select_prompt(label : String) : Nil</span>
+    select_prompt</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/InputHelpers.html">Motion::InputHelpers</a></code></h3>
+  
+  
+    <a href="../Motion/InputHelpers.html#checkbox(field:Avram::PermittedAttribute(T),unchecked_value:String,checked_value:String,**html_options):NilforallT-instance-method" class="tooltip">
+      <span>checkbox(field : Avram::PermittedAttribute(T), unchecked_value : String, checked_value : String, **html_options) : Nil forall T<br/>checkbox(field : Avram::PermittedAttribute(Bool?), attrs : Array(Symbol), **html_options) : Nil<br/>checkbox(field : Avram::PermittedAttribute(Bool?), **html_options) : Nil<br/>checkbox(field : Avram::Attribute, **options)</span>
+    checkbox</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#color_input(field:Avram::PermittedAttribute,attrs:Array(Symbol),**html_options):Nil-instance-method" class="tooltip">
+      <span>color_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil<br/>color_input(field : Avram::Attribute, **options)<br/>color_input(field : Avram::PermittedAttribute, **html_options) : Nil</span>
+    color_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#date_input(field:Avram::Attribute,**options)-instance-method" class="tooltip">
+      <span>date_input(field : Avram::Attribute, **options)<br/>date_input(field : Avram::PermittedAttribute, **html_options) : Nil<br/>date_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil</span>
+    date_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#datetime_input(field:Avram::PermittedAttribute,**html_options):Nil-instance-method" class="tooltip">
+      <span>datetime_input(field : Avram::PermittedAttribute, **html_options) : Nil<br/>datetime_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil<br/>datetime_input(field : Avram::Attribute, **options)</span>
+    datetime_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#email_input(field:Avram::PermittedAttribute,attrs:Array(Symbol),**html_options):Nil-instance-method" class="tooltip">
+      <span>email_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil<br/>email_input(field : Avram::Attribute, **options)<br/>email_input(field : Avram::PermittedAttribute, **html_options) : Nil</span>
+    email_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#file_input(field:Avram::Attribute,**options)-instance-method" class="tooltip">
+      <span>file_input(field : Avram::Attribute, **options)<br/>file_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil<br/>file_input(field : Avram::PermittedAttribute, **html_options) : Nil</span>
+    file_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#hidden_input(field:Avram::PermittedAttribute,attrs:Array(Symbol),**html_options):Nil-instance-method" class="tooltip">
+      <span>hidden_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil<br/>hidden_input(field : Avram::PermittedAttribute, **html_options) : Nil<br/>hidden_input(field : Avram::Attribute, **options)</span>
+    hidden_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#number_input(field:Avram::Attribute,**options)-instance-method" class="tooltip">
+      <span>number_input(field : Avram::Attribute, **options)<br/>number_input(field : Avram::PermittedAttribute, **html_options) : Nil<br/>number_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil</span>
+    number_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#password_input(field:Avram::PermittedAttribute,**html_options):Nil-instance-method" class="tooltip">
+      <span>password_input(field : Avram::PermittedAttribute, **html_options) : Nil<br/>password_input(field : Avram::Attribute, **options)<br/>password_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil</span>
+    password_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#radio(field:Avram::PermittedAttribute(String?),checked_value:String,attrs:Array(Symbol),**html_options):Nil-instance-method" class="tooltip">
+      <span>radio(field : Avram::PermittedAttribute(String?), checked_value : String, attrs : Array(Symbol), **html_options) : Nil<br/>radio(field : Avram::PermittedAttribute(String?), checked_value : String, **html_options) : Nil<br/>radio(field : Avram::Attribute, **options)</span>
+    radio</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#range_input(field:Avram::PermittedAttribute,attrs:Array(Symbol),**html_options):Nil-instance-method" class="tooltip">
+      <span>range_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil<br/>range_input(field : Avram::Attribute, **options)<br/>range_input(field : Avram::PermittedAttribute, **html_options) : Nil</span>
+    range_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#search_input(field:Avram::PermittedAttribute,attrs:Array(Symbol),**html_options):Nil-instance-method" class="tooltip">
+      <span>search_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil<br/>search_input(field : Avram::Attribute, **options)<br/>search_input(field : Avram::PermittedAttribute, **html_options) : Nil</span>
+    search_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#submit(text:String,**html_options):Nil-instance-method" class="tooltip">
+      <span>submit(text : String, **html_options) : Nil</span>
+    submit</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#telephone_input(field:Avram::PermittedAttribute,**html_options):Nil-instance-method" class="tooltip">
+      <span>telephone_input(field : Avram::PermittedAttribute, **html_options) : Nil<br/>telephone_input(field : Avram::Attribute, **options)<br/>telephone_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil</span>
+    telephone_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#text_input(field:Avram::PermittedAttribute,attrs:Array(Symbol),**html_options):Nil-instance-method" class="tooltip">
+      <span>text_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil<br/>text_input(field : Avram::Attribute, **options)<br/>text_input(field : Avram::PermittedAttribute, **html_options) : Nil</span>
+    text_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#textarea(field:Avram::PermittedAttribute,**html_options):Nil-instance-method" class="tooltip">
+      <span>textarea(field : Avram::PermittedAttribute, **html_options) : Nil<br/>textarea(field : Avram::Attribute, **options)<br/>textarea(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil</span>
+    textarea</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#time_input(field:Avram::PermittedAttribute,attrs:Array(Symbol),**html_options):Nil-instance-method" class="tooltip">
+      <span>time_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil<br/>time_input(field : Avram::Attribute, **options)<br/>time_input(field : Avram::PermittedAttribute, **html_options) : Nil</span>
+    time_input</a>, 
+    
+  
+    <a href="../Motion/InputHelpers.html#url_input(field:Avram::PermittedAttribute,**html_options):Nil-instance-method" class="tooltip">
+      <span>url_input(field : Avram::PermittedAttribute, **html_options) : Nil<br/>url_input(field : Avram::Attribute, **options)<br/>url_input(field : Avram::PermittedAttribute, attrs : Array(Symbol), **html_options) : Nil</span>
+    url_input</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/LabelHelpers.html">Motion::LabelHelpers</a></code></h3>
+  
+  
+    <a href="../Motion/LabelHelpers.html#label_for(field:Avram::PermittedAttribute,text:String?=nil,**html_options):Nil-instance-method" class="tooltip">
+      <span>label_for(field : Avram::PermittedAttribute, text : String? = <span class="n">nil</span>, **html_options) : Nil<br/>label_for(field : Avram::PermittedAttribute, **html_options, &) : Nil<br/>label_for(field, **options) : Nil<br/>label_for(field, **options, &) : Nil</span>
+    label_for</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/CustomTags.html">Motion::CustomTags</a></code></h3>
+  
+  
+    <a href="../Motion/CustomTags.html#empty_tag(name:String,options=EMPTY_HTML_ATTRS,**other_options):Nil-instance-method" class="tooltip">
+      <span>empty_tag(name : String, options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil</span>
+    empty_tag</a>, 
+    
+  
+    <a href="../Motion/CustomTags.html#tag(name:String,content:Motion::AllowedInTags%7CString?=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>tag(name : String, content : Motion::AllowedInTags | String? = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>tag(name : String, content : String | Motion::AllowedInTags) : Nil<br/>tag(name : String, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    tag</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+  <h3>Instance methods inherited from module <code><a href="../Motion/BaseTags.html">Motion::BaseTags</a></code></h3>
+  
+  
+    <a href="../Motion/BaseTags.html#a(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>a(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>a(content : String | Motion::AllowedInTags) : Nil<br/>a(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>a(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    a</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#abbr(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>abbr(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>abbr(content : String | Motion::AllowedInTags) : Nil<br/>abbr(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>abbr(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    abbr</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#address(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>address(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>address(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>address(content : String | Motion::AllowedInTags) : Nil<br/>address(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    address</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#article(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>article(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>article(content : String | Motion::AllowedInTags) : Nil<br/>article(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>article(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    article</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#aside(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>aside(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>aside(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>aside(content : String | Motion::AllowedInTags) : Nil<br/>aside(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    aside</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#b(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>b(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>b(content : String | Motion::AllowedInTags) : Nil<br/>b(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>b(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    b</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#bdi(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>bdi(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>bdi(content : String | Motion::AllowedInTags) : Nil<br/>bdi(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>bdi(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    bdi</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#body(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>body(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>body(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>body(content : String | Motion::AllowedInTags) : Nil<br/>body(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    body</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#br(options=EMPTY_HTML_ATTRS,**other_options):Nil-instance-method" class="tooltip">
+      <span>br(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil<br/>br(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil</span>
+    br</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#button(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>button(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>button(content : String | Motion::AllowedInTags) : Nil<br/>button(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>button(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    button</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#code(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>code(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>code(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>code(content : String | Motion::AllowedInTags) : Nil<br/>code(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    code</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#dd(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>dd(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>dd(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>dd(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>dd(content : String | Motion::AllowedInTags) : Nil</span>
+    dd</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#details(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>details(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>details(content : String | Motion::AllowedInTags) : Nil<br/>details(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>details(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    details</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#dialog(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>dialog(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>dialog(content : String | Motion::AllowedInTags) : Nil<br/>dialog(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>dialog(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    dialog</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#div(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>div(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>div(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>div(content : String | Motion::AllowedInTags) : Nil<br/>div(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    div</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#dl(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>dl(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>dl(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>dl(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>dl(content : String | Motion::AllowedInTags) : Nil</span>
+    dl</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#dt(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>dt(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>dt(content : String | Motion::AllowedInTags) : Nil<br/>dt(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>dt(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    dt</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#em(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>em(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>em(content : String | Motion::AllowedInTags) : Nil<br/>em(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>em(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    em</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#fieldset(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>fieldset(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>fieldset(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>fieldset(content : String | Motion::AllowedInTags) : Nil<br/>fieldset(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    fieldset</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#figcaption(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>figcaption(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>figcaption(content : String | Motion::AllowedInTags) : Nil<br/>figcaption(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>figcaption(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    figcaption</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#figure(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>figure(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>figure(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>figure(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>figure(content : String | Motion::AllowedInTags) : Nil</span>
+    figure</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#footer(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>footer(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>footer(content : String | Motion::AllowedInTags) : Nil<br/>footer(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>footer(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    footer</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#form(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>form(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>form(content : String | Motion::AllowedInTags) : Nil<br/>form(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>form(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    form</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#h1(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>h1(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>h1(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>h1(content : String | Motion::AllowedInTags) : Nil<br/>h1(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    h1</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#h2(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>h2(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>h2(content : String | Motion::AllowedInTags) : Nil<br/>h2(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>h2(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    h2</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#h3(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>h3(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>h3(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>h3(content : String | Motion::AllowedInTags) : Nil<br/>h3(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    h3</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#h4(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>h4(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>h4(content : String | Motion::AllowedInTags) : Nil<br/>h4(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>h4(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    h4</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#h5(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>h5(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>h5(content : String | Motion::AllowedInTags) : Nil<br/>h5(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>h5(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    h5</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#h6(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>h6(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>h6(content : String | Motion::AllowedInTags) : Nil<br/>h6(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>h6(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    h6</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#head(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>head(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>head(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>head(content : String | Motion::AllowedInTags) : Nil<br/>head(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    head</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#header(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>header(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>header(content : String | Motion::AllowedInTags) : Nil<br/>header(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>header(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    header</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#hr(attrs:Array(Symbol),options=EMPTY_HTML_ATTRS,**other_options):Nil-instance-method" class="tooltip">
+      <span>hr(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil<br/>hr(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil</span>
+    hr</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#html(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>html(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>html(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>html(content : String | Motion::AllowedInTags) : Nil<br/>html(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    html</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#i(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>i(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>i(content : String | Motion::AllowedInTags) : Nil<br/>i(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>i(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    i</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#iframe(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>iframe(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>iframe(content : String | Motion::AllowedInTags) : Nil<br/>iframe(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>iframe(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    iframe</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#img(options=EMPTY_HTML_ATTRS,**other_options):Nil-instance-method" class="tooltip">
+      <span>img(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil<br/>img(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil</span>
+    img</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#input(options=EMPTY_HTML_ATTRS,**other_options):Nil-instance-method" class="tooltip">
+      <span>input(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil<br/>input(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil</span>
+    input</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#label(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>label(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>label(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>label(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>label(content : String | Motion::AllowedInTags) : Nil</span>
+    label</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#li(content:String%7CMotion::AllowedInTags):Nil-instance-method" class="tooltip">
+      <span>li(content : String | Motion::AllowedInTags) : Nil<br/>li(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>li(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>li(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    li</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#main(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>main(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>main(content : String | Motion::AllowedInTags) : Nil<br/>main(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>main(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    main</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#mark(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>mark(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>mark(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>mark(content : String | Motion::AllowedInTags) : Nil<br/>mark(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    mark</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#menuitem(content:String%7CMotion::AllowedInTags):Nil-instance-method" class="tooltip">
+      <span>menuitem(content : String | Motion::AllowedInTags) : Nil<br/>menuitem(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>menuitem(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>menuitem(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    menuitem</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#meta(attrs:Array(Symbol),options=EMPTY_HTML_ATTRS,**other_options):Nil-instance-method" class="tooltip">
+      <span>meta(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil<br/>meta(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil</span>
+    meta</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#meter(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>meter(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>meter(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>meter(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>meter(content : String | Motion::AllowedInTags) : Nil</span>
+    meter</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#nav(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>nav(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>nav(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>nav(content : String | Motion::AllowedInTags) : Nil<br/>nav(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    nav</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#ol(attrs:Array(Symbol),options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>ol(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>ol(content : String | Motion::AllowedInTags) : Nil<br/>ol(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>ol(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    ol</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#option(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>option(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>option(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>option(content : String | Motion::AllowedInTags) : Nil<br/>option(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    option</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#para(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>para(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>para(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>para(content : String | Motion::AllowedInTags) : Nil<br/>para(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    para</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#pre(content:String%7CMotion::AllowedInTags):Nil-instance-method" class="tooltip">
+      <span>pre(content : String | Motion::AllowedInTags) : Nil<br/>pre(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>pre(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>pre(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    pre</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#progress(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>progress(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>progress(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>progress(content : String | Motion::AllowedInTags) : Nil<br/>progress(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    progress</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#rp(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>rp(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>rp(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>rp(content : String | Motion::AllowedInTags) : Nil<br/>rp(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    rp</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#rt(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>rt(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>rt(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>rt(content : String | Motion::AllowedInTags) : Nil<br/>rt(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    rt</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#ruby(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>ruby(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>ruby(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>ruby(content : String | Motion::AllowedInTags) : Nil<br/>ruby(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    ruby</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#s(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>s(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>s(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>s(content : String | Motion::AllowedInTags) : Nil<br/>s(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    s</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#script(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>script(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>script(content : String | Motion::AllowedInTags) : Nil<br/>script(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>script(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    script</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#section(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>section(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>section(content : String | Motion::AllowedInTags) : Nil<br/>section(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>section(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    section</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#select_tag(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>select_tag(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>select_tag(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>select_tag(content : String | Motion::AllowedInTags) : Nil<br/>select_tag(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    select_tag</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#small(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>small(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>small(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>small(content : String | Motion::AllowedInTags) : Nil<br/>small(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    small</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#source(attrs:Array(Symbol),options=EMPTY_HTML_ATTRS,**other_options):Nil-instance-method" class="tooltip">
+      <span>source(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil<br/>source(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options) : Nil</span>
+    source</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#span(attrs:Array(Symbol),options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>span(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>span(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>span(content : String | Motion::AllowedInTags) : Nil<br/>span(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    span</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#strong(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>strong(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>strong(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>strong(content : String | Motion::AllowedInTags) : Nil<br/>strong(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    strong</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#style(styles:String):Nil-instance-method" class="tooltip">
+      <span>style(styles : String) : Nil</span>
+    style</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#summary(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>summary(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>summary(content : String | Motion::AllowedInTags) : Nil<br/>summary(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>summary(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    summary</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#table(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>table(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>table(content : String | Motion::AllowedInTags) : Nil<br/>table(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>table(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    table</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#tbody(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>tbody(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>tbody(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>tbody(content : String | Motion::AllowedInTags) : Nil<br/>tbody(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    tbody</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#td(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>td(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>td(content : String | Motion::AllowedInTags) : Nil<br/>td(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>td(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    td</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#template(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>template(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>template(content : String | Motion::AllowedInTags) : Nil<br/>template(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>template(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    template</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#text(content:String%7CMotion::AllowedInTags):Nil-instance-method" class="tooltip">
+      <span>text(content : String | Motion::AllowedInTags) : Nil</span>
+    text</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#textarea(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>textarea(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>textarea(content : String | Motion::AllowedInTags) : Nil<br/>textarea(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>textarea(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    textarea</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#th(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>th(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>th(content : String | Motion::AllowedInTags) : Nil<br/>th(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>th(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    th</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#thead(content:String%7CMotion::AllowedInTags):Nil-instance-method" class="tooltip">
+      <span>thead(content : String | Motion::AllowedInTags) : Nil<br/>thead(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>thead(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>thead(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    thead</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#time(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>time(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>time(content : String | Motion::AllowedInTags) : Nil<br/>time(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>time(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    time</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#title(content:String%7CMotion::AllowedInTags):Nil-instance-method" class="tooltip">
+      <span>title(content : String | Motion::AllowedInTags) : Nil<br/>title(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>title(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>title(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    title</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#tr(options=EMPTY_HTML_ATTRS,**other_options,&):Nil-instance-method" class="tooltip">
+      <span>tr(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>tr(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>tr(content : String | Motion::AllowedInTags) : Nil<br/>tr(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    tr</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#u(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>u(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>u(content : String | Motion::AllowedInTags) : Nil<br/>u(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>u(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    u</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#ul(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>ul(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>ul(content : String | Motion::AllowedInTags) : Nil<br/>ul(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>ul(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    ul</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#video(content:String%7CMotion::AllowedInTags):Nil-instance-method" class="tooltip">
+      <span>video(content : String | Motion::AllowedInTags) : Nil<br/>video(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>video(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>video(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil</span>
+    video</a>, 
+    
+  
+    <a href="../Motion/BaseTags.html#wbr(content:Motion::AllowedInTags%7CString=&quot;&quot;,options=EMPTY_HTML_ATTRS,attrs:Array(Symbol)=[]ofSymbol,**other_options):Nil-instance-method" class="tooltip">
+      <span>wbr(content : Motion::AllowedInTags | String = <span class="s">&quot;&quot;</span>, options = <span class="t">EMPTY_HTML_ATTRS</span>, attrs : Array(Symbol) = <span class="o">[]</span> <span class="k">of</span> <span class="t">Symbol</span>, **other_options) : Nil<br/>wbr(content : String | Motion::AllowedInTags) : Nil<br/>wbr(attrs : Array(Symbol), options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil<br/>wbr(options = <span class="t">EMPTY_HTML_ATTRS</span>, **other_options, &) : Nil</span>
+    wbr</a>
+    
+  
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="perform_render:IO-instance-method">
+      <div class="signature">
+        
+        def <strong>perform_render</strong> : IO
+
+        <a class="method-permalink" href="#perform_render:IO-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="render-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>render</strong>
+
+        <a class="method-permalink" href="#render-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="view-instance-method">
+      <div class="signature">
+        abstract 
+        def <strong>view</strong>
+
+        <a class="method-permalink" href="#view-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>
+    <a id="macro-detail" class="anchor" href="#macro-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Macro Detail
+  </h2>
+  
+    <div class="entry-detail" id="generate_getters-macro">
+      <div class="signature">
+        
+        macro <strong>generate_getters</strong>
+
+        <a class="method-permalink" href="#generate_getters-macro">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="generate_needy_initializer-macro">
+      <div class="signature">
+        
+        macro <strong>generate_needy_initializer</strong>
+
+        <a class="method-permalink" href="#generate_needy_initializer-macro">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="setup_initializer_hook-macro">
+      <div class="signature">
+        
+        macro <strong>setup_initializer_hook</strong>
+
+        <a class="method-permalink" href="#setup_initializer_hook-macro">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+</div>
+
+</body>
+</html>
