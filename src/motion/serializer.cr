@@ -3,6 +3,7 @@ require "base64"
 require "crypto/bcrypt"
 
 module Motion
+  # :nodoc:
   class Serializer
     private HASH_PEPPER = "Motion"
     private NULL_BYTE   = "\0"

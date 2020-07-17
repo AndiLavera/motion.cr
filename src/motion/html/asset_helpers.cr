@@ -4,7 +4,7 @@
 # and allow for setting a CDN.
 #
 # For an in-depth guide check: https://luckyframework.org/guides/frontend/asset-handling
-module Motion::AssetHelpers
+module Motion::HTML::AssetHelpers
   ASSET_MANIFEST = {} of String => String
   CONFIG         = {has_loaded_manifest: false}
 

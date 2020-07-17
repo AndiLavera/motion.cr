@@ -1,10 +1,10 @@
-module Motion::CustomTags
-  include Motion::CheckTagContent
+module Motion::HTML::CustomTags
+  include Motion::HTML::CheckTagContent
   EMPTY_HTML_ATTRS = {} of String => String
 
   def tag(
     name : String,
-    content : Motion::AllowedInTags | String? = "",
+    content : Motion::HTML::AllowedInTags | String? = "",
     options = EMPTY_HTML_ATTRS,
     attrs : Array(Symbol) = [] of Symbol,
     **other_options
@@ -16,7 +16,7 @@ module Motion::CustomTags
     end
   end
 
-  def tag(name : String, content : String | Motion::AllowedInTags) : Nil
+  def tag(name : String, content : String | Motion::HTML::AllowedInTags) : Nil
     tag(EMPTY_HTML_ATTRS) do
       text content
     end

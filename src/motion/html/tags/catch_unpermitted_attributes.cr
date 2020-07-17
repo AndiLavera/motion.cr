@@ -5,9 +5,9 @@
 #
 # This module is included in the default `Shared::Field` component in new
 # Lucky apps.
-module Motion::CatchUnpermittedAttribute
+module Motion::HTML::CatchUnpermittedAttribute
   # :nodoc:
   def self.new(field : Avram::Attribute, *arg, **named_args)
-    Motion::InputHelpers.error_message_for_unallowed_field
+    Motion::HTML::InputHelpers.error_message_for_unallowed_field
   end
 end

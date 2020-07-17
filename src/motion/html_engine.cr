@@ -1,28 +1,28 @@
-require "./tags/**"
-require "./page_helpers/**"
-require "./allowed_in_tags"
-require "./asset_helpers"
-require "./assignable"
+require "./html/tags/**"
+require "./html/page_helpers/**"
+require "./html/allowed_in_tags"
+require "./html/asset_helpers"
+require "./html/assignable"
 require "./mount_component"
 
-module Motion::HTMLBuilder
-  include Motion::BaseTags
-  include Motion::CustomTags
-  include Motion::LabelHelpers
-  include Motion::InputHelpers
-  include Motion::SelectHelpers
-  include Motion::SpecialtyTags
-  include Motion::Assignable
-  include Motion::AssetHelpers
-  include Motion::NumberToCurrency
-  include Motion::TextHelpers
-  include Motion::HTMLTextHelpers
-  include Motion::TimeHelpers
-  include Motion::ForgeryProtectionHelpers
-  include Motion::MountComponent
-  include Motion::HelpfulParagraphError
-  include Motion::RenderIfDefined
-  include Motion::WithDefaults
+module Motion::HTML::Engine
+  include BaseTags
+  include CustomTags
+  include LabelHelpers
+  include InputHelpers
+  include SelectHelpers
+  include SpecialtyTags
+  include Assignable
+  include AssetHelpers
+  include NumberToCurrency
+  include TextHelpers
+  include HTMLTextHelpers
+  include TimeHelpers
+  include ForgeryProtectionHelpers
+  include MountComponent
+  include HelpfulParagraphError
+  include RenderIfDefined
+  include WithDefaults
 
   abstract def view
   abstract def render

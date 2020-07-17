@@ -1,4 +1,4 @@
-module Motion::Assignable
+module Motion::HTML::Assignable
   # Declare what a page needs in order to be initialized.
   #
   # This will declare an instance variable and getter automatically. It will

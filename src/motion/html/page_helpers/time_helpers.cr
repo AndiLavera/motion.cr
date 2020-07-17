@@ -1,4 +1,4 @@
-module Motion::TimeHelpers
+module Motion::HTML::TimeHelpers
   # Returns a `String` with approximate distance in time between `from` and `to`.
   #
   # ```

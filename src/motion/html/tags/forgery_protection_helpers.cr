@@ -1,4 +1,4 @@
-module Motion::ForgeryProtectionHelpers
+module Motion::HTML::ForgeryProtectionHelpers
   # Generate a hidden input with the request CSRF token
   #
   # This input is automatically generated when using

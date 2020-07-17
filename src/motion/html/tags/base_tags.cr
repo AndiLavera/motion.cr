@@ -1,5 +1,5 @@
-module Motion::BaseTags
-  include Motion::CheckTagContent
+module Motion::HTML::BaseTags
+  include Motion::HTML::CheckTagContent
   TAGS             = %i(a abbr address article aside b bdi body button code details dialog div dd dl dt em fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 head header html i iframe label li main mark menuitem meter nav ol option pre progress rp rt ruby s script section small span strong summary table tbody td template textarea th thead time title tr u ul video wbr)
   RENAMED_TAGS     = {"para": "p", "select_tag": "select"}
   EMPTY_TAGS       = %i(img br hr input meta source)
@@ -16,7 +16,7 @@ module Motion::BaseTags
     # {{method_name.id}}("Sample", {"class" => "cls-1 red"}, [:required]) #=> <{{method_name.id}} class="cls-1 red" required>Sample</{{method_name.id}}>
     # ```
     def {{method_name.id}}(
-        content : Motion::AllowedInTags | String = "",
+        content : Motion::HTML::AllowedInTags | String = "",
         options = EMPTY_HTML_ATTRS,
         attrs : Array(Symbol) = [] of Symbol,
         **other_options
@@ -27,7 +27,7 @@ module Motion::BaseTags
       end
     end
 
-    def {{method_name.id}}(content : String | Motion::AllowedInTags) : Nil
+    def {{method_name.id}}(content : String | Motion::HTML::AllowedInTags) : Nil
       {{method_name.id}}(EMPTY_HTML_ATTRS) do
         text content
       end
@@ -97,8 +97,8 @@ module Motion::BaseTags
   # text("Hello") # => Hello
   # text("<div>") # => &lt;div&gt;
   # ```
-  def text(content : String | Motion::AllowedInTags) : Nil
-    view << HTML.escape(content.to_s)
+  def text(content : String | Motion::HTML::AllowedInTags) : Nil
+    view << ::HTML.escape(content.to_s)
   end
 
   # Generates a `&lt;style&gt;&lt;/style&gt;` block for adding inline CSS
@@ -114,7 +114,7 @@ module Motion::BaseTags
     tag_attrs = String.build do |attrs|
       options.each do |key, value|
         attrs << " " << Wordsmith::Inflector.dasherize(key.to_s) << "=\""
-        attrs << HTML.escape(value.to_s)
+        attrs << ::HTML.escape(value.to_s)
         attrs << "\""
       end
     end
@@ -129,7 +129,7 @@ module Motion::BaseTags
   end
 
   private def merge_options(html_options, tag_attrs)
-    options = {} of String => String | Motion::AllowedInTags
+    options = {} of String => String | Motion::HTML::AllowedInTags
     tag_attrs.each do |key, value|
       options[key.to_s] = value
     end

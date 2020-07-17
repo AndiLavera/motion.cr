@@ -1,7 +1,7 @@
 # Set up defaults arguments for HTML tags.
 #
 # This is automatically included in Pages and Components.
-module Motion::WithDefaults
+module Motion::HTML::WithDefaults
   # This is typically used in components and helper methods to set up defaults for
   # reusable components.
   #

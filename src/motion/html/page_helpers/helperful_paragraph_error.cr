@@ -1,5 +1,5 @@
 # :nodoc:
-module Motion::HelpfulParagraphError
+module Motion::HTML::HelpfulParagraphError
   macro p(_arg, **args)
     {% raise <<-ERROR
       `p` is not available on Lucky pages. This is because it's not clear whether you want to print something out or use a `p` HTML tag.
