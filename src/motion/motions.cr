@@ -2,7 +2,9 @@ require "./motions/*"
 require "./html_transformer"
 require "./serializer"
 require "./component_connection"
-require "./motion_channel"
+
+# TODO: Can't build when required. Maybe in the initializer users will have to explicitly require this
+# require "./motion_channel"
 
 module Motion
   module Motions
