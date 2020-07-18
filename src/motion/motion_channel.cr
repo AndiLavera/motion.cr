@@ -1,6 +1,5 @@
 require "json"
 
-# :nodoc:
 abstract class Amber::WebSockets::Channel; end
 
 module Motion
@@ -53,16 +52,23 @@ module Motion
     end
 
     def handle_message(client_socket, message)
-      pp "handle message"
-      pp message["payload"]
+      identifier, data, action = parse_motion(message["payload"])
+      case action
+      when "process_motion" then process_motion(identifier, data)
+      end
     end
 
-    # def process_motion(data)
-    #   motion, raw_event = data.values_at("name", "event")
+    def process_motion(identifier, data)
+      pp "processing motion"
+      motion, raw_event = data["name"], data["event"]
 
-    #   component_connection.process_motion(motion, Event.from_raw(raw_event))
-    #   synchronize
-    # end
+      if (cc = component_connection)
+        cc.process_motion(motion.to_s, Motion::Event.from_raw(raw_event))
+      else
+        raise "NoComponentConnectionError"
+      end
+      synchronize
+    end
 
     # def process_broadcast(broadcast, message)
     #   component_connection.process_broadcast(broadcast, message)
@@ -89,11 +95,18 @@ module Motion
 
     # TODO: pass error in as an argument: , error: error
     private def handle_error(error, context)
-      logger.error("An error occurred while #{context}")
+      log_helper.error("An error occurred while #{context} & #{error}")
     end
 
-    private def logger
+    private def log_helper
       @log_helper ||= Motion::Logger.new # TODO: .for_channel(self)
+    end
+
+    private def parse_motion(payload)
+      identifier = JSON.parse(payload["message"]["identifier"].to_s)
+      data = JSON.parse(payload["message"]["data"].to_s)
+      action = data["action"]
+      [identifier, data, action]
     end
 
     # Memoize the renderer on the connection so that it can be shared accross

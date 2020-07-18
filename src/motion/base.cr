@@ -25,7 +25,7 @@ class Motion::Base
     io << view
   end
 
-  def process_motion(method : String)
+  def process_motion(method : String, event : Motion::Event?)
     # TODO: Real Error
     raise "Motion::Base#process_motion"
   end
@@ -36,7 +36,7 @@ class Motion::Base
   end
 
   macro inherited
-    def process_motion(motion : String)
+    def process_motion(motion : String, event : Motion::Event?)
       {% verbatim do %}
         {% begin %}
           case motion
