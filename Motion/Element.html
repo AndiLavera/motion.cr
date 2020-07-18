@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="motion.cr">
-  <title>Motion::Channel - motion.cr master</title>
+  <title>Motion::Element - motion.cr master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -61,12 +61,12 @@
       
     </li>
   
-  <li class=" current" data-id="motion.cr/Motion/Channel" data-name="motion::channel">
+  <li class=" " data-id="motion.cr/Motion/Channel" data-name="motion::channel">
       <a href="../Motion/Channel.html">Channel</a>
       
     </li>
   
-  <li class=" " data-id="motion.cr/Motion/Element" data-name="motion::element">
+  <li class=" current" data-id="motion.cr/Motion/Element" data-name="motion::element">
       <a href="../Motion/Element.html">Element</a>
       
     </li>
@@ -275,12 +275,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Motion::Channel
+  <span class="kind">class</span> Motion::Element
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Motion/Channel.html">Motion::Channel</a></li><li class="superclass"><a href="../Amber/WebSockets/Channel.html">Amber::WebSockets::Channel</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Motion/Element.html">Motion::Element</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -308,8 +308,8 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/motion_channel.cr#L6" target="_blank">
-        motion/motion_channel.cr
+      <a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/element.cr#L2" target="_blank">
+        motion/element.cr
       </a>
     
     <br/>
@@ -319,7 +319,41 @@
 
 
 
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(raw:JSON::Any)-class-method" class="signature"><strong>.new</strong>(raw : JSON::Any)</a>
+        
+      </li>
+    
+  </ul>
 
+
+
+  <h2>
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#from_raw(raw:JSON::Any)-class-method" class="signature"><strong>.from_raw</strong>(raw : JSON::Any)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -334,27 +368,37 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#component_connection:Motion::ComponentConnection?-instance-method" class="signature"><strong>#component_connection</strong> : Motion::ComponentConnection?</a>
+        <a href="#[](key)-instance-method" class="signature"><strong>#[]</strong>(key)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#handle_joined(client_socket,message)-instance-method" class="signature"><strong>#handle_joined</strong>(client_socket, message)</a>
+        <a href="#attributes-instance-method" class="signature"><strong>#attributes</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#handle_leave(client_socket)-instance-method" class="signature"><strong>#handle_leave</strong>(client_socket)</a>
+        <a href="#data-instance-method" class="signature"><strong>#data</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#handle_message(client_socket,message)-instance-method" class="signature"><strong>#handle_message</strong>(client_socket, message)</a>
+        <a href="#id-instance-method" class="signature"><strong>#id</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#process_motion(identifier,data)-instance-method" class="signature"><strong>#process_motion</strong>(identifier, data)</a>
+        <a href="#raw:JSON::Any-instance-method" class="signature"><strong>#raw</strong> : JSON::Any</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tag_name-instance-method" class="signature"><strong>#tag_name</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#value-instance-method" class="signature"><strong>#value</strong></a>
         
       </li>
     
@@ -386,20 +430,62 @@
 
 
   
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(raw:JSON::Any)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(raw : JSON::Any)
 
+        <a class="method-permalink" href="#new(raw:JSON::Any)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/element.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="from_raw(raw:JSON::Any)-class-method">
+      <div class="signature">
+        
+        def self.<strong>from_raw</strong>(raw : JSON::Any)
+
+        <a class="method-permalink" href="#from_raw(raw:JSON::Any)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/element.cr#L3" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
@@ -412,82 +498,114 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="component_connection:Motion::ComponentConnection?-instance-method">
+    <div class="entry-detail" id="[](key)-instance-method">
       <div class="signature">
         
-        def <strong>component_connection</strong> : Motion::ComponentConnection?
+        def <strong>[]</strong>(key)
 
-        <a class="method-permalink" href="#component_connection:Motion::ComponentConnection?-instance-method">#</a>
+        <a class="method-permalink" href="#[](key)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/motion_channel.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/element.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="handle_joined(client_socket,message)-instance-method">
+    <div class="entry-detail" id="attributes-instance-method">
       <div class="signature">
         
-        def <strong>handle_joined</strong>(client_socket, message)
+        def <strong>attributes</strong>
 
-        <a class="method-permalink" href="#handle_joined(client_socket,message)-instance-method">#</a>
+        <a class="method-permalink" href="#attributes-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/motion_channel.cr#L23" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/element.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="handle_leave(client_socket)-instance-method">
+    <div class="entry-detail" id="data-instance-method">
       <div class="signature">
         
-        def <strong>handle_leave</strong>(client_socket)
+        def <strong>data</strong>
 
-        <a class="method-permalink" href="#handle_leave(client_socket)-instance-method">#</a>
+        <a class="method-permalink" href="#data-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/motion_channel.cr#L46" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/element.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="handle_message(client_socket,message)-instance-method">
+    <div class="entry-detail" id="id-instance-method">
       <div class="signature">
         
-        def <strong>handle_message</strong>(client_socket, message)
+        def <strong>id</strong>
 
-        <a class="method-permalink" href="#handle_message(client_socket,message)-instance-method">#</a>
+        <a class="method-permalink" href="#id-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/motion_channel.cr#L54" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/element.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="process_motion(identifier,data)-instance-method">
+    <div class="entry-detail" id="raw:JSON::Any-instance-method">
       <div class="signature">
         
-        def <strong>process_motion</strong>(identifier, data)
+        def <strong>raw</strong> : JSON::Any
 
-        <a class="method-permalink" href="#process_motion(identifier,data)-instance-method">#</a>
+        <a class="method-permalink" href="#raw:JSON::Any-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/motion_channel.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/element.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="tag_name-instance-method">
+      <div class="signature">
+        
+        def <strong>tag_name</strong>
+
+        <a class="method-permalink" href="#tag_name-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/element.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="value-instance-method">
+      <div class="signature">
+        
+        def <strong>value</strong>
+
+        <a class="method-permalink" href="#value-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/194e11c6e5ca345b154dae0dacff711745963180/src/motion/element.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
