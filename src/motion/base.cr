@@ -5,7 +5,7 @@ require "./exceptions"
 require "./motions"
 
 # :nodoc:
-annotation Invokeable; end
+annotation MapMotion; end
 
 class Motion::Base
   # TODO:
@@ -25,24 +25,25 @@ class Motion::Base
     io << view
   end
 
-  def invoke(method : String)
+  def process_motion(method : String, event : Motion::Event?)
     # TODO: Real Error
-    raise "Motion::Base#invoke"
+    raise "Motion::Base#process_motion"
   end
 
   def render
+    # TODO: Real Error
     raise "Motion::Base#render"
   end
 
   macro inherited
-    def invoke(method : String)
+    def process_motion(motion : String, event : Motion::Event?)
       {% verbatim do %}
-          {% begin %}
-            case method
-            {% for method in @type.methods.select &.annotation(Invokeable) %}
-              when {{method.name.id.stringify}} then return self.{{method.name.id}}    
-            {% end %}
-            end
+        {% begin %}
+          case motion
+          {% for method in @type.methods.select &.annotation(MapMotion) %}
+            when {{method.name.id.stringify}} then return self.{{method.name.id}}    
+          {% end %}
+          end
         {% end %}
       {% end %}
     end

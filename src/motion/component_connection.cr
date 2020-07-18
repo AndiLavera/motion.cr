@@ -17,6 +17,7 @@ module Motion
     def initialize(@component : Motion::Base, @logger = Motion::Logger.new)
       timing("Connected") do
         @render_hash = component.render_hash
+        puts render_hash
         # component.process_connect
       end
     end
@@ -33,17 +34,17 @@ module Motion
       #   false
     end
 
-    # def process_motion(motion, event = nil)
-    #   timing("Proccessed #{motion}") do
-    #     component.process_motion(motion, event)
-    #   end
+    def process_motion(motion : String, event : Motion::Event? = nil)
+      timing("Proccessed #{motion}") do
+        component.process_motion(motion, event)
+      end
 
-    #   true
-    # rescue => error
-    #   handle_error(error, "processing #{motion}")
+      true
+    rescue error : Exception
+      handle_error(error, "processing #{motion}")
 
-    #   false
-    # end
+      false
+    end
 
     # def process_broadcast(broadcast, message)
     #   timing("Proccessed broadcast to #{broadcast}") do
@@ -96,8 +97,8 @@ module Motion
       logger.timing(context, &block)
     end
 
-    # private def handle_error(error, context)
-    #   logger.error("An error occurred while #{context}", error: error)
-    # end
+    private def handle_error(error, context)
+      logger.error("An error occurred while #{context}. Error: #{error}")
+    end
   end
 end

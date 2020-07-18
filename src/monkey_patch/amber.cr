@@ -7,6 +7,9 @@ module Amber
       # :nodoc:
       module Render
         include Motion::MountComponent
+        include Motion::HTML::SpecialtyTags
+        @[JSON::Field(ignore: true)]
+        getter view = IO::Memory.new
       end
     end
   end

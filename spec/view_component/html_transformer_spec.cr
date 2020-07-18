@@ -13,7 +13,7 @@ class MotionMount < Motion::Base
   props test_prop : String = "Test Prop"
   props count : Int32 = 0
 
-  @[Invokeable]
+  @[MapMotion]
   def add
     @count += 1
   end
@@ -76,7 +76,7 @@ describe Motion::Serializer do
 
     deserialized_component.inspect.to_s.includes?("@test_prop=\"Test Prop\"").should be_true
     deserialized_component.inspect.to_s.includes?("@map_motion=true").should be_true
-    deserialized_component.invoke("add")
+    deserialized_component.process_motion("add")
     deserialized_component.inspect.to_s.includes?("@count=1").should be_true
   end
 end
