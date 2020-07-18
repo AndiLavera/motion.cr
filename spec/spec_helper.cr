@@ -1,8 +1,5 @@
 require "spec"
 require "http"
-
-# Mock the channel
-class Amber::WebSockets::Channel
-end
-
+require "./support/amber_fixtures"
 require "../src/motion"
+require "./support/model_fixtures"
