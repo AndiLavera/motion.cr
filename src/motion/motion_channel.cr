@@ -21,10 +21,7 @@ module Motion
     getter component_connection : Motion::ComponentConnection?
 
     def handle_joined(client_socket, message)
-      pp "handle joined"
       params = JSON.parse message["identifier"].to_s
-      # pp params.values_at
-
       state, client_version = params["state"].to_s, params["version"].to_s
 
       # TODO: Ensure npm & shard versions are the same
@@ -52,14 +49,16 @@ module Motion
     end
 
     def handle_message(client_socket, message)
-      identifier, data, action = parse_motion(message["payload"])
+      identifier, data, action =
+        parse_motion(message["payload"])
+
       case action
-      when "process_motion" then process_motion(identifier, data)
+      when "process_motion"
+        process_motion(identifier, data)
       end
     end
 
     def process_motion(identifier, data)
-      pp "processing motion"
       motion, raw_event = data["name"], data["event"]
 
       if (cc = component_connection)

@@ -17,7 +17,7 @@ module Motion
     def initialize(@component : Motion::Base, @logger = Motion::Logger.new)
       timing("Connected") do
         @render_hash = component.render_hash
-        puts render_hash
+        # puts render_hash
         # component.process_connect
       end
     end

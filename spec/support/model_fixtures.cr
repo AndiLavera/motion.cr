@@ -79,6 +79,13 @@ class LessNeedyDefaultsPage < MainLayout
 end
 
 class MotionRender < Motion::Base
+  props motion_hit : Bool = false
+
+  @[MapMotion]
+  def motion
+    @motion_hit = true
+  end
+
   def render
     m MotionMount
     view.to_s
