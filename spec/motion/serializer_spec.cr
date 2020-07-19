@@ -4,7 +4,7 @@ describe Motion::Serializer do
   it "can deserialize component" do
     fragment = Myhtml::Parser.new(MotionRender.new.render)
     node_with_state = fragment.body!.children.to_a[0]
-    state = node_with_state.attribute_by("motion-state")
+    state = node_with_state.attribute_by("data-motion-state")
 
     raise "Could not find motion-state" if state.nil?
     deserialized_component = Motion::Serializer.new.deserialize(state)
