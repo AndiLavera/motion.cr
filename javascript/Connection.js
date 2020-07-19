@@ -28,7 +28,7 @@ class Connection {
       this.channel.join({ identifier: data.identifier });
 
       this.channel.on('message_new', function (payload) {
-        data.received()
+        data.received(payload.html)
       })
 
       this.channel.on('leave', function (payload) {

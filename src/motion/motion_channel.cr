@@ -21,6 +21,8 @@ module Motion
     getter component_connection : Motion::ComponentConnection?
 
     def handle_joined(client_socket, message)
+      pp "handle join"
+      # puts message
       params = JSON.parse message["identifier"].to_s
       state, client_version = params["state"].to_s, params["version"].to_s
 
@@ -41,24 +43,26 @@ module Motion
     end
 
     def handle_leave(client_socket)
-      if component_connection.responds_to?(:close)
-        # component_connection.close
-      end
+      # TODO: Remove not_nil
+      pp "unsubscribe"
+      component_connection.not_nil!.close
 
       @component_connection = nil
     end
 
     def handle_message(client_socket, message)
+      return handle_leave(client_socket) if message["payload"]["message"]["command"] == "unsubscribe"
       identifier, data, action =
         parse_motion(message["payload"])
 
       case action
       when "process_motion"
-        process_motion(identifier, data)
+        process_motion(identifier, data) if data
       end
+      synchronize(message["topic"], true)
     end
 
-    def process_motion(identifier, data)
+    def process_motion(identifier, data : JSON::Any)
       motion, raw_event = data["name"], data["event"]
 
       if (cc = component_connection)
@@ -66,7 +70,6 @@ module Motion
       else
         raise "NoComponentConnectionError"
       end
-      synchronize
     end
 
     # def process_broadcast(broadcast, message)
@@ -79,17 +82,25 @@ module Motion
     #   synchronize
     # end
 
-    private def synchronize
-      puts "synchronizing"
+    private def synchronize(topic = nil, broadcast = false)
       # streaming_from component_connection.broadcasts,
       #   to: :process_broadcast
 
       # periodically_notify component_connection.periodic_timers,
       #   via: :process_periodic_timer
 
-      # component_connection.if_render_required do |component|
-      #   transmit(renderer.render(component))
-      # end
+      proc = ->(component : Motion::Base) {
+        rebroadcast!({
+          subject: "message_new",
+          topic:   topic,
+          payload: {
+            html: component.render,
+          },
+        }) if broadcast
+      }
+
+      # TODO: Remove not_nil
+      component_connection.not_nil!.if_render_required(proc)
     end
 
     # TODO: pass error in as an argument: , error: error
@@ -102,9 +113,20 @@ module Motion
     end
 
     private def parse_motion(payload)
-      identifier = JSON.parse(payload["message"]["identifier"].to_s)
-      data = JSON.parse(payload["message"]["data"].to_s)
-      action = data["action"]
+      identifier = if (_identifier = payload["message"]["identifier"]?)
+                     JSON.parse(_identifier.to_s)
+                   else
+                     nil
+                   end
+
+      data = if (_data = payload["message"]["data"]?)
+               JSON.parse(_data.to_s)
+             else
+               nil
+             end
+
+      action = data ? data["action"]? : nil
+
       [identifier, data, action]
     end
 

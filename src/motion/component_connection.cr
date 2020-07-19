@@ -70,20 +70,20 @@ module Motion
     #   false
     # end
 
-    # def if_render_required(&block)
-    #   timing("Rendered") do
-    #     next_render_hash = component.render_hash
+    def if_render_required(proc)
+      timing("Rendered") do
+        next_render_hash = component.render_hash
 
-    #     return if @render_hash == next_render_hash &&
-    #       !component.awaiting_forced_rerender?
+        next if @render_hash == next_render_hash
+        # && !component.awaiting_forced_rerender?
 
-    #     yield(component)
+        proc.call(component)
 
-    #     @render_hash = next_render_hash
-    #   end
-    # rescue => error
-    #   handle_error(error, "rendering the component")
-    # end
+        @render_hash = next_render_hash
+      end
+    rescue error : Exception
+      handle_error(error, "rendering the component")
+    end
 
     # def broadcasts
     #   component.broadcasts
