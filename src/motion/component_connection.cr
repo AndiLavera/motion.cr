@@ -1,8 +1,7 @@
 module Motion
   # :nodoc:
   class ComponentConnection
-    # TODO: Motion.serializer,
-    def self.from_state(state, serializer = Serializer.new, logger = Motion::Logger.new)
+    def self.from_state(state, serializer = Motion.serializer, logger = Motion::Logger.new)
       component = serializer.deserialize(state)
 
       # TODO: logger.for_component(component)

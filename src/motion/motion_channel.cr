@@ -88,19 +88,21 @@ module Motion
 
       # periodically_notify component_connection.periodic_timers,
       #   via: :process_periodic_timer
+      if broadcast
+        proc = ->(component : Motion::Base) {
+          html = html_transformer.add_state_to_html(component, component.rerender)
+          rebroadcast!({
+            subject: "message_new",
+            topic:   topic,
+            payload: {
+              html: html,
+            },
+          })
+        }
 
-      proc = ->(component : Motion::Base) {
-        rebroadcast!({
-          subject: "message_new",
-          topic:   topic,
-          payload: {
-            html: component.render,
-          },
-        }) if broadcast
-      }
-
-      # TODO: Remove not_nil
-      component_connection.not_nil!.if_render_required(proc)
+        # TODO: Remove not_nil
+        component_connection.not_nil!.if_render_required(proc)
+      end
     end
 
     # TODO: pass error in as an argument: , error: error
@@ -128,6 +130,10 @@ module Motion
       action = data ? data["action"]? : nil
 
       [identifier, data, action]
+    end
+
+    private def html_transformer
+      @html_transformer ||= Motion::HTMLTransformer.new
     end
 
     # Memoize the renderer on the connection so that it can be shared accross

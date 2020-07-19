@@ -21,8 +21,13 @@ class Motion::Base
   getter view = IO::Memory.new
   property map_motion : Bool = false
 
-  def to_s(io)
-    io << view
+  # def to_s(io)
+  #   io << view
+  # end
+
+  def rerender
+    self.view = IO::Memory.new
+    render
   end
 
   def process_motion(method : String, event : Motion::Event?)

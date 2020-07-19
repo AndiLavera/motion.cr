@@ -24,7 +24,6 @@ describe Motion::ComponentConnection do
 
     component.motion_hit.should be_false
     component_connection.process_motion("motion", Motion::Event.from_raw(EVENT_DATA))
-    pp Motion::Event.from_raw(EVENT_DATA)
     component.motion_hit.should be_true
   end
 end
