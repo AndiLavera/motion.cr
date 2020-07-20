@@ -84,7 +84,7 @@ export default class Component {
 
     reconcile(
       this.element,
-      "&lt;label class='ash'&gt;Comment Removed&lt;/label&gt;", // newState
+      newState, // newState,
       this.client.keyAttribute
     )
 

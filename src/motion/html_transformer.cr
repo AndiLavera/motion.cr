@@ -8,9 +8,9 @@ module Motion
     private property state_attribute : String
 
     def initialize(
-      @serializer = Serializer.new,     # Motion.serializer,
-      @key_attribute = "motion-key",    # TODO: Motion.config.key_attribute,
-      @state_attribute = "motion-state" # TODO: Motion.config.state_attribute
+      @serializer = Serializer.new,          # Motion.serializer,
+      @key_attribute = "data-motion-key",    # TODO: Motion.config.key_attribute,
+      @state_attribute = "data-motion-state" # TODO: Motion.config.state_attribute
     )
     end
 

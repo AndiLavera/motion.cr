@@ -1,8 +1,7 @@
 module Motion
   # :nodoc:
   class ComponentConnection
-    # TODO: Motion.serializer,
-    def self.from_state(state, serializer = Serializer.new, logger = Motion::Logger.new)
+    def self.from_state(state, serializer = Motion.serializer, logger = Motion::Logger.new)
       component = serializer.deserialize(state)
 
       # TODO: logger.for_component(component)
@@ -10,14 +9,14 @@ module Motion
     end
 
     getter component : Motion::Base
-    getter render_hash : String?
+    getter render_hash : UInt64?
     getter logger : Motion::Logger
 
     # TOOD: LogHelper.for_component(component)
     def initialize(@component : Motion::Base, @logger = Motion::Logger.new)
       timing("Connected") do
         @render_hash = component.render_hash
-        puts render_hash
+        # puts render_hash
         # component.process_connect
       end
     end
@@ -70,20 +69,20 @@ module Motion
     #   false
     # end
 
-    # def if_render_required(&block)
-    #   timing("Rendered") do
-    #     next_render_hash = component.render_hash
+    def if_render_required(proc)
+      timing("Rendered") do
+        next_render_hash = component.render_hash
 
-    #     return if @render_hash == next_render_hash &&
-    #       !component.awaiting_forced_rerender?
+        next if @render_hash == next_render_hash
+        # && !component.awaiting_forced_rerender?
 
-    #     yield(component)
+        proc.call(component)
 
-    #     @render_hash = next_render_hash
-    #   end
-    # rescue => error
-    #   handle_error(error, "rendering the component")
-    # end
+        @render_hash = next_render_hash
+      end
+    rescue error : Exception
+      handle_error(error, "rendering the component")
+    end
 
     # def broadcasts
     #   component.broadcasts

@@ -1,6 +1,5 @@
 require "json"
 require "base64"
-require "crypto/bcrypt"
 
 module Motion
   # :nodoc:
@@ -25,8 +24,8 @@ module Motion
       ]
     end
 
-    def weak_digest(component : Motion::Base) : String
-      hash(dump(component)).to_s
+    def weak_digest(component : Motion::Base) : UInt64
+      dump(component).to_s.hash
     end
 
     # TODO:
@@ -36,9 +35,10 @@ module Motion
       # raise "BadDigestError" unless salted_digest(state_with_class) == digest
 
       state, component_class = state_with_class.split(NULL_BYTE)
-      puts state
 
+      # ameba:disable Lint/UselessAssign
       component = load(state, component_class)
+      # ameba:enable Lint/UselessAssign
 
       # if revision == serialized_revision
       #   component
@@ -49,17 +49,13 @@ module Motion
     end
 
     private def dump(component : Motion::Base)
-      serialized_comp = component.to_json
+      component.to_json
     rescue e : Exception
       raise Exceptions::UnrepresentableStateError.new(component, e.message)
     end
 
     private def load(state : String, klass : String) : Motion::Base
       Motion::Base.subclasses[klass].from_json(state)
-    end
-
-    private def hash(state)
-      Crypto::Bcrypt.hash_secret(state)
     end
 
     private def encode(state)

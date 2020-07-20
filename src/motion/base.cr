@@ -21,8 +21,13 @@ class Motion::Base
   getter view = IO::Memory.new
   property map_motion : Bool = false
 
-  def to_s(io)
-    io << view
+  # def to_s(io)
+  #   io << view
+  # end
+
+  def rerender
+    self.view = IO::Memory.new
+    render
   end
 
   def process_motion(method : String, event : Motion::Event?)
@@ -41,7 +46,18 @@ class Motion::Base
         {% begin %}
           case motion
           {% for method in @type.methods.select &.annotation(MapMotion) %}
-            when {{method.name.id.stringify}} then return self.{{method.name.id}}    
+
+            {% args = method.args %}
+            {% if args[0] && !args[0].restriction.resolve == Event %}
+              {% raise "MotionArgumentError: Motions can only accept `Event` type" %}
+            {% end %}
+
+            {% if args.size >= 2 %}
+              {% raise "MotionArgumentError: Too many arguments for motion #{@type}##{method.name}" %}
+            {% end %}
+
+            when {{method.name.id.stringify}}
+              return self.{{method.name.id}}({% if args.size == 1 %}{{"event".id}}{% end %})
           {% end %}
           end
         {% end %}
