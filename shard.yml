@@ -15,6 +15,11 @@ dependencies:
   myhtml:
     github: kostya/myhtml
 
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 0.13.1
+
 # development_dependencies:
 #   webmock:
 #     github: manastech/webmock.cr

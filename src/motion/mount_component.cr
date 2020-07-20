@@ -40,13 +40,16 @@ module Motion::MountComponent
   end
 
   private def print_component_comment(component_class : Motion::Base.class) : Nil
-    if true # TODO: Motion::HTMLPage.settings.render_component_comments
+    # TODO: Motion::HTMLPage.settings.render_component_comments
+    # ameba:disable Lint/LiteralInCondition
+    if true
       raw "<!-- BEGIN: #{component_class.name} -->"
       yield
       raw "<!-- END: #{component_class.name} -->"
     else
       yield
     end
+    # ameba:enable Lint/LiteralInCondition
   end
 
   private def render_and_transform(component : Motion::Base)

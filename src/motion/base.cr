@@ -46,7 +46,7 @@ class Motion::Base
         {% begin %}
           case motion
           {% for method in @type.methods.select &.annotation(MapMotion) %}
-        
+
             {% args = method.args %}
             {% if args[0] && !args[0].restriction.resolve == Event %}
               {% raise "MotionArgumentError: Motions can only accept `Event` type" %}

@@ -36,7 +36,9 @@ module Motion
 
       state, component_class = state_with_class.split(NULL_BYTE)
 
+      # ameba:disable Lint/UselessAssign
       component = load(state, component_class)
+      # ameba:enable Lint/UselessAssign
 
       # if revision == serialized_revision
       #   component
@@ -47,7 +49,7 @@ module Motion
     end
 
     private def dump(component : Motion::Base)
-      serialized_comp = component.to_json
+      component.to_json
     rescue e : Exception
       raise Exceptions::UnrepresentableStateError.new(component, e.message)
     end

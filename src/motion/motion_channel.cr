@@ -22,9 +22,11 @@ module Motion
 
     def handle_joined(client_socket, message)
       pp "handle join"
-      # puts message
+
       params = JSON.parse message["identifier"].to_s
+      # ameba:disable Lint/UselessAssign
       state, client_version = params["state"].to_s, params["version"].to_s
+      # ameba:enable Lint/UselessAssign
 
       # TODO: Ensure npm & shard versions are the same
       # if Gem::Version.new(Motion::VERSION) < Gem::Version.new(client_version)
