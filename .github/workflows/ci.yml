@@ -29,7 +29,22 @@ jobs:
 
   test_latest:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: mochi
+          POSTGRES_PASSWORD: mochi
+          POSTGRES_DB: mochi_test
+        ports:
+        - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
+      - name: Install Crystal
+        run: |
+          sudo snap install crystal --classic
+          sudo apt -y install libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libz-dev libevent-dev gcc pkg-config tzdata libpcre3-dev
       - uses: actions/checkout@v1
       - name: Install Dependencies
         run: shards install
@@ -39,6 +54,7 @@ jobs:
   test_nightly:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Crystal
         run: |
           sudo snap install crystal --classic --edge
           sudo apt -y install libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libz-dev libevent-dev gcc pkg-config tzdata libpcre3-dev
