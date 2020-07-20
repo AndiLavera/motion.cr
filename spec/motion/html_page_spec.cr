@@ -44,6 +44,8 @@ describe Motion::Base do
     view(&.raw("<safe>")).should eq "<safe>"
   end
 
+  pending("can rerender html properly")
+
   describe "can be used to render layouts" do
     it "renders layouts and needs" do
       InnerPage.new(foo: "bar").render.should contain %(<title>A great title</title>)
