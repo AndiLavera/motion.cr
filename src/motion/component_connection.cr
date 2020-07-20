@@ -9,7 +9,7 @@ module Motion
     end
 
     getter component : Motion::Base
-    getter render_hash : String?
+    getter render_hash : UInt64?
     getter logger : Motion::Logger
 
     # TOOD: LogHelper.for_component(component)

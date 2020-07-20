@@ -24,8 +24,8 @@ module Motion
       ]
     end
 
-    def weak_digest(component : Motion::Base) : String
-      dump(component).to_s.hash.to_s
+    def weak_digest(component : Motion::Base) : UInt64
+      dump(component).to_s.hash
     end
 
     # TODO:
