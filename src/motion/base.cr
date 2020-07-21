@@ -18,7 +18,7 @@ class Motion::Base
   include JSON::Serializable
 
   @[JSON::Field(ignore: true)]
-  getter view = IO::Memory.new
+  property view : IO::Memory = IO::Memory.new
   property map_motion : Bool = false
 
   # def to_s(io)

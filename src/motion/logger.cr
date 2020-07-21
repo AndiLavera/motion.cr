@@ -28,8 +28,8 @@ module Motion
     end
 
     private def format_duration(duration)
-      duration_ms = duration * 1000
-      duration_ms.milliseconds < 0.1 ? "less than 0.1ms" : "#{duration_ms.milliseconds.round(1)}ms"
+      μs = duration.microseconds
+      μs < 0.1 ? "less than 0.1μs" : "#{μs.round(1)}μs"
     end
   end
 end
