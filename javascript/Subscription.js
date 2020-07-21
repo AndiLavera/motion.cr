@@ -70,22 +70,20 @@ export default class Subscription {
   constructor(consumer, params = {}, mixin) {
     this.consumer = consumer
     this.channel = params.channel
-    this.identifier = JSON.stringify(params)
+    this.identifier = params
     extend(this, mixin)
   }
 
   // Perform a channel action with the optional data passed as an attribute
-  perform(action, data = {}) {
-    data.action = action
+  perform(data = {}) {
     return this.send(data)
   }
 
   send(data) {
     return this.consumer.send({
-      command: "message",
+      command: "process_motion",
       identifier: this.identifier,
-      data: JSON.stringify(data),
-      topic: this.channel
+      data: data,
     })
   }
 

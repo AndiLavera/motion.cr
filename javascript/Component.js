@@ -38,7 +38,6 @@ export default class Component {
     const extraDataForEvent = event && this.client.getExtraDataForEvent(event)
 
     this._subscription.perform(
-      'process_motion',
       {
         name,
         event: event && serializeEvent(event, extraDataForEvent)

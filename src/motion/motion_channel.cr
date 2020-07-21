@@ -1,33 +1,19 @@
 require "json"
 
-abstract class Amber::WebSockets::Channel; end
-
 module Motion
   class Channel < Amber::WebSockets::Channel
     getter component_connection : Motion::ComponentConnection?
+    getter html_transformer : Motion::HTMLTransformer = Motion.html_transformer
+    getter logger : Motion::Logger = Motion.logger
 
     def handle_joined(client_socket, message)
-      pp "handle join"
+      state = message["identifier"]["state"].to_s
+      client_version = message["identifier"]["version"].to_s
 
-      params = JSON.parse message["identifier"].to_s
-      # ameba:disable Lint/UselessAssign
-      state, client_version = params["state"].to_s, params["version"].to_s
-      # ameba:enable Lint/UselessAssign
+      raise_version_mismatch(client_version) if versions_mismatch?(client_version)
 
-      # TODO: Ensure npm & shard versions are the same
-      # if Gem::Version.new(Motion::VERSION) < Gem::Version.new(client_version)
-      #   raise IncompatibleClientError.new(Motion::VERSION, client_version)
-      # end
-
-      # TODO: Pass in Motion.config.log_helper
-      @component_connection =
-        ComponentConnection.from_state(state)
-
+      @component_connection = connect_component(state)
       synchronize
-    rescue e : Exception
-      # reject
-
-      handle_error(e, "connecting a component")
     end
 
     def handle_leave(client_socket)
@@ -39,15 +25,15 @@ module Motion
     end
 
     def handle_message(client_socket, message)
-      return handle_leave(client_socket) if message["payload"]["message"]["command"] == "unsubscribe"
-      identifier, data, action =
-        parse_motion(message["payload"])
+      topic = message["topic"]
+      identifier, data, command = parse_motion(message["payload"])
 
-      case action
-      when "process_motion"
-        process_motion(identifier, data) if data
+      case command
+      when "unsubscribe"    then handle_leave(client_socket)
+      when "process_motion" then (process_motion(identifier, data) if data)
       end
-      synchronize(message["topic"], true)
+
+      synchronize(topic, broadcast = true)
     end
 
     def process_motion(identifier, data : JSON::Any)
@@ -60,15 +46,20 @@ module Motion
       end
     end
 
-    # def process_broadcast(broadcast, message)
-    #   component_connection.process_broadcast(broadcast, message)
-    #   synchronize
-    # end
+    private def versions_mismatch?(client_version)
+      Motion.config.version != client_version
+    end
 
-    # def process_periodic_timer(timer)
-    #   component_connection.process_periodic_timer(timer)
-    #   synchronize
-    # end
+    private def raise_version_mismatch(client_version)
+      raise Exceptions::IncompatibleClientError.new(Motion.config.version, client_version)
+    end
+
+    private def connect_component(state)
+      ComponentConnection.from_state(state)
+    rescue e : Exception
+      # reject
+      handle_error(e, "connecting a component")
+    end
 
     private def synchronize(topic = nil, broadcast = false)
       # streaming_from component_connection.broadcasts,
@@ -93,35 +84,27 @@ module Motion
       end
     end
 
+    private def parse_motion(payload)
+      identifier = payload["identifier"]?
+      data = payload["data"]?
+      command = payload["command"]?
+
+      [identifier, data, command]
+    end
+
     # TODO: pass error in as an argument: , error: error
     private def handle_error(error, context)
-      log_helper.error("An error occurred while #{context} & #{error}")
+      logger.error("An error occurred while #{context} & #{error}")
     end
 
-    private def log_helper
-      @log_helper ||= Motion.logger
-    end
+    # def process_broadcast(broadcast, message)
+    #   component_connection.process_broadcast(broadcast, message)
+    #   synchronize
+    # end
 
-    private def parse_motion(payload)
-      identifier = if (_identifier = payload["message"]["identifier"]?)
-                     JSON.parse(_identifier.to_s)
-                   else
-                     nil
-                   end
-
-      data = if (_data = payload["message"]["data"]?)
-               JSON.parse(_data.to_s)
-             else
-               nil
-             end
-
-      action = data ? data["action"]? : nil
-
-      [identifier, data, action]
-    end
-
-    private def html_transformer
-      @html_transformer ||= Motion.html_transformer
-    end
+    # def process_periodic_timer(timer)
+    #   component_connection.process_periodic_timer(timer)
+    #   synchronize
+    # end
   end
 end
