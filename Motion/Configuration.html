@@ -51,6 +51,11 @@
   <div class="types-list">
     <ul>
   
+  <li class=" " data-id="motion/MapMotion" data-name="mapmotion">
+      <a href="../MapMotion.html">MapMotion</a>
+      
+    </li>
+  
   <li class="parent open current" data-id="motion/Motion" data-name="motion">
       <a href="../Motion.html">Motion</a>
       
@@ -58,11 +63,6 @@
   
   <li class=" " data-id="motion/Motion/Base" data-name="motion::base">
       <a href="../Motion/Base.html">Base</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/Channel" data-name="motion::channel">
-      <a href="../Motion/Channel.html">Channel</a>
       
     </li>
   
@@ -78,56 +78,6 @@
   
   <li class=" " data-id="motion/Motion/Event" data-name="motion::event">
       <a href="../Motion/Event.html">Event</a>
-      
-    </li>
-  
-  <li class="parent " data-id="motion/Motion/Exceptions" data-name="motion::exceptions">
-      <a href="../Motion/Exceptions.html">Exceptions</a>
-      
-        <ul>
-  
-  <li class=" " data-id="motion/Motion/Exceptions/AlreadyConfiguredError" data-name="motion::exceptions::alreadyconfigurederror">
-      <a href="../Motion/Exceptions/AlreadyConfiguredError.html">AlreadyConfiguredError</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/Exceptions/BaseError" data-name="motion::exceptions::baseerror">
-      <a href="../Motion/Exceptions/BaseError.html">BaseError</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/Exceptions/ComponentError" data-name="motion::exceptions::componenterror">
-      <a href="../Motion/Exceptions/ComponentError.html">ComponentError</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/Exceptions/ComponentRenderingError" data-name="motion::exceptions::componentrenderingerror">
-      <a href="../Motion/Exceptions/ComponentRenderingError.html">ComponentRenderingError</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/Exceptions/InvalidComponentStateError" data-name="motion::exceptions::invalidcomponentstateerror">
-      <a href="../Motion/Exceptions/InvalidComponentStateError.html">InvalidComponentStateError</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/Exceptions/MotionBaseMethodError" data-name="motion::exceptions::motionbasemethoderror">
-      <a href="../Motion/Exceptions/MotionBaseMethodError.html">MotionBaseMethodError</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/Exceptions/MultipleRootsError" data-name="motion::exceptions::multiplerootserror">
-      <a href="../Motion/Exceptions/MultipleRootsError.html">MultipleRootsError</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/Exceptions/UnrepresentableStateError" data-name="motion::exceptions::unrepresentablestateerror">
-      <a href="../Motion/Exceptions/UnrepresentableStateError.html">UnrepresentableStateError</a>
-      
-    </li>
-  
-</ul>
-
       
     </li>
   
@@ -256,18 +206,8 @@
       
     </li>
   
-  <li class="parent " data-id="motion/Motion/Motions" data-name="motion::motions">
+  <li class=" " data-id="motion/Motion/Motions" data-name="motion::motions">
       <a href="../Motion/Motions.html">Motions</a>
-      
-        <ul>
-  
-  <li class=" " data-id="motion/Motion/Motions/Rendering" data-name="motion::motions::rendering">
-      <a href="../Motion/Motions/Rendering.html">Rendering</a>
-      
-    </li>
-  
-</ul>
-
       
     </li>
   
@@ -299,6 +239,23 @@
 
 
 
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Main configuration for Motion.cr.</p>
+
+<p>In <code>config/initializers/motion.cr</code></p>
+
+<pre><code class="language-crystal"><span class="t">Motion</span>.configure <span class="k">do</span> <span class="o">|</span>config<span class="o">|</span>
+  config.render_component_comments <span class="o">=</span> <span class="n">true</span>
+<span class="k">end</span></code></pre>
 
 
 
@@ -342,39 +299,16 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#finalized:Bool-instance-method" class="signature"><strong>#finalized</strong> : Bool</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#finalized=(finalized:Bool)-instance-method" class="signature"><strong>#finalized=</strong>(finalized : Bool)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#html_transformer:Motion::HTMLTransformer-instance-method" class="signature"><strong>#html_transformer</strong> : Motion::HTMLTransformer</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#logger:Motion::Logger-instance-method" class="signature"><strong>#logger</strong> : Motion::Logger</a>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#render_component_comments:Bool-instance-method" class="signature"><strong>#render_component_comments</strong> : Bool</a>
+        
+          <div class="summary"><p>If true, 2 comments will be added at rendering signifying the start & end of a component.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#render_component_comments=(render_component_comments:Bool)-instance-method" class="signature"><strong>#render_component_comments=</strong>(render_component_comments : Bool)</a>
         
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#serializer:Motion::Serializer-instance-method" class="signature"><strong>#serializer</strong> : Motion::Serializer</a>
-        
-          <div class="summary"><p>We don't want anyone overriding these when configuring</p></div>
+          <div class="summary"><p>If true, 2 comments will be added at rendering signifying the start & end of a component.</p></div>
         
       </li>
     
@@ -422,62 +356,6 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="finalized:Bool-instance-method">
-      <div class="signature">
-        
-        def <strong>finalized</strong> : Bool
-
-        <a class="method-permalink" href="#finalized:Bool-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="finalized=(finalized:Bool)-instance-method">
-      <div class="signature">
-        
-        def <strong>finalized=</strong>(finalized : Bool)
-
-        <a class="method-permalink" href="#finalized=(finalized:Bool)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="html_transformer:Motion::HTMLTransformer-instance-method">
-      <div class="signature">
-        
-        def <strong>html_transformer</strong> : Motion::HTMLTransformer
-
-        <a class="method-permalink" href="#html_transformer:Motion::HTMLTransformer-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="logger:Motion::Logger-instance-method">
-      <div class="signature">
-        
-        def <strong>logger</strong> : Motion::Logger
-
-        <a class="method-permalink" href="#logger:Motion::Logger-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
     <div class="entry-detail" id="render_component_comments:Bool-instance-method">
       <div class="signature">
         
@@ -485,6 +363,14 @@
 
         <a class="method-permalink" href="#render_component_comments:Bool-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p>If true, 2 comments will be added at rendering signifying
+the start & end of a component. Really helpful for debugging.</p>
+
+<p>Defaults to true</p>
+        </div>
       
       <br/>
       <div>
@@ -500,23 +386,12 @@
         <a class="method-permalink" href="#render_component_comments=(render_component_comments:Bool)-instance-method">#</a>
       </div>
       
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="serializer:Motion::Serializer-instance-method">
-      <div class="signature">
-        
-        def <strong>serializer</strong> : Motion::Serializer
-
-        <a class="method-permalink" href="#serializer:Motion::Serializer-instance-method">#</a>
-      </div>
-      
         <div class="doc">
           
-          <p>We don't want anyone overriding these when configuring</p>
+          <p>If true, 2 comments will be added at rendering signifying
+the start & end of a component. Really helpful for debugging.</p>
+
+<p>Defaults to true</p>
         </div>
       
       <br/>
