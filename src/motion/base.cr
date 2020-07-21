@@ -4,7 +4,19 @@ require "./logger"
 require "./exceptions"
 require "./motions"
 
-# :nodoc:
+# Set this annotation on any methods that can be invoked from the frontend.
+#
+# Here is a small example setting `MyComponent#add` as a motion:
+# ```crystal
+# class MyComponent < Motion::Base
+#   props count : Int32 = 0
+#
+#   @[MapMotion]
+#   def add
+#     count += 1
+#   end
+# end
+# ```
 annotation MapMotion; end
 
 class Motion::Base
@@ -20,19 +32,23 @@ class Motion::Base
   #   io << view
   # end
 
+  # :nodoc:
   def rerender
     self.view = IO::Memory.new
     render
   end
 
+  # :nodoc:
   def process_motion(method : String, event : Motion::Event?)
     raise Exceptions::MotionBaseMethodError.new("process_motion")
   end
 
+  # :nodoc:
   def render
     raise Exceptions::MotionBaseMethodError.new("render")
   end
 
+  # :nodoc:
   macro inherited
     def process_motion(motion : String, event : Motion::Event?)
       {% verbatim do %}
@@ -58,6 +74,7 @@ class Motion::Base
     end
   end
 
+  # :nodoc:
   macro subclasses
     {
     {% for subclass in @type.subclasses %}

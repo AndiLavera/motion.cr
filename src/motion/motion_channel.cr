@@ -1,6 +1,12 @@
 require "json"
 
+# Please leave this for generating docs
+# :nodoc:
+abstract class Amber::WebSockets::Channel
+end
+
 module Motion
+  # :nodoc:
   class Channel < Amber::WebSockets::Channel
     getter component_connection : Motion::ComponentConnection?
     getter html_transformer : Motion::HTMLTransformer = Motion.html_transformer

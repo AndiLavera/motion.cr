@@ -12,6 +12,8 @@ module Motion
     # include Lifecycle
     # include Motions
     # include PeriodicTimers
+
+    # :nodoc:
     include Rendering
   end
 end

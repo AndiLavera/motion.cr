@@ -1,4 +1,5 @@
 module Motion
+  # :nodoc:
   module Exceptions
     class BaseError < Exception; end
 
