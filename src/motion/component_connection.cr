@@ -1,10 +1,9 @@
 module Motion
   # :nodoc:
   class ComponentConnection
-    def self.from_state(state, serializer = Motion.serializer, logger = Motion::Logger.new)
+    def self.from_state(state, serializer = Motion.serializer, logger = Motion.logger)
       component = serializer.deserialize(state)
 
-      # TODO: logger.for_component(component)
       new(component: component, logger: logger)
     end
 
@@ -12,12 +11,9 @@ module Motion
     getter render_hash : UInt64?
     getter logger : Motion::Logger
 
-    # TOOD: LogHelper.for_component(component)
-    def initialize(@component : Motion::Base, @logger = Motion::Logger.new)
+    def initialize(@component : Motion::Base, @logger = Motion.logger)
       timing("Connected") do
         @render_hash = component.render_hash
-        # puts render_hash
-        # component.process_connect
       end
     end
 

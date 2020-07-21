@@ -55,6 +55,14 @@ module Motion
       end
     end
 
+    class MotionBaseMethodError < BaseError
+      def initialize(method)
+        super(
+          "Motion::Base##{method} should not be invoked.\n"
+        )
+      end
+    end
+
     # class MotionNotMapped < ComponentError
     #   attr_reader :motion
 

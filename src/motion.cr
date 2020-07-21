@@ -25,6 +25,10 @@ module Motion
     @@config.html_transformer
   end
 
+  def self.logger
+    @@config.logger
+  end
+
   # TODO:
   # def self.build_renderer_for(websocket_connection)
   #   config.renderer_for_connection_proc.call(websocket_connection)

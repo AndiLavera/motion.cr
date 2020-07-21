@@ -26,13 +26,11 @@ class Motion::Base
   end
 
   def process_motion(method : String, event : Motion::Event?)
-    # TODO: Real Error
-    raise "Motion::Base#process_motion"
+    raise Exceptions::MotionBaseMethodError.new("process_motion")
   end
 
   def render
-    # TODO: Real Error
-    raise "Motion::Base#render"
+    raise Exceptions::MotionBaseMethodError.new("render")
   end
 
   macro inherited

@@ -113,7 +113,7 @@ module Motion
     end
 
     private def log_helper
-      @log_helper ||= Motion::Logger.new # TODO: .for_channel(self)
+      @log_helper ||= Motion.logger
     end
 
     private def parse_motion(payload)
@@ -135,7 +135,7 @@ module Motion
     end
 
     private def html_transformer
-      @html_transformer ||= Motion::HTMLTransformer.new
+      @html_transformer ||= Motion.html_transformer
     end
 
     # Memoize the renderer on the connection so that it can be shared accross
