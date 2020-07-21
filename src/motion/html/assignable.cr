@@ -46,7 +46,9 @@ module Motion::HTML::Assignable
 
   # :nodoc:
   macro included
+    # :nodoc:
     SETTINGS = {} of Nil => Nil
+    # :nodoc:
     ASSIGNS = [] of Nil
 
     macro included
@@ -60,7 +62,9 @@ module Motion::HTML::Assignable
 
   # :nodoc:
   macro inherit_page_settings
+    # :nodoc:
     SETTINGS = {} of Nil => Nil
+    # :nodoc:
     ASSIGNS = [] of Nil
 
     \{% for declaration in @type.ancestors.first.constant :ASSIGNS %}

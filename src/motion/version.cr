@@ -1,7 +1,10 @@
-module Motion::Version
-  VERSION = "0.1.0"
+module Motion
+  # :nodoc:
+  module Version
+    VERSION = "0.1.0"
 
-  def self.to_s
-    VERSION
+    def self.to_s
+      VERSION
+    end
   end
 end

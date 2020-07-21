@@ -25,6 +25,7 @@ module Motion::HTML::Engine
   include WithDefaults
 
   abstract def view
+  # :nodoc:
   abstract def render
 
   macro setup_initializer_hook
@@ -95,6 +96,7 @@ module Motion::HTML::Engine
     {% end %}
   end
 
+  # :nodoc:
   def perform_render : IO
     render
     view
