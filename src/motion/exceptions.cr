@@ -2,6 +2,16 @@ module Motion
   module Exceptions
     class BaseError < Exception; end
 
+    class AlreadyConfiguredError < BaseError
+      def initialize
+        super(
+          "Motion is already configured.\n" \
+          "\n" \
+          "Hint: Move all Motion config to `config/initializers/motion.cr`."
+        )
+      end
+    end
+
     class ComponentError < BaseError
       getter component : Motion::Base
 
@@ -116,16 +126,6 @@ module Motion
 
     #     @previous_revision = previous_revision
     #     @current_revision = current_revision
-    #   end
-    # end
-
-    # class AlreadyConfiguredError < Error
-    #   def initialize
-    #     super(
-    #       "Motion is already configured.\n" \
-    #       "\n" \
-    #       "Hint: Move all Motion config to `config/initializers/motion.rb`."
-    #     )
     #   end
     # end
 
