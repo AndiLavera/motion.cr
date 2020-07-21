@@ -8,11 +8,6 @@ require "./motions"
 annotation MapMotion; end
 
 class Motion::Base
-  # TODO:
-  # Habitat.create do
-  #   setting render_component_comments : Bool = false
-  # end
-
   include Motion::HTML::Engine
   include Motion::Motions
   include JSON::Serializable
