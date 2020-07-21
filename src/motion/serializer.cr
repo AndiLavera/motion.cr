@@ -12,12 +12,8 @@ module Motion
     def serialize(component : Motion::Base)
       state = dump(component)
 
-      # [
-      #   salted_digest(state_with_revision),
-      #   encrypt_and_sign(state_with_revision),
-      # ]
-
       state_with_class = "#{state}#{NULL_BYTE}#{component.class}"
+
       [
         salted_digest(state_with_class),
         encode(state_with_class),
@@ -28,11 +24,8 @@ module Motion
       dump(component).to_s.hash
     end
 
-    # TODO:
-    # Possibly accept `digest` & ensure the digests match
     def deserialize(encoded_component : String)
       state_with_class = decode(encoded_component)
-      # raise "BadDigestError" unless salted_digest(state_with_class) == digest
 
       state, component_class = state_with_class.split(NULL_BYTE)
 
@@ -45,7 +38,6 @@ module Motion
       # else
       #   component.class.upgrade_from(serialized_revision, component)
       # end
-
     end
 
     private def dump(component : Motion::Base)

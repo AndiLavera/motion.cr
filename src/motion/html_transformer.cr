@@ -3,16 +3,8 @@ require "myhtml"
 module Motion
   # :nodoc:
   class HTMLTransformer
-    private property serializer : Motion::Serializer
-    private property key_attribute : String
-    private property state_attribute : String
-
-    def initialize(
-      @serializer = Serializer.new,          # Motion.serializer,
-      @key_attribute = "data-motion-key",    # TODO: Motion.config.key_attribute,
-      @state_attribute = "data-motion-state" # TODO: Motion.config.state_attribute
-    )
-    end
+    private property key_attribute : String = "data-motion-key"
+    private property state_attribute : String = "data-motion-state"
 
     def add_state_to_html(component, html)
       return if html.nil?
@@ -44,6 +36,10 @@ module Motion
           root.to_html(io)
         end
       end
+    end
+
+    private def serializer
+      Motion.serializer
     end
   end
 end

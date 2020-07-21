@@ -40,23 +40,20 @@ module Motion::MountComponent
   end
 
   private def print_component_comment(component_class : Motion::Base.class) : Nil
-    # TODO: Motion::HTMLPage.settings.render_component_comments
-    # ameba:disable Lint/LiteralInCondition
-    if true
+    if Motion.config.render_component_comments
       raw "<!-- BEGIN: #{component_class.name} -->"
       yield
       raw "<!-- END: #{component_class.name} -->"
     else
       yield
     end
-    # ameba:enable Lint/LiteralInCondition
   end
 
   private def render_and_transform(component : Motion::Base)
     html = component.render
 
     if component.map_motion
-      html = Motion::HTMLTransformer.new.add_state_to_html(component, html)
+      html = Motion.html_transformer.add_state_to_html(component, html)
     end
     view << html
   end
