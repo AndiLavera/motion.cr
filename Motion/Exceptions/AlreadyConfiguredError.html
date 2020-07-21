@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="motion">
-  <title>Motion::HTML::ForgeryProtectionHelpers - motion master-dev</title>
+  <title>Motion::Exceptions::AlreadyConfiguredError - motion master-dev</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -81,12 +81,12 @@
       
     </li>
   
-  <li class="parent " data-id="motion/Motion/Exceptions" data-name="motion::exceptions">
+  <li class="parent open current" data-id="motion/Motion/Exceptions" data-name="motion::exceptions">
       <a href="../../Motion/Exceptions.html">Exceptions</a>
       
         <ul>
   
-  <li class=" " data-id="motion/Motion/Exceptions/AlreadyConfiguredError" data-name="motion::exceptions::alreadyconfigurederror">
+  <li class=" current" data-id="motion/Motion/Exceptions/AlreadyConfiguredError" data-name="motion::exceptions::alreadyconfigurederror">
       <a href="../../Motion/Exceptions/AlreadyConfiguredError.html">AlreadyConfiguredError</a>
       
     </li>
@@ -126,7 +126,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="motion/Motion/HTML" data-name="motion::html">
+  <li class="parent " data-id="motion/Motion/HTML" data-name="motion::html">
       <a href="../../Motion/HTML.html">HTML</a>
       
         <ul>
@@ -166,7 +166,7 @@
       
     </li>
   
-  <li class=" current" data-id="motion/Motion/HTML/ForgeryProtectionHelpers" data-name="motion::html::forgeryprotectionhelpers">
+  <li class=" " data-id="motion/Motion/HTML/ForgeryProtectionHelpers" data-name="motion::html::forgeryprotectionhelpers">
       <a href="../../Motion/HTML/ForgeryProtectionHelpers.html">ForgeryProtectionHelpers</a>
       
     </li>
@@ -285,11 +285,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Motion::HTML::ForgeryProtectionHelpers
+  <span class="kind">class</span> Motion::Exceptions::AlreadyConfiguredError
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../Motion/Exceptions/AlreadyConfiguredError.html">Motion::Exceptions::AlreadyConfiguredError</a></li><li class="superclass"><a href="../../Motion/Exceptions/BaseError.html">Motion::Exceptions::BaseError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -303,19 +304,6 @@
 
 
 
-  <h2>
-    <a id="direct-including-types" class="anchor" href="#direct-including-types">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Direct including types
-  </h2>
-  <ul class="other-types-list">
-    
-      <li class="other-type"><a href="../../Motion/HTML/Engine.html">Motion::HTML::Engine</a></li>
-    
-  </ul>
 
 
 
@@ -334,31 +322,18 @@
 
 
 
-
-
-
-
   <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+    <a id="constructors" class="anchor" href="#constructors">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Instance Method Summary
+    Constructors
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#csrf_hidden_input:Nil-instance-method" class="signature"><strong>#csrf_hidden_input</strong> : Nil</a>
-        
-          <div class="summary"><p>Generate a hidden input with the request CSRF token</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#csrf_meta_tags:Nil-instance-method" class="signature"><strong>#csrf_meta_tags</strong> : Nil</a>
-        
-          <div class="summary"><p>Meta tags used for submitting AJAX links and forms</p></div>
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
         
       </li>
     
@@ -368,41 +343,71 @@
 
 
 
+
+
+
+
 <div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
   
 </div>
 
 
-
-
-
-
   <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Instance Method Detail
+    Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="csrf_hidden_input:Nil-instance-method">
+    <div class="entry-detail" id="new-class-method">
       <div class="signature">
         
-        def <strong>csrf_hidden_input</strong> : Nil
+        def self.<strong>new</strong>
 
-        <a class="method-permalink" href="#csrf_hidden_input:Nil-instance-method">#</a>
+        <a class="method-permalink" href="#new-class-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Generate a hidden input with the request CSRF token</p>
-
-<p>This input is automatically generated when using
-<code>Motion::FormHelpers#form_for</code>. It creates a hidden input with the CSRF
-token. THis ensures that the form is safe. If you try to submit a form
-without a CSRF token it will fail with a 403 forbidden status code.</p>
-        </div>
       
       <br/>
       <div>
@@ -410,29 +415,10 @@ without a CSRF token it will fail with a 403 forbidden status code.</p>
       </div>
     </div>
   
-    <div class="entry-detail" id="csrf_meta_tags:Nil-instance-method">
-      <div class="signature">
-        
-        def <strong>csrf_meta_tags</strong> : Nil
 
-        <a class="method-permalink" href="#csrf_meta_tags:Nil-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Meta tags used for submitting AJAX links and forms</p>
 
-<p>These tags are automatically added to MainLayout when generating a new
-project. They are used by Rails UJS to safely submit forms and non-GET AJAX
-requests</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-      </div>
-    </div>
-  
+
+
 
 
 

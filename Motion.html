@@ -66,6 +66,11 @@
       
     </li>
   
+  <li class=" " data-id="motion/Motion/Configuration" data-name="motion::configuration">
+      <a href="Motion/Configuration.html">Configuration</a>
+      
+    </li>
+  
   <li class=" " data-id="motion/Motion/Element" data-name="motion::element">
       <a href="Motion/Element.html">Element</a>
       
@@ -80,6 +85,11 @@
       <a href="Motion/Exceptions.html">Exceptions</a>
       
         <ul>
+  
+  <li class=" " data-id="motion/Motion/Exceptions/AlreadyConfiguredError" data-name="motion::exceptions::alreadyconfigurederror">
+      <a href="Motion/Exceptions/AlreadyConfiguredError.html">AlreadyConfiguredError</a>
+      
+    </li>
   
   <li class=" " data-id="motion/Motion/Exceptions/BaseError" data-name="motion::exceptions::baseerror">
       <a href="Motion/Exceptions/BaseError.html">BaseError</a>
@@ -323,14 +333,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#markup_transformer-class-method" class="signature"><strong>.markup_transformer</strong></a>
+        <a href="#config-class-method" class="signature"><strong>.config</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#reset_internal_state_for_testing!(new_configuration=nil)-class-method" class="signature"><strong>.reset_internal_state_for_testing!</strong>(new_configuration = <span class="n">nil</span>)</a>
+        <a href="#configure(&)-class-method" class="signature"><strong>.configure</strong>(&)</a>
         
-          <div class="summary"><p>This method only exists for testing.</p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#html_transformer-class-method" class="signature"><strong>.html_transformer</strong></a>
         
       </li>
     
@@ -363,12 +376,12 @@
     Class Method Detail
   </h2>
   
-    <div class="entry-detail" id="markup_transformer-class-method">
+    <div class="entry-detail" id="config-class-method">
       <div class="signature">
         
-        def self.<strong>markup_transformer</strong>
+        def self.<strong>config</strong>
 
-        <a class="method-permalink" href="#markup_transformer-class-method">#</a>
+        <a class="method-permalink" href="#config-class-method">#</a>
       </div>
       
       <br/>
@@ -377,20 +390,27 @@
       </div>
     </div>
   
-    <div class="entry-detail" id="reset_internal_state_for_testing!(new_configuration=nil)-class-method">
+    <div class="entry-detail" id="configure(&)-class-method">
       <div class="signature">
         
-        def self.<strong>reset_internal_state_for_testing!</strong>(new_configuration = <span class="n">nil</span>)
+        def self.<strong>configure</strong>(&)
 
-        <a class="method-permalink" href="#reset_internal_state_for_testing!(new_configuration=nil)-class-method">#</a>
+        <a class="method-permalink" href="#configure(&)-class-method">#</a>
       </div>
       
-        <div class="doc">
-          
-          <p>This method only exists for testing. Changing configuration while Motion is
-in use is not supported. It is only safe to call this method when no
-components are currently mounted.</p>
-        </div>
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="html_transformer-class-method">
+      <div class="signature">
+        
+        def self.<strong>html_transformer</strong>
+
+        <a class="method-permalink" href="#html_transformer-class-method">#</a>
+      </div>
       
       <br/>
       <div>
