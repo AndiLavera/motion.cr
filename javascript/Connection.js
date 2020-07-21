@@ -16,7 +16,8 @@ class Connection {
 
   send(data) {
     this.connection_promise.then(() => {
-      this.channel.push('message_new', { message: data })
+      console.log(data)
+      this.channel.push('message_new', data)
     })
   }
 
