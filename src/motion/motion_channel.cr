@@ -4,20 +4,6 @@ abstract class Amber::WebSockets::Channel; end
 
 module Motion
   class Channel < Amber::WebSockets::Channel
-    # include ActionCableExtentions::DeclarativeNotifications
-    # include ActionCableExtentions::DeclarativeStreams
-    # include ActionCableExtentions::LogSuppression
-
-    # ACTION_METHODS = Set.new(["process_motion"]).freeze
-    # private_constant :ACTION_METHODS
-
-    # Don't use the ActionCable huertistic for deciding what actions can be
-    # called from JavaScript. Instead, hard-code the list so we can make other
-    # methods public without worrying about them being called from JavaScript.
-    # def self.action_methods
-    #   ACTION_METHODS
-    # end
-
     getter component_connection : Motion::ComponentConnection?
 
     def handle_joined(client_socket, message)
@@ -137,14 +123,5 @@ module Motion
     private def html_transformer
       @html_transformer ||= Motion.html_transformer
     end
-
-    # Memoize the renderer on the connection so that it can be shared accross
-    # all components. `ActionController::Renderer` is already thread-safe and
-    # designed to be reused.
-    # private def renderer
-    #   connection.instance_eval do
-    #     @_motion_renderer ||= Motion.build_renderer_for(self)
-    #   end
-    # end
   end
 end
