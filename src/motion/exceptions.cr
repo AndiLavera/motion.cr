@@ -63,6 +63,15 @@ module Motion
       end
     end
 
+    class IncompatibleClientError < BaseError
+      def initialize(server_version, client_version)
+        super(
+          "The client version (#{client_version}) is not the same as the server " \
+          "version (#{server_version}). Please sychronize the shard & npm versions.\n" \
+          )
+      end
+    end
+
     # class MotionNotMapped < ComponentError
     #   attr_reader :motion
 
@@ -134,22 +143,6 @@ module Motion
 
     #     @previous_revision = previous_revision
     #     @current_revision = current_revision
-    #   end
-    # end
-
-    # class IncompatibleClientError < Error
-    #   attr_reader :server_version, :client_version
-
-    #   def initialize(server_version, client_version)
-    #     super(
-    #       "The client version (#{client_version}) is newer than the server " \
-    #       "version (#{server_version}). Please upgrade the Motion gem.\n" \
-    #       "\n" \
-    #       "Hint: Run `bundle add motion --version \">= #{client_version}\"`."
-    #     )
-
-    #     @server_version = server_version
-    #     @client_version = client_version
     #   end
     # end
 
