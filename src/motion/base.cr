@@ -57,8 +57,8 @@ class Motion::Base
           {% for method in @type.methods.select &.annotation(MapMotion) %}
 
             {% args = method.args %}
-            {% if args[0] && !args[0].restriction.resolve == Event %}
-              {% raise "MotionArgumentError: Motions can only accept `Event` type" %}
+            {% if args[0] && !args[0].restriction.resolve == Motion::Event %}
+              {% raise "MotionArgumentError: Motions can only accept `Motion::Event` type" %}
             {% end %}
 
             {% if args.size >= 2 %}

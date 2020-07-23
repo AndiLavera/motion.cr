@@ -1,5 +1,4 @@
 require "../spec_helper"
-EVENT_DATA = JSON::Any.new("{\"type\":\"click\",\"details\":{},\"extraData\":null,\"target\":{\"tagName\":\"BUTTON\",\"value\":\"\",\"attributes\":{\"class\":\"btn btn-success\",\"data-motion\":\"add\",\"data-motion-key\":\"kROsy2xoFCkI+3PCDMINN/O9EJWiFpGXK3NOTZM=\",\"data-motion-state\":\"eyJtYXBfbW90aW9uIjp0cnVlLCJtYXBfbW90aW9uIjoiYW5kcmV3IiwibmFtZTIiOiJtZWxpbmRhIn0AVGVzdFJlbmRlcg==\"},\"formData\":null},\"currentTarget\":{\"tagName\":\"BUTTON\",\"value\":\"\",\"attributes\":{\"class\":\"btn btn-success\",\"data-motion\":\"add\",\"data-motion-key\":\"kROsy2xoFCkI+3PCDMINN/O9EJWiFpGXK3NOTZM=\",\"data-motion-state\":\"eyJtYXBfbW90aW9uIjp0cnVlLCJtYXBfbW90aW9uIjoiYW5kcmV3IiwibmFtZTIiOiJtZWxpbmRhIn0AVGVzdFJlbmRlcg==\"},\"formData\":null}}")
 
 describe Motion::ComponentConnection do
   it "can intialize all dependencies" do
@@ -23,7 +22,7 @@ describe Motion::ComponentConnection do
     component_connection = Motion::ComponentConnection.new(component)
 
     component.motion_hit.should be_false
-    component_connection.process_motion("motion", Motion::Event.from_raw(EVENT_DATA))
+    component_connection.process_motion("motion", Motion::Event.new(EVENT_DATA))
     component.motion_hit.should be_true
   end
 end

@@ -2,42 +2,38 @@ require "json"
 
 module Motion
   class Event
-    def self.from_raw(raw : JSON::Any)
-      new(raw) if raw
-    end
-
     getter raw : JSON::Any
 
     def initialize(@raw : JSON::Any)
     end
 
     def type
-      raw["type"]
+      raw["type"]?
     end
 
-    # alias name type
+    def name
+      type
+    end
 
     def details
-      raw.dig?("details")
+      raw["details"]?
     end
 
     def extra_data
-      raw["extraData"]
+      raw["extraData"]?
     end
 
     def target
-      return @target if defined?(@target)
-
-      @target = Motion::Element.from_raw(raw["target"])
+      @target ||= Motion::Element.new(raw["target"])
     end
 
     def current_target
-      return @current_target if defined?(@current_target)
-
-      @current_target = Motion::Element.from_raw(raw["currentTarget"])
+      @current_target ||= Motion::Element.new(raw["currentTarget"])
     end
 
-    # alias element current_target
+    def element
+      current_target()
+    end
 
     # def form_data
     #   element&.form_data

@@ -1,0 +1,3 @@
+MESSAGE = JSON.parse("{\"event\":\"message\",\"topic\":\"motion:922\",\"subject\":\"message_new\",\"payload\":{\"command\":\"process_motion\",\"identifier\":{\"channel\":\"motion:922\",\"version\":\"0.2.2\",\"state\":\"eyJtYXBfbW90aW9uIjp0cnVlLCJuYW1lIjoiZGVmYXVsdCIsImNvdW50IjowfQBUZXN0UmVuZGVy\"},\"data\":{\"name\":\"add\",\"event\":{\"type\":\"click\",\"details\":{},\"extraData\":{},\"target\":{\"tagName\":\"BUTTON\",\"value\":\"\",\"attributes\":{\"data-motion\":\"add\",\"class\":\"btn btn-primary\"},\"formData\":null},\"currentTarget\":{\"tagName\":\"BUTTON\",\"value\":\"\",\"attributes\":{\"data-motion\":\"add\",\"class\":\"btn btn-primary\",\"id\":\"motion-button\"},\"formData\":null}}}}}")
+
+EVENT_DATA = MESSAGE["payload"]["data"]["event"]
