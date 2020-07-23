@@ -11,13 +11,35 @@ require "./motions"
 # class MyComponent < Motion::Base
 #   props count : Int32 = 0
 #
-#   @[MapMotion]
+#   @[Motion::MapMethod]
 #   def add
 #     count += 1
 #   end
+#
+#   def render
+#     div do
+#       span class: "count" do
+#         text @count.to_s
+#       end
+#       button data_motion: "add" do
+#         text "Add"
+#       end
+#     end
+#   end
 # end
 # ```
-annotation MapMotion; end
+#
+# `MyComponent#render` would return:
+#
+# ```html
+# <div>
+#   <span class="count">0</span>
+#   <button data-motion="add">Add</button>
+# </div>
+# ```
+#
+# When the user hits the button that `data-motion` is assigned to, a request will be sent off. The server will invoke the method provided and rerender the component. In this case, `add` will be invoked, count will increment by `1` & the html after rerendering will reflect that.
+annotation Motion::MapMethod; end
 
 class Motion::Base
   include Motion::HTML::Engine
@@ -50,11 +72,11 @@ class Motion::Base
 
   # :nodoc:
   macro inherited
-    def process_motion(motion : String, event : Motion::Event?)
+    def process_motion(motion : String, event : Motion::Event)
       {% verbatim do %}
         {% begin %}
           case motion
-          {% for method in @type.methods.select &.annotation(MapMotion) %}
+          {% for method in @type.methods.select &.annotation(Motion::MapMethod) %}
 
             {% args = method.args %}
             {% if args[0] && !args[0].restriction.resolve == Motion::Event %}

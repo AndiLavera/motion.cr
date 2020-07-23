@@ -81,12 +81,12 @@ end
 class MotionRender < Motion::Base
   props motion_hit : Bool = false
 
-  @[MapMotion]
+  @[Motion::MapMethod]
   def motion
     @motion_hit = true
   end
 
-  @[MapMotion]
+  @[Motion::MapMethod]
   def add
     @motion_hit = true
   end
@@ -102,7 +102,7 @@ class MotionMount < Motion::Base
   props test_prop : String = "Test Prop"
   props count : Int32 = 0
 
-  @[MapMotion]
+  @[Motion::MapMethod]
   def add
     @count += 1
   end
