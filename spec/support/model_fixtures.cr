@@ -86,6 +86,11 @@ class MotionRender < Motion::Base
     @motion_hit = true
   end
 
+  @[MapMotion]
+  def add
+    @motion_hit = true
+  end
+
   def render
     m MotionMount
     view.to_s

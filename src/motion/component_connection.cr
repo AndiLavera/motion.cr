@@ -17,6 +17,7 @@ module Motion
       end
     end
 
+    # TODO:
     def close
       #   timing("Disconnected") do
       #     component.process_disconnect
