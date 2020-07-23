@@ -1,3 +1,52 @@
-MESSAGE = JSON.parse("{\"event\":\"message\",\"topic\":\"motion:922\",\"subject\":\"message_new\",\"payload\":{\"command\":\"process_motion\",\"identifier\":{\"channel\":\"motion:922\",\"version\":\"0.2.2\",\"state\":\"eyJtYXBfbW90aW9uIjp0cnVlLCJuYW1lIjoiZGVmYXVsdCIsImNvdW50IjowfQBUZXN0UmVuZGVy\"},\"data\":{\"name\":\"add\",\"event\":{\"type\":\"click\",\"details\":{},\"extraData\":{},\"target\":{\"tagName\":\"BUTTON\",\"value\":\"\",\"attributes\":{\"data-motion\":\"add\",\"class\":\"btn btn-primary\"},\"formData\":null},\"currentTarget\":{\"tagName\":\"BUTTON\",\"value\":\"\",\"attributes\":{\"data-motion\":\"add\",\"class\":\"btn btn-primary\",\"id\":\"motion-button\"},\"formData\":null}}}}}")
+MESSAGE_JOIN = JSON.parse({
+  "event"      => "join",
+  "topic"      => "motion:6968",
+  "identifier" => {
+    "channel" => "motion:6968",
+    "version" => "0.1.0",
+    "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==",
+  },
+}.to_json)
 
-EVENT_DATA = MESSAGE["payload"]["data"]["event"]
+MESSAGE_NEW = JSON.parse({
+  "event"   => "message",
+  "topic"   => "motion:922",
+  "subject" => "message_new",
+  "payload" => {
+    "command"    => "process_motion",
+    "identifier" => {
+      "channel" => "motion:922",
+      "version" => "0.1.0",
+      "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==",
+    },
+    "data" => {
+      "name"  => "add",
+      "event" => {
+        "type"      => "click",
+        "details"   => {} of String => String,
+        "extraData" => {} of String => String,
+        "target"    => {
+          "tagName"    => "BUTTON",
+          "value"      => "",
+          "attributes" => {
+            "data-motion" => "add",
+            "class"       => "btn btn-primary",
+          },
+          "formData" => nil,
+        },
+        "currentTarget" => {
+          "tagName"    => "BUTTON",
+          "value"      => "",
+          "attributes" => {
+            "data-motion" => "add",
+            "class"       => "btn btn-primary",
+            "id"          => "motion-button",
+          },
+          "formData" => nil,
+        },
+      },
+    },
+  },
+}.to_json)
+
+EVENT_DATA = MESSAGE_NEW["payload"]["data"]["event"]

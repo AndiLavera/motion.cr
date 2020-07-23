@@ -24,9 +24,7 @@ module Motion
 
     def handle_leave(client_socket)
       # TODO: Remove not_nil
-      pp "unsubscribe"
       component_connection.not_nil!.close
-
       @component_connection = nil
     end
 
@@ -35,11 +33,17 @@ module Motion
       identifier, data, command = parse_motion(message["payload"])
 
       case command
-      when "unsubscribe"    then handle_leave(client_socket)
-      when "process_motion" then (process_motion(identifier, data) if data)
+      when "unsubscribe"
+        handle_leave(client_socket)
+        broadcast = false
+      when "process_motion"
+        if data
+          process_motion(identifier, data)
+          broadcast = true
+        end
       end
 
-      synchronize(topic, broadcast = true)
+      synchronize(topic, broadcast)
     end
 
     def process_motion(identifier, data : JSON::Any)
