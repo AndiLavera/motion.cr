@@ -11,13 +11,13 @@ require "./motions"
 # class MyComponent < Motion::Base
 #   props count : Int32 = 0
 #
-#   @[MapMotion]
+#   @[Motion::MapMethod]
 #   def add
 #     count += 1
 #   end
 # end
 # ```
-annotation MapMotion; end
+annotation Motion::MapMethod; end
 
 class Motion::Base
   include Motion::HTML::Engine
@@ -54,7 +54,7 @@ class Motion::Base
       {% verbatim do %}
         {% begin %}
           case motion
-          {% for method in @type.methods.select &.annotation(MapMotion) %}
+          {% for method in @type.methods.select &.annotation(Motion::MapMethod) %}
 
             {% args = method.args %}
             {% if args[0] && !args[0].restriction.resolve == Motion::Event %}
