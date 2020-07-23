@@ -22,7 +22,7 @@ describe Motion::ComponentConnection do
     component_connection = Motion::ComponentConnection.new(component)
 
     component.motion_hit.should be_false
-    component_connection.process_motion("motion", Motion::Event.from_raw(EVENT_DATA))
+    component_connection.process_motion("motion", Motion::Event.new(EVENT_DATA))
     component.motion_hit.should be_true
   end
 end

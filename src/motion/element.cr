@@ -9,16 +9,20 @@ module Motion
       raw["tagName"]?
     end
 
+    def name
+      tag_name
+    end
+
     def value
       raw["value"]?
     end
 
     def attributes
-      raw["attributes"]?
+      raw["attributes"]? || {} of String => String
     end
 
     def [](key : String)
-      attributes[key] || attributes[key.tr("_", "-")]
+      attributes[key]? || attributes[key.tr("_", "-")]?
     end
 
     def id
@@ -37,9 +41,7 @@ module Motion
     end
 
     def data
-      return @data unless @data.nil?
-
-      @data = DataAttributes.new(self)
+      @data ||= DataAttributes.new(self)
     end
 
     # def form_data

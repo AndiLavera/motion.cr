@@ -46,7 +46,7 @@ module Motion
       motion, raw_event = data["name"], data["event"]
 
       if (cc = component_connection)
-        cc.process_motion(motion.to_s, Motion::Event.from_raw(raw_event))
+        cc.process_motion(motion.to_s, Motion::Event.new(raw_event))
       else
         raise "NoComponentConnectionError"
       end

@@ -2,15 +2,9 @@ require "json"
 
 module Motion
   class Event
-    def self.from_raw(raw : JSON::Any)
-      new(raw) if raw
-    end
-
     getter raw : JSON::Any
 
     def initialize(@raw : JSON::Any)
-      @target = Motion::Element.new(raw["target"])
-      @current_target = Motion::Element.new(raw["currentTarget"])
     end
 
     def type
@@ -30,11 +24,11 @@ module Motion
     end
 
     def target
-      @target
+      @target ||= Motion::Element.new(raw["target"])
     end
 
     def current_target
-      @current_target
+      @current_target ||= Motion::Element.new(raw["currentTarget"])
     end
 
     def element
