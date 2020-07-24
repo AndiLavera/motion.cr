@@ -21,8 +21,8 @@ describe Motion::ComponentConnection do
     component = MotionRender.new
     component_connection = Motion::ComponentConnection.new(component)
 
-    component.motion_hit.should be_false
+    component.motion_hit?.should be_false
     component_connection.process_motion("motion", Motion::Event.new(EVENT_DATA))
-    component.motion_hit.should be_true
+    component.motion_hit?.should be_true
   end
 end
