@@ -40,7 +40,7 @@ export default class Client {
 
   consumer: Consumer
 
-  constructor(options: ClientInterface) {
+  constructor(options = {}) {
     Object.assign(this, Client.defaultOptions, options);
 
     this._componentSelector = `[${this.keyAttribute}][${this.stateAttribute}]`;

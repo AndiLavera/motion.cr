@@ -9,6 +9,18 @@ parserOptions:
   sourceType: module
 plugins:
   - '@typescript-eslint'
-rules: {
+rules: 
   no-underscore-dangle: ["off"]
-}
+  import/extensions: ["error", "ignorePackages", {
+      "ts": "never",
+      "tsx": "never",
+      "js": "never",
+      "jsx": "never",
+      "mjs": "never"
+    }]
+
+settings: 
+  import/resolver:
+    node:
+      paths: ["./javascript"]
+      extensions: ['.js', '.jsx', '.ts', '.tsx']

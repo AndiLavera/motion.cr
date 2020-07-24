@@ -1,7 +1,7 @@
-import Client from './Client'
+import Client from './Client';
 
 export function createClient(options) {
-  return new Client(options)
+  return new Client(options);
 }
 
-export default createClient
+export default createClient;

@@ -1,17 +1,17 @@
-export default function serializeEvent (event, extraData = null) {
-  const { type } = event
-  const details = serializeEventDetails(event)
-  const target = serializeElement(event.target)
-  const currentTarget = serializeElement(event.currentTarget)
+export default function serializeEvent(event, extraData = null) {
+  const { type } = event;
+  const details = serializeEventDetails(event);
+  const target = serializeElement(event.target);
+  const currentTarget = serializeElement(event.currentTarget);
 
   return {
     type,
     details,
     extraData,
     target,
-    currentTarget
-  }
-};
+    currentTarget,
+  };
+}
 
 const detailProperties = [
   'button',
@@ -22,56 +22,54 @@ const detailProperties = [
   'altKey',
   'ctrlKey',
   'metaKey',
-  'shiftKey'
-]
+  'shiftKey',
+];
 
-function serializeEventDetails (event) {
-  const details = {}
+function serializeEventDetails(event) {
+  const details = {};
 
   for (const property of detailProperties) {
     if (Object.prototype.hasOwnProperty.call(event, property)) {
-      details[property] = event[property]
+      details[property] = event[property];
     }
   }
 
-  return details
+  return details;
 }
 
-function serializeElement (element) {
-  const { tagName, value } = element
-  const attributes = serializeElementAttributes(element)
-  const formData = serializeElementFormData(element)
+function serializeElement(element) {
+  const { tagName, value } = element;
+  const attributes = serializeElementAttributes(element);
+  const formData = serializeElementFormData(element);
 
   return {
     tagName,
     value,
     attributes,
-    formData
-  }
+    formData,
+  };
 }
 
-function serializeElementAttributes (element) {
-  const attributes = {}
+function serializeElementAttributes(element) {
+  const attributes = {};
 
   for (const attributeName of element.getAttributeNames()) {
-    attributes[attributeName] = element.getAttribute(attributeName)
+    attributes[attributeName] = element.getAttribute(attributeName);
   }
 
-  return attributes
+  return attributes;
 }
 
-function serializeElementFormData (element) {
-  const form = element.form || element.closest('form')
+function serializeElementFormData(element) {
+  const form = element.form || element.closest('form');
 
   if (!form) {
-    return null
+    return null;
   }
 
-  const formData = new FormData(form)
+  const formData = new FormData(form);
 
   return Array.from(formData.entries())
-    .map(([key, value]) =>
-      `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
-    )
-    .join('&')
+    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+    .join('&');
 }

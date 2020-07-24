@@ -1,25 +1,25 @@
 export const documentLoaded = new Promise((resolve) => {
   if (/^loaded|^i|^c/i.test(document.readyState)) {
-    resolve()
+    resolve();
   } else {
-    once(document, 'DOMContentLoaded', resolve)
+    once(document, 'DOMContentLoaded', resolve);
   }
-})
+});
 
 export const beforeDocumentUnload = new Promise((resolve) => {
   window.addEventListener('beforeunload', () => {
     once(window, 'beforeunload', ({ defaultPrevented }) => {
       if (!defaultPrevented) {
-        resolve()
+        resolve();
       }
-    })
-  }, true)
-})
+    });
+  }, true);
+});
 
-function once (target, event, callback) {
-  target.addEventListener(event, function handler (event) {
-    target.removeEventListener(event, handler)
+function once(target, event, callback) {
+  target.addEventListener(event, function handler(event) {
+    target.removeEventListener(event, handler);
 
-    callback(event)
-  })
+    callback(event);
+  });
 }

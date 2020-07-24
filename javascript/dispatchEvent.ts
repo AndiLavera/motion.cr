@@ -2,12 +2,12 @@ export default function dispatchEvent(target, name) {
   try {
     const event = new CustomEvent(name, {
       bubbles: true,
-      cancelable: false
-    })
+      cancelable: false,
+    });
 
-    //debugger
-    target.dispatchEvent(event)
+    // debugger
+    target.dispatchEvent(event);
   } catch (error) {
-    console.error('Error while dispatching', name, 'on', target, error)
+    console.error('Error while dispatching', name, 'on', target, error);
   }
 }

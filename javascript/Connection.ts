@@ -1,49 +1,59 @@
 import Amber from 'amber';
-// Encapsulate the cable connection held by the consumer. This is an internal class not intended for direct user manipulation.
+import Consumer from './Consumer';
+import Subscriptions from './Subscriptions';
+// Encapsulate the cable connection held by the consumer.
+// This is an internal class not intended for direct user manipulation.
 
-const indexOf = [].indexOf
+const { indexOf } = [];
 
 class Connection {
+  socket: Amber.Socket
+
+  consumer: Consumer
+
+  subscriptions: Subscriptions
+
   constructor(consumer) {
-    this.socket = new Amber.Socket('/cable')
-    this.connection_promise = this.open.call(this)
-    this.consumer = consumer
-    this.subscriptions = this.consumer.subscriptions
-    this.monitor = null // new ConnectionMonitor(this)
-    this.disconnected = true
+    this.socket = new Amber.Socket('/cable');
+    this.connection_promise = this.open.call(this);
+    this.consumer = consumer;
+    this.subscriptions = this.consumer.subscriptions;
+    this.monitor = null; // new ConnectionMonitor(this)
+    this.disconnected = true;
     this.channel;
+    this.reopenDelay = 500;
   }
 
   send(data) {
     this.connection_promise.then(() => {
-      console.log(data)
-      this.channel.push('message_new', data)
-    })
+      console.log(data);
+      this.channel.push('message_new', data);
+    });
   }
 
   join_channel(data) {
     this.connection_promise.then(() => {
-      data.connected()
+      data.connected();
       this.channel = this.socket.channel(data.channel);
 
       this.channel.join({ identifier: data.identifier });
 
-      this.channel.on('message_new', function (payload) {
-        data.received(payload.html)
-      })
+      this.channel.on('message_new', (payload) => {
+        data.received(payload.html);
+      });
 
-      this.channel.on('leave', function (payload) {
+      this.channel.on('leave', (payload) => {
         console.log(payload);
-      })
-    })
+      });
+    });
   }
 
   open() {
-    return this.socket.connect()
+    return this.socket.connect();
   }
 
   close({ allowReconnect } = { allowReconnect: true }) {
-    return this.socket.disconnect()
+    return this.socket.disconnect();
   }
 
   // reopen() {
@@ -74,8 +84,8 @@ class Connection {
   // }
 
   isActive() {
-    console.log("TODO: Connect#isActive is always true")
-    return true
+    console.log('TODO: Connect#isActive is always true');
+    return true;
   }
 
   // // Private
@@ -111,10 +121,7 @@ class Connection {
   //     this.webSocket[`on${eventName}`] = function () { }
   //   }
   // }
-
 }
-
-Connection.reopenDelay = 500
 
 // Connection.prototype.events = {
 //   message(event) {
@@ -152,7 +159,8 @@ Connection.reopenDelay = 500
 //     if (this.disconnected) { return }
 //     this.disconnected = true
 //     this.monitor.recordDisconnect()
-//     return this.subscriptions.notifyAll("disconnected", { willAttemptReconnect: this.monitor.isRunning() })
+//     return this.subscriptions.notifyAll("disconnected",
+//      { willAttemptReconnect: this.monitor.isRunning() })
 //   },
 
 //   error() {
@@ -160,4 +168,4 @@ Connection.reopenDelay = 500
 //   }
 // }
 
-export default Connection
+export default Connection;
