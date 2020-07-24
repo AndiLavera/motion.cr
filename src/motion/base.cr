@@ -41,7 +41,7 @@ require "./motions"
 # When the user hits the button that `data-motion` is assigned to, a request will be sent off. The server will invoke the method provided and rerender the component. In this case, `add` will be invoked, count will increment by `1` & the html after rerendering will reflect that.
 annotation Motion::MapMethod; end
 
-class Motion::Base
+abstract class Motion::Base
   include Motion::HTML::Engine
   include Motion::Motions
   include JSON::Serializable
