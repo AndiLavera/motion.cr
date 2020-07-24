@@ -1,0 +1,33 @@
+{
+  "name": "@awcrotwell/motion",
+  "version": "0.1.1",
+  "description": "Motion allows you to build reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.",
+  "main": "javascript/index.js",
+  "files": [
+    "package.json",
+    "javascript/**/*"
+  ],
+  "directories": {
+    "lib": "javascript/**"
+  },
+  "dependencies": {
+    "morphdom": "^2.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewc910/motion.cr.git"
+  },
+  "keywords": [
+    "crystal",
+    "crystal-lang"
+  ],
+  "author": "Andrew Crotwell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrewc910/motion.cr/issues"
+  },
+  "homepage": "https://github.com/andrewc910/motion.cr#readme"
+}
