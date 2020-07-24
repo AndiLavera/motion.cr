@@ -72,7 +72,7 @@ class Motion::Base
 
   # :nodoc:
   macro inherited
-    def process_motion(motion : String, event : Motion::Event)
+    def process_motion(motion : String, event : Motion::Event?)
       {% verbatim do %}
         {% begin %}
           case motion
