@@ -58,17 +58,6 @@ module Motion::HTML::Engine
            has_explicit_value ? 1 : 0
          } %}
 
-      # Generate JSON::Serilizable annotions
-      {% for declaration in sorted_assigns %}
-        {% var = declaration.var %}
-        {% type = declaration.type %}
-        {% value = declaration.value %}
-        {% value = nil if type.stringify.ends_with?("Nil") && !value %}
-        {% has_default = value || value == false || value == nil %}
-        {{ "@".id }}[JSON::Field(key: {{ var.stringify }})]
-        property {{ var.id }} : {{ type }}{% if has_default %} = {{ value }}{% end %}
-      {% end %}
-
       def initialize(
         {% for declaration in sorted_assigns %}
           {% var = declaration.var %}
@@ -81,18 +70,6 @@ module Motion::HTML::Engine
         **unused_exposures
         )
       end
-    {% end %}
-  end
-
-  macro generate_getters
-    {% if !@type.abstract? %}
-      {% for declaration in ASSIGNS %}
-        {% if declaration.type.stringify == "Bool" %}
-          getter? {{ declaration }}
-        {% else %}
-          getter {{ declaration }}
-        {% end %}
-      {% end %}
     {% end %}
   end
 
