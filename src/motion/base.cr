@@ -61,16 +61,6 @@ abstract class Motion::Base
   end
 
   # :nodoc:
-  def process_motion(method : String, event : Motion::Event?)
-    raise Exceptions::MotionBaseMethodError.new("process_motion")
-  end
-
-  # :nodoc:
-  def render
-    raise Exceptions::MotionBaseMethodError.new("render")
-  end
-
-  # :nodoc:
   macro inherited
     def process_motion(motion : String, event : Motion::Event?)
       {% verbatim do %}
