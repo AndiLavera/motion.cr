@@ -44,7 +44,6 @@ annotation Motion::MapMethod; end
 abstract class Motion::Base
   include Motion::HTML::Engine
   include Motion::Motions
-  include JSON::Serializable
 
   @[JSON::Field(ignore: true)]
   property view : IO::Memory = IO::Memory.new
