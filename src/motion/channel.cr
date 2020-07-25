@@ -10,8 +10,6 @@ module Motion
   # :nodoc:
   class Channel < Amber::WebSockets::Channel
     getter component_connection : Motion::ComponentConnection?
-    getter html_transformer : Motion::HTMLTransformer = Motion.html_transformer
-    getter logger : Motion::Logger = Motion.logger
     getter topic : String?
 
     def handle_joined(client_socket, message)
@@ -102,7 +100,7 @@ module Motion
     end
 
     private def render(component)
-      html = html_transformer.add_state_to_html(component, component.rerender)
+      html = Motion.html_transformer.add_state_to_html(component, component.rerender)
       rebroadcast!({
         subject: "message_new",
         topic:   topic,
@@ -114,7 +112,7 @@ module Motion
 
     # TODO: pass error in as an argument: , error: error
     private def handle_error(error, context)
-      logger.error("An error occurred while #{context} & #{error}")
+      Motion.logger.error("An error occurred while #{context} & #{error}")
     end
 
     # def process_broadcast(broadcast, message)

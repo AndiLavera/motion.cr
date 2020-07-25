@@ -2,3 +2,6 @@ lib/
 docs/
 test.cr
 notes.md
+node_modules/
+dist/
+bin/

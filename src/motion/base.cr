@@ -41,10 +41,9 @@ require "./motions"
 # When the user hits the button that `data-motion` is assigned to, a request will be sent off. The server will invoke the method provided and rerender the component. In this case, `add` will be invoked, count will increment by `1` & the html after rerendering will reflect that.
 annotation Motion::MapMethod; end
 
-class Motion::Base
+abstract class Motion::Base
   include Motion::HTML::Engine
   include Motion::Motions
-  include JSON::Serializable
 
   @[JSON::Field(ignore: true)]
   property view : IO::Memory = IO::Memory.new
@@ -62,16 +61,6 @@ class Motion::Base
   def rerender
     self.view = IO::Memory.new
     render
-  end
-
-  # :nodoc:
-  def process_motion(method : String, event : Motion::Event?)
-    raise Exceptions::MotionBaseMethodError.new("process_motion")
-  end
-
-  # :nodoc:
-  def render
-    raise Exceptions::MotionBaseMethodError.new("render")
   end
 
   # :nodoc:
