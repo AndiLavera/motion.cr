@@ -5,7 +5,6 @@ describe Motion::ComponentConnection do
     component_connection = Motion::ComponentConnection.new(MotionRender.new)
     component_connection.render_hash.should_not be_nil
     component_connection.component.should_not be_nil
-    component_connection.logger.should_not be_nil
   end
 
   it "can process a motion" do

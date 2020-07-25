@@ -1,17 +1,14 @@
 module Motion
   # :nodoc:
   class ComponentConnection
-    def self.from_state(state, serializer = Motion.serializer, logger = Motion.logger)
-      component = serializer.deserialize(state)
-
-      new(component: component, logger: logger)
+    def self.from_state(state)
+      new(component: Motion.serializer.deserialize(state))
     end
 
     getter component : Motion::Base
     getter render_hash : UInt64?
-    getter logger : Motion::Logger
 
-    def initialize(@component : Motion::Base, @logger = Motion.logger)
+    def initialize(@component : Motion::Base)
       timing("Connected") do
         @render_hash = component.render_hash
       end
@@ -95,6 +92,10 @@ module Motion
 
     private def handle_error(error, context)
       logger.error("An error occurred while #{context}. Error: #{error}")
+    end
+
+    private def logger
+      Motion.logger
     end
   end
 end
