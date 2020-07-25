@@ -50,7 +50,7 @@ class Motion::Base
   property view : IO::Memory = IO::Memory.new
 
   @[JSON::Field(ignore: true)]
-  property channel : Motion::Channel?
+  property channel : Motion::ChannelInterface?
 
   property map_motion : Bool = false
 
@@ -109,5 +109,9 @@ class Motion::Base
       {{subclass}}: {{subclass.id}},
     {% end %}
     }
+  end
+
+  def set_state
+    (c = channel) ? c.set_state(self) : raise "NoChannelError"
   end
 end

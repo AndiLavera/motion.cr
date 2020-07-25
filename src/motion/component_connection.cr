@@ -11,10 +11,10 @@ module Motion
     getter render_hash : UInt64?
     getter logger : Motion::Logger
 
-    def initialize(@component : Motion::Base, @channel : Amber::WebSockets::Channel, @logger = Motion.logger)
+    def initialize(@component : Motion::Base, channel : ChannelInterface, @logger = Motion.logger)
       timing("Connected") do
         @render_hash = component.render_hash
-        component.channel = @channel
+        component.channel = channel
       end
     end
 

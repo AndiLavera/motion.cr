@@ -1,4 +1,5 @@
 require "json"
+require "./channel_interface"
 
 # Please leave this for generating docs
 # :nodoc:
@@ -11,6 +12,7 @@ module Motion
     getter component_connection : Motion::ComponentConnection?
     getter html_transformer : Motion::HTMLTransformer = Motion.html_transformer
     getter logger : Motion::Logger = Motion.logger
+    getter topic : String?
 
     def handle_joined(client_socket, message)
       state = message["identifier"]["state"].to_s
@@ -29,7 +31,7 @@ module Motion
     end
 
     def handle_message(client_socket, message)
-      topic = message["topic"]
+      @topic = message["topic"].to_s
       identifier, data, command = parse_motion(message["payload"])
 
       case command
@@ -56,12 +58,12 @@ module Motion
       end
     end
 
-    private def set_state(component : Motion::Base)
+    def set_state(component : Motion::Base)
       rebroadcast!({
-        subject: "set_state",
+        subject: "message_new",
         topic:   topic,
         payload: {
-          html: html,
+          html: html_transformer.add_state_to_html(component, component.rerender),
         },
       })
     end
@@ -75,7 +77,7 @@ module Motion
     end
 
     private def connect_component(state)
-      ComponentConnection.from_state(state, channel: self)
+      ComponentConnection.from_state(state, channel: ChannelInterface.new(self))
     rescue e : Exception
       # reject
       handle_error(e, "connecting a component")
