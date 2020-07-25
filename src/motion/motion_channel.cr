@@ -59,13 +59,7 @@ module Motion
     end
 
     def set_state(component : Motion::Base)
-      rebroadcast!({
-        subject: "message_new",
-        topic:   topic,
-        payload: {
-          html: html_transformer.add_state_to_html(component, component.rerender),
-        },
-      })
+      render(component)
     end
 
     private def versions_mismatch?(client_version)
@@ -91,14 +85,7 @@ module Motion
       #   via: :process_periodic_timer
       if broadcast
         proc = ->(component : Motion::Base) {
-          html = html_transformer.add_state_to_html(component, component.rerender)
-          rebroadcast!({
-            subject: "message_new",
-            topic:   topic,
-            payload: {
-              html: html,
-            },
-          })
+          render(component)
         }
 
         # TODO: Remove not_nil
@@ -112,6 +99,17 @@ module Motion
       command = payload["command"]?
 
       [identifier, data, command]
+    end
+
+    private def render(component)
+      html = html_transformer.add_state_to_html(component, component.rerender)
+      rebroadcast!({
+        subject: "message_new",
+        topic:   topic,
+        payload: {
+          html: html,
+        },
+      })
     end
 
     # TODO: pass error in as an argument: , error: error
