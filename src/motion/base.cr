@@ -92,7 +92,9 @@ class Motion::Base
             {% end %}
 
             when {{method.name.id.stringify}}
-              return self.{{method.name.id}}({% if args.size == 1 %}{{"event".id}}{% end %})
+              self.before_motion if self.responds_to?(:before_motion)
+              self.{{method.name.id}}({% if args.size == 1 %}{{"event".id}}{% end %})
+              self.after_motion if self.responds_to?(:after_motion)
           {% end %}
           end
         {% end %}
