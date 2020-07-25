@@ -1,5 +1,16 @@
 export default class AttributeTracker {
-  constructor(attribute, createManager) {
+  attribute: string
+
+  createManager: Function
+
+  // TODO:
+  _managers: Array<any>
+
+  _attributeSelector: string
+
+  _mutationObserver: MutationObserver
+
+  constructor(attribute: string, createManager: Function) {
     this.attribute = attribute;
     this.createManager = createManager;
 
@@ -13,7 +24,7 @@ export default class AttributeTracker {
     });
   }
 
-  attachRoot(element) {
+  attachRoot(element: HTMLElement) {
     this._forEachMatchingUnder(element, (match) => this._detect(match));
 
     this._mutationObserver.observe(element, {
@@ -38,11 +49,11 @@ export default class AttributeTracker {
     this._managers.clear();
   }
 
-  getManager(element) {
+  getManager(element: HTMLElement) {
     return this._managers.get(element);
   }
 
-  _detect(element) {
+  _detect(element: HTMLElement) {
     let manager = null;
 
     this._errorBoundry(() => {
@@ -56,7 +67,7 @@ export default class AttributeTracker {
     this._managers.set(element, manager);
   }
 
-  _update(element) {
+  _update(element: HTMLElement) {
     const manager = this._managers.get(element);
 
     if (manager && manager.update) {
@@ -67,7 +78,7 @@ export default class AttributeTracker {
     }
   }
 
-  _remove(element) {
+  _remove(element: HTMLElement) {
     const manager = this._managers.get(element);
 
     if (manager && manager.shutdown) {
@@ -98,7 +109,7 @@ export default class AttributeTracker {
     }
   }
 
-  _processAttributeUpdateToTracked(element) {
+  _processAttributeUpdateToTracked(element: HTMLElement) {
     if (element.hasAttribute(this.attribute)) {
       this._update(element);
     } else {
@@ -106,19 +117,19 @@ export default class AttributeTracker {
     }
   }
 
-  _processAttributeUpdateToUntracked(element) {
+  _processAttributeUpdateToUntracked(element: HTMLElement) {
     if (element.hasAttribute(this.attribute)) {
       this._detect(element);
     }
   }
 
-  _forEachMatchingIn(nodes, callback) {
+  _forEachMatchingIn(nodes, callback: Function) {
     for (const node of nodes) {
       this._forEachMatchingUnder(node, callback);
     }
   }
 
-  _forEachMatchingUnder(node, callback) {
+  _forEachMatchingUnder(node, callback: Function) {
     if (node.hasAttribute && node.hasAttribute(this.attribute)) {
       callback(node);
     }
@@ -130,7 +141,7 @@ export default class AttributeTracker {
     }
   }
 
-  _errorBoundry(callback) {
+  _errorBoundry(callback: Function) {
     try {
       callback();
     } catch (error) {

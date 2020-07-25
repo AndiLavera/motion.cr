@@ -1,7 +1,14 @@
 import parseBindings, { MODE_HANDLE } from './parseBindings';
 
 export default class BindingManager {
-  constructor(client, element) {
+  client: Client
+
+  // TODO:
+  _handlers: Array<any>
+
+  element: HTMLElement
+
+  constructor(client: Client, element: HTMLElement) {
     this.client = client;
     this.element = element;
 

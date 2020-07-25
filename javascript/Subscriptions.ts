@@ -71,7 +71,7 @@ export default class Subscriptions {
     );
   }
 
-  sendCommand(subscription, command) {
+  sendCommand(subscription: Subscription, command: string) {
     const { identifier, channel } = subscription;
     return this.consumer.send({ command, identifier, channel });
   }

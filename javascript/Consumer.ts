@@ -23,7 +23,7 @@ export default class Consumer {
 
   connection: Connection
 
-  constructor(url) {
+  constructor(url: string) {
     this._url = url;
     this.subscriptions = new Subscriptions(this);
     this.connection = new Connection(this);

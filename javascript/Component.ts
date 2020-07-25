@@ -3,26 +3,25 @@ import serializeEvent from './serializeEvent';
 import reconcile from './reconcile';
 import Client from './Client';
 
-// import { version } from '../package.json'
+import { version } from '../package.json';
 
 export default class Component {
   client: Client
 
-  element: Element
+  element: HTMLElement
 
   _subscription: Subscription
 
-  constructor(client, element) {
+  constructor(client: Client, element: HTMLElement) {
     this.client = client;
     this.element = element;
 
     this._beforeConnect();
 
-    // debugger
     this._subscription = this.client.consumer.subscriptions.create(
       {
         channel: `motion:${Math.floor(Math.random() * 10000)}`,
-        version: '0.2.2', // import version
+        version: '0.1.0', // import version
         state: this.element.getAttribute(this.client.stateAttribute),
       },
       {
@@ -34,7 +33,7 @@ export default class Component {
     );
   }
 
-  processMotion(name, event = null) {
+  processMotion(name: string, event = null) {
     if (!this._subscription) {
       this.client.log('Dropped motion', name, 'on', this.element);
       return;

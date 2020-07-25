@@ -1,6 +1,6 @@
 {
   "name": "@awcrotwell/motion",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "Motion allows you to build reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.",
   "main": "dist/index.js",
   "types": "index.d.ts",
@@ -15,8 +15,7 @@
     "morphdom": "^2.6.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "tsc"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

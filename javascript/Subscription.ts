@@ -11,7 +11,13 @@ const extend = function (object, properties) {
 };
 
 export default class Subscription {
-  constructor(consumer, params = {}, mixin) {
+  consumer: Consumer
+
+  identifier: string
+
+  channel: string
+
+  constructor(consumer: Consumer, params = {}, mixin) {
     this.consumer = consumer;
     this.channel = params.channel;
     this.identifier = params;
@@ -34,10 +40,4 @@ export default class Subscription {
   unsubscribe() {
     return this.consumer.subscriptions.remove(this);
   }
-
-  consumer: Consumer
-
-  identifier: string
-
-  channel: string
 }
