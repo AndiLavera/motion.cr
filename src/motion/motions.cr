@@ -20,11 +20,11 @@ module Motion
       macro finished
         setup_json_serializer
       end
-  
+
       macro included
         setup_json_hook
       end
-  
+
       macro inherited
         setup_json_hook
       end
