@@ -21,6 +21,7 @@ export default class Component {
     this._subscription = this.client.consumer.subscriptions.create(
       {
         channel: `motion:${Math.floor(Math.random() * 10000)}`,
+        // TODO:
         version: '0.1.0', // import version
         state: this.element.getAttribute(this.client.stateAttribute),
       },
