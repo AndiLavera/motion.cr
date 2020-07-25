@@ -2,7 +2,7 @@ require "./motions/*"
 require "./html_transformer"
 require "./serializer"
 require "./component_connection"
-require "./motion_channel"
+require "./channel"
 require "./event"
 require "./element"
 
