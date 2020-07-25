@@ -1,15 +1,5 @@
 import Subscription from './Subscription';
 
-// Collection class for creating (and internally managing) channel subscriptions.
-// The only method intended to be triggered by the user is ActionCable.Subscriptions#create,
-// and it should be called through the consumer like so:
-//
-//   App = {}
-//   App.cable = ActionCable.createConsumer("ws://example.com/accounts/1")
-//   App.appearance = App.cable.subscriptions.create("AppearanceChannel")
-//
-// For more details on how you'd configure an actual channel subscription, see ActionCable.Subscription.
-
 export default class Subscriptions {
   constructor(consumer) {
     this.consumer = consumer;
@@ -17,20 +7,19 @@ export default class Subscriptions {
   }
 
   create(channelName, mixin) {
-    // debugger
     const channel = channelName;
     const params = typeof channel === 'object' ? channel : { channel };
     const subscription = new Subscription(this.consumer, params, mixin);
     return this.add(subscription);
   }
 
-  // Private
+  Private
 
   add(subscription) {
     this.subscriptions.push(subscription);
     this.consumer.ensureActiveConnection();
     this.notify(subscription, 'initialized');
-    this.join_channel(subscription);
+    this.joinChannel(subscription);
     return subscription;
   }
 
@@ -64,7 +53,9 @@ export default class Subscriptions {
   }
 
   notifyAll(callbackName, ...args) {
-    return this.subscriptions.map((subscription) => this.notify(subscription, callbackName, ...args));
+    return this.subscriptions.map(
+      (subscription) => this.notify(subscription, callbackName, ...args),
+    );
   }
 
   notify(subscription, callbackName, ...args) {
@@ -75,7 +66,9 @@ export default class Subscriptions {
       subscriptions = [subscription];
     }
 
-    return subscriptions.map((subscription) => (typeof subscription[callbackName] === 'function' ? subscription[callbackName](...args) : undefined));
+    return subscriptions.map(
+      (sub) => (typeof sub[callbackName] === 'function' ? sub[callbackName](...args) : undefined),
+    );
   }
 
   sendCommand(subscription, command) {
@@ -83,7 +76,11 @@ export default class Subscriptions {
     return this.consumer.send({ command, identifier, channel });
   }
 
-  join_channel(subscription) {
-    return this.consumer.join_channel(subscription);
+  joinChannel(subscription) {
+    return this.consumer.joinChannel(subscription);
   }
+
+  subscriptions: Array<Subscription>
+
+  consumer: Consumer
 }

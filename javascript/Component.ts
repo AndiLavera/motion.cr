@@ -1,6 +1,7 @@
 import dispatchEvent from './dispatchEvent';
 import serializeEvent from './serializeEvent';
 import reconcile from './reconcile';
+import Client from './Client';
 
 // import { version } from '../package.json'
 

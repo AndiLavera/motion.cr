@@ -1,18 +1,3 @@
-export default function serializeEvent(event, extraData = null) {
-  const { type } = event;
-  const details = serializeEventDetails(event);
-  const target = serializeElement(event.target);
-  const currentTarget = serializeElement(event.currentTarget);
-
-  return {
-    type,
-    details,
-    extraData,
-    target,
-    currentTarget,
-  };
-}
-
 const detailProperties = [
   'button',
   'x',
@@ -37,19 +22,6 @@ function serializeEventDetails(event) {
   return details;
 }
 
-function serializeElement(element) {
-  const { tagName, value } = element;
-  const attributes = serializeElementAttributes(element);
-  const formData = serializeElementFormData(element);
-
-  return {
-    tagName,
-    value,
-    attributes,
-    formData,
-  };
-}
-
 function serializeElementAttributes(element) {
   const attributes = {};
 
@@ -72,4 +44,32 @@ function serializeElementFormData(element) {
   return Array.from(formData.entries())
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
+}
+
+function serializeElement(element) {
+  const { tagName, value } = element;
+  const attributes = serializeElementAttributes(element);
+  const formData = serializeElementFormData(element);
+
+  return {
+    tagName,
+    value,
+    attributes,
+    formData,
+  };
+}
+
+export default function serializeEvent(event, extraData = null) {
+  const { type } = event;
+  const details = serializeEventDetails(event);
+  const target = serializeElement(event.target);
+  const currentTarget = serializeElement(event.currentTarget);
+
+  return {
+    type,
+    details,
+    extraData,
+    target,
+    currentTarget,
+  };
 }

@@ -1,38 +1,31 @@
 import Amber from 'amber';
-import Consumer from './Consumer';
-import Subscriptions from './Subscriptions';
+// import Consumer from './Consumer';
+// import Subscriptions from './Subscriptions';
 // Encapsulate the cable connection held by the consumer.
 // This is an internal class not intended for direct user manipulation.
 
 const { indexOf } = [];
 
 class Connection {
-  socket: Amber.Socket
-
-  consumer: Consumer
-
-  subscriptions: Subscriptions
-
   constructor(consumer) {
     this.socket = new Amber.Socket('/cable');
-    this.connection_promise = this.open.call(this);
+    this.connectionPromise = this.open.call(this);
     this.consumer = consumer;
     this.subscriptions = this.consumer.subscriptions;
-    this.monitor = null; // new ConnectionMonitor(this)
     this.disconnected = true;
     this.channel;
     this.reopenDelay = 500;
   }
 
   send(data) {
-    this.connection_promise.then(() => {
+    this.connectionPromise.then(() => {
       console.log(data);
       this.channel.push('message_new', data);
     });
   }
 
-  join_channel(data) {
-    this.connection_promise.then(() => {
+  joinChannel(data) {
+    this.connectionPromise.then(() => {
       data.connected();
       this.channel = this.socket.channel(data.channel);
 
@@ -121,6 +114,20 @@ class Connection {
   //     this.webSocket[`on${eventName}`] = function () { }
   //   }
   // }
+
+  socket: Amber.Socket
+
+  consumer: Consumer
+
+  subscriptions: Subscriptions
+
+  disconnected: boolean
+
+  channel: string | undefined
+
+  reopenDelay: number
+
+  connectionPromise: Promise<any>
 }
 
 // Connection.prototype.events = {

@@ -4,10 +4,6 @@ import Component from './Component';
 import { documentLoaded, beforeDocumentUnload } from './documentLifecycle';
 import Consumer from './Consumer';
 
-interface ClientInterface {
-
-}
-
 function getConfig(name) {
   const element = document.head.querySelector(`meta[name='action-cable-${name}']`);
   if (element) {
@@ -36,11 +32,11 @@ export default class Client {
 
   shutdownBeforeUnload: boolean
 
-  defaultOptions: Object
+  defaultOptions: IClient
 
   consumer: Consumer
 
-  constructor(options = {}) {
+  constructor(options: IClient) {
     Object.assign(this, Client.defaultOptions, options);
 
     this._componentSelector = `[${this.keyAttribute}][${this.stateAttribute}]`;
@@ -84,12 +80,22 @@ export default class Client {
   }
 }
 
+interface IClient {
+  getExtraDataForEvent: Function
+  logging: boolean
+  root: Document
+  shutdownBeforeUnload: boolean
+  keyAttribute: string
+  stateAttribute: string
+  motionAttribute: string
+}
+
 Client.defaultOptions = {
   get consumer() {
     return new Consumer(getConfig('url') || '/cable');
   },
 
-  getExtraDataForEvent(_event) {
+  getExtraDataForEvent() {
     // noop
   },
 
