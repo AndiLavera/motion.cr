@@ -56,6 +56,16 @@ module Motion
       end
     end
 
+    private def set_state(component : Motion::Base)
+      rebroadcast!({
+        subject: "set_state",
+        topic:   topic,
+        payload: {
+          html: html,
+        },
+      })
+    end
+
     private def versions_mismatch?(client_version)
       Motion.config.version != client_version
     end
@@ -65,7 +75,7 @@ module Motion
     end
 
     private def connect_component(state)
-      ComponentConnection.from_state(state)
+      ComponentConnection.from_state(state, channel: self)
     rescue e : Exception
       # reject
       handle_error(e, "connecting a component")

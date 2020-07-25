@@ -48,6 +48,10 @@ class Motion::Base
 
   @[JSON::Field(ignore: true)]
   property view : IO::Memory = IO::Memory.new
+
+  @[JSON::Field(ignore: true)]
+  property channel : Motion::Channel?
+
   property map_motion : Bool = false
 
   # def to_s(io)

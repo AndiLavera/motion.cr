@@ -1,19 +1,20 @@
 module Motion
   # :nodoc:
   class ComponentConnection
-    def self.from_state(state, serializer = Motion.serializer, logger = Motion.logger)
+    def self.from_state(state, channel, serializer = Motion.serializer, logger = Motion.logger)
       component = serializer.deserialize(state)
 
-      new(component: component, logger: logger)
+      new(component: component, logger: logger, channel: channel)
     end
 
     getter component : Motion::Base
     getter render_hash : UInt64?
     getter logger : Motion::Logger
 
-    def initialize(@component : Motion::Base, @logger = Motion.logger)
+    def initialize(@component : Motion::Base, @channel : Amber::WebSockets::Channel, @logger = Motion.logger)
       timing("Connected") do
         @render_hash = component.render_hash
+        component.channel = @channel
       end
     end
 
