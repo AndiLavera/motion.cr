@@ -1,5 +1,6 @@
 import Connection from './Connection';
 import Subscriptions from './Subscriptions';
+import Subscription from './Subscription';
 // import Subscription from './Subscription';
 
 export function createWebSocketURL(inputUrl: string | Function) {
@@ -37,7 +38,7 @@ export default class Consumer {
     return this.connection.send(data);
   }
 
-  joinChannel(data) {
+  joinChannel(data: Subscription) {
     return this.connection.joinChannel(data);
   }
 

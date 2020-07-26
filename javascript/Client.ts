@@ -93,6 +93,10 @@ export default class Client {
     this._componentTracker.shutdown();
     this._motionTracker.shutdown();
   }
+
+  getExtraDataForEvent() {
+    // noop
+  }
 }
 
 // Client.defaultOptions = {

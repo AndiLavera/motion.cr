@@ -1,6 +1,7 @@
 import Amber from 'amber';
 import Consumer from './Consumer';
 import Subscriptions from './Subscriptions';
+import Subscription from './Subscription';
 
 class Connection {
   socket: Amber.Socket
@@ -33,7 +34,7 @@ class Connection {
     });
   }
 
-  joinChannel(data) {
+  joinChannel(data: Subscription) {
     this.connectionPromise.then(() => {
       data.connected();
       this.channel = this.socket.channel(data.channel);

@@ -29,7 +29,7 @@ export default class Component {
         connected: () => this._connect(),
         rejected: () => this._connectFailed(),
         disconnected: () => this._disconnect(),
-        received: (newState) => this._render(newState),
+        received: (newState: string) => this._render(newState),
       },
     );
   }
@@ -84,7 +84,7 @@ export default class Component {
     dispatchEvent(this.element, 'motion:disconnect');
   }
 
-  _render(newState) {
+  _render(newState: string) {
     dispatchEvent(this.element, 'motion:before-render');
 
     reconcile(

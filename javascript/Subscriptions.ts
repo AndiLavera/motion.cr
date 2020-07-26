@@ -1,17 +1,11 @@
 import Subscription from './Subscription';
 import Consumer from './Consumer';
+import Imixin from './interfaces/imixin';
 
 interface IChannel {
   channel: string
   version: string
   state: string | null
-}
-
-interface Imixin {
-  connected: Function
-  rejected: Function
-  disconnected: Function
-  received: Function
 }
 
 export default class Subscriptions {
@@ -94,7 +88,7 @@ export default class Subscriptions {
     return this.consumer.send({ command, identifier, channel });
   }
 
-  joinChannel(subscription) {
+  joinChannel(subscription: Subscription) {
     return this.consumer.joinChannel(subscription);
   }
 }

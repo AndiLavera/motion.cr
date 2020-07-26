@@ -1,4 +1,5 @@
 import Consumer from './Consumer';
+import Imixin from './interfaces/imixin';
 
 const extend = function (object, properties) {
   if (properties != null) {
@@ -10,6 +11,29 @@ const extend = function (object, properties) {
   return object;
 };
 
+interface ITarget {
+  formData: {} | null
+  tagName: string
+  value: string
+  attributes: {
+    class: string
+    "data-motion": string
+  }
+}
+
+interface IEvent {
+  extraData: string | null
+  type: string
+  currentTarget: ITarget
+  target: ITarget
+  details: {}
+}
+
+interface IPayload {
+  name: string
+  event: IEvent
+}
+
 export default class Subscription {
   consumer: Consumer
 
@@ -17,7 +41,7 @@ export default class Subscription {
 
   channel: string
 
-  constructor(consumer: Consumer, params = {}, mixin) {
+  constructor(consumer: Consumer, params = {}, mixin: Imixin) {
     this.consumer = consumer;
     this.channel = params.channel;
     this.identifier = params;
@@ -25,11 +49,11 @@ export default class Subscription {
   }
 
   // Perform a channel action with the optional data passed as an attribute
-  perform(data = {}) {
+  perform(data: IPayload) {
     return this.send(data);
   }
 
-  send(data) {
+  send(data: IPayload) {
     return this.consumer.send({
       command: 'process_motion',
       identifier: this.identifier,

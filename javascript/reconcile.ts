@@ -1,6 +1,6 @@
 import morphdom from 'morphdom';
 
-export default (rootElement, newState, keyAttribute) => {
+export default (rootElement: HTMLElement, newState: string, keyAttribute: string) => {
   if (typeof (newState) !== 'string') {
     throw new TypeError('Expected raw HTML for reconcile newState');
   }

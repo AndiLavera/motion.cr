@@ -1,4 +1,4 @@
-export default function dispatchEvent(target, name) {
+export default function dispatchEvent(target: HTMLElement, name: string) {
   try {
     const event = new CustomEvent(name, {
       bubbles: true,
