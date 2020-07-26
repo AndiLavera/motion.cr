@@ -1,5 +1,7 @@
 lib/
 docs/
 test.cr
-dist/
+notes.md
 node_modules/
+dist/
+bin/
