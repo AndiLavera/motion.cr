@@ -23,27 +23,6 @@ function getConfig(name: string) {
   return false;
 }
 
-function defaultOptions() {
-  return {
-    get consumer() {
-      return new Consumer(getConfig('url') || '/cable');
-    },
-
-    getExtraDataForEvent() {
-      // noop
-    },
-
-    logging: false,
-
-    root: document,
-    shutdownBeforeUnload: true,
-
-    keyAttribute: 'data-motion-key',
-    stateAttribute: 'data-motion-state',
-    motionAttribute: 'data-motion',
-  };
-}
-
 export default class Client {
   _componentSelector: string
 
@@ -73,7 +52,7 @@ export default class Client {
     this.stateAttribute = 'data-motion-state';
     this.motionAttribute = 'data-motion';
 
-    Object.assign(this, defaultOptions(), options);
+    Object.assign(this, options);
 
     this._componentSelector = `[${this.keyAttribute}][${this.stateAttribute}]`;
 
@@ -106,7 +85,7 @@ export default class Client {
 
   findComponent(element: HTMLElement) {
     return this._componentTracker.getManager(
-      element.closest(this._componentSelector),
+      element.closest(this._componentSelector)
     );
   }
 

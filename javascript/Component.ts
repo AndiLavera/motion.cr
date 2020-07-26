@@ -85,12 +85,11 @@ export default class Component {
   }
 
   _render(newState) {
-    // debugger
     dispatchEvent(this.element, 'motion:before-render');
 
     reconcile(
       this.element,
-      newState, // newState,
+      newState,
       this.client.keyAttribute,
     );
 

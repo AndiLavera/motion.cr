@@ -1,10 +1,12 @@
+import BindingManager from "./BindingManager"
+import Component from "./Component"
+
 export default class AttributeTracker {
   attribute: string
 
   createManager: Function
 
-  // TODO:
-  _managers: Array<any>
+  _managers: Map<HTMLElement, BindingManager | Component>
 
   _attributeSelector: string
 
@@ -24,7 +26,7 @@ export default class AttributeTracker {
     });
   }
 
-  attachRoot(element: HTMLElement) {
+  attachRoot(element: HTMLDocument) {
     this._forEachMatchingUnder(element, (match) => this._detect(match));
 
     this._mutationObserver.observe(element, {
@@ -64,13 +66,13 @@ export default class AttributeTracker {
       manager = this.createManager(element);
     });
 
-    this._managers.set(element, manager);
+    if (manager) this._managers.set(element, manager);
   }
 
   _update(element: HTMLElement) {
     const manager = this._managers.get(element);
 
-    if (manager && manager.update) {
+    if (manager && manager instanceof BindingManager) {
       this._errorBoundry(() => manager.update());
     } else {
       this._remove(element);

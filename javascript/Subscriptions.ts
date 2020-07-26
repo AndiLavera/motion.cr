@@ -1,12 +1,30 @@
 import Subscription from './Subscription';
+import Consumer from './Consumer';
+
+interface IChannel {
+  channel: string
+  version: string
+  state: string | null
+}
+
+interface Imixin {
+  connected: Function
+  rejected: Function
+  disconnected: Function
+  received: Function
+}
 
 export default class Subscriptions {
-  constructor(consumer) {
+  subscriptions: Array<Subscription>
+
+  consumer: Consumer
+
+  constructor(consumer: Consumer) {
     this.consumer = consumer;
     this.subscriptions = [];
   }
 
-  create(channelName, mixin) {
+  create(channelName: IChannel, mixin: Imixin) {
     const channel = channelName;
     const params = typeof channel === 'object' ? channel : { channel };
     const subscription = new Subscription(this.consumer, params, mixin);
@@ -15,7 +33,7 @@ export default class Subscriptions {
 
   Private
 
-  add(subscription) {
+  add(subscription: Subscription) {
     this.subscriptions.push(subscription);
     this.consumer.ensureActiveConnection();
     this.notify(subscription, 'initialized');
@@ -23,7 +41,7 @@ export default class Subscriptions {
     return subscription;
   }
 
-  remove(subscription) {
+  remove(subscription: Subscription) {
     this.forget(subscription);
     if (!this.findAll(subscription.identifier).length) {
       this.sendCommand(subscription, 'unsubscribe');
@@ -39,7 +57,7 @@ export default class Subscriptions {
     });
   }
 
-  forget(subscription) {
+  forget(subscription: Subscription) {
     this.subscriptions = (this.subscriptions.filter((s) => s !== subscription));
     return subscription;
   }
@@ -58,7 +76,7 @@ export default class Subscriptions {
     );
   }
 
-  notify(subscription, callbackName, ...args) {
+  notify(subscription: Subscription, callbackName, ...args) {
     let subscriptions;
     if (typeof subscription === 'string') {
       subscriptions = this.findAll(subscription);
@@ -79,8 +97,4 @@ export default class Subscriptions {
   joinChannel(subscription) {
     return this.consumer.joinChannel(subscription);
   }
-
-  subscriptions: Array<Subscription>
-
-  consumer: Consumer
 }
