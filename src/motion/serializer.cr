@@ -12,7 +12,7 @@ module Motion
     def serialize(component : Motion::Base)
       state = dump(component)
 
-      state_with_class = "#{state}#{NULL_BYTE}#{component.class}"
+      state_with_class = "#{state}#{NULL_BYTE}#{component.class}#{NULL_BYTE}#{Motion.config.revision}"
 
       [
         salted_digest(state_with_class),
@@ -27,17 +27,15 @@ module Motion
     def deserialize(encoded_component : String)
       state_with_class = decode(encoded_component)
 
-      state, component_class = state_with_class.split(NULL_BYTE)
+      state, component_class, serialized_revision = state_with_class.split(NULL_BYTE)
 
-      # ameba:disable Lint/UselessAssign
       component = load(state, component_class)
-      # ameba:enable Lint/UselessAssign
 
-      # if revision == serialized_revision
-      #   component
-      # else
-      #   component.class.upgrade_from(serialized_revision, component)
-      # end
+      if Motion.config.revision == serialized_revision
+        component
+      else
+        component.class.upgrade_from(serialized_revision, component)
+      end
     end
 
     private def dump(component : Motion::Base)

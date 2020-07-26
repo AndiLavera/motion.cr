@@ -4,7 +4,7 @@ MESSAGE_JOIN = JSON.parse({
   "identifier" => {
     "channel" => "motion:6968",
     "version" => "0.1.0",
-    "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==",
+    "state"   => Motion.serializer.serialize(MotionRender.new)[1],
   },
 }.to_json)
 
@@ -17,7 +17,7 @@ MESSAGE_NEW = JSON.parse({
     "identifier" => {
       "channel" => "motion:922",
       "version" => "0.1.0",
-      "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==",
+      "state"   => Motion.serializer.serialize(MotionRender.new)[1],
     },
     "data" => {
       "name"  => "add",

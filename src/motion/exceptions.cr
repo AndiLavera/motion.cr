@@ -73,6 +73,25 @@ module Motion
       end
     end
 
+    class UpgradeNotImplementedError < ComponentError
+      def initialize(component, previous_revision, current_revision)
+        super(
+          component,
+          "Cannot upgrade `#{component.class}` from a previous revision of the " \
+          "application (#{previous_revision}) to the current revision of the " \
+          "application (#{current_revision})\n" \
+          "\n" \
+          "By default, Motioncr does not allow components from other revisions " \
+          "of the application to be mounted because new code with old state " \
+          "can lead to unpredictable and unsafe behavior.\n" \
+          "\n" \
+          "Hint: If you would like to allow this component to surive " \
+          "deployments, consider providing an alternative implimentation for " \
+          "`#{component.class}.upgrade_from`."
+        )
+      end
+    end
+
     # class MotionNotMapped < ComponentError
     #   attr_reader :motion
 
@@ -119,31 +138,6 @@ module Motion
     #       "attributes added by Motion in the DOM or changed the value of " \
     #       "`Motion.config.secret`."
     #     )
-    #   end
-    # end
-
-    # class UpgradeNotImplementedError < ComponentError
-    #   attr_reader :previous_revision,
-    #     :current_revision
-
-    #   def initialize(component, previous_revision, current_revision)
-    #     super(
-    #       component,
-    #       "Cannot upgrade `#{component.class}` from a previous revision of the " \
-    #       "application (#{previous_revision}) to the current revision of the " \
-    #       "application (#{current_revision})\n" \
-    #       "\n" \
-    #       "By default, Motion does not allow components from other revisions " \
-    #       "of the application to be mounted because new code with old state " \
-    #       "can lead to unpredictable and unsafe behavior.\n" \
-    #       "\n" \
-    #       "Hint: If you would like to allow this component to surive " \
-    #       "deployments, consider providing an alternative implimentation for " \
-    #       "`#{component.class}.upgrade_from`."
-    #     )
-
-    #     @previous_revision = previous_revision
-    #     @current_revision = current_revision
     #   end
     # end
 
