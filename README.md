@@ -16,7 +16,7 @@ Motion allows you to build reactive, real-time frontend UI components in your Am
 
 Motion has Crystal and JavaScript parts, execute both of these commands:
 
-```crystal
+```sh
 dependencies:
   motion.cr:
     github: andrewc910/motion.cr
@@ -26,16 +26,17 @@ dependencies:
 yarn add @andrewc910/motion.cr
 ```
 
-After installing all libraries, run the install script:
+Create a file `motion.cr` in `config/initializers` and add:
 
-TODO: Maybe plugin, maybe copy/paste boilerplate 
-```sh
-amber plugin motion:install
+```crystal
+require "motion"
+# The next require adds the `render` method for components to Amber controllers
+require "motion/amber/monkey_patch"
 ```
 
 ## Guide
 
-MotionComponents are Crystal objects that output HTML. Think of them as an evolution of the presenter pattern, inspired by React & Github Motion.
+MotionComponents are Crystal objects that output HTML. The code itself was pulled & altered from [Lucky Framework](https://github.com/luckyframework/lucky). Think of them as an evolution of the presenter pattern, inspired by React & Github's ViewComponent library.
 
 MotionComponents are most effective in cases where view code is reused or benefits from being tested directly.
 
@@ -59,7 +60,7 @@ MotionComponents use defined props that clearly defines what is needed to render
 
 Views often fail basic code quality standards: long methods, deep conditional nesting, and mystery guests abound.
 
-MotionComponents are Ruby objects, making it easy to follow (and enforce) code quality standards.
+MotionComponents are Crystal objects, making it easy to follow (and enforce) code quality standards.
 
 ## How does it work?
 
@@ -75,9 +76,11 @@ Motion.cr is similar to [Phoenix LiveView](https://github.com/phoenixframework/p
 
 - **Partial Page Replacement** - Motion does not use full page replacement, but rather replaces only the component on the page with new HTML, DOM diffed for performance.
 - **Encapsulated, consistent stateful components** - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.
-- **Blazing Fast** - Communication does not have to go through the full Rails router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion.
+- **Blazing Fast** - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion. Motions take less than 1ms to process with typical times being around 300μs.
 
 ### Building components
+
+#### Conventions
 
 Components are subclasses of `Motion::Base` and live in `src/components`. It's common practice to create and inherit from an `ApplicationComponent` that is a subclass of `Motion::Base`. By doing so, not only can you share logic, you can share view templates.
 
@@ -87,37 +90,61 @@ Component module names are plural, as for controllers and jobs: `Users::AvatarCo
 
 ### Quick start
 
-TODO: All the cool things components can do. How to render, generate html, mount other components, props, etc.
+For static html rendering, please review the [lucky framework documentation](https://www.luckyframework.org/guides/frontend/rendering-html#layouts)
 
+> Note: Lucky uses the macro keyword `needs`, motion uses `prop`
 
 ### Frontend interactions
 
 Frontend interactions can update your Motion components using standard JavaScript events that you're already familiar with: `change`, `blur`, form submission, and more. You can invoke Motion actions manually using JavaScript if you need to.
 
-The primary way to handle user interactions on the frontend is by using `map_motion`:
+The primary way to handle user interactions on the frontend is by using the annotation `@[Motion::MapMethod]`:
 
 ```crystal
-class MyComponent < Motion::Base
+# Whenever a user interacts with the portion of the
+# page that contains this component,
+# `add` will be invoked, the component will be rerendered
+# and the dom will be updated with the new html
+class MyMotionComponent < Motion::Base
+  # Let motion know this is a motion component
+  prop motion_component = true
+  # Add your props that you plan to pass in or default
   prop total : Int32 = 0
 
-  map_motion :add
-
+  # Annotate any motion methods
+  @[Motion::MapMethod]
   def add
     @total += 1
   end
-end
-```
 
-To invoke this motion on the frontend, add `data-motion='add'` to your component's template:
-
-```crystal
-def render
-  div do
-    span do
-      @total
-      button data_motion: "add" do
-        "Increment"
+  # render is what motion will invoke
+  # to generate your components html
+  def render
+    # data_motion: add tells motion what method
+    # to invoke when a user interacts with this component
+    div do
+      span do
+        @total
+        button data_motion: "add" do
+          "Increment"
+        end
       end
+    end
+  end
+end
+
+class MyFirstComponent < Motion::Base
+  def render
+    html_doctype
+    head do
+      css_link "/css/main.css"
+      utf8_charset
+      meta content: "text/html;charset=utf-8", http_equiv: "Content-Type"
+      title "My First Component"
+    end
+
+    body do
+      m(MyFirstMotionComponent)
     end
   end
 end
@@ -126,12 +153,12 @@ end
 This component can be rendered from your controller:
 
 ```crystal
-mount MyFirstMotionComponent
+render MyFirstComponent
 ```
 
 Every time the "Increment" button is clicked, MyComponent will call the `add` method, re-render your component and send it back to the frontend to replace the existing DOM. All invocations of mapped motions will cause the component to re-render, and unchanged rendered HTML will not perform any changes.
 
-
+<!---
 ### Backend interactions
 
 Backend changes can be streamed to your Motion components in 2 steps.
@@ -184,14 +211,14 @@ class ClockComponent < Motion::Base
   end
 end
 ```
+-->
 
-## Motion::Event and Motion::Element
+## `Motion::Event` and `Motion::Element`
 
-Methods that are mapped using `map_motion` accept an `event` parameter which is a `Motion::Event`. This object has a `target` attribute which is a `Motion::Element`, the element in the DOM that triggered the motion. Useful state and attributes can be extracted from these objects, including value, selected, checked, form state, data attributes, and more.
+Methods that are mapped using `@[Motion::MapMethod]` can choose to accept an `event` parameter which is a `Motion::Event`. This object has a `target` attribute which is a `Motion::Element`, the element in the DOM that triggered the motion. Useful state and attributes can be extracted from these objects, including value, selected, checked, form state, data attributes, and more.
 
-```ruby
-  map_motion :example
-
+```crystal
+  @[Motion::MapMethod]
   def example(event)
     event.type # => "change"
     event.name # alias for type
@@ -227,16 +254,21 @@ See the code for full API for [Event](https://github.com/andrewc910/motion.cr/bl
 
 ## Limitations
 
-* Due to the way that your components are replaced on the page, MotionComponents are limited to a single top-level DOM element. If you have multiple DOM elements in your template at the top level, you must wrap them in a single element. This is a similar limitation that React enforced until `React.Fragment` appeared and is for a very similar reason.
+* Due to the way that your components are replaced on the page, MotionComponents are limited to a single top-level DOM element. If you have multiple DOM elements in your template at the top level, you must wrap them in a single element. This is a similar limitation that React enforced until `React.Fragment` appeared and is for a very similar reason. Because of this, your upper most component (the component you call from the controller) cannot be a set `motion_component`. The top most component will return the entire html document to the controller and there is no way to wrap an entire document in a single tag.
 
 * Motion generates the `initialize` method for you. You cannot define your own. To add an instance variable to the parameters & initialize it, add a prop like `prop name : String = "Default Name"`
 
 
 ## Roadmap
+* Perodic Timers
+* Stream Updates from Models
+* Routing for a full SPA experience
+* AJAX?(TBD)
+* 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/unabridged/motion.
+Bug reports and pull requests are welcome on GitHub at https://github.com/andrewc910/motion.cr/issues.
 
 
 ## License
