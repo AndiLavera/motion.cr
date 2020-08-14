@@ -47,7 +47,7 @@ abstract class Motion::Base
 
   @[JSON::Field(ignore: true)]
   property view : IO::Memory = IO::Memory.new
-  property map_motion : Bool = false
+  property motion_component : Bool = false
 
   # def to_s(io)
   #   io << view

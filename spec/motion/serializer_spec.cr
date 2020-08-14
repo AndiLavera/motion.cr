@@ -10,6 +10,6 @@ describe Motion::Serializer do
     deserialized_component = Motion::Serializer.new.deserialize(state)
 
     deserialized_component.inspect.to_s.includes?("@test_prop=\"Test Prop\"").should be_true
-    deserialized_component.inspect.to_s.includes?("@map_motion=true").should be_true
+    deserialized_component.inspect.to_s.includes?("@motion_component=true").should be_true
   end
 end
