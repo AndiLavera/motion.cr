@@ -1,7 +1,7 @@
 # Motion.cr - WIP
 
 <p align="center"> 
-  <img src="./motion-calculator.gif" width="450" />
+  <img src="./images/motion-calculator.gif" width="450" />
 </p>
 
 Motion allows you to build reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.
