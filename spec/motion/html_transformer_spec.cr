@@ -3,7 +3,9 @@ require "myhtml"
 
 describe Motion::HTMLTransformer do
   it "can transform markup" do
-    MotionRender.new.render.includes?("motion-state").should be_true
+    c = MotionRender.new
+    c.render
+    c.view.to_s.includes?("motion-state").should be_true
   end
 
   it "throws error when component has multiple roots" do
