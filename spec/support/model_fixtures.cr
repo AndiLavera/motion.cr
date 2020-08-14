@@ -98,7 +98,7 @@ class MotionRender < Motion::Base
 end
 
 class MotionMount < Motion::Base
-  props map_motion : Bool = true
+  props motion_component : Bool = true
   props test_prop : String = "Test Prop"
   props count : Int32 = 0
 
@@ -127,7 +127,7 @@ class UnsafeMultipleRootsRender < Motion::Base
 end
 
 class UnsafeMultipleRootsMount < Motion::Base
-  property map_motion : Bool = true
+  property motion_component : Bool = true
 
   def render
     div do
