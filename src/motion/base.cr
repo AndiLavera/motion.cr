@@ -57,6 +57,7 @@ abstract class Motion::Base
   def rerender
     self.view = IO::Memory.new
     render
+    view.to_s
   end
 
   # :nodoc:

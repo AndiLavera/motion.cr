@@ -2,7 +2,9 @@ require "../spec_helper"
 
 describe Motion::Serializer do
   it "can deserialize component" do
-    fragment = Myhtml::Parser.new(MotionRender.new.render)
+    c = MotionRender.new
+    c.render
+    fragment = Myhtml::Parser.new(c.view.to_s)
     node_with_state = fragment.body!.children.to_a[0]
     state = node_with_state.attribute_by("data-motion-state")
 
