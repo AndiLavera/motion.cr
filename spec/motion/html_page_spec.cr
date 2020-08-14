@@ -24,7 +24,7 @@ describe Motion::Base do
 
   describe "HTML escaping" do
     it "escapes text" do
-      UnsafePage.new.render.should eq "&lt;script&gt;not safe&lt;/span&gt;"
+      fetch_view(UnsafePage).should eq "&lt;script&gt;not safe&lt;/span&gt;"
     end
 
     it "escapes HTML attributes" do
@@ -37,7 +37,7 @@ describe Motion::Base do
   end
 
   it "renders complicated HTML syntax" do
-    TestRender.new.render.should be_a(String)
+    TestRender.new.render.should be_a(Nil)
   end
 
   it "can render raw strings" do
@@ -48,30 +48,32 @@ describe Motion::Base do
 
   describe "can be used to render layouts" do
     it "renders layouts and needs" do
-      InnerPage.new(foo: "bar").render.should contain %(<title>A great title</title>)
-      InnerPage.new(foo: "bar").render.should contain %(<body>Inner textbar</body>)
+      c = InnerPage.new(foo: "bar")
+      c.render
+      c.view.to_s.should contain %(<title>A great title</title>)
+      c.view.to_s.should contain %(<body>Inner textbar</body>)
     end
   end
 
   describe "props with defaults" do
     it "allows default values to needs" do
-      LessNeedyDefaultsPage.new.render.should contain %(<div>string default</div>)
+      fetch_view(LessNeedyDefaultsPage).should contain %(<div>string default</div>)
     end
 
     it "allows false as default value to needs" do
-      LessNeedyDefaultsPage.new.render.should contain %(<div>bool default</div>)
+      fetch_view(LessNeedyDefaultsPage).should contain %(<div>bool default</div>)
     end
 
     it "allows nil as default value to needs" do
-      LessNeedyDefaultsPage.new.render.should contain %(<div>nil default</div>)
+      fetch_view(LessNeedyDefaultsPage).should contain %(<div>nil default</div>)
     end
 
     it "infers the default value from nilable needs" do
-      LessNeedyDefaultsPage.new.render.should contain %(<div>inferred nil default</div>)
+      fetch_view(LessNeedyDefaultsPage).should contain %(<div>inferred nil default</div>)
     end
 
     it "infers the default value from nilable needs" do
-      LessNeedyDefaultsPage.new.render.should contain %(<div>inferred nil default 2</div>)
+      fetch_view(LessNeedyDefaultsPage).should contain %(<div>inferred nil default 2</div>)
     end
   end
 
@@ -84,4 +86,10 @@ private def view
   TestRender.new.tap do |page|
     yield page
   end.view.to_s
+end
+
+private def fetch_view(klass)
+  c = klass.new
+  c.render
+  c.view.to_s
 end

@@ -1,7 +1,6 @@
 class TestRender < Motion::Base
-  def render : String
+  def render
     render_complicated_html
-    view.to_s
   end
 
   private def render_complicated_html
@@ -27,7 +26,6 @@ end
 class UnsafePage < Motion::Base
   def render
     text "<script>not safe</span>"
-    view.to_s
   end
 end
 
@@ -38,7 +36,6 @@ abstract class MainLayout < Motion::Base
     body do
       inner
     end
-    view.to_s
   end
 
   abstract def inner
@@ -93,7 +90,6 @@ class MotionRender < Motion::Base
 
   def render
     m MotionMount
-    view.to_s
   end
 end
 
@@ -113,7 +109,6 @@ class MotionMount < Motion::Base
         h2 @count.to_s
       end
     end
-    view.to_s
   end
 end
 
@@ -138,6 +133,5 @@ class UnsafeMultipleRootsMount < Motion::Base
     div do
       h1 "hi"
     end
-    view.to_s
   end
 end

@@ -50,7 +50,8 @@ module Motion::MountComponent
   end
 
   private def render_and_transform(component : Motion::Base)
-    html = component.render
+    component.render
+    html = component.view.to_s
 
     if component.motion_component
       html = Motion.html_transformer.add_state_to_html(component, html)
