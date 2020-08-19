@@ -1,6 +1,7 @@
 module Motion
   class Element
     getter raw : JSON::Any
+    getter form_data : JSON::Any?
 
     def initialize(@raw : JSON::Any)
     end
@@ -44,15 +45,9 @@ module Motion
       @data ||= DataAttributes.new(self)
     end
 
-    # def form_data
-    #   return @form_data if defined?(@form_data)
-
-    #   @form_data =
-    #     ActionController::Parameters.new(
-    #       Rack::Utils.parse_nested_query(
-    #         raw.fetch("formData", "")
-    #       )
-    #     )
-    # end
+    # TODO: Test
+    def form_data
+      @form_data ||= raw["formData"]?
+    end
   end
 end
