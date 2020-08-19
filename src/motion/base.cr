@@ -47,11 +47,9 @@ abstract class Motion::Base
 
   @[JSON::Field(ignore: true)]
   property view : IO::Memory = IO::Memory.new
-
   @[JSON::Field(ignore: true)]
   property channel : Motion::ChannelInterface?
-
-  property map_motion : Bool = false
+  property motion_component : Bool = false
 
   # def to_s(io)
   #   io << view
@@ -61,6 +59,7 @@ abstract class Motion::Base
   def rerender
     self.view = IO::Memory.new
     render
+    view.to_s
   end
 
   # :nodoc:
