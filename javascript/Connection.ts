@@ -1,10 +1,10 @@
-import Socket from './amber';
+import Amber from './amber';
 import Consumer from './Consumer';
 import Subscriptions from './Subscriptions';
 import Subscription from './Subscription';
 
 class Connection {
-  socket: Socket
+  socket: Amber.Socket
 
   consumer: Consumer
 
@@ -19,7 +19,7 @@ class Connection {
   connectionPromise: Promise<any>
 
   constructor(consumer: Consumer) {
-    this.socket = new Socket('/cable');
+    this.socket = new Amber.Socket('/cable');
     this.connectionPromise = this.open.call(this);
     this.consumer = consumer;
     this.subscriptions = this.consumer.subscriptions;
