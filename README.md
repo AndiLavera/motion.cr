@@ -13,9 +13,8 @@ Motion allows you to build reactive, real-time frontend UI components in your Am
 * **No JavaScript required!**
 
 <p align="center">
-  <button style="border-radius:5px;background-color:#8712fb;border:none;padding:5px"> 
-    <a href="http://3.23.28.58/" style="color:white;font-size:18px">Try the Motion Demo</a>
-  </button>
+  <a href="http://3.23.28.58/">Try the Motion Demo</a>
+  [Try the Motion Demo](http://3.23.28.58/){: .btn}
 </p>
 
 ## Installation
