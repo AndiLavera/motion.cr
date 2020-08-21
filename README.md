@@ -7,10 +7,16 @@
 Motion allows you to build reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.
 
 * Plays nicely with the Amber monolith you have.
-* Peacefully coexists with your existing tech: Turbolinks, Trix, React, Vue, etc.
+* Peacefully coexists with your existing frontend
 * Real-time frontend UI updates from frontend user interaction AND server-side updates.
 * No more frontend models, stores, or syncing; your source of truth is the database you already have.
 * **No JavaScript required!**
+
+<p align="center">
+  <button style="border-radius:5px;background-color:#8712fb;border:none;padding:5px"> 
+    <a href="http://3.23.28.58/" style="color:white;font-size:18px">Try the Motion Demo</a>
+  </button>
+</p>
 
 ## Installation
 
