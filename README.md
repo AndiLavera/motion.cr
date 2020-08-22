@@ -2,12 +2,12 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/91df8833c8fd48b3a0397bf51e2c3787)](https://www.codacy.com/manual/andrewc910/motion.cr?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andrewc910/motion.cr&amp;utm_campaign=Badge_Grade)
 
-<p align="center"> 
-  <img src="./images/motion-calculator.gif" width="450" />
-</p>
-
 <p align="center">
   <a href="http://3.23.28.58/">Try the Motion Demo</a>
+</p>
+
+<p align="center"> 
+  <img src="./images/motion-calculator.gif" width="450" />
 </p>
 
 Motion allows you to build reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.
