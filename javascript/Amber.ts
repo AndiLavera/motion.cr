@@ -1,5 +1,3 @@
-/* eslint-disable */
-/* tslint:disable */
 const EVENTS = {
   join: 'join',
   leave: 'leave',
@@ -17,17 +15,20 @@ const now = () => new Date().getTime();
  * Returns the difference between the current time and passed `time` in seconds
  * @param {Number|Date} time - A numeric time or date object
  */
-const secondsSince = (time) => (now() - time) / 1000;
+const secondsSince = (time: number | Date) => (now() - time) / 1000;
 
 /**
  * Class for channel related functions (joining, leaving, subscribing and sending messages)
  */
 export class Channel {
+  topic: string;
+  socket: Socket;
+  onMessageHandlers: never[];
   /**
    * @param {String} topic - topic to subscribe to
    * @param {Socket} socket - A Socket instance
    */
-  constructor(topic, socket) {
+  constructor(topic: string, socket: Socket) {
     this.topic = topic;
     this.socket = socket;
     this.onMessageHandlers = [];
@@ -61,7 +62,7 @@ export class Channel {
    * @param {String} subject - subject to listen for: `msg:new`
    * @param {function} callback - callback function when a new message arrives
    */
-  on(subject, callback) {
+  on(subject: string, callback: function) {
     this.onMessageHandlers.push({ subject, callback });
   }
 
@@ -70,7 +71,7 @@ export class Channel {
    * @param {String} subject - subject to send message to: `msg:new`
    * @param {Object} payload - payload object: `{message: 'hello'}`
    */
-  push(subject, payload) {
+  push(subject: string, payload: object) {
     this.socket.ws.send(JSON.stringify({
       event: EVENTS.message, topic: this.topic, subject, payload,
     }));
@@ -81,10 +82,17 @@ export class Channel {
  * Class for maintaining connection with server and maintaining channels list
  */
 export class Socket {
+  endpoint: string;
+  ws: null;
+  channels: never[];
+  lastPing: number;
+  reconnectTries: number;
+  attemptReconnect: boolean;
+  pollingTimeout: number;
   /**
    * @param {String} endpoint - Websocket endpont used in routes.cr file
    */
-  constructor(endpoint) {
+  constructor(endpoint: string) {
     this.endpoint = endpoint;
     this.ws = null;
     this.channels = [];
@@ -110,6 +118,12 @@ export class Socket {
       this.connect(this.params);
       this._reconnect();
     }, this._reconnectInterval());
+  }
+  reconnectTimeout(reconnectTimeout: any) {
+    throw new Error("Method not implemented.");
+  }
+  params(params: any) {
+    throw new Error("Method not implemented.");
   }
 
   /**
@@ -164,7 +178,7 @@ export class Socket {
    * @param {String} parmas.port - Port to connect to, defaults to `window.location.port`
    * @param {String} params.protocol - Protocol to use, either 'wss' or 'ws'
    */
-  connect(params) {
+  connect(params: * @param {String} params.location - Hostname to connect to, defaults to`window.location.hostname`) {
     this.params = params;
 
     const opts = {
@@ -203,7 +217,7 @@ export class Socket {
    * Adds a new channel to the socket channels list
    * @param {String} topic - Topic for the channel: `chat_room:123`
    */
-  channel(topic) {
+  channel(topic: string) {
     const channel = new Channel(topic, this);
     this.channels.push(channel);
     return channel;
@@ -213,7 +227,7 @@ export class Socket {
    * Message handler for messages received
    * @param {MessageEvent} msg - Message received from ws
    */
-  handleMessage(msg) {
+  handleMessage(msg: MessageEvent) {
     if (msg.data === 'ping') return this._handlePing();
 
     const parsed_msg = JSON.parse(msg.data);

@@ -1,5 +1,4 @@
 import BindingManager from './BindingManager';
-// eslint-disable-next-line no-unused-vars
 import Component from './Component';
 
 export default class AttributeTracker {

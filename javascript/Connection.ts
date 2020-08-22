@@ -1,4 +1,4 @@
-import Amber from './amber';
+import Amber from './Amber';
 import Consumer from './Consumer';
 import Subscriptions from './Subscriptions';
 import Subscription from './Subscription';

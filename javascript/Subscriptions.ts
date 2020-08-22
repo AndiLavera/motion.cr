@@ -1,12 +1,6 @@
 import Subscription from './Subscription';
 import Consumer from './Consumer';
-import Imixin from './interfaces/imixin';
-
-interface IChannel {
-  channel: string
-  version: string
-  state: string | null
-}
+import Imixin from './interfaces/mixin_interface';
 
 export default class Subscriptions {
   subscriptions: Array<Subscription>
@@ -43,7 +37,7 @@ export default class Subscriptions {
     return subscription;
   }
 
-  reject(identifier) {
+  reject(identifier: Array<any>) {
     return this.findAll(identifier).map((subscription) => {
       this.forget(subscription);
       this.notify(subscription, 'rejected');

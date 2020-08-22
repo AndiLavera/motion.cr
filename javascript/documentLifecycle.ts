@@ -1,5 +1,5 @@
-function once(target, event, callback) {
-  target.addEventListener(event, function handler(event) {
+function once(target: Document | (Window & typeof globalThis), event: string, callback: Function) {
+  target.addEventListener(event, function handler(event: string) {
     target.removeEventListener(event, handler);
 
     callback(event);

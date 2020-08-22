@@ -11,6 +11,8 @@ plugins:
   - '@typescript-eslint'
 rules: 
   no-underscore-dangle: ["off"]
+  no-unused-vars: "off",
+  "@typescript-eslint/no-unused-vars": ["error"]
   import/extensions: ["error", "ignorePackages", {
       "ts": "never",
       "tsx": "never",

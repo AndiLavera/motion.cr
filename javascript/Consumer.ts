@@ -1,7 +1,6 @@
 import Connection from './Connection';
 import Subscriptions from './Subscriptions';
 import Subscription from './Subscription';
-// import Subscription from './Subscription';
 
 export function createWebSocketURL(inputUrl: string | Function) {
   const url = typeof inputUrl === 'function' ? inputUrl() : inputUrl;
