@@ -3,16 +3,7 @@ import BindingManager from './BindingManager';
 import Component from './Component';
 import { documentLoaded, beforeDocumentUnload } from './documentLifecycle';
 import Consumer from './Consumer';
-
-interface IClient {
-  getExtraDataForEvent: Function
-  logging: boolean
-  root: Document
-  shutdownBeforeUnload: boolean
-  keyAttribute: string
-  stateAttribute: string
-  motionAttribute: string
-}
+import IClient from './interfaces/client_interface';
 
 function getConfig(name: string) {
   const element = document.head.querySelector(`meta[name='action-cable-${name}']`);
@@ -98,22 +89,3 @@ export default class Client {
     // noop
   }
 }
-
-// Client.defaultOptions = {
-//   get consumer() {
-//     return new Consumer(getConfig('url') || '/cable');
-//   },
-
-//   getExtraDataForEvent() {
-//     // noop
-//   },
-
-//   logging: false,
-
-//   root: document,
-//   shutdownBeforeUnload: true,
-
-//   keyAttribute: 'data-motion-key',
-//   stateAttribute: 'data-motion-state',
-//   motionAttribute: 'data-motion',
-// };
