@@ -178,7 +178,7 @@ export class Socket {
    * @param {String} parmas.port - Port to connect to, defaults to `window.location.port`
    * @param {String} params.protocol - Protocol to use, either 'wss' or 'ws'
    */
-  connect(params: * @param {String} params.location - Hostname to connect to, defaults to`window.location.hostname`) {
+  connect(params: any) {
     this.params = params;
 
     const opts = {
