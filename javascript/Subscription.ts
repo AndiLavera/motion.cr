@@ -17,7 +17,7 @@ interface ITarget {
   value: string
   attributes: {
     class: string
-    "data-motion": string
+    'data-motion': string
   }
 }
 

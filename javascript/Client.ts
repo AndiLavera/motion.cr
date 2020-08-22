@@ -85,7 +85,7 @@ export default class Client {
 
   findComponent(element: HTMLElement) {
     return this._componentTracker.getManager(
-      element.closest(this._componentSelector)
+      element.closest(this._componentSelector),
     );
   }
 

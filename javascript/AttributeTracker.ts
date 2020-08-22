@@ -1,5 +1,5 @@
-import BindingManager from "./BindingManager"
-import Component from "./Component"
+import BindingManager from './BindingManager';
+import Component from './Component';
 
 export default class AttributeTracker {
   attribute: string
