@@ -6,6 +6,10 @@
   <img src="./images/motion-calculator.gif" width="450" />
 </p>
 
+<p align="center">
+  <a href="http://3.23.28.58/">Try the Motion Demo</a>
+</p>
+
 Motion allows you to build reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.
 
 * Plays nicely with the Amber monolith you have.
@@ -13,10 +17,6 @@ Motion allows you to build reactive, real-time frontend UI components in your Am
 * Real-time frontend UI updates from frontend user interaction AND server-side updates.
 * No more frontend models, stores, or syncing; your source of truth is the database you already have.
 * **No JavaScript required!**
-
-<p align="center">
-  <a href="http://3.23.28.58/" style="font-size:18px;background:#8d12fc;border-radius:5px;color:white;padding:5px">Try the Motion Demo</a>
-</p>
 
 ## Installation
 
