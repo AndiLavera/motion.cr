@@ -16,7 +16,7 @@ export const documentLoaded = new Promise<any>((resolve) => {
 
 export const beforeDocumentUnload = new Promise<any>((resolve) => {
   window.addEventListener('beforeunload', () => {
-    once(window, 'beforeunload', ({ defaultPrevented }) => {
+    once(window, 'beforeunload', ({ defaultPrevented }: any) => {
       if (!defaultPrevented) {
         resolve();
       }

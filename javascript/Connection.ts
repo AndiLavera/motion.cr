@@ -59,10 +59,13 @@ class Connection {
     return this.socket.disconnect();
   }
 
+  /* eslint-disable class-methods-use-this */
   isActive() {
+    // eslint-disable-next-line no-console
     console.log('TODO: Connect#isActive is always true');
     return true;
   }
+  /* eslint-enable class-methods-use-this */
 }
 
 export default Connection;

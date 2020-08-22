@@ -8,6 +8,7 @@ export default function dispatchEvent(target: HTMLElement, name: string) {
     // debugger
     target.dispatchEvent(event);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error while dispatching', name, 'on', target, error);
   }
 }
