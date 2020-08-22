@@ -62,7 +62,7 @@ export class Channel {
    * @param {String} subject - subject to listen for: `msg:new`
    * @param {function} callback - callback function when a new message arrives
    */
-  on(subject: string, callback: function) {
+  on(subject: string, callback: Function) {
     this.onMessageHandlers.push({ subject, callback });
   }
 
