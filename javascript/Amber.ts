@@ -57,7 +57,7 @@ export class Channel {
    */
   handleMessage(msg) {
     this.onMessageHandlers.forEach((handler) => {
-      if (handler.subject === msg.subject) handler.callback(msg.payload);
+      if (handler.subject === msg.subject) { handler.callback(msg.payload); }
     });
   }
 
@@ -131,10 +131,12 @@ export class Socket {
     }, this._reconnectInterval());
   }
 
+  // eslint-disable-next-line class-methods-use-this
   reconnectTimeout(reconnectTimeout: any) {
     throw new Error('Method not implemented.');
   }
 
+  // eslint-disable-next-line class-methods-use-this
   params(params: any) {
     throw new Error('Method not implemented.');
   }
@@ -187,7 +189,8 @@ export class Socket {
   /**
    * Connect the socket to the server, and binds to native ws functions
    * @param {Object} params - Optional parameters
-   * @param {String} params.location - Hostname to connect to, defaults to `window.location.hostname`
+   * @param {String} params.location
+   * - Hostname to connect to, defaults to `window.location.hostname`
    * @param {String} parmas.port - Port to connect to, defaults to `window.location.port`
    * @param {String} params.protocol - Protocol to use, either 'wss' or 'ws'
    */
@@ -200,14 +203,14 @@ export class Socket {
       protocol: window.location.protocol === 'https:' ? 'wss:' : 'ws:',
     };
 
-    if (params) Object.assign(opts, params);
-    if (opts.port) opts.location += `:${opts.port}`;
+    if (params) { Object.assign(opts, params); }
+    if (opts.port) { opts.location += `:${opts.port}`; }
 
     return new Promise((resolve, reject) => {
       this.ws = new WebSocket(`${opts.protocol}//${opts.location}${this.endpoint}`);
       this.ws.onmessage = (msg) => { this.handleMessage(msg); };
       this.ws.onclose = () => {
-        if (this.attemptReconnect) this._reconnect();
+        if (this.attemptReconnect) { this._reconnect(); }
       };
       this.ws.onopen = () => {
         this._reset();
@@ -241,11 +244,11 @@ export class Socket {
    * @param {MessageEvent} msg - Message received from ws
    */
   handleMessage(msg: MessageEvent) {
-    if (msg.data === 'ping') return this._handlePing();
+    if (msg.data === 'ping') { return this._handlePing(); }
 
     const parsed_msg = JSON.parse(msg.data);
     this.channels.forEach((channel) => {
-      if (channel.topic === parsed_msg.topic) channel.handleMessage(parsed_msg);
+      if (channel.topic === parsed_msg.topic) { channel.handleMessage(parsed_msg); }
     });
   }
 }
