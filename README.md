@@ -135,13 +135,12 @@ If you followed the installation guide above, you can start with you first compo
   render MyFirstComponent
   ```
 
+#### HTML Generation
 <!-- 
 For static html rendering, please review the [lucky framework documentation](https://www.luckyframework.org/guides/frontend/rendering-html#layouts)
 
 > Note: Lucky uses the macro keyword `needs`, motion uses `prop`
 -->
-
-#### HTML Generation
 #### Props & Type Safety
 #### Blocks & Procs
 
@@ -280,7 +279,7 @@ See the code for full API for [Event](https://andrewc910.github.io/motion.cr/Mot
 
 ## Limitations
 
-* Due to the way that your components are replaced on the page, MotionComponents are limited to a single top-level DOM element. If you have multiple DOM elements in your template at the top level, you must wrap them in a single element. This is a similar limitation that React enforced until `React.Fragment` appeared and is for a very similar reason. Because of this, your upper most component (the component you call from the controller) cannot be a set `motion_component`. The top most component will return the entire html document to the controller and there is no way to wrap an entire document in a single tag.
+* Due to the way that your components are replaced on the page, Components that set `motion_component` to `true` are limited to a single top-level DOM element. If you have multiple DOM elements in your template at the top level, you must wrap them in a single element. This is a similar limitation that React enforced until `React.Fragment` appeared and is for a very similar reason. Because of this, your upper most component (the component you call from the controller) cannot be a set `motion_component`. The top most component will return the entire html document to the controller and there is no way to wrap an entire document in a single tag.
 
 * Motion generates the `initialize` method for you. You cannot define your own. To add an instance variable to the parameters & initialize it, add a prop like `prop name : String = "Default Name"`
 
@@ -290,6 +289,7 @@ See the code for full API for [Event](https://andrewc910.github.io/motion.cr/Mot
 * Stream Updates from Models
 * Routing for a full SPA experience
 * AJAX?(TBD)
+* Passing procs as props?(TBD)
 
 ## Contributing
 
