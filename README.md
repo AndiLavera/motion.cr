@@ -121,6 +121,11 @@ For static html rendering, please review the [lucky framework documentation](htt
 > Note: Lucky uses the macro keyword `needs`, motion uses `prop`
 -->
 
+#### HTML Generation
+#### Props & Type Safety
+#### placeholder
+#### placeholder
+#### placeholder
 
 
 
@@ -314,7 +319,6 @@ See the code for full API for [Event](https://github.com/andrewc910/motion.cr/bl
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/andrewc910/motion.cr/issues.
-
 
 ## License
 
