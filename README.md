@@ -20,7 +20,7 @@ Motion allows you to build reactive, real-time frontend UI components in your Am
 
 ## Installation
 
-Motion has Crystal and JavaScript parts, execute both of these commands:
+Motion.cr has Crystal and JavaScript parts, execute both of these commands:
 
 ```sh
 dependencies:
@@ -42,9 +42,7 @@ require "motion/amber/monkey_patch"
 
 ## Guide
 
-MotionComponents are Crystal objects that output HTML. The code itself was pulled & altered from [Lucky Framework](https://github.com/luckyframework/lucky). Think of them as an evolution of the presenter pattern, inspired by React & Github's ViewComponent library.
-
-MotionComponents are most effective in cases where view code is reused or benefits from being tested directly.
+MotionComponents are Crystal objects that output HTML. MotionComponents are most effective in cases where view code is reused or benefits from being tested directly. The code itself was pulled & altered from [Lucky Framework](https://github.com/luckyframework/lucky). 
 
 ### Why should I use components?
 
@@ -68,7 +66,7 @@ Views often fail basic code quality standards: long methods, deep conditional ne
 
 MotionComponents are Crystal objects, making it easy to follow (and enforce) code quality standards.
 
-## How does it work?
+## How does it work? - from motion
 
 Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:
 
