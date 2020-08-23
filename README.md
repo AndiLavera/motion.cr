@@ -111,7 +111,7 @@ For static html rendering, please review the [lucky framework documentation](htt
 
 #### HTML Generation
 #### Props & Type Safety
-#### Procs
+#### Procs & Blocks
 #### placeholder
 #### placeholder
 
