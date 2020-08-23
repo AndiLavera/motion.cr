@@ -28,10 +28,6 @@ dependencies:
     github: andrewc910/motion.cr
 ```
 
-```sh
-yarn add @andrewc910/motion.cr
-```
-
 Create a file `motion.cr` in `config/initializers` and add:
 
 ```crystal
@@ -40,23 +36,13 @@ require "motion"
 require "motion/amber/monkey_patch"
 ```
 
-In `main.js` add:
-
-```js
-import { createClient } from '@awcrotwell/motion';
-
-const client = createClient()
-```
-
-## Guide
-
-### Component
+## Component Guide
 
 MotionComponents are Crystal objects that output HTML. MotionComponents are most effective in cases where view code is reused or benefits from being tested directly. The code itself was pulled & altered from [Lucky Framework](https://github.com/luckyframework/lucky). 
 
-#### Why should I use components?
+### Why should I use components?
 
-##### Testing
+#### Testing
 
 Unlike traditional views, Motion Components can be unit-tested.
 
@@ -64,21 +50,21 @@ Views are typically tested with slow integration tests that also exercise the ro
 
 With MotionComponents, integration tests can be reserved for end-to-end assertions, with permutations and corner cases covered at the unit level.
 
-##### Data Flow
+#### Data Flow
 
 Traditional views have an implicit interface, making it hard to reason about what information is needed to render, leading to subtle bugs when rendering the same view in different contexts.
 
 MotionComponents use defined props that clearly defines what is needed to render, making them easier (and safer) to reuse than partials.
 
-##### Standards
+#### Standards
 
 Views often fail basic code quality standards: long methods, deep conditional nesting, and mystery guests abound.
 
 MotionComponents are Crystal objects, making it easy to follow (and enforce) code quality standards.
 
-#### Building components
+### Building components
 
-##### Conventions
+#### Conventions
 
 Components are subclasses of `Motion::Base` and live in `views/components`. It's common practice to create and inherit from an `ApplicationComponent` that is a subclass of `Motion::Base`. By doing so, not only can you share logic, you can share view templates.
 
@@ -86,7 +72,7 @@ Component names end in `Component`.
 
 Component module names are plural, as for controllers and jobs: `Users::AvatarComponent`
 
-##### Quick start
+#### Quick start
 
 If you followed the installation guide above, you can start with you first component.
 
@@ -123,15 +109,15 @@ For static html rendering, please review the [lucky framework documentation](htt
 > Note: Lucky uses the macro keyword `needs`, motion uses `prop`
 -->
 
-##### HTML Generation
-##### Props & Type Safety
-##### Procs
-##### placeholder
-##### placeholder
+#### HTML Generation
+#### Props & Type Safety
+#### Procs
+#### placeholder
+#### placeholder
 
 
 
-### Motions
+### Motion Guide
 
 Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:
 
@@ -146,6 +132,20 @@ Motion.cr is similar to [Phoenix LiveView](https://github.com/phoenixframework/p
 - **Partial Page Replacement** - Motion does not use full page replacement, but rather replaces only the component on the page with new HTML, DOM diffed for performance.
 - **Encapsulated, consistent stateful components** - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.
 - **Blazing Fast** - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion. Motions take less than 1ms to process with typical times being around 300μs.
+
+#### Installation
+
+```sh
+yarn add @andrewc910/motion.cr
+```
+
+In `main.js` add:
+
+```js
+import { createClient } from '@awcrotwell/motion';
+
+const client = createClient()
+```
 
 #### Frontend interactions
 
