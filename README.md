@@ -1,4 +1,4 @@
-# Motion.cr - WIP
+# Motion.cr
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/91df8833c8fd48b3a0397bf51e2c3787)](https://www.codacy.com/manual/andrewc910/motion.cr?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andrewc910/motion.cr&amp;utm_campaign=Badge_Grade)
 
@@ -21,7 +21,7 @@ Motion is a framework for building reactive, real-time frontend UI components in
 
 ## Table of Contents
 
-- [Motion.cr - WIP](#motioncr---wip)
+- [Motion.cr](#motioncr---wip)
   * [Table of Contents](#table-of-contents)
   * [Installation](#installation)
   * [Documentation](#documentation)
