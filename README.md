@@ -21,7 +21,7 @@ Motion is a framework for building reactive, real-time frontend UI components in
 
 ## Table of Contents
 
-- [Motion.cr](#motioncr---wip)
+- [Motion.cr](#motioncr )
   * [Table of Contents](#table-of-contents)
   * [Installation](#installation)
   * [Documentation](#documentation)
