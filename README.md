@@ -12,12 +12,12 @@
 
 Motion is a framework for building reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.
 
-* Motion is an Object-Oriented View Layer
-* Plays nicely with the Amber monolith you have.
-* Peacefully coexists with your existing frontend
-* Real-time frontend UI updates from frontend user interaction AND server-side updates.
-* No more frontend models, stores, or syncing; your source of truth is the database you already have.
-* **No JavaScript required!**
+- Motion is an Object-Oriented View Layer
+- Plays nicely with the Amber monolith you have.
+- Peacefully coexists with your existing frontend
+- Real-time frontend UI updates from frontend user interaction AND server-side updates.
+- No more frontend models, stores, or syncing; your source of truth is the database you already have.
+- **No JavaScript required!**
 
 ## Table of Contents
 
@@ -35,7 +35,7 @@ Motion is a framework for building reactive, real-time frontend UI components in
       - [Quick start](#quick-start)
       - [HTML Generation](#html-generation)
       - [Props & Type Safety](#props---type-safety)
-      - [Procs & Blocks](#procs---blocks)
+      - [Blocks & Procs](#procs---blocks)
   * [Motion Guide](#motion-guide)
     + [Installation](#installation-1)
     + [Building Motions](#building-motions)
@@ -143,7 +143,7 @@ For static html rendering, please review the [lucky framework documentation](htt
 
 #### HTML Generation
 #### Props & Type Safety
-#### Procs & Blocks
+#### Blocks & Procs
 
 ## Motion Guide
 
@@ -276,8 +276,7 @@ Methods that are mapped using `@[Motion::MapMethod]` can choose to accept an `ev
   end
 ```
 
-See the code for full API for [Event](https://github.com/andrewc910/motion.cr/blob/master/src/motion/event.cr) and [Element](https://github.com/andrewc910/motion.cr/blob/master/src/motion/element.rb).
-
+See the code for full API for [Event](https://andrewc910.github.io/motion.cr/Motion/Event.html) and [Element](https://andrewc910.github.io/motion.cr/Motion/Element.html).
 
 ## Limitations
 
