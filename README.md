@@ -66,22 +66,6 @@ Views often fail basic code quality standards: long methods, deep conditional ne
 
 MotionComponents are Crystal objects, making it easy to follow (and enforce) code quality standards.
 
-## How does it work? - from motion
-
-Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:
-
-- **Object-Oriented View Layer** - MotionComponents are like react components or other frontend frameworks
-- **Websockets Communication** - Communication with your Rails backend is performed via ActionCable
-- **No Full Page Reload** - The current page for a user is updated in place.
-- **Fast DOM Diffing** - DOM diffing is performed when replacing existing content with new content.
-- **Server Triggered Events** - Server-side events can trigger updates to arbitrarily many components via WebSocket channels.
-
-Motion.cr is similar to [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view) (and even React!) in some key ways:
-
-- **Partial Page Replacement** - Motion does not use full page replacement, but rather replaces only the component on the page with new HTML, DOM diffed for performance.
-- **Encapsulated, consistent stateful components** - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.
-- **Blazing Fast** - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion. Motions take less than 1ms to process with typical times being around 300μs.
-
 ### Building components
 
 #### Conventions
@@ -97,6 +81,22 @@ Component module names are plural, as for controllers and jobs: `Users::AvatarCo
 For static html rendering, please review the [lucky framework documentation](https://www.luckyframework.org/guides/frontend/rendering-html#layouts)
 
 > Note: Lucky uses the macro keyword `needs`, motion uses `prop`
+
+## Motions - How It Works
+
+Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:
+
+- **Object-Oriented View Layer** - MotionComponents are like react components or other frontend frameworks
+- **Websockets Communication** - Communication with your Rails backend is performed via ActionCable
+- **No Full Page Reload** - The current page for a user is updated in place.
+- **Fast DOM Diffing** - DOM diffing is performed when replacing existing content with new content.
+- **Server Triggered Events** - Server-side events can trigger updates to arbitrarily many components via WebSocket channels.
+
+Motion.cr is similar to [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view) (and even React!) in some key ways:
+
+- **Partial Page Replacement** - Motion does not use full page replacement, but rather replaces only the component on the page with new HTML, DOM diffed for performance.
+- **Encapsulated, consistent stateful components** - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.
+- **Blazing Fast** - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion. Motions take less than 1ms to process with typical times being around 300μs.
 
 ### Frontend interactions
 
