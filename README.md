@@ -3,7 +3,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/91df8833c8fd48b3a0397bf51e2c3787)](https://www.codacy.com/manual/andrewc910/motion.cr?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andrewc910/motion.cr&amp;utm_campaign=Badge_Grade)
 
 <p align="center">
-  <a href="http://3.23.28.58/" target="_blank">Try the Motion Demo</a>
+  <a href="http://3.23.28.58/">Try the Motion Demo</a>
 </p>
 
 <p align="center"> 
@@ -70,13 +70,38 @@ MotionComponents are Crystal objects, making it easy to follow (and enforce) cod
 
 #### Conventions
 
-Components are subclasses of `Motion::Base` and live in `src/components`. It's common practice to create and inherit from an `ApplicationComponent` that is a subclass of `Motion::Base`. By doing so, not only can you share logic, you can share view templates.
+Components are subclasses of `Motion::Base` and live in `views/components`. It's common practice to create and inherit from an `ApplicationComponent` that is a subclass of `Motion::Base`. By doing so, not only can you share logic, you can share view templates.
 
 Component names end in `Component`.
 
 Component module names are plural, as for controllers and jobs: `Users::AvatarComponent`
 
 ### Quick start
+
+If you followed the installation guide above, you can start with you first component.
+
+1. Create a `components` folder in `views`
+2. Create your first component:
+
+  ```crystal
+  class MyFirstComponent < Motion::Base
+    def render
+      html_doctype
+      head do
+        css_link "/css/main.css"
+        utf8_charset
+        meta content: "text/html;charset=utf-8", http_equiv: "Content-Type"
+        title "My First Component"
+      end
+
+      body do
+        m(MyFirstMotionComponent)
+      end
+    end
+  end
+  ```
+
+
 
 For static html rendering, please review the [lucky framework documentation](https://www.luckyframework.org/guides/frontend/rendering-html#layouts)
 
@@ -87,7 +112,7 @@ For static html rendering, please review the [lucky framework documentation](htt
 Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:
 
 - **Object-Oriented View Layer** - MotionComponents are like react components or other frontend frameworks
-- **Websockets Communication** - Communication with your Rails backend is performed via ActionCable
+- **Websockets Communication** - Communication with your Amber backend is performed via websockets
 - **No Full Page Reload** - The current page for a user is updated in place.
 - **Fast DOM Diffing** - DOM diffing is performed when replacing existing content with new content.
 - **Server Triggered Events** - Server-side events can trigger updates to arbitrarily many components via WebSocket channels.
