@@ -107,8 +107,6 @@ If you followed the installation guide above, you can start with you first compo
   render MyFirstComponent
   ```
 
-
-
 For static html rendering, please review the [lucky framework documentation](https://www.luckyframework.org/guides/frontend/rendering-html#layouts)
 
 > Note: Lucky uses the macro keyword `needs`, motion uses `prop`
@@ -161,7 +159,7 @@ class MyMotionComponent < Motion::Base
       span do
         @total
         button data_motion: "add" do
-          "Increment"
+          "Increment" // button text
         end
       end
     end
