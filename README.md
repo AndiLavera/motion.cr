@@ -10,13 +10,41 @@
   <img src="./images/motion-calculator.gif" width="450" />
 </p>
 
-Motion allows you to build reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.
+Motion is a framework for building reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.
 
+* Motion is an Object-Oriented View Layer
 * Plays nicely with the Amber monolith you have.
 * Peacefully coexists with your existing frontend
 * Real-time frontend UI updates from frontend user interaction AND server-side updates.
 * No more frontend models, stores, or syncing; your source of truth is the database you already have.
 * **No JavaScript required!**
+
+## Table of Contents
+
+- [Motion.cr - WIP](#motioncr---wip)
+  * [Table of Contents](#table-of-contents)
+  * [Installation](#installation)
+  * [Documentation](#documentation)
+  * [Component Guide](#component-guide)
+    + [Why should I use components?](#why-should-i-use-components-)
+      - [Testing](#testing)
+      - [Data Flow](#data-flow)
+      - [Standards](#standards)
+    + [Building components](#building-components)
+      - [Conventions](#conventions)
+      - [Quick start](#quick-start)
+      - [HTML Generation](#html-generation)
+      - [Props & Type Safety](#props---type-safety)
+      - [Procs & Blocks](#procs---blocks)
+  * [Motion Guide](#motion-guide)
+    + [Installation](#installation-1)
+    + [Building Motions](#building-motions)
+      - [Frontend interactions](#frontend-interactions)
+      - [`Motion::Event` and `Motion::Element`](#-motion--event--and--motion--element-)
+  * [Limitations](#limitations)
+  * [Roadmap](#roadmap)
+  * [Contributing](#contributing)
+  * [License](#license)
 
 ## Installation
 
@@ -35,6 +63,10 @@ require "motion"
 # The next require adds the `render` method for components to Amber controllers
 require "motion/amber/monkey_patch"
 ```
+
+## Documentation
+
+  * [API Documentation](https://andrewc910.github.io/motion.cr/)
 
 ## Component Guide
 
@@ -112,16 +144,11 @@ For static html rendering, please review the [lucky framework documentation](htt
 #### HTML Generation
 #### Props & Type Safety
 #### Procs & Blocks
-#### placeholder
-#### placeholder
 
-
-
-### Motion Guide
+## Motion Guide
 
 Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:
 
-- **Object-Oriented View Layer** - MotionComponents are like react components or other frontend frameworks
 - **Websockets Communication** - Communication with your Amber backend is performed via websockets
 - **No Full Page Reload** - The current page for a user is updated in place.
 - **Fast DOM Diffing** - DOM diffing is performed when replacing existing content with new content.
@@ -133,7 +160,7 @@ Motion.cr is similar to [Phoenix LiveView](https://github.com/phoenixframework/p
 - **Encapsulated, consistent stateful components** - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.
 - **Blazing Fast** - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion. Motions take less than 1ms to process with typical times being around 300μs.
 
-#### Installation
+### Installation
 
 ```sh
 yarn add @andrewc910/motion.cr
@@ -147,11 +174,13 @@ import { createClient } from '@awcrotwell/motion';
 const client = createClient()
 ```
 
+### Building Motions
+
 #### Frontend interactions
 
-Frontend interactions can update your Motion components using standard JavaScript events that you're already familiar with: `change`, `blur`, form submission, and more. You can invoke Motion actions manually using JavaScript if you need to.
+Frontend interactions can update your Motion components using standard JavaScript events that you're already familiar with: `change`, `blur`, form submission, and more. You can invoke motions manually using JavaScript if you need to.
 
-The primary way to handle user interactions on the frontend is by using the annotation `@[Motion::MapMethod]`:
+The primary way to handle user interactions on the frontend is by setting `motion_component` to `true` annotating `@[Motion::MapMethod]` any motion methods:
 
 ```crystal
 # Whenever a user interacts with the portion of the
@@ -173,7 +202,7 @@ class MyMotionComponent < Motion::Base
   # render is what motion will invoke
   # to generate your components html
   def render
-    # data_motion: add tells motion what method
+    # data_motion: add tells the motion JS library what method
     # to invoke when a user interacts with this component
     div do
       span do
@@ -210,61 +239,6 @@ render MyFirstComponent
 ```
 
 Every time the "Increment" button is clicked, MyComponent will call the `add` method, re-render your component and send it back to the frontend to replace the existing DOM. All invocations of mapped motions will cause the component to re-render, and unchanged rendered HTML will not perform any changes.
-
-<!---
-### Backend interactions
-
-Backend changes can be streamed to your Motion components in 2 steps.
-
-1. Broadcast changes using ActionCable after an event you care about:
-
-```ruby
-class Todo < ApplicationModel
-  after_commit :broadcast_created, on: :create
-
-  def broadcast_created
-    ActionCable.server.broadcast("todos:created", name)
-  end
-end
-```
-
-2. Configure your Motion component to listen to an ActionCable channel:
-
-```ruby
-class TopTodosComponent < Motion::Base
-  stream_from "todos:created", :handle_created
-
-  def initialize(count: 5)
-    @count = count
-    @todos = Todo.order(created_at: :desc).limit(count).pluck(:name)
-  end
-
-  def handle_created(name)
-    @todos = [name, *@todos.first(@count - 1)]
-  end
-end
-```
-
-This will cause any user that has a page open with `MyComponent` mounted on it to re-render that component's portion of the page.
-
-All invocations of `stream_from` connected methods will cause the component to re-render everywhere, and unchanged rendered HTML will not perform any changes.
-
-## Periodic Timers
-
-Motion can automatically invoke a method on your component at regular intervals:
-
-```crystal
-class ClockComponent < Motion::Base
-  prop time : TimeSpan = Time.local
-
-  every 1.second, :tick
-
-  def tick
-    @time = Time.now
-  end
-end
-```
--->
 
 #### `Motion::Event` and `Motion::Element`
 
@@ -325,3 +299,58 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/andrew
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+<!---
+### Backend interactions
+
+Backend changes can be streamed to your Motion components in 2 steps.
+
+1. Broadcast changes using ActionCable after an event you care about:
+
+```ruby
+class Todo < ApplicationModel
+  after_commit :broadcast_created, on: :create
+
+  def broadcast_created
+    ActionCable.server.broadcast("todos:created", name)
+  end
+end
+```
+
+2. Configure your Motion component to listen to an ActionCable channel:
+
+```ruby
+class TopTodosComponent < Motion::Base
+  stream_from "todos:created", :handle_created
+
+  def initialize(count: 5)
+    @count = count
+    @todos = Todo.order(created_at: :desc).limit(count).pluck(:name)
+  end
+
+  def handle_created(name)
+    @todos = [name, *@todos.first(@count - 1)]
+  end
+end
+```
+
+This will cause any user that has a page open with `MyComponent` mounted on it to re-render that component's portion of the page.
+
+All invocations of `stream_from` connected methods will cause the component to re-render everywhere, and unchanged rendered HTML will not perform any changes.
+
+## Periodic Timers
+
+Motion can automatically invoke a method on your component at regular intervals:
+
+```crystal
+class ClockComponent < Motion::Base
+  prop time : TimeSpan = Time.local
+
+  every 1.second, :tick
+
+  def tick
+    @time = Time.now
+  end
+end
+```
+-->
