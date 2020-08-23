@@ -40,6 +40,14 @@ require "motion"
 require "motion/amber/monkey_patch"
 ```
 
+In `main.js` add:
+
+```js
+import { createClient } from '@awcrotwell/motion';
+
+const client = createClient()
+```
+
 ## Guide
 
 MotionComponents are Crystal objects that output HTML. MotionComponents are most effective in cases where view code is reused or benefits from being tested directly. The code itself was pulled & altered from [Lucky Framework](https://github.com/luckyframework/lucky). 
@@ -135,7 +143,7 @@ The primary way to handle user interactions on the frontend is by using the anno
 
 ```crystal
 # Whenever a user interacts with the portion of the
-# page that contains this component,
+# page that contains this cQuickmponent,
 # `add` will be invoked, the component will be rerendered
 # and the dom will be updated with the new html
 class MyMotionComponent < Motion::Base
