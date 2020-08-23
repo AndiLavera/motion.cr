@@ -1,6 +1,6 @@
 import Consumer from './Consumer';
 import Imixin from './interfaces/mixin_interface';
-import ISubscriptionPayload from './interfaces/subscription_payload_interface'
+import ISubscriptionPayload from './interfaces/subscription_payload_interface';
 
 const extend = function (object: any, properties: any) {
   if (properties != null) {

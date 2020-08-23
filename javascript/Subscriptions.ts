@@ -1,7 +1,7 @@
 import Subscription from './Subscription';
 import Consumer from './Consumer';
 import Imixin from './interfaces/mixin_interface';
-import IChannel from './interfaces/channel_interface'
+import IChannel from './interfaces/channel_interface';
 
 export default class Subscriptions {
   subscriptions: Array<Subscription>

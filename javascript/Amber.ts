@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 const EVENTS = {
   join: 'join',
   leave: 'leave',
@@ -22,8 +23,11 @@ const secondsSince = (time: number | Date) => (now() - time) / 1000;
  */
 export class Channel {
   topic: string;
+
   socket: Socket;
+
   onMessageHandlers: never[];
+
   /**
    * @param {String} topic - topic to subscribe to
    * @param {Socket} socket - A Socket instance
@@ -83,12 +87,19 @@ export class Channel {
  */
 export class Socket {
   endpoint: string;
+
   ws: null;
+
   channels: never[];
+
   lastPing: number;
+
   reconnectTries: number;
+
   attemptReconnect: boolean;
+
   pollingTimeout: number;
+
   /**
    * @param {String} endpoint - Websocket endpont used in routes.cr file
    */
@@ -119,11 +130,13 @@ export class Socket {
       this._reconnect();
     }, this._reconnectInterval());
   }
+
   reconnectTimeout(reconnectTimeout: any) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
+
   params(params: any) {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   /**
@@ -246,7 +259,7 @@ export default {
  * Allows delete links to post for security and ease of use similar to Rails jquery_ujs
  */
 document.addEventListener('DOMContentLoaded', () => {
-  const elements = document.querySelectorAll("a[data-method='delete']");
+  const elements = document.querySelectorAll('a[data-method=\'delete\']');
   for (let i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', (e) => {
       e.preventDefault();
