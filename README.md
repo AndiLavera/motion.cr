@@ -95,10 +95,16 @@ If you followed the installation guide above, you can start with you first compo
       end
 
       body do
-        m(MyFirstMotionComponent)
+        h1 { "My First Component!" }
       end
     end
   end
+  ```
+
+3. Render it in your controller:
+
+  ```crystal
+  render MyFirstComponent
   ```
 
 
