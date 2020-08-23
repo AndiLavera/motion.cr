@@ -159,7 +159,7 @@ class MyMotionComponent < Motion::Base
       span do
         @total
         button data_motion: "add" do
-          "Increment" // button text
+          "Increment" # button text
         end
       end
     end
