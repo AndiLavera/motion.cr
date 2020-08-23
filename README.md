@@ -84,7 +84,7 @@ Component names end in `Component`.
 
 Component module names are plural, as for controllers and jobs: `Users::AvatarComponent`
 
-### Quick start
+#### Quick start
 
 If you followed the installation guide above, you can start with you first component.
 
@@ -115,11 +115,16 @@ If you followed the installation guide above, you can start with you first compo
   render MyFirstComponent
   ```
 
+<!-- 
 For static html rendering, please review the [lucky framework documentation](https://www.luckyframework.org/guides/frontend/rendering-html#layouts)
 
 > Note: Lucky uses the macro keyword `needs`, motion uses `prop`
+-->
 
-## Motions - How It Works
+
+
+
+### Motions
 
 Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:
 
@@ -135,7 +140,7 @@ Motion.cr is similar to [Phoenix LiveView](https://github.com/phoenixframework/p
 - **Encapsulated, consistent stateful components** - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.
 - **Blazing Fast** - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion. Motions take less than 1ms to process with typical times being around 300μs.
 
-### Frontend interactions
+#### Frontend interactions
 
 Frontend interactions can update your Motion components using standard JavaScript events that you're already familiar with: `change`, `blur`, form submission, and more. You can invoke Motion actions manually using JavaScript if you need to.
 
@@ -254,7 +259,7 @@ end
 ```
 -->
 
-## `Motion::Event` and `Motion::Element`
+#### `Motion::Event` and `Motion::Element`
 
 Methods that are mapped using `@[Motion::MapMethod]` can choose to accept an `event` parameter which is a `Motion::Event`. This object has a `target` attribute which is a `Motion::Element`, the element in the DOM that triggered the motion. Useful state and attributes can be extracted from these objects, including value, selected, checked, form state, data attributes, and more.
 
@@ -305,7 +310,6 @@ See the code for full API for [Event](https://github.com/andrewc910/motion.cr/bl
 * Stream Updates from Models
 * Routing for a full SPA experience
 * AJAX?(TBD)
-* 
 
 ## Contributing
 
