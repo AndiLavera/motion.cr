@@ -35,12 +35,12 @@ Motion is a framework for building reactive, real-time frontend UI components in
       - [Quick start](#quick-start)
       - [HTML Generation](#html-generation)
       - [Props & Type Safety](#props---type-safety)
-      - [Blocks & Procs](#procs---blocks)
+      - [Blocks & Procs](#blocks---procs)
   - [Motion Guide](#motion-guide)
     - [Installation](#installation-1)
     - [Building Motions](#building-motions)
       - [Frontend interactions](#frontend-interactions)
-      - [`Motion::Event` and `Motion::Element`](#-motion--event--and--motion--element-)
+      - [Motion::Event and Motion::Element](#motion--event-and-motion--element)
   - [Limitations](#limitations)
   - [Roadmap](#roadmap)
   - [Contributing](#contributing)
@@ -303,7 +303,7 @@ render MyFirstComponent
 
 Every time the "Increment" button is clicked, MyComponent will call the `add` method, re-render your component and send it back to the frontend to replace the existing DOM. All invocations of mapped motions will cause the component to re-render, and unchanged rendered HTML will not perform any changes.
 
-#### `Motion::Event` and `Motion::Element`
+#### Motion::Event and Motion::Element
 
 Methods that are mapped using `@[Motion::MapMethod]` can choose to accept an `event` parameter which is a `Motion::Event`. This object has a `target` attribute which is a `Motion::Element`, the element in the DOM that triggered the motion. Useful state and attributes can be extracted from these objects, including value, selected, checked, form state, data attributes, and more.
 
