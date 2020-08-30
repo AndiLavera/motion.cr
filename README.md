@@ -1,6 +1,6 @@
 # Motion.cr
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/91df8833c8fd48b3a0397bf51e2c3787)](https://www.codacy.com/manual/andrewc910/motion.cr?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andrewc910/motion.cr&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/91df8833c8fd48b3a0397bf51e2c3787)](https://www.codacy.com/manual/andrewc910/motion.cr?utm_source=github.com&utm_medium=referral&utm_content=andrewc910/motion.cr&utm_campaign=Badge_Grade)
 
 <p align="center">
   <a href="http://3.23.28.58/">Try the Motion Demo</a>
@@ -21,30 +21,30 @@ Motion is a framework for building reactive, real-time frontend UI components in
 
 ## Table of Contents
 
-- [Motion.cr](#motioncr )
-  * [Table of Contents](#table-of-contents)
-  * [Installation](#installation)
-  * [Documentation](#documentation)
-  * [Component Guide](#component-guide)
-    + [Why should I use components?](#why-should-i-use-components-)
+- [Motion.cr](#motioncr)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Documentation](#documentation)
+  - [Component Guide](#component-guide)
+    - [Why should I use components?](#why-should-i-use-components-)
       - [Testing](#testing)
       - [Data Flow](#data-flow)
       - [Standards](#standards)
-    + [Building components](#building-components)
+    - [Building components](#building-components)
       - [Conventions](#conventions)
       - [Quick start](#quick-start)
       - [HTML Generation](#html-generation)
       - [Props & Type Safety](#props---type-safety)
       - [Blocks & Procs](#procs---blocks)
-  * [Motion Guide](#motion-guide)
-    + [Installation](#installation-1)
-    + [Building Motions](#building-motions)
+  - [Motion Guide](#motion-guide)
+    - [Installation](#installation-1)
+    - [Building Motions](#building-motions)
       - [Frontend interactions](#frontend-interactions)
       - [`Motion::Event` and `Motion::Element`](#-motion--event--and--motion--element-)
-  * [Limitations](#limitations)
-  * [Roadmap](#roadmap)
-  * [Contributing](#contributing)
-  * [License](#license)
+  - [Limitations](#limitations)
+  - [Roadmap](#roadmap)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Installation
 
@@ -66,11 +66,11 @@ require "motion/amber/monkey_patch"
 
 ## Documentation
 
-  * [API Documentation](https://andrewc910.github.io/motion.cr/)
+- [API Documentation](https://andrewc910.github.io/motion.cr/)
 
 ## Component Guide
 
-MotionComponents are Crystal objects that output HTML. MotionComponents are most effective in cases where view code is reused or benefits from being tested directly. The code itself was pulled & altered from [Lucky Framework](https://github.com/luckyframework/lucky). 
+MotionComponents are Crystal objects that output HTML. MotionComponents are most effective in cases where view code is reused or benefits from being tested directly. The code itself was pulled & altered from [Lucky Framework](https://github.com/luckyframework/lucky).
 
 ### Why should I use components?
 
@@ -111,29 +111,29 @@ If you followed the installation guide above, you can start with you first compo
 1. Create a `components` folder in `views`
 2. Create your first component:
 
-  ```crystal
-  class MyFirstComponent < Motion::Base
-    def render
-      html_doctype
-      head do
-        css_link "/css/main.css"
-        utf8_charset
-        meta content: "text/html;charset=utf-8", http_equiv: "Content-Type"
-        title "My First Component"
-      end
+```crystal
+class MyFirstComponent < Motion::Base
+  def render
+    html_doctype
+    head do
+      css_link "/css/main.css"
+      utf8_charset
+      meta content: "text/html;charset=utf-8", http_equiv: "Content-Type"
+      title "My First Component"
+    end
 
-      body do
-        h1 { "My First Component!" }
-      end
+    body do
+      h1 { "My First Component!" }
     end
   end
-  ```
+end
+```
 
 3. Render it in your controller:
 
-  ```crystal
-  render MyFirstComponent
-  ```
+```crystal
+render MyFirstComponent
+```
 
 #### HTML Generation
 
@@ -143,13 +143,69 @@ For static html rendering, please review the [lucky framework documentation](htt
 
 #### Props & Type Safety
 
-Props allow you to pass arguements to child components. Props make your code more legible and easier to reason about. By 
+Props allow you to pass arguements to child components that are type safe. One of the problems with ecr views & partials is, it's hard to reason what variables & data the page requires to render because everything is within scope. Props explicity display what is required for a particular component.
+
+```crystal
+class MyFirstComponent < Motion::Base
+  prop title : String
+
+  def render
+    html_doctype
+    head do
+      css_link "/css/main.css"
+      utf8_charset
+      meta content: "text/html;charset=utf-8", http_equiv: "Content-Type"
+      title "My First Component"
+    end
+
+    body do
+      h1 { @title }
+    end
+  end
+end
+```
+
+In your controller:
+
+```crystal
+render(MyFirstComponent, title: "Hello World")
+```
+
+or rendering from a component:
+
+```crystal
+m(MyFirstComponent, title: "Hello World") # m is shorthand for mount. mount is also acceptable
+```
 
 #### Blocks & Procs
 
-Blocks & Procs can be passed to child components. This will allow you to create more generic & reusable components. 
+Blocks & Procs can be passed to child components. This will allow you to create more generic & reusable components.
 
 ```crystal
+class MyFirstComponent < Motion::Base
+  prop title : Proc(void)
+
+  def render
+    html_doctype
+    head do
+      css_link "/css/main.css"
+      utf8_charset
+      meta content: "text/html;charset=utf-8", http_equiv: "Content-Type"
+      title "My First Component"
+    end
+
+    body do
+      title.call
+    end
+  end
+end
+```
+
+In your parent component:
+
+```crystal
+title = Proc(void).new { h1 "Hello World!" }
+m(MyFirstComponent, title: title)
 ```
 
 ## Motion Guide
@@ -176,9 +232,9 @@ yarn add @andrewc910/motion.cr
 In `main.js` add:
 
 ```js
-import { createClient } from '@awcrotwell/motion';
+import { createClient } from "@awcrotwell/motion";
 
-const client = createClient()
+const client = createClient();
 ```
 
 ### Building Motions
@@ -287,17 +343,17 @@ See the code for full API for [Event](https://andrewc910.github.io/motion.cr/Mot
 
 ## Limitations
 
-* Due to the way that your components are replaced on the page, Components that set `motion_component` to `true` are limited to a single top-level DOM element. If you have multiple DOM elements in your template at the top level, you must wrap them in a single element. This is a similar limitation that React enforced until `React.Fragment` appeared and is for a very similar reason. Because of this, your upper most component (the component you call from the controller) cannot be a set `motion_component`. The top most component will return the entire html document to the controller and there is no way to wrap an entire document in a single tag.
+- Due to the way that your components are replaced on the page, Components that set `motion_component` to `true` are limited to a single top-level DOM element. If you have multiple DOM elements in your template at the top level, you must wrap them in a single element. This is a similar limitation that React enforced until `React.Fragment` appeared and is for a very similar reason. Because of this, your upper most component (the component you call from the controller) cannot be a set `motion_component`. The top most component will return the entire html document to the controller and there is no way to wrap an entire document in a single tag.
 
-* Motion generates the `initialize` method for you. You cannot define your own. To add an instance variable to the parameters & initialize it, add a prop like `prop name : String = "Default Name"`
-
+- Motion generates the `initialize` method for you. You cannot define your own. To add an instance variable to the parameters & initialize it, add a prop like `prop name : String = "Default Name"`
 
 ## Roadmap
-* Perodic Timers
-* Stream Updates from Models
-* Routing for a full SPA experience
-* AJAX?(TBD)
-* Passing procs as props?(TBD)
+
+- Perodic Timers
+- Stream Updates from Models
+- Routing for a full SPA experience
+- AJAX?(TBD)
+- Passing procs as props?(TBD)
 
 ## Contributing
 
