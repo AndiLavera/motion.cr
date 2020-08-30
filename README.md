@@ -40,7 +40,7 @@ Motion is a framework for building reactive, real-time frontend UI components in
     - [Installation](#installation-1)
     - [Building Motions](#building-motions)
       - [Frontend interactions](#frontend-interactions)
-      - [Motion::Event and Motion::Element](#motion--event-and-motion--element)
+      - [Motion::Event and Motion::Element](#motionevent-and-motionelement)
   - [Limitations](#limitations)
   - [Roadmap](#roadmap)
   - [Contributing](#contributing)
