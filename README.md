@@ -232,7 +232,7 @@ yarn add @andrewc910/motion.cr
 In `main.js` add:
 
 ```js
-import { createClient } from "@awcrotwell/motion";
+import { createClient } from '@awcrotwell/motion';
 
 const client = createClient();
 ```
@@ -241,13 +241,13 @@ const client = createClient();
 
 #### Frontend interactions
 
-Frontend interactions can update your Motion components using standard JavaScript events that you're already familiar with: `change`, `blur`, form submission, and more. You can invoke motions manually using JavaScript if you need to.
+Frontend interactions can update your MotionComponents using standard JavaScript events that you're already familiar with: `change`, `blur`, form submission, and more. Motions default to click events however you can override this to make it any event you would like. You can invoke motions manually using JavaScript if you need to.
 
 The primary way to handle user interactions on the frontend is by setting `motion_component` to `true` annotating `@[Motion::MapMethod]` any motion methods:
 
 ```crystal
-# Whenever a user interacts with the portion of the
-# page that contains this cQuickmponent,
+# Whenever a user click with the portion of the
+# page that contains this component,
 # `add` will be invoked, the component will be rerendered
 # and the dom will be updated with the new html
 class MyMotionComponent < Motion::Base
@@ -270,7 +270,9 @@ class MyMotionComponent < Motion::Base
     div do
       span do
         @total
-        button data_motion: "add" do
+        button data_motion: "add" do # data_motion: "add" defaults to a click event
+                                     # data_motion: "mouseover->add" to make it a mouseover event
+                                     # data_motion: "mouseover->add mouseout->add" to map multiple events to a single element
           "Increment" # button text
         end
       end
