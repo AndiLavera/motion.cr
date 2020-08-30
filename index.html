@@ -228,19 +228,33 @@
 
 
 <div class="main-content">
-<h1><a id="motion.cr-wip" class="anchor" href="#motion.cr-wip">
+<h1><a id="motion.cr" class="anchor" href="#motion.cr">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Motion.cr - WIP</h1>
+</a>Motion.cr</h1>
+
+<p><a href="https://www.codacy.com/manual/andrewc910/motion.cr?utm_source=github.com&utm_medium=referral&utm_content=andrewc910/motion.cr&utm_campaign=Badge_Grade" target="_blank"><img src="https://app.codacy.com/project/badge/Grade/91df8833c8fd48b3a0397bf51e2c3787" alt="Codacy Badge"/></a></p>
+
+<p>&lt;p align="center">
+  &lt;a href="http://3.23.28.58/">Try the Motion Demo&lt;/a>
+&lt;/p></p>
 
 <p>&lt;p align="center"> 
   &lt;img src="./images/motion-calculator.gif" width="450" />
 &lt;/p></p>
 
-<p>Motion allows you to build reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.</p>
+<p>Motion is a framework for building reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.</p>
 
-<ul><li>Plays nicely with the Amber monolith you have.</li><li>Peacefully coexists with your existing tech: Turbolinks, Trix, React, Vue, etc.</li><li>Real-time frontend UI updates from frontend user interaction AND server-side updates.</li><li>No more frontend models, stores, or syncing; your source of truth is the database you already have.</li><li><strong>No JavaScript required!</strong></li></ul>
+<ul><li>Motion is an Object-Oriented View Layer</li><li>Plays nicely with the Amber monolith you have.</li><li>Peacefully coexists with your existing frontend</li><li>Real-time frontend UI updates from frontend user interaction AND server-side updates.</li><li>No more frontend models, stores, or syncing; your source of truth is the database you already have.</li><li><strong>No JavaScript required!</strong></li></ul>
+
+<h2><a id="table-of-contents" class="anchor" href="#table-of-contents">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Table of Contents</h2>
+
+<ul><li><a href="#motioncr" target="_blank">Motion.cr</a></li><ul><li><a href="#table-of-contents" target="_blank">Table of Contents</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#documentation" target="_blank">Documentation</a></li><li><a href="#component-guide" target="_blank">Component Guide</a></li><li><a href="#why-should-i-use-components-" target="_blank">Why should I use components?</a></li><li><a href="#testing" target="_blank">Testing</a></li><li><a href="#data-flow" target="_blank">Data Flow</a></li><li><a href="#standards" target="_blank">Standards</a></li><li><a href="#building-components" target="_blank">Building components</a></li><li><a href="#conventions" target="_blank">Conventions</a></li><li><a href="#quick-start" target="_blank">Quick start</a></li><li><a href="#html-generation" target="_blank">HTML Generation</a></li><li><a href="#props---type-safety" target="_blank">Props & Type Safety</a></li><li><a href="#blocks---procs" target="_blank">Blocks & Procs</a></li><li><a href="#motion-guide" target="_blank">Motion Guide</a></li><li><a href="#installation-1" target="_blank">Installation</a></li><li><a href="#building-motions" target="_blank">Building Motions</a></li><li><a href="#frontend-interactions" target="_blank">Frontend interactions</a></li><li><a href="#motionevent-and-motionelement" target="_blank">Motion::Event and Motion::Element</a></li><li><a href="#limitations" target="_blank">Limitations</a></li><li><a href="#roadmap" target="_blank">Roadmap</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#license" target="_blank">License</a></li></ul></ul>
 
 <h2><a id="installation" class="anchor" href="#installation">
   <svg class="octicon-link" aria-hidden="true">
@@ -248,13 +262,11 @@
   </svg>
 </a>Installation</h2>
 
-<p>Motion has Crystal and JavaScript parts, execute both of these commands:</p>
+<p>Motion.cr has Crystal and JavaScript parts, execute both of these commands:</p>
 
 <pre><code class="language-sh">dependencies:
   motion.cr:
     github: andrewc910/motion.cr</code></pre>
-
-<pre><code class="language-sh">yarn add @andrewc910/motion.cr</code></pre>
 
 <p>Create a file <code>motion.cr</code> in <code>config/initializers</code> and add:</p>
 
@@ -262,15 +274,21 @@
 <span class="c"># The next require adds the `render` method for components to Amber controllers</span>
 <span class="k">require</span> <span class="s">&quot;motion/amber/monkey_patch&quot;</span></code></pre>
 
-<h2><a id="guide" class="anchor" href="#guide">
+<h2><a id="documentation" class="anchor" href="#documentation">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Guide</h2>
+</a>Documentation</h2>
 
-<p>MotionComponents are Crystal objects that output HTML. The code itself was pulled & altered from <a href="https://github.com/luckyframework/lucky" target="_blank">Lucky Framework</a>. Think of them as an evolution of the presenter pattern, inspired by React & Github's ViewComponent library.</p>
+<ul><li><a href="https://andrewc910.github.io/motion.cr/" target="_blank">API Documentation</a></li></ul>
 
-<p>MotionComponents are most effective in cases where view code is reused or benefits from being tested directly.</p>
+<h2><a id="component-guide" class="anchor" href="#component-guide">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Component Guide</h2>
+
+<p>MotionComponents are Crystal objects that output HTML. MotionComponents are most effective in cases where view code is reused or benefits from being tested directly. The code itself was pulled & altered from <a href="https://github.com/luckyframework/lucky" target="_blank">Lucky Framework</a>.</p>
 
 <h3><a id="why-should-i-use-components" class="anchor" href="#why-should-i-use-components">
   <svg class="octicon-link" aria-hidden="true">
@@ -310,20 +328,6 @@
 
 <p>MotionComponents are Crystal objects, making it easy to follow (and enforce) code quality standards.</p>
 
-<h2><a id="how-does-it-work" class="anchor" href="#how-does-it-work">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>How does it work?</h2>
-
-<p>Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:</p>
-
-<ul><li><strong>Object-Oriented View Layer</strong> - MotionComponents are like react components or other frontend frameworks</li><li><strong>Websockets Communication</strong> - Communication with your Rails backend is performed via ActionCable</li><li><strong>No Full Page Reload</strong> - The current page for a user is updated in place.</li><li><strong>Fast DOM Diffing</strong> - DOM diffing is performed when replacing existing content with new content.</li><li><strong>Server Triggered Events</strong> - Server-side events can trigger updates to arbitrarily many components via WebSocket channels.</li></ul>
-
-<p>Motion.cr is similar to <a href="https://github.com/phoenixframework/phoenix_live_view" target="_blank">Phoenix LiveView</a> (and even React!) in some key ways:</p>
-
-<ul><li><strong>Partial Page Replacement</strong> - Motion does not use full page replacement, but rather replaces only the component on the page with new HTML, DOM diffed for performance.</li><li><strong>Encapsulated, consistent stateful components</strong> - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.</li><li><strong>Blazing Fast</strong> - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion. Motions take less than 1ms to process with typical times being around 300μs.</li></ul>
-
 <h3><a id="building-components" class="anchor" href="#building-components">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -336,34 +340,163 @@
   </svg>
 </a>Conventions</h4>
 
-<p>Components are subclasses of <code><a href="Motion/Base.html">Motion::Base</a></code> and live in <code>src/components</code>. It's common practice to create and inherit from an <code>ApplicationComponent</code> that is a subclass of <code><a href="Motion/Base.html">Motion::Base</a></code>. By doing so, not only can you share logic, you can share view templates.</p>
+<p>Components are subclasses of <code><a href="Motion/Base.html">Motion::Base</a></code> and live in <code>views/components</code>. It's common practice to create and inherit from an <code>ApplicationComponent</code> that is a subclass of <code><a href="Motion/Base.html">Motion::Base</a></code>. By doing so, not only can you share logic, you can share view templates.</p>
 
 <p>Component names end in <code>Component</code>.</p>
 
 <p>Component module names are plural, as for controllers and jobs: <code>Users::AvatarComponent</code></p>
 
-<h3><a id="quick-start" class="anchor" href="#quick-start">
+<h4><a id="quick-start" class="anchor" href="#quick-start">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Quick start</h3>
+</a>Quick start</h4>
+
+<p>If you followed the installation guide above, you can start with you first component.</p>
+
+<ol><li>Create a <code>components</code> folder in <code>views</code></li><li>Create your first component:</li></ol>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">MyFirstComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
+  <span class="k">def</span> <span class="m">render</span>
+    html_doctype
+    head <span class="k">do</span>
+      css_link <span class="s">&quot;/css/main.css&quot;</span>
+      utf8_charset
+      meta content: <span class="s">&quot;text/html;charset=utf-8&quot;</span>, http_equiv: <span class="s">&quot;Content-Type&quot;</span>
+      title <span class="s">&quot;My First Component&quot;</span>
+    <span class="k">end</span>
+
+    body <span class="k">do</span>
+      h1 { <span class="s">&quot;My First Component!&quot;</span> }
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<ol><li>Render it in your controller:</li></ol>
+
+<pre><code class="language-crystal">render <span class="t">MyFirstComponent</span></code></pre>
+
+<h4><a id="html-generation" class="anchor" href="#html-generation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>HTML Generation</h4>
 
 <p>For static html rendering, please review the <a href="https://www.luckyframework.org/guides/frontend/rendering-html#layouts" target="_blank">lucky framework documentation</a></p>
 
 <blockquote>Note: Lucky uses the macro keyword <code>needs</code>, motion uses <code>prop</code></blockquote>
 
-<h3><a id="frontend-interactions" class="anchor" href="#frontend-interactions">
+<h4><a id="props-type-safety" class="anchor" href="#props-type-safety">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Frontend interactions</h3>
+</a>Props & Type Safety</h4>
 
-<p>Frontend interactions can update your Motion components using standard JavaScript events that you're already familiar with: <code>change</code>, <code>blur</code>, form submission, and more. You can invoke Motion actions manually using JavaScript if you need to.</p>
+<p>Props allow you to pass arguements to child components that are type safe. One of the problems with ecr views & partials is, it's hard to reason what variables & data the page requires to render because everything is within scope. Props explicity display what is required for a particular component.</p>
 
-<p>The primary way to handle user interactions on the frontend is by using the annotation <code>@[<a href="Motion/MapMethod.html">Motion::MapMethod</a>]</code>:</p>
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">MyFirstComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
+  prop title : <span class="t">String</span>
+
+  <span class="k">def</span> <span class="m">render</span>
+    html_doctype
+    head <span class="k">do</span>
+      css_link <span class="s">&quot;/css/main.css&quot;</span>
+      utf8_charset
+      meta content: <span class="s">&quot;text/html;charset=utf-8&quot;</span>, http_equiv: <span class="s">&quot;Content-Type&quot;</span>
+      title <span class="s">&quot;My First Component&quot;</span>
+    <span class="k">end</span>
+
+    body <span class="k">do</span>
+      h1 { @title }
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>In your controller:</p>
+
+<pre><code class="language-crystal">render(<span class="t">MyFirstComponent</span>, title: <span class="s">&quot;Hello World&quot;</span>)</code></pre>
+
+<p>or rendering from a component:</p>
+
+<pre><code class="language-crystal">m(<span class="t">MyFirstComponent</span>, title: <span class="s">&quot;Hello World&quot;</span>) <span class="c"># m is shorthand for mount. mount is also acceptable</span></code></pre>
+
+<h4><a id="blocks-procs" class="anchor" href="#blocks-procs">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Blocks & Procs</h4>
+
+<p>Blocks & Procs can be passed to child components. This will allow you to create more generic & reusable components.</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">MyFirstComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
+  prop title : <span class="t">Proc</span>(void)
+
+  <span class="k">def</span> <span class="m">render</span>
+    html_doctype
+    head <span class="k">do</span>
+      css_link <span class="s">&quot;/css/main.css&quot;</span>
+      utf8_charset
+      meta content: <span class="s">&quot;text/html;charset=utf-8&quot;</span>, http_equiv: <span class="s">&quot;Content-Type&quot;</span>
+      title <span class="s">&quot;My First Component&quot;</span>
+    <span class="k">end</span>
+
+    body <span class="k">do</span>
+      title.call
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>In your parent component:</p>
+
+<pre><code class="language-crystal">title <span class="o">=</span> <span class="t">Proc</span>(void).<span class="k">new</span> { h1 <span class="s">&quot;Hello World!&quot;</span> }
+m(<span class="t">MyFirstComponent</span>, title: title)</code></pre>
+
+<h2><a id="motion-guide" class="anchor" href="#motion-guide">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Motion Guide</h2>
+
+<p>Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:</p>
+
+<ul><li><strong>Websockets Communication</strong> - Communication with your Amber backend is performed via websockets</li><li><strong>No Full Page Reload</strong> - The current page for a user is updated in place.</li><li><strong>Fast DOM Diffing</strong> - DOM diffing is performed when replacing existing content with new content.</li><li><strong>Server Triggered Events</strong> - Server-side events can trigger updates to arbitrarily many components via WebSocket channels.</li></ul>
+
+<p>Motion.cr is similar to <a href="https://github.com/phoenixframework/phoenix_live_view" target="_blank">Phoenix LiveView</a> (and even React!) in some key ways:</p>
+
+<ul><li><strong>Partial Page Replacement</strong> - Motion does not use full page replacement, but rather replaces only the component on the page with new HTML, DOM diffed for performance.</li><li><strong>Encapsulated, consistent stateful components</strong> - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.</li><li><strong>Blazing Fast</strong> - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion. Motions take less than 1ms to process with typical times being around 300μs.</li></ul>
+
+<h3><a id="installation" class="anchor" href="#installation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Installation</h3>
+
+<pre><code class="language-sh">yarn add @andrewc910/motion.cr</code></pre>
+
+<p>In <code>main.js</code> add:</p>
+
+<pre><code class="language-js">import { createClient } from "@awcrotwell/motion";
+
+const client = createClient();</code></pre>
+
+<h3><a id="building-motions" class="anchor" href="#building-motions">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Building Motions</h3>
+
+<h4><a id="frontend-interactions" class="anchor" href="#frontend-interactions">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Frontend interactions</h4>
+
+<p>Frontend interactions can update your Motion components using standard JavaScript events that you're already familiar with: <code>change</code>, <code>blur</code>, form submission, and more. You can invoke motions manually using JavaScript if you need to.</p>
+
+<p>The primary way to handle user interactions on the frontend is by setting <code>motion_component</code> to <code>true</code> annotating <code>@[<a href="Motion/MapMethod.html">Motion::MapMethod</a>]</code> any motion methods:</p>
 
 <pre><code class="language-crystal"><span class="c"># Whenever a user interacts with the portion of the</span>
-<span class="c"># page that contains this component,</span>
+<span class="c"># page that contains this cQuickmponent,</span>
 <span class="c"># `add` will be invoked, the component will be rerendered</span>
 <span class="c"># and the dom will be updated with the new html</span>
 <span class="k">class</span> <span class="t">MyMotionComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
@@ -381,13 +514,13 @@
   <span class="c"># render is what motion will invoke</span>
   <span class="c"># to generate your components html</span>
   <span class="k">def</span> <span class="m">render</span>
-    <span class="c"># data_motion: add tells motion what method</span>
+    <span class="c"># data_motion: add tells the motion JS library what method</span>
     <span class="c"># to invoke when a user interacts with this component</span>
     div <span class="k">do</span>
       span <span class="k">do</span>
         @total
         button data_motion: <span class="s">&quot;add&quot;</span> <span class="k">do</span>
-          <span class="s">&quot;Increment&quot;</span>
+          <span class="s">&quot;Increment&quot;</span> <span class="c"># button text</span>
         <span class="k">end</span>
       <span class="k">end</span>
     <span class="k">end</span>
@@ -415,6 +548,80 @@
 <pre><code class="language-crystal">render <span class="t">MyFirstComponent</span></code></pre>
 
 <p>Every time the "Increment" button is clicked, MyComponent will call the <code>add</code> method, re-render your component and send it back to the frontend to replace the existing DOM. All invocations of mapped motions will cause the component to re-render, and unchanged rendered HTML will not perform any changes.</p>
+
+<h4><a id="motionevent-and-motionelement" class="anchor" href="#motionevent-and-motionelement">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Motion::Event and Motion::Element</h4>
+
+<p>Methods that are mapped using <code>@[<a href="Motion/MapMethod.html">Motion::MapMethod</a>]</code> can choose to accept an <code>event</code> parameter which is a <code><a href="Motion/Event.html">Motion::Event</a></code>. This object has a <code>target</code> attribute which is a <code><a href="Motion/Element.html">Motion::Element</a></code>, the element in the DOM that triggered the motion. Useful state and attributes can be extracted from these objects, including value, selected, checked, form state, data attributes, and more.</p>
+
+<pre><code class="language-crystal">  @[<span class="t">Motion</span><span class="t">::</span><span class="t">MapMethod</span>]
+  <span class="k">def</span> <span class="m">example</span>(event)
+    event.<span class="k">type</span> <span class="c"># =&gt; &quot;change&quot;</span>
+    event.name <span class="c"># alias for type</span>
+
+    <span class="c"># Motion::Element instance, the element that received the event.</span>
+    event.target
+
+    <span class="c"># Motion::Element instance, the element with the event handler and the `data-motion` attribute</span>
+    element <span class="o">=</span> event.current_target
+    <span class="c"># Alias for #current_target</span>
+    event.element
+
+
+    <span class="c"># Element API examples</span>
+    element.tag_name <span class="c"># =&gt; &quot;input&quot;</span>
+    element.value <span class="c"># =&gt; &quot;5&quot;</span>
+    element.attributes <span class="c"># { class: &quot;col-xs-12&quot;, ... }</span>
+
+    <span class="c"># DOM element with aria-label=&quot;...&quot;</span>
+    element[<span class="n">:aria_label</span>]
+
+    <span class="c"># DOM element with data-extra-info=&quot;...&quot;</span>
+    element.data[<span class="n">:extra_info</span>]
+
+    <span class="c"># ActionController::Parameters instance with all form params. Also</span>
+    <span class="c"># available on Motion::Event objects for convenience.</span>
+    element.form_data
+  <span class="k">end</span></code></pre>
+
+<p>See the code for full API for <a href="https://andrewc910.github.io/motion.cr/Motion/Event.html" target="_blank">Event</a> and <a href="https://andrewc910.github.io/motion.cr/Motion/Element.html" target="_blank">Element</a>.</p>
+
+<h2><a id="limitations" class="anchor" href="#limitations">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Limitations</h2>
+
+<ul><li>Due to the way that your components are replaced on the page, Components that set <code>motion_component</code> to <code>true</code> are limited to a single top-level DOM element. If you have multiple DOM elements in your template at the top level, you must wrap them in a single element. This is a similar limitation that React enforced until <code>React.Fragment</code> appeared and is for a very similar reason. Because of this, your upper most component (the component you call from the controller) cannot be a set <code>motion_component</code>. The top most component will return the entire html document to the controller and there is no way to wrap an entire document in a single tag.</li></ul>
+
+<ul><li>Motion generates the <code>initialize</code> method for you. You cannot define your own. To add an instance variable to the parameters & initialize it, add a prop like <code>prop name : String = "Default Name"</code></li></ul>
+
+<h2><a id="roadmap" class="anchor" href="#roadmap">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Roadmap</h2>
+
+<ul><li>Perodic Timers</li><li>Stream Updates from Models</li><li>Routing for a full SPA experience</li><li>AJAX?(TBD)</li><li>Passing procs as props?(TBD)</li></ul>
+
+<h2><a id="contributing" class="anchor" href="#contributing">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Contributing</h2>
+
+<p>Bug reports and pull requests are welcome on GitHub at https://github.com/andrewc910/motion.cr/issues.</p>
+
+<h2><a id="license" class="anchor" href="#license">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>License</h2>
+
+<p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.</p>
 
 <p>&lt;!---</p>
 
@@ -474,80 +681,6 @@ end</code></pre>
 <span class="k">end</span></code></pre>
 
 <p>--></p>
-
-<h2><a id="motionevent-and-motionelement" class="anchor" href="#motionevent-and-motionelement">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a><code><a href="Motion/Event.html">Motion::Event</a></code> and <code><a href="Motion/Element.html">Motion::Element</a></code></h2>
-
-<p>Methods that are mapped using <code>@[<a href="Motion/MapMethod.html">Motion::MapMethod</a>]</code> can choose to accept an <code>event</code> parameter which is a <code><a href="Motion/Event.html">Motion::Event</a></code>. This object has a <code>target</code> attribute which is a <code><a href="Motion/Element.html">Motion::Element</a></code>, the element in the DOM that triggered the motion. Useful state and attributes can be extracted from these objects, including value, selected, checked, form state, data attributes, and more.</p>
-
-<pre><code class="language-crystal">  @[<span class="t">Motion</span><span class="t">::</span><span class="t">MapMethod</span>]
-  <span class="k">def</span> <span class="m">example</span>(event)
-    event.<span class="k">type</span> <span class="c"># =&gt; &quot;change&quot;</span>
-    event.name <span class="c"># alias for type</span>
-
-    <span class="c"># Motion::Element instance, the element that received the event.</span>
-    event.target
-
-    <span class="c"># Motion::Element instance, the element with the event handler and the `data-motion` attribute</span>
-    element <span class="o">=</span> event.current_target
-    <span class="c"># Alias for #current_target</span>
-    event.element
-
-
-    <span class="c"># Element API examples</span>
-    element.tag_name <span class="c"># =&gt; &quot;input&quot;</span>
-    element.value <span class="c"># =&gt; &quot;5&quot;</span>
-    element.attributes <span class="c"># { class: &quot;col-xs-12&quot;, ... }</span>
-
-    <span class="c"># DOM element with aria-label=&quot;...&quot;</span>
-    element[<span class="n">:aria_label</span>]
-
-    <span class="c"># DOM element with data-extra-info=&quot;...&quot;</span>
-    element.data[<span class="n">:extra_info</span>]
-
-    <span class="c"># ActionController::Parameters instance with all form params. Also</span>
-    <span class="c"># available on Motion::Event objects for convenience.</span>
-    element.form_data
-  <span class="k">end</span></code></pre>
-
-<p>See the code for full API for <a href="https://github.com/andrewc910/motion.cr/blob/master/src/motion/event.cr" target="_blank">Event</a> and <a href="https://github.com/andrewc910/motion.cr/blob/master/src/motion/element.rb" target="_blank">Element</a>.</p>
-
-<h2><a id="limitations" class="anchor" href="#limitations">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>Limitations</h2>
-
-<ul><li>Due to the way that your components are replaced on the page, MotionComponents are limited to a single top-level DOM element. If you have multiple DOM elements in your template at the top level, you must wrap them in a single element. This is a similar limitation that React enforced until <code>React.Fragment</code> appeared and is for a very similar reason. Because of this, your upper most component (the component you call from the controller) cannot be a set <code>motion_component</code>. The top most component will return the entire html document to the controller and there is no way to wrap an entire document in a single tag.</li></ul>
-
-<ul><li>Motion generates the <code>initialize</code> method for you. You cannot define your own. To add an instance variable to the parameters & initialize it, add a prop like <code>prop name : String = "Default Name"</code></li></ul>
-
-<h2><a id="roadmap" class="anchor" href="#roadmap">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>Roadmap</h2>
-
-<ul><li>Perodic Timers</li><li>Stream Updates from Models</li><li>Routing for a full SPA experience</li><li>AJAX?(TBD)</li><li></li></ul>
-
-<h2><a id="contributing" class="anchor" href="#contributing">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>Contributing</h2>
-
-<p>Bug reports and pull requests are welcome on GitHub at https://github.com/andrewc910/motion.cr/issues.</p>
-
-<h2><a id="license" class="anchor" href="#license">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>License</h2>
-
-<p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.</p>
 </div>
 </body>
 </html>
