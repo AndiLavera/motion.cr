@@ -136,13 +136,21 @@ If you followed the installation guide above, you can start with you first compo
   ```
 
 #### HTML Generation
-<!-- 
+
 For static html rendering, please review the [lucky framework documentation](https://www.luckyframework.org/guides/frontend/rendering-html#layouts)
 
 > Note: Lucky uses the macro keyword `needs`, motion uses `prop`
--->
+
 #### Props & Type Safety
+
+Props allow you to pass arguements to child components. Props make your code more legible and easier to reason about. By 
+
 #### Blocks & Procs
+
+Blocks & Procs can be passed to child components. This will allow you to create more generic & reusable components. 
+
+```crystal
+```
 
 ## Motion Guide
 
