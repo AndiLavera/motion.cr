@@ -148,8 +148,4 @@ export default class AttributeTracker {
       console.error('[Motion] An internal error occurred:', error);
     }
   }
-
-  hello() {
-    console.log('hi');
-  }
 }
