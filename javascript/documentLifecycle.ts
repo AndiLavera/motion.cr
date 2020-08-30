@@ -1,4 +1,8 @@
-function once(target: Document | (Window & typeof globalThis), event: string, callback: Function) {
+function once(
+  target: Document | (Window & typeof globalThis),
+  event: string,
+  callback: Function
+) {
   target.addEventListener(event, function handler(event: string) {
     target.removeEventListener(event, handler);
 
@@ -15,11 +19,15 @@ export const documentLoaded = new Promise<any>((resolve) => {
 });
 
 export const beforeDocumentUnload = new Promise<any>((resolve) => {
-  window.addEventListener('beforeunload', () => {
-    once(window, 'beforeunload', ({ defaultPrevented }: any) => {
-      if (!defaultPrevented) {
-        resolve();
-      }
-    });
-  }, true);
+  window.addEventListener(
+    'beforeunload',
+    () => {
+      once(window, 'beforeunload', ({ defaultPrevented }: any) => {
+        if (!defaultPrevented) {
+          resolve();
+        }
+      });
+    },
+    true
+  );
 });

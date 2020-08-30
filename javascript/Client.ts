@@ -6,7 +6,9 @@ import Consumer from './Consumer';
 import IClient from './interfaces/client_interface';
 
 function getConfig(name: string) {
-  const element = document.head.querySelector(`meta[name='action-cable-${name}']`);
+  const element = document.head.querySelector(
+    `meta[name='action-cable-${name}']`
+  );
   if (element) {
     return element.getAttribute('content');
   }
@@ -15,23 +17,23 @@ function getConfig(name: string) {
 }
 
 export default class Client {
-  _componentSelector: string
+  _componentSelector: string;
 
-  keyAttribute: string
+  keyAttribute: string;
 
-  stateAttribute: string
+  stateAttribute: string;
 
-  motionAttribute: string
+  motionAttribute: string;
 
-  logging: boolean
+  logging: boolean;
 
-  _componentTracker: AttributeTracker
+  _componentTracker: AttributeTracker;
 
-  _motionTracker: AttributeTracker
+  _motionTracker: AttributeTracker;
 
-  root: HTMLDocument
+  root: HTMLDocument;
 
-  shutdownBeforeUnload: boolean
+  shutdownBeforeUnload: boolean;
 
   consumer: Consumer;
 
@@ -49,16 +51,21 @@ export default class Client {
 
     this.logging = true;
 
-    this._componentTracker = new AttributeTracker(this.keyAttribute, (element: HTMLElement) => (
-      element.hasAttribute(this.stateAttribute) // ensure matches selector
-        ? new Component(this, element) : null
-    ));
+    this._componentTracker = new AttributeTracker(
+      this.keyAttribute,
+      (element: HTMLElement) =>
+        element.hasAttribute(this.stateAttribute) // ensure matches selector
+          ? new Component(this, element)
+          : null
+    );
 
-    this._motionTracker = new AttributeTracker(this.motionAttribute, (element: HTMLElement) => (
-      new BindingManager(this, element)
-    ));
+    this._motionTracker = new AttributeTracker(
+      this.motionAttribute,
+      (element: HTMLElement) => new BindingManager(this, element)
+    );
 
-    documentLoaded.then(() => { // avoid mutations while loading the document
+    documentLoaded.then(() => {
+      // avoid mutations while loading the document
       this._componentTracker.attachRoot(this.root);
       this._motionTracker.attachRoot(this.root);
     });
@@ -76,7 +83,7 @@ export default class Client {
 
   findComponent(element: HTMLElement) {
     return this._componentTracker.getManager(
-      element.closest(this._componentSelector),
+      element.closest(this._componentSelector)
     );
   }
 

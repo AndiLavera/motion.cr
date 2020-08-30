@@ -2,15 +2,15 @@ import BindingManager from './BindingManager';
 import Component from './Component';
 
 export default class AttributeTracker {
-  attribute: string
+  attribute: string;
 
-  createManager: Function
+  createManager: Function;
 
-  _managers: Map<HTMLElement, BindingManager | Component>
+  _managers: Map<HTMLElement, BindingManager | Component>;
 
-  _attributeSelector: string
+  _attributeSelector: string;
 
-  _mutationObserver: MutationObserver
+  _mutationObserver: MutationObserver;
 
   constructor(attribute: string, createManager: Function) {
     this.attribute = attribute;
@@ -31,9 +31,7 @@ export default class AttributeTracker {
 
     this._mutationObserver.observe(element, {
       attributes: true,
-      attributeFilter: [
-        this.attribute,
-      ],
+      attributeFilter: [this.attribute],
       childList: true,
       subtree: true,
     });

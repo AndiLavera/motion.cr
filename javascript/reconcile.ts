@@ -1,7 +1,11 @@
 import morphdom from 'morphdom';
 
-export default (rootElement: HTMLElement, newState: string, keyAttribute: string) => {
-  if (typeof (newState) !== 'string') {
+export default (
+  rootElement: HTMLElement,
+  newState: string,
+  keyAttribute: string
+) => {
+  if (typeof newState !== 'string') {
     throw new TypeError('Expected raw HTML for reconcile newState');
   }
 
@@ -31,13 +35,12 @@ export default (rootElement: HTMLElement, newState: string, keyAttribute: string
       // For some reason, it it seems like all TEXTAREAs are equal to eachother
       // regardless of their content which is super werid because the same thing
       // does not seem to be true for INPUTs or SELECTs whose value has changed.
-      fromElement.tagName !== 'TEXTAREA'
-
+      fromElement.tagName !== 'TEXTAREA' &&
       // When two nodes have (deep) DOM equality, don't replace. This is correct
       // because we checked above that we are reconsiling against an HTML string
       // (which cannot possibly have state outside of the DOM because no handles
       // have been allowed to leave this function since parsing).
-      && fromElement.isEqualNode(toElement)
+      fromElement.isEqualNode(toElement)
     ) {
       return false;
     }
@@ -46,11 +49,7 @@ export default (rootElement: HTMLElement, newState: string, keyAttribute: string
     return true;
   };
 
-  return morphdom(
-    rootElement,
-    newState,
-    {
-      onBeforeElUpdated,
-    },
-  );
+  return morphdom(rootElement, newState, {
+    onBeforeElUpdated,
+  });
 };

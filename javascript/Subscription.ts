@@ -13,11 +13,11 @@ const extend = function (object: any, properties: any) {
 };
 
 export default class Subscription {
-  consumer: Consumer
+  consumer: Consumer;
 
-  identifier: string
+  identifier: string;
 
-  channel: string
+  channel: string;
 
   constructor(consumer: Consumer, params: any = {}, mixin: Imixin) {
     this.consumer = consumer;

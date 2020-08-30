@@ -17,11 +17,11 @@ export function createWebSocketURL(inputUrl: string | Function) {
 }
 
 export default class Consumer {
-  _url: string
+  _url: string;
 
-  subscriptions: Subscriptions
+  subscriptions: Subscriptions;
 
-  connection: Connection
+  connection: Connection;
 
   constructor(url: string) {
     this._url = url;

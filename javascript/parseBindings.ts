@@ -35,11 +35,9 @@ export default function parseBindings(input, element) {
     const id = match[captureIndicies.id];
     const motion = match[captureIndicies.motion];
 
-    const event = match[captureIndicies.event]
-      || defaultEventFor(element);
+    const event = match[captureIndicies.event] || defaultEventFor(element);
 
-    const mode = match[captureIndicies.mode]
-      || defaultModeFor(event);
+    const mode = match[captureIndicies.mode] || defaultModeFor(event);
 
     return {
       id,
@@ -51,10 +49,10 @@ export default function parseBindings(input, element) {
 }
 
 function defaultEventFor(element) {
-  const event = DEFAULT_EVENT[element && element.tagName]
-    || DEFAULT_EVENT._other;
+  const event =
+    DEFAULT_EVENT[element && element.tagName] || DEFAULT_EVENT._other;
 
-  if (typeof (event) === 'function') {
+  if (typeof event === 'function') {
     return event(element);
   }
   return event;
