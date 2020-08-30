@@ -296,12 +296,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (confirm(message)) {
         const form = document.createElement('form');
         const input = document.createElement('input');
+
         form.setAttribute('action', elements[i].getAttribute('href'));
         form.setAttribute('method', 'POST');
         input.setAttribute('type', 'hidden');
         input.setAttribute('name', '_method');
         input.setAttribute('value', 'DELETE');
         form.appendChild(input);
+
         document.body.appendChild(form);
         form.submit();
       }
