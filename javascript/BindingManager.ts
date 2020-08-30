@@ -2,11 +2,11 @@ import parseBindings, { MODE_HANDLE } from './parseBindings';
 import Client from './Client';
 
 export default class BindingManager {
-  client: Client
+  client: Client;
 
-  _handlers: Array<any>
+  _handlers: Array<any>;
 
-  element: HTMLElement
+  element: HTMLElement;
 
   constructor(client: Client, element: HTMLElement) {
     this.client = client;

@@ -4,9 +4,9 @@ import Imixin from './interfaces/mixin_interface';
 import IChannel from './interfaces/channel_interface';
 
 export default class Subscriptions {
-  subscriptions: Array<Subscription>
+  subscriptions: Array<Subscription>;
 
-  consumer: Consumer
+  consumer: Consumer;
 
   constructor(consumer: Consumer) {
     this.consumer = consumer;
@@ -20,7 +20,7 @@ export default class Subscriptions {
     return this.add(subscription);
   }
 
-  Private
+  Private;
 
   add(subscription: Subscription) {
     this.subscriptions.push(subscription);
@@ -47,7 +47,7 @@ export default class Subscriptions {
   }
 
   forget(subscription: Subscription) {
-    this.subscriptions = (this.subscriptions.filter((s) => s !== subscription));
+    this.subscriptions = this.subscriptions.filter((s) => s !== subscription);
     return subscription;
   }
 
@@ -56,12 +56,14 @@ export default class Subscriptions {
   }
 
   reload() {
-    return this.subscriptions.map((subscription) => this.sendCommand(subscription, 'subscribe'));
+    return this.subscriptions.map((subscription) =>
+      this.sendCommand(subscription, 'subscribe')
+    );
   }
 
   notifyAll(callbackName, ...args) {
-    return this.subscriptions.map(
-      (subscription) => this.notify(subscription, callbackName, ...args),
+    return this.subscriptions.map((subscription) =>
+      this.notify(subscription, callbackName, ...args)
     );
   }
 
@@ -73,8 +75,10 @@ export default class Subscriptions {
       subscriptions = [subscription];
     }
 
-    return subscriptions.map(
-      (sub) => (typeof sub[callbackName] === 'function' ? sub[callbackName](...args) : undefined),
+    return subscriptions.map((sub) =>
+      typeof sub[callbackName] === 'function'
+        ? sub[callbackName](...args)
+        : undefined
     );
   }
 

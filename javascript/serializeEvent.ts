@@ -42,7 +42,10 @@ function serializeElementFormData(element) {
   const formData = new FormData(form);
 
   return Array.from(formData.entries())
-    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+    .map(
+      ([key, value]) =>
+        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+    )
     .join('&');
 }
 

@@ -4,19 +4,19 @@ import Subscriptions from './Subscriptions';
 import Subscription from './Subscription';
 
 class Connection {
-  socket: Amber.Socket
+  socket: Amber.Socket;
 
-  consumer: Consumer
+  consumer: Consumer;
 
-  subscriptions: Subscriptions
+  subscriptions: Subscriptions;
 
-  disconnected: boolean
+  disconnected: boolean;
 
-  channel: string | undefined
+  channel: string | undefined;
 
-  reopenDelay: number
+  reopenDelay: number;
 
-  connectionPromise: Promise<any>
+  connectionPromise: Promise<any>;
 
   constructor(consumer: Consumer) {
     this.socket = new Amber.Socket('/cable');
