@@ -1,6 +1,6 @@
-import IEvent from './event_interface'
+import IEvent from './event_interface';
 
 export default interface ISubscriptionPayload {
-  name: string
-  event: IEvent
+  name: string;
+  event: IEvent;
 }
