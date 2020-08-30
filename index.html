@@ -475,7 +475,7 @@ m(<span class="t">MyFirstComponent</span>, title: title)</code></pre>
 
 <p>In <code>main.js</code> add:</p>
 
-<pre><code class="language-js">import { createClient } from "@awcrotwell/motion";
+<pre><code class="language-js">import { createClient } from '@awcrotwell/motion';
 
 const client = createClient();</code></pre>
 
@@ -491,12 +491,12 @@ const client = createClient();</code></pre>
   </svg>
 </a>Frontend interactions</h4>
 
-<p>Frontend interactions can update your Motion components using standard JavaScript events that you're already familiar with: <code>change</code>, <code>blur</code>, form submission, and more. You can invoke motions manually using JavaScript if you need to.</p>
+<p>Frontend interactions can update your MotionComponents using standard JavaScript events that you're already familiar with: <code>change</code>, <code>blur</code>, form submission, and more. Motions default to click events however you can override this to make it any event you would like. You can invoke motions manually using JavaScript if you need to.</p>
 
 <p>The primary way to handle user interactions on the frontend is by setting <code>motion_component</code> to <code>true</code> annotating <code>@[<a href="Motion/MapMethod.html">Motion::MapMethod</a>]</code> any motion methods:</p>
 
-<pre><code class="language-crystal"><span class="c"># Whenever a user interacts with the portion of the</span>
-<span class="c"># page that contains this cQuickmponent,</span>
+<pre><code class="language-crystal"><span class="c"># Whenever a user click with the portion of the</span>
+<span class="c"># page that contains this component,</span>
 <span class="c"># `add` will be invoked, the component will be rerendered</span>
 <span class="c"># and the dom will be updated with the new html</span>
 <span class="k">class</span> <span class="t">MyMotionComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
@@ -519,7 +519,9 @@ const client = createClient();</code></pre>
     div <span class="k">do</span>
       span <span class="k">do</span>
         @total
-        button data_motion: <span class="s">&quot;add&quot;</span> <span class="k">do</span>
+        button data_motion: <span class="s">&quot;add&quot;</span> <span class="k">do</span> <span class="c"># data_motion: &quot;add&quot; defaults to a click event</span>
+                                     <span class="c"># data_motion: &quot;mouseover-&gt;add&quot; to make it a mouseover event</span>
+                                     <span class="c"># data_motion: &quot;mouseover-&gt;add mouseout-&gt;add&quot; to map multiple events to a single element</span>
           <span class="s">&quot;Increment&quot;</span> <span class="c"># button text</span>
         <span class="k">end</span>
       <span class="k">end</span>
