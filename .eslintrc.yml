@@ -1,0 +1,40 @@
+env:
+  browser: true
+  es2020: true
+extends:
+  - airbnb-base
+  - 'eslint:recommended'
+  - 'plugin:@typescript-eslint/eslint-recommended'
+  - 'plugin:@typescript-eslint/recommended'
+  - prettier
+  - tslint-config-prettier
+
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaVersion: 11
+  sourceType: module
+plugins:
+  - '@typescript-eslint'
+rules:
+  no-underscore-dangle: ['off']
+  no-unused-vars: 'off'
+  quotes: ['error', 'single']
+  '@typescript-eslint/no-unused-vars': ['error']
+  import/extensions:
+    [
+      'error',
+      'ignorePackages',
+      {
+        'ts': 'never',
+        'tsx': 'never',
+        'js': 'never',
+        'jsx': 'never',
+        'mjs': 'never',
+      },
+    ]
+
+settings:
+  import/resolver:
+    node:
+      paths: ['./javascript']
+      extensions: ['.js', '.jsx', '.ts', '.tsx']
