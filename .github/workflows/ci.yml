@@ -60,6 +60,6 @@ jobs:
           sudo apt -y install libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libz-dev libevent-dev gcc pkg-config tzdata libpcre3-dev
       - uses: actions/checkout@v1
       - name: Install Dependencies
-        run: shards install
+        run: shards install --ignore-crystal-version
       - name: Specs
-        run: crystal spec --order random --error-on-warnings --ignore-crystal-version
+        run: crystal spec --order random --error-on-warnings
