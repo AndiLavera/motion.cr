@@ -1,9 +1,16 @@
-# Motion.cr
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/91df8833c8fd48b3a0397bf51e2c3787)](https://www.codacy.com/manual/andrewc910/motion.cr?utm_source=github.com&utm_medium=referral&utm_content=andrewc910/motion.cr&utm_campaign=Badge_Grade)
-
 <p align="center">
-  <a href="http://3.23.28.58/">Try the Motion Demo</a>
+  <!-- <img src="https://raw.githubusercontent.com/veelenga/bin/master/ameba/logo.png" width="800"> -->
+  <h3 align="center">Motion</h3>
+  <p align="center">Reactive, Real-time Frontend Components</p>
+  <p align="center"><a href="http://3.23.28.58/">Try the Motion Demo</a></p>
+  <p align="center">
+    <a href="https://www.codacy.com/manual/andrewc910/motion.cr?utm_source=github.com&utm_medium=referral&utm_content=andrewc910/motion.cr&utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/91df8833c8fd48b3a0397bf51e2c3787"></a>
+    <a href="https://github.com/andrewc910/motion.cr/releases"><img src="https://img.shields.io/github/release/andrewc910/motion.cr.svg?maxAge=360"></a>
+    <a href="https://www.npmjs.com/package/@awcrotwell/motion"><img alt="npm" src="https://img.shields.io/npm/v/@awcrotwell/motion"></a>
+    <a href="https://github.com/andrewc910/motion.cr/blob/master/LICENSE"><img src="https://img.shields.io/github/license/andrewc910/motion.cr.svg"></a>
+    <a href="#"><img src="https://github.com/andrewc910/motion.cr/workflows/CI/badge.svg"></a>
+    <a href="#"><img src="https://github.com/andrewc910/motion.cr/workflows/Build%20Docs%20and%20Deploy/badge.svg"></a>
+  </p>
 </p>
 
 <p align="center"> 
@@ -355,7 +362,6 @@ See the code for full API for [Event](https://andrewc910.github.io/motion.cr/Mot
 - Stream Updates from Models
 - Routing for a full SPA experience
 - AJAX?(TBD)
-- Passing procs as props?(TBD)
 
 ## Contributing
 
@@ -363,7 +369,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/andrew
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The shard is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 <!---
 ### Backend interactions
