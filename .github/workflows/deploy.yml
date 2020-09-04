@@ -1,4 +1,4 @@
-name: Build Docs and Deploy
+name: Docs
 
 on:
   push:
