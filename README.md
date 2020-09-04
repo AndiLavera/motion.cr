@@ -1,6 +1,5 @@
 <p align="center">
-  <!-- <img src="https://raw.githubusercontent.com/veelenga/bin/master/ameba/logo.png" width="800"> -->
-  <h3 align="center">Motion</h3>
+  <img src="./images/logo.svg" width="800">
   <p align="center">Reactive, Real-time Frontend Components</p>
   <p align="center"><a href="http://3.23.28.58/">Try the Motion Demo</a></p>
   <p align="center">
@@ -8,8 +7,8 @@
     <a href="https://github.com/andrewc910/motion.cr/releases"><img src="https://img.shields.io/github/release/andrewc910/motion.cr.svg?maxAge=360"></a>
     <a href="https://www.npmjs.com/package/@awcrotwell/motion"><img alt="npm" src="https://img.shields.io/npm/v/@awcrotwell/motion"></a>
     <a href="https://github.com/andrewc910/motion.cr/blob/master/LICENSE"><img src="https://img.shields.io/github/license/andrewc910/motion.cr.svg"></a>
-    <a href="#"><img src="https://github.com/andrewc910/motion.cr/workflows/CI/badge.svg"></a>
-    <a href="#"><img src="https://github.com/andrewc910/motion.cr/workflows/Build%20Docs%20and%20Deploy/badge.svg"></a>
+    <a href="#"><img src="https://github.com/andrewc910/motion.cr/workflows/Build/badge.svg"></a>
+    <a href="#"><img src="https://github.com/andrewc910/motion.cr/workflows/Docs/badge.svg"></a>
   </p>
 </p>
 
