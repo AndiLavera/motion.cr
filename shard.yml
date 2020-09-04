@@ -1,9 +1,6 @@
 name: motion
 version: 0.1.0
 
-# authors:
-#   - name <email@example.com>
-
 # description: |
 #   Short description of view_component
 
@@ -19,9 +16,6 @@ dependencies:
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.13.1
-# development_dependencies:
-#   webmock:
-#     github: manastech/webmock.cr
+    version: ~> 0.13.2
 
-# license: MIT
+license: MIT
