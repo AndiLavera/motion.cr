@@ -2,6 +2,12 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/91df8833c8fd48b3a0397bf51e2c3787)](https://www.codacy.com/manual/andrewc910/motion.cr?utm_source=github.com&utm_medium=referral&utm_content=andrewc910/motion.cr&utm_campaign=Badge_Grade)
 
+![Build](https://github.com/andrewc910/motion.cr/workflows/CI/badge.svg)
+
+![Docs](https://github.com/andrewc910/motion.cr/workflows/Build%20Docs%20and%20Deploy/badge.svg)
+
+![dev](https://img.shields.io/david/dev/andrewc910/motion.cr)
+
 <p align="center">
   <a href="http://3.23.28.58/">Try the Motion Demo</a>
 </p>
@@ -355,7 +361,6 @@ See the code for full API for [Event](https://andrewc910.github.io/motion.cr/Mot
 - Stream Updates from Models
 - Routing for a full SPA experience
 - AJAX?(TBD)
-- Passing procs as props?(TBD)
 
 ## Contributing
 
@@ -363,7 +368,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/andrew
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The shard is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 <!---
 ### Backend interactions
