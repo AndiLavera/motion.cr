@@ -1,6 +1,5 @@
 <p align="center">
-  <img src="./images/logo.png" width="800">
-  <h3 align="center">Motion</h3>
+  <img src="./images/logo.svg" width="800">
   <p align="center">Reactive, Real-time Frontend Components</p>
   <p align="center"><a href="http://3.23.28.58/">Try the Motion Demo</a></p>
   <p align="center">
