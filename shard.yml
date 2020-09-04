@@ -10,7 +10,7 @@ version: 0.1.0
 dependencies:
   wordsmith:
     github: luckyframework/wordsmith
-    version: ~> 0.2.0
+    version: ~> 0.2.1
 
   myhtml:
     github: kostya/myhtml
