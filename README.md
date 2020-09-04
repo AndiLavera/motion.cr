@@ -1,7 +1,8 @@
 <p align="center">
   <!-- <img src="https://raw.githubusercontent.com/veelenga/bin/master/ameba/logo.png" width="800"> -->
   <h3 align="center">Motion</h3>
-  <p align="center">Reactive, Real-time Frontend Components<p>
+  <p align="center">Reactive, Real-time Frontend Components</p>
+  <p align="center"><a href="http://3.23.28.58/">Try the Motion Demo</a></p>
   <p align="center">
     <a href="https://www.codacy.com/manual/andrewc910/motion.cr?utm_source=github.com&utm_medium=referral&utm_content=andrewc910/motion.cr&utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/91df8833c8fd48b3a0397bf51e2c3787"></a>
     <a href="https://github.com/andrewc910/motion.cr/releases"><img src="https://img.shields.io/github/release/andrewc910/motion.cr.svg?maxAge=360"></a>
@@ -10,10 +11,6 @@
     <a href="#"><img src="https://github.com/andrewc910/motion.cr/workflows/CI/badge.svg"></a>
     <a href="#"><img src="https://github.com/andrewc910/motion.cr/workflows/Build%20Docs%20and%20Deploy/badge.svg"></a>
   </p>
-</p>
-
-<p align="center">
-  <a href="http://3.23.28.58/">Try the Motion Demo</a>
 </p>
 
 <p align="center"> 
