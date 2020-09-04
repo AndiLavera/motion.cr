@@ -1,27 +1,21 @@
 name: motion
 version: 0.1.0
 
-# authors:
-#   - name <email@example.com>
-
 # description: |
 #   Short description of view_component
 
 dependencies:
   wordsmith:
     github: luckyframework/wordsmith
-    version: ~> 0.2.0
+    version: ~> 0.2.1
 
   myhtml:
     github: kostya/myhtml
+    version: ~> 1.5.2
 
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.13.1
+    version: ~> 0.13.2
 
-# development_dependencies:
-#   webmock:
-#     github: manastech/webmock.cr
-
-# license: MIT
+license: MIT
