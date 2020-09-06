@@ -1,4 +1,4 @@
-name: CI
+name: Build
 
 on:
   pull_request:
@@ -37,7 +37,7 @@ jobs:
           POSTGRES_PASSWORD: mochi
           POSTGRES_DB: mochi_test
         ports:
-        - 5432:5432
+          - 5432:5432
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
@@ -50,7 +50,7 @@ jobs:
         run: shards install
       - name: Specs
         run: crystal spec --order random --error-on-warnings
-  
+
   test_nightly:
     runs-on: ubuntu-latest
     steps:
@@ -60,6 +60,6 @@ jobs:
           sudo apt -y install libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libz-dev libevent-dev gcc pkg-config tzdata libpcre3-dev
       - uses: actions/checkout@v1
       - name: Install Dependencies
-        run: shards install
+        run: shards install --ignore-crystal-version
       - name: Specs
         run: crystal spec --order random --error-on-warnings

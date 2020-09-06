@@ -1,0 +1,44 @@
+{
+  "name": "@awcrotwell/motion",
+  "version": "0.1.12",
+  "description": "Motion allows you to build reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.",
+  "main": "dist/index.js",
+  "types": "index.d.ts",
+  "files": [
+    "package.json",
+    "dist/**/*"
+  ],
+  "directories": {
+    "lib": "javascript/**"
+  },
+  "dependencies": {
+    "morphdom": "^2.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewc910/motion.cr.git"
+  },
+  "keywords": [
+    "crystal",
+    "crystal-lang"
+  ],
+  "author": "Andrew Crotwell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrewc910/motion.cr/issues"
+  },
+  "homepage": "https://github.com/andrewc910/motion.cr#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "prettier": "2.1.1",
+    "typescript": "^3.9.7"
+  }
+}

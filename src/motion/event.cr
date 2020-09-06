@@ -35,8 +35,9 @@ module Motion
       current_target()
     end
 
-    # def form_data
-    #   element&.form_data
-    # end
+    # TODO: Test
+    def form_data
+      element.form_data
+    end
   end
 end
