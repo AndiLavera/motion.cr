@@ -47,6 +47,8 @@ abstract class Motion::Base
 
   @[JSON::Field(ignore: true)]
   property view : IO::Memory = IO::Memory.new
+  @[JSON::Field(ignore: true)]
+  property channel : Motion::ChannelInterface?
   property motion_component : Bool = false
 
   # def to_s(io)
@@ -78,7 +80,9 @@ abstract class Motion::Base
             {% end %}
 
             when {{method.name.id.stringify}}
-              return self.{{method.name.id}}({% if args.size == 1 %}{{"event".id}}{% end %})
+              self.before_motion if self.responds_to?(:before_motion)
+              self.{{method.name.id}}({% if args.size == 1 %}{{"event".id}}{% end %})
+              self.after_motion if self.responds_to?(:after_motion)
           {% end %}
           end
         {% end %}
@@ -93,5 +97,9 @@ abstract class Motion::Base
       {{subclass}}: {{subclass.id}},
     {% end %}
     }
+  end
+
+  def set_state
+    (c = channel) ? c.set_state(self) : raise "NoChannelError"
   end
 end

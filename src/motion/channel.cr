@@ -1,4 +1,5 @@
 require "json"
+require "./channel_interface"
 
 # Please leave this for generating docs
 # :nodoc:
@@ -9,6 +10,7 @@ module Motion
   # :nodoc:
   class Channel < Amber::WebSockets::Channel
     getter component_connection : Motion::ComponentConnection?
+    getter topic : String?
 
     def handle_joined(client_socket, message)
       state = message["identifier"]["state"].to_s
@@ -27,7 +29,7 @@ module Motion
     end
 
     def handle_message(client_socket, message)
-      topic = message["topic"]
+      @topic = message["topic"].to_s
       identifier, data, command = parse_motion(message["payload"])
 
       case command
@@ -54,6 +56,10 @@ module Motion
       end
     end
 
+    def set_state(component : Motion::Base)
+      render(component)
+    end
+
     private def versions_mismatch?(client_version)
       Motion.config.version != client_version
     end
@@ -63,7 +69,7 @@ module Motion
     end
 
     private def connect_component(state)
-      ComponentConnection.from_state(state)
+      ComponentConnection.from_state(state, channel: ChannelInterface.new(self))
     rescue e : Exception
       # reject
       handle_error(e, "connecting a component")
@@ -77,14 +83,7 @@ module Motion
       #   via: :process_periodic_timer
       if broadcast
         proc = ->(component : Motion::Base) {
-          html = Motion.html_transformer.add_state_to_html(component, component.rerender)
-          rebroadcast!({
-            subject: "message_new",
-            topic:   topic,
-            payload: {
-              html: html,
-            },
-          })
+          render(component)
         }
 
         # TODO: Remove not_nil
@@ -98,6 +97,17 @@ module Motion
       command = payload["command"]?
 
       [identifier, data, command]
+    end
+
+    private def render(component)
+      html = Motion.html_transformer.add_state_to_html(component, component.rerender)
+      rebroadcast!({
+        subject: "message_new",
+        topic:   topic,
+        payload: {
+          html: html,
+        },
+      })
     end
 
     # TODO: pass error in as an argument: , error: error
