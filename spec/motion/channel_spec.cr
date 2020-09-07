@@ -50,4 +50,6 @@ describe Motion::Channel do
     channel.handle_message(nil, message)
     channel.component_connection.should be_nil
   end
+
+  pending("periodic timers")
 end
