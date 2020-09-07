@@ -3,43 +3,7 @@ require "./html_engine"
 require "./logger"
 require "./exceptions"
 require "./motions"
-
-# Set this annotation on any methods that can be invoked from the frontend.
-#
-# Here is a small example setting `MyComponent#add` as a motion:
-# ```crystal
-# class MyComponent < Motion::Base
-#   props count : Int32 = 0
-#
-#   @[Motion::MapMethod]
-#   def add
-#     count += 1
-#   end
-#
-#   def render
-#     div do
-#       span class: "count" do
-#         text @count.to_s
-#       end
-#       button data_motion: "add" do
-#         text "Add"
-#       end
-#     end
-#   end
-# end
-# ```
-#
-# `MyComponent#render` would return:
-#
-# ```html
-# <div>
-#   <span class="count">0</span>
-#   <button data-motion="add">Add</button>
-# </div>
-# ```
-#
-# When the user hits the button that `data-motion` is assigned to, a request will be sent off. The server will invoke the method provided and rerender the component. In this case, `add` will be invoked, count will increment by `1` & the html after rerendering will reflect that.
-annotation Motion::MapMethod; end
+require "./annotations"
 
 abstract class Motion::Base
   include Motion::HTML::Engine

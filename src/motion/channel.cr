@@ -18,7 +18,7 @@ module Motion
       raise_version_mismatch(client_version) if versions_mismatch?(client_version)
 
       @component_connection = connect_component(state)
-      self.topic = message["topic"].to_s
+      self.topic = message["topic"]?.to_s
       process_periodic_timer
       synchronize
     end
