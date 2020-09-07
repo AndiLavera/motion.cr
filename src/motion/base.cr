@@ -57,7 +57,7 @@ abstract class Motion::Base
             timers << {
               :method   => Proc(Void).new { {{method.name}} },
               :interval => {{method.annotation(Motion::PeriodicTimer)[:interval]}},
-            } 
+            }
           {% end %}
         {% end %}
       {% end %}
