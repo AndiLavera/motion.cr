@@ -10,7 +10,6 @@ module Motion
   class Channel < Amber::WebSockets::Channel
     getter component_connection : Motion::ComponentConnection?
     property topic : String?
-    property fibers : Array(Fiber) = [] of Fiber
 
     def handle_joined(client_socket, message)
       state = message["identifier"]["state"].to_s
@@ -77,8 +76,6 @@ module Motion
       # streaming_from component_connection.broadcasts,
       #   to: :process_broadcast
 
-      # periodically_notify component_connection.periodic_timers,
-      #   via: :process_periodic_timer
       if broadcast
         proc = ->(component : Motion::Base) {
           render(component)
@@ -120,7 +117,7 @@ module Motion
 
     private def process_periodic_timer
       component_connection.not_nil!.periodic_timers.each do |timer|
-        @fibers << spawn do
+        spawn do
           while connected?
             interval = timer[:interval]
             sleep interval if interval.is_a?(Time::Span)
