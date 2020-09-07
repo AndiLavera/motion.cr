@@ -9,6 +9,8 @@ module Motion
   # :nodoc:
   class Channel < Amber::WebSockets::Channel
     getter component_connection : Motion::ComponentConnection?
+    property topic : String?
+    property fibers : Array(Fiber) = [] of Fiber
 
     def handle_joined(client_socket, message)
       state = message["identifier"]["state"].to_s
@@ -17,6 +19,8 @@ module Motion
       raise_version_mismatch(client_version) if versions_mismatch?(client_version)
 
       @component_connection = connect_component(state)
+      self.topic = message["topic"].to_s
+      process_periodic_timer
       synchronize
     end
 
@@ -77,14 +81,7 @@ module Motion
       #   via: :process_periodic_timer
       if broadcast
         proc = ->(component : Motion::Base) {
-          html = Motion.html_transformer.add_state_to_html(component, component.rerender)
-          rebroadcast!({
-            subject: "message_new",
-            topic:   topic,
-            payload: {
-              html: html,
-            },
-          })
+          render(component)
         }
 
         # TODO: Remove not_nil
@@ -100,6 +97,17 @@ module Motion
       [identifier, data, command]
     end
 
+    private def render(component)
+      html = Motion.html_transformer.add_state_to_html(component, component.rerender)
+      rebroadcast!({
+        subject: "message_new",
+        topic:   topic,
+        payload: {
+          html: html,
+        },
+      })
+    end
+
     # TODO: pass error in as an argument: , error: error
     private def handle_error(error, context)
       Motion.logger.error("An error occurred while #{context} & #{error}")
@@ -110,9 +118,24 @@ module Motion
     #   synchronize
     # end
 
-    # def process_periodic_timer(timer)
-    #   component_connection.process_periodic_timer(timer)
-    #   synchronize
-    # end
+    private def process_periodic_timer
+      component_connection.not_nil!.periodic_timers.each do |timer|
+        @fibers << spawn do
+          while connected?
+            interval = timer[:interval]
+            sleep interval if interval.is_a?(Time::Span)
+
+            method = timer[:method]
+            method.call if method.is_a?(Proc(Nil))
+
+            synchronize(broadcast: true)
+          end
+        end
+      end
+    end
+
+    private def connected?
+      !component_connection.nil?
+    end
   end
 end
