@@ -11,6 +11,7 @@ describe Motion::Channel do
 
   it "raises an error when versions mismatch" do
     json = {
+      "topic":      "motion:6968",
       "identifier": {
         "state":   "",
         "version": "2.0.0a",
