@@ -26,7 +26,7 @@ export default class AttributeTracker {
     });
   }
 
-  attachRoot(element: HTMLDocument) {
+  attachRoot(element: HTMLElement): void {
     this._forEachMatchingUnder(element, (match) => this._detect(match));
 
     this._mutationObserver.observe(element, {
@@ -37,7 +37,7 @@ export default class AttributeTracker {
     });
   }
 
-  shutdown() {
+  shutdown(): void {
     this._mutationObserver.disconnect();
 
     for (const manager of this._managers.values()) {
@@ -49,11 +49,11 @@ export default class AttributeTracker {
     this._managers.clear();
   }
 
-  getManager(element: HTMLElement) {
+  getManager(element: HTMLElement): HTMLElement {
     return this._managers.get(element);
   }
 
-  _detect(element: HTMLElement) {
+  _detect(element: HTMLElement): void {
     let manager = null;
 
     this._errorBoundry(() => {
@@ -67,7 +67,7 @@ export default class AttributeTracker {
     if (manager) this._managers.set(element, manager);
   }
 
-  _update(element: HTMLElement) {
+  _update(element: HTMLElement): void {
     const manager = this._managers.get(element);
 
     if (manager && manager instanceof BindingManager) {
@@ -78,7 +78,7 @@ export default class AttributeTracker {
     }
   }
 
-  _remove(element: HTMLElement) {
+  _remove(element: HTMLElement): void {
     const manager = this._managers.get(element);
 
     if (manager && manager.shutdown) {
@@ -88,7 +88,7 @@ export default class AttributeTracker {
     this._managers.delete(element);
   }
 
-  _processMutation(mutation) {
+  _processMutation(mutation): void {
     if (mutation.type === 'childList') {
       this._processChildListMutation(mutation);
     } else if (mutation.type === 'attributes') {
@@ -96,12 +96,12 @@ export default class AttributeTracker {
     }
   }
 
-  _processChildListMutation({ removedNodes, addedNodes }) {
+  _processChildListMutation({ removedNodes, addedNodes }): void {
     this._forEachMatchingIn(removedNodes, (match) => this._remove(match));
     this._forEachMatchingIn(addedNodes, (match) => this._detect(match));
   }
 
-  _processAttributesMutation({ target }) {
+  _processAttributesMutation({ target }): void {
     if (this._managers.has(target)) {
       this._processAttributeUpdateToTracked(target);
     } else {
@@ -109,7 +109,7 @@ export default class AttributeTracker {
     }
   }
 
-  _processAttributeUpdateToTracked(element: HTMLElement) {
+  _processAttributeUpdateToTracked(element: HTMLElement): void {
     if (element.hasAttribute(this.attribute)) {
       this._update(element);
     } else {
@@ -117,19 +117,19 @@ export default class AttributeTracker {
     }
   }
 
-  _processAttributeUpdateToUntracked(element: HTMLElement) {
+  _processAttributeUpdateToUntracked(element: HTMLElement): void {
     if (element.hasAttribute(this.attribute)) {
       this._detect(element);
     }
   }
 
-  _forEachMatchingIn(nodes, callback: Function) {
+  _forEachMatchingIn(nodes, callback: Function): void {
     for (const node of nodes) {
       this._forEachMatchingUnder(node, callback);
     }
   }
 
-  _forEachMatchingUnder(node, callback: Function) {
+  _forEachMatchingUnder(node, callback: Function): void {
     if (node.hasAttribute && node.hasAttribute(this.attribute)) {
       callback(node);
     }
@@ -141,10 +141,12 @@ export default class AttributeTracker {
     }
   }
 
-  _errorBoundry(callback: Function) {
+  // eslint-disable-next-line class-methods-use-this
+  _errorBoundry(callback: Function): void {
     try {
       callback();
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('[Motion] An internal error occurred:', error);
     }
   }

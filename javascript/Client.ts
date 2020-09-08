@@ -75,13 +75,14 @@ export default class Client {
     }
   }
 
-  log(...args: Array<any>) {
+  log(...args: Array<any>): void {
     if (this.logging) {
+      // eslint-disable-next-line no-console
       console.log('[Motion]', ...args);
     }
   }
 
-  findComponent(element: HTMLElement) {
+  findComponent(element: HTMLElement): HTMLElement | undefined {
     return this._componentTracker.getManager(
       element.closest(this._componentSelector)
     );

@@ -20,7 +20,7 @@ export default class Component {
 
     this._subscription = this.client.consumer.subscriptions.create(
       {
-        channel: `motion:${Math.floor(Math.random() * 10000)}`,
+        channel: `motion:${this.generateTopic()}`,
         // TODO:
         version: '0.1.0', // import version
         state: this.element.getAttribute(this.client.stateAttribute),
@@ -96,5 +96,10 @@ export default class Component {
     this.client.log('Component rendered', this.element);
 
     dispatchEvent(this.element, 'motion:render');
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  generateTopic() : string {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 }
