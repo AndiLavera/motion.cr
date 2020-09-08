@@ -25,12 +25,17 @@ class Connection {
     this.subscriptions = this.consumer.subscriptions;
     this.disconnected = true;
     this.channel = undefined;
+    this.channels = [];
     this.reopenDelay = 500;
   }
 
   send(data) {
     this.connectionPromise.then(() => {
-      this.channel.push('message_new', data);
+      const topic = data.identifier.channel
+      this.channels.forEach(channel => {
+        if (channel.topic === topic) { channel.push('message_new', data) }
+      })
+      // this.channel.push('message_new', data);
     });
   }
 
