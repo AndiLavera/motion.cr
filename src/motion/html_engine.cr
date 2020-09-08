@@ -58,6 +58,16 @@ module Motion::HTML::Engine
            has_explicit_value ? 1 : 0
          } %}
 
+      {% for declaration in sorted_assigns %}
+        {% var = declaration.var %}
+        {% type = declaration.type %}
+        {% value = declaration.value %}
+        {% value = nil if type.stringify.ends_with?("Nil") && !value %}
+        {% has_default = value || value == false || value == nil %}
+        @[JSON::Field(key: {{ var.id.stringify }})]
+        property {{ var.id }} : {{ type }}{% if has_default %} = {{ value }}{% end %}
+      {% end %}
+
       def initialize(
         {% for declaration in sorted_assigns %}
           {% var = declaration.var %}
@@ -67,8 +77,8 @@ module Motion::HTML::Engine
           {% has_default = value || value == false || value == nil %}
           @{{ var.id }} : {{ type }}{% if has_default %} = {{ value }}{% end %},
         {% end %}
-        **unused_exposures
         )
+        
       end
     {% end %}
   end
