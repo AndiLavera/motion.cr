@@ -51,17 +51,18 @@ module Motion
     #   false
     # end
 
-    # def process_periodic_timer(timer)
-    #   timing("Proccessed periodic timer #{timer}") do
-    #     component.process_periodic_timer timer
-    #   end
+    def process_periodic_timer(timer)
+      timing("Proccessed periodic timer #{timer}") do
+        # component.process_periodic_timer timer
+        timer.call
+      end
 
-    #   true
-    # rescue => error
-    #   handle_error(error, "processing periodic timer #{timer}")
+      true
+    rescue error : Exception
+      handle_error(error, "processing periodic timer #{timer}")
 
-    #   false
-    # end
+      false
+    end
 
     def if_render_required(proc)
       timing("Rendered") do

@@ -121,11 +121,15 @@ module Motion
         # TODO: Name fibers to allow users to shut them down later?
         self.fibers << spawn do
           while connected?
-            interval = timer[:interval]
-            sleep interval if interval.is_a?(Time::Span)
+            proc = ->do
+              interval = timer[:interval]
+              sleep interval if interval.is_a?(Time::Span)
 
-            method = timer[:method]
-            method.call if method.is_a?(Proc(Nil))
+              method = timer[:method]
+              method.call if method.is_a?(Proc(Nil))
+            end
+
+            component_connection.not_nil!.process_periodic_timer(proc)
 
             synchronize(broadcast: true)
           end
