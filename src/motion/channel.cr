@@ -17,7 +17,7 @@ module Motion
       client_version = message["identifier"]["version"].to_s
       raise_version_mismatch(client_version) if versions_mismatch?(client_version)
 
-      state = message["identifier"]["state"].as_s
+      state = message["identifier"]["state"].to_s
       topic = message["topic"].to_s
       self.component_connections[topic] = connect_component(state)
 
@@ -39,7 +39,7 @@ module Motion
 
       case command
       when "unsubscribe"
-        handle_leave(client_socket)
+        handle_leave(client_socket, message)
         broadcast = false
       when "process_motion"
         if data

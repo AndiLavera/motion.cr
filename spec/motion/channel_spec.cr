@@ -5,9 +5,8 @@ describe Motion::Channel do
     channel = Motion::Channel.new
     channel.handle_joined(nil, MESSAGE_JOIN)
 
-    channel.component_connection.should_not be_nil
-    channel.component_connection.not_nil!.component.class.should eq(MotionRender)
-    channel.topic.should_not be_nil
+    channel.component_connections[MESSAGE_JOIN["topic"]].should_not be_nil
+    channel.component_connections[MESSAGE_JOIN["topic"]].not_nil!.component.class.should eq(MotionRender)
   end
 
   it "raises an error when versions mismatch" do
@@ -28,7 +27,7 @@ describe Motion::Channel do
     channel = join_channel
 
     channel.handle_message(nil, MESSAGE_NEW)
-    component = channel.component_connection.not_nil!.component
+    component = channel.component_connections[MESSAGE_JOIN["topic"]].not_nil!.component
     (c = component) ? c.inspect.to_s.includes?("@motion_hit=true") : fail("No component found")
   end
 
@@ -47,7 +46,7 @@ describe Motion::Channel do
     channel = join_channel
 
     channel.handle_message(nil, message)
-    channel.component_connection.should be_nil
+    channel.component_connections[message["topic"]]?.should be_nil
   end
 
   it "can register periodic timers" do

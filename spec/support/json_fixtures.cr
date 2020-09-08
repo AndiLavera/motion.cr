@@ -10,12 +10,12 @@ MESSAGE_JOIN = JSON.parse({
 
 MESSAGE_NEW = JSON.parse({
   "event"   => "message",
-  "topic"   => "motion:922",
+  "topic"   => "motion:6968",
   "subject" => "message_new",
   "payload" => {
     "command"    => "process_motion",
     "identifier" => {
-      "channel" => "motion:922",
+      "channel" => "motion:6968",
       "version" => "0.1.0",
       "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==",
     },
