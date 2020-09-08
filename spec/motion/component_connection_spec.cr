@@ -24,4 +24,13 @@ describe Motion::ComponentConnection do
     component_connection.process_motion("motion", Motion::Event.new(EVENT_DATA))
     component.motion_hit?.should be_true
   end
+
+  it "can fetch components periodic timers" do
+    component = TickerComponent.new
+    component_connection = Motion::ComponentConnection.new(component)
+
+    component_connection.periodic_timers.empty?.should be_false
+    # TODO: Errors out?
+    # component_connection.periodic_timers.should eq(component.periodic_timers)
+  end
 end

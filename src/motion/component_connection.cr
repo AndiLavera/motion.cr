@@ -82,9 +82,9 @@ module Motion
     #   component.broadcasts
     # end
 
-    # def periodic_timers
-    #   component.periodic_timers
-    # end
+    def periodic_timers
+      component.periodic_timers
+    end
 
     private def timing(context, &block)
       logger.timing(context, &block)

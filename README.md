@@ -311,6 +311,30 @@ render MyFirstComponent
 
 Every time the "Increment" button is clicked, MyComponent will call the `add` method, re-render your component and send it back to the frontend to replace the existing DOM. All invocations of mapped motions will cause the component to re-render, and unchanged rendered HTML will not perform any changes.
 
+#### Periodic Timers
+
+Motion can automatically invoke a method on your component at regular intervals:
+
+```crystal
+class TickerComponent < Motion::Base
+  props ticker : Int32 = 0
+  props motion_component : Bool = true
+
+  @[Motion::PeriodicTimer(interval: 1.second)]
+  def tick
+    @ticker += 1
+  end
+
+  def render
+    div do
+      span @ticker.to_s
+    end
+  end
+end
+```
+
+In this example, after the component has mounted to a websockets channel, `tick` will be invoked every second and the component will be rerendered on the frontend.
+
 #### Motion::Event and Motion::Element
 
 Methods that are mapped using `@[Motion::MapMethod]` can choose to accept an `event` parameter which is a `Motion::Event`. This object has a `target` attribute which is a `Motion::Element`, the element in the DOM that triggered the motion. Useful state and attributes can be extracted from these objects, including value, selected, checked, form state, data attributes, and more.
@@ -357,7 +381,6 @@ See the code for full API for [Event](https://andrewc910.github.io/motion.cr/Mot
 
 ## Roadmap
 
-- Perodic Timers
 - Stream Updates from Models
 - Routing for a full SPA experience
 - AJAX?(TBD)
@@ -407,20 +430,4 @@ end
 This will cause any user that has a page open with `MyComponent` mounted on it to re-render that component's portion of the page.
 
 All invocations of `stream_from` connected methods will cause the component to re-render everywhere, and unchanged rendered HTML will not perform any changes.
-
-## Periodic Timers
-
-Motion can automatically invoke a method on your component at regular intervals:
-
-```crystal
-class ClockComponent < Motion::Base
-  prop time : TimeSpan = Time.local
-
-  every 1.second, :tick
-
-  def tick
-    @time = Time.now
-  end
-end
-```
 -->
