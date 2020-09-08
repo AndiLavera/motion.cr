@@ -77,8 +77,9 @@ module Motion::HTML::Engine
           {% has_default = value || value == false || value == nil %}
           @{{ var.id }} : {{ type }}{% if has_default %} = {{ value }}{% end %},
         {% end %}
+        # Removed due to json serialization bug
+        # **unused_exposures
         )
-        
       end
     {% end %}
   end
