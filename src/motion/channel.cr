@@ -10,6 +10,7 @@ module Motion
   class Channel < Amber::WebSockets::Channel
     getter component_connection : Motion::ComponentConnection?
     property topic : String?
+    property fibers : Array(Fiber) = [] of Fiber
 
     def handle_joined(client_socket, message)
       state = message["identifier"]["state"].to_s
@@ -117,7 +118,8 @@ module Motion
 
     private def process_periodic_timer
       component_connection.not_nil!.periodic_timers.each do |timer|
-        spawn do
+        # TODO: Name fibers to allow users to shut them down later?
+        self.fibers << spawn do
           while connected?
             interval = timer[:interval]
             sleep interval if interval.is_a?(Time::Span)

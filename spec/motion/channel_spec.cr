@@ -7,6 +7,7 @@ describe Motion::Channel do
 
     channel.component_connection.should_not be_nil
     channel.component_connection.not_nil!.component.class.should eq(MotionRender)
+    channel.topic.should_not be_nil
   end
 
   it "raises an error when versions mismatch" do
@@ -51,5 +52,18 @@ describe Motion::Channel do
     channel.component_connection.should be_nil
   end
 
-  pending("periodic timers")
+  it "can register periodic timers" do
+    json = {
+      "topic":      "motion:69689",
+      "identifier": {
+        "state":   "eyJtb3Rpb25fY29tcG9uZW50Ijp0cnVlLCJjb3VudCI6MH0AVGlja2VyQ29tcG9uZW50", # TickerComponent
+        "version": "0.1.0",
+      },
+    }
+
+    channel = Motion::Channel.new
+    channel.handle_joined(nil, json)
+
+    channel.fibers.empty?.should be_false
+  end
 end
