@@ -216,6 +216,11 @@
       
     </li>
   
+  <li class=" " data-id="motion/Motion/PeriodicTimer" data-name="motion::periodictimer">
+      <a href="Motion/PeriodicTimer.html">PeriodicTimer</a>
+      
+    </li>
+  
 </ul>
 
       
@@ -555,6 +560,32 @@ const client = createClient();</code></pre>
 
 <p>Every time the "Increment" button is clicked, MyComponent will call the <code>add</code> method, re-render your component and send it back to the frontend to replace the existing DOM. All invocations of mapped motions will cause the component to re-render, and unchanged rendered HTML will not perform any changes.</p>
 
+<h4><a id="periodic-timers" class="anchor" href="#periodic-timers">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Periodic Timers</h4>
+
+<p>Motion can automatically invoke a method on your component at regular intervals:</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">TickerComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
+  props ticker : <span class="t">Int32</span> <span class="o">=</span> <span class="n">0</span>
+  props motion_component : <span class="t">Bool</span> <span class="o">=</span> <span class="n">true</span>
+
+  @[<span class="t">Motion</span><span class="t">::</span><span class="t">PeriodicTimer</span>(interval: <span class="n">1</span>.second)]
+  <span class="k">def</span> <span class="m">tick</span>
+    @ticker += <span class="n">1</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="m">render</span>
+    div <span class="k">do</span>
+      span @ticker.to_s
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>In this example, after the component has mounted to a websockets channel, <code>tick</code> will be invoked every second and the component will be rerendered on the frontend.</p>
+
 <h4><a id="motionevent-and-motionelement" class="anchor" href="#motionevent-and-motionelement">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -611,7 +642,7 @@ const client = createClient();</code></pre>
   </svg>
 </a>Roadmap</h2>
 
-<ul><li>Perodic Timers</li><li>Stream Updates from Models</li><li>Routing for a full SPA experience</li><li>AJAX?(TBD)</li></ul>
+<ul><li>Stream Updates from Models</li><li>Routing for a full SPA experience</li><li>AJAX?(TBD)</li></ul>
 
 <h2><a id="contributing" class="anchor" href="#contributing">
   <svg class="octicon-link" aria-hidden="true">
@@ -666,27 +697,8 @@ end</code></pre>
 
 <p>This will cause any user that has a page open with <code>MyComponent</code> mounted on it to re-render that component's portion of the page.</p>
 
-<p>All invocations of <code>stream_from</code> connected methods will cause the component to re-render everywhere, and unchanged rendered HTML will not perform any changes.</p>
-
-<h2><a id="periodic-timers" class="anchor" href="#periodic-timers">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>Periodic Timers</h2>
-
-<p>Motion can automatically invoke a method on your component at regular intervals:</p>
-
-<pre><code class="language-crystal"><span class="k">class</span> <span class="t">ClockComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
-  prop time : <span class="t">TimeSpan</span> <span class="o">=</span> <span class="t">Time</span>.local
-
-  every <span class="n">1</span>.second, <span class="n">:tick</span>
-
-  <span class="k">def</span> <span class="m">tick</span>
-    @time <span class="o">=</span> <span class="t">Time</span>.now
-  <span class="k">end</span>
-<span class="k">end</span></code></pre>
-
-<p>--></p>
+<p>All invocations of <code>stream_from</code> connected methods will cause the component to re-render everywhere, and unchanged rendered HTML will not perform any changes.
+--></p>
 </div>
 </body>
 </html>
