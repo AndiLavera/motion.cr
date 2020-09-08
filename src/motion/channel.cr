@@ -118,9 +118,9 @@ module Motion
 
     private def process_periodic_timer
       component_connection.not_nil!.periodic_timers.each do |timer|
-        # TODO: Name fibers to allow users to shut them down later?
-        self.fibers << spawn do
-          while connected?
+        name = timer[:name]
+        self.fibers << spawn name: name.to_s do
+          while connected? && periodic_timer_active?(name)
             proc = ->do
               interval = timer[:interval]
               sleep interval if interval.is_a?(Time::Span)
@@ -129,7 +129,7 @@ module Motion
               method.call if method.is_a?(Proc(Nil))
             end
 
-            component_connection.not_nil!.process_periodic_timer(proc)
+            component_connection.not_nil!.process_periodic_timer(proc, name.to_s)
 
             synchronize(broadcast: true)
           end
@@ -139,6 +139,12 @@ module Motion
 
     private def connected?
       !component_connection.nil?
+    end
+
+    # TODO: Some way to allow users to invoke
+    # a method to stop a particular timer
+    private def periodic_timer_active?(name)
+      true
     end
   end
 end

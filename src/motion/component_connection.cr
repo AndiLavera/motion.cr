@@ -51,8 +51,8 @@ module Motion
     #   false
     # end
 
-    def process_periodic_timer(timer)
-      timing("Proccessed periodic timer #{timer}") do
+    def process_periodic_timer(timer : Proc(Nil), name : String)
+      timing("Proccessed periodic timer #{name}") do
         # component.process_periodic_timer timer
         timer.call
       end
