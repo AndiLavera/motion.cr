@@ -20,13 +20,12 @@ describe Motion::Channel do
     }
 
     expect_raises(Motion::Exceptions::IncompatibleClientError) do
-      Motion::Channel.new.handle_joined(nil, json)
+      join_channel(json)
     end
   end
 
   it "can process a motion" do
-    channel = Motion::Channel.new
-    channel.handle_joined(nil, MESSAGE_JOIN)
+    channel = join_channel
 
     channel.handle_message(nil, MESSAGE_NEW)
     component = channel.component_connection.not_nil!.component
@@ -45,8 +44,7 @@ describe Motion::Channel do
       },
     }.to_json)
 
-    channel = Motion::Channel.new
-    channel.handle_joined(nil, MESSAGE_JOIN)
+    channel = join_channel
 
     channel.handle_message(nil, message)
     channel.component_connection.should be_nil
@@ -61,9 +59,14 @@ describe Motion::Channel do
       },
     }
 
-    channel = Motion::Channel.new
-    channel.handle_joined(nil, json)
+    channel = join_channel(json)
 
     channel.fibers.empty?.should be_false
   end
+end
+
+def join_channel(json = MESSAGE_JOIN)
+  channel = Motion::Channel.new
+  channel.handle_joined(nil, json)
+  channel
 end
