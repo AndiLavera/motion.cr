@@ -134,7 +134,7 @@ module Motion
 
             component_connections[topic].not_nil!.process_periodic_timer(proc, name.to_s)
 
-            synchronize(topic: topic broadcast: true)
+            synchronize(topic: topic, broadcast: true)
           end
         end
       end

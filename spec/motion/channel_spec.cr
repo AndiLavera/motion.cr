@@ -62,6 +62,8 @@ describe Motion::Channel do
 
     channel.fibers.empty?.should be_false
   end
+
+  pending("it can run periodic timers")
 end
 
 def join_channel(json = MESSAGE_JOIN)
