@@ -50,7 +50,7 @@ abstract class Motion::Base
     end
 
     def periodic_timers
-      timers = [] of Hash(Symbol, String | Proc(Nil) | Time::Span) | Hash(Symbol, Time::Span)
+      timers = [] of Hash(Symbol, String | Proc(Nil) | Time::Span)
       {% verbatim do %}
         {% begin %}
           {% for method in @type.methods.select &.annotation(Motion::PeriodicTimer) %}
