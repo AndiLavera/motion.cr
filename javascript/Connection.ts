@@ -73,6 +73,18 @@ class Connection {
     return true;
   }
   /* eslint-enable class-methods-use-this */
+
+  // For some reason the documentLifecycle promise wasn't ever hitting this
+  // Check client & client#shutdown for more info
+  handleWindowOffload(): void {
+    window.addEventListener('beforeunload', () => this.shutdown.bind(this))
+  }
+
+  shutdown(): void {
+    this.channels.forEach(channel => {
+      channel.push('unsubscribe', { command: 'unsubscribe' })
+    })
+  }
 }
 
 export default Connection;

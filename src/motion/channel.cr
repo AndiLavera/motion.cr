@@ -9,9 +9,7 @@ module Motion
   # :nodoc:
   class Channel < Amber::WebSockets::Channel
     property component_connections : Hash(String, Motion::ComponentConnection?) = Hash(String, Motion::ComponentConnection?).new
-    # getter component_connection : Motion::ComponentConnection?
-    # property topic : String?
-    property fibers : Array(Fiber) = [] of Fiber
+    property fibers : Hash(String, Fiber) = Hash(String, Fiber).new
 
     def handle_joined(client_socket, message)
       client_version = message["identifier"]["version"].to_s
@@ -25,12 +23,16 @@ module Motion
       synchronize(topic)
     end
 
-    def handle_leave(client_socket, message)
-      pp "HANDLE LEAVE"
-      pp message
-      # TODO: Remove not_nil
-      # component_connection.not_nil!.close
-      # @component_connection = nil
+    def handle_leave(client_socket, topic : String)
+      component_connections[topic].not_nil!.close do |component|
+        component.periodic_timers.each do |timer|
+          if name = timer[:name]
+            fibers.delete(name)
+            logger.info("Periodic Timer #{name} has been disabled")
+          end
+        end
+        component_connections.delete(topic)
+      end
     end
 
     def handle_message(client_socket, message)
@@ -39,7 +41,7 @@ module Motion
 
       case command
       when "unsubscribe"
-        handle_leave(client_socket, message)
+        handle_leave(client_socket, topic)
         broadcast = false
       when "process_motion"
         if data
@@ -85,8 +87,9 @@ module Motion
           render(component, topic)
         }
 
-        # TODO: Remove not_nil
-        component_connections[topic].not_nil!.if_render_required(proc)
+        if cc = component_connections[topic]?
+          cc.if_render_required(proc)
+        end
       end
     end
 
@@ -109,11 +112,6 @@ module Motion
       })
     end
 
-    # TODO: pass error in as an argument: , error: error
-    private def handle_error(error, context)
-      Motion.logger.error("An error occurred while #{context} & #{error}")
-    end
-
     # def process_broadcast(broadcast, message)
     #   component_connection.process_broadcast(broadcast, message)
     #   synchronize
@@ -121,8 +119,8 @@ module Motion
 
     private def process_periodic_timer(topic)
       component_connections[topic].not_nil!.periodic_timers.each do |timer|
-        name = timer[:name]
-        self.fibers << spawn name: name.to_s do
+        name = timer[:name].to_s
+        self.fibers[name] = spawn do
           while connected?(topic) && periodic_timer_active?(name)
             proc = ->do
               interval = timer[:interval]
@@ -132,9 +130,10 @@ module Motion
               method.call if method.is_a?(Proc(Nil))
             end
 
-            component_connections[topic].not_nil!.process_periodic_timer(proc, name.to_s)
-
-            synchronize(topic: topic, broadcast: true)
+            if cc = component_connections[topic]?
+              cc.process_periodic_timer(proc, name.to_s)
+              synchronize(topic: topic, broadcast: true)
+            end
           end
         end
       end
@@ -148,6 +147,15 @@ module Motion
     # a method to stop a particular timer
     private def periodic_timer_active?(name)
       true
+    end
+
+    # TODO: pass error in as an argument: , error: error
+    private def handle_error(error, context)
+      logger.error("An error occurred while #{context} & #{error}")
+    end
+
+    private def logger
+      Motion.logger
     end
   end
 end
