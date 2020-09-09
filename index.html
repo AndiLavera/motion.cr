@@ -263,7 +263,7 @@
   </svg>
 </a>Table of Contents</h2>
 
-<ul><li><a href="#motioncr" target="_blank">Motion.cr</a></li><ul><li><a href="#table-of-contents" target="_blank">Table of Contents</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#documentation" target="_blank">Documentation</a></li><li><a href="#component-guide" target="_blank">Component Guide</a></li><li><a href="#why-should-i-use-components-" target="_blank">Why should I use components?</a></li><li><a href="#testing" target="_blank">Testing</a></li><li><a href="#data-flow" target="_blank">Data Flow</a></li><li><a href="#standards" target="_blank">Standards</a></li><li><a href="#building-components" target="_blank">Building components</a></li><li><a href="#conventions" target="_blank">Conventions</a></li><li><a href="#quick-start" target="_blank">Quick start</a></li><li><a href="#html-generation" target="_blank">HTML Generation</a></li><li><a href="#props---type-safety" target="_blank">Props & Type Safety</a></li><li><a href="#blocks---procs" target="_blank">Blocks & Procs</a></li><li><a href="#motion-guide" target="_blank">Motion Guide</a></li><li><a href="#installation-1" target="_blank">Installation</a></li><li><a href="#building-motions" target="_blank">Building Motions</a></li><li><a href="#frontend-interactions" target="_blank">Frontend interactions</a></li><li><a href="#motionevent-and-motionelement" target="_blank">Motion::Event and Motion::Element</a></li><li><a href="#limitations" target="_blank">Limitations</a></li><li><a href="#roadmap" target="_blank">Roadmap</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#license" target="_blank">License</a></li></ul></ul>
+<ul><li><a href="#motioncr" target="_blank">Motion.cr</a></li><ul><li><a href="#table-of-contents" target="_blank">Table of Contents</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#documentation" target="_blank">Documentation</a></li><li><a href="#component-guide" target="_blank">Component Guide</a></li><li><a href="#why-should-i-use-components-" target="_blank">Why should I use components?</a></li><li><a href="#testing" target="_blank">Testing</a></li><li><a href="#data-flow" target="_blank">Data Flow</a></li><li><a href="#standards" target="_blank">Standards</a></li><li><a href="#building-components" target="_blank">Building components</a></li><li><a href="#conventions" target="_blank">Conventions</a></li><li><a href="#quick-start" target="_blank">Quick start</a></li><li><a href="#html-generation" target="_blank">HTML Generation</a></li><li><a href="#props---type-safety" target="_blank">Props & Type Safety</a></li><li><a href="#blocks---procs" target="_blank">Blocks & Procs</a></li><li><a href="#motion-guide" target="_blank">Motion Guide</a></li><li><a href="#installation-1" target="_blank">Installation</a></li><li><a href="#building-motions" target="_blank">Building Motions</a></li><li><a href="#frontend-interactions" target="_blank">Frontend interactions</a></li><li><a href="#periodic-timers" target="_blank">Periodic Timers</a></li><li><a href="#motionevent-and-motionelement" target="_blank">Motion::Event and Motion::Element</a></li><li><a href="#limitations" target="_blank">Limitations</a></li><li><a href="#roadmap" target="_blank">Roadmap</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#license" target="_blank">License</a></li></ul></ul>
 
 <h2><a id="installation" class="anchor" href="#installation">
   <svg class="octicon-link" aria-hidden="true">
@@ -274,14 +274,15 @@
 <p>Motion.cr has Crystal and JavaScript parts, execute both of these commands:</p>
 
 <pre><code class="language-sh">dependencies:
-  motion.cr:
-    github: andrewc910/motion.cr</code></pre>
+  motion:
+    github: andrewc910/motion.cr
+    version: 0.2.0</code></pre>
 
 <p>Create a file <code>motion.cr</code> in <code>config/initializers</code> and add:</p>
 
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;motion&quot;</span>
-<span class="c"># The next require adds the `render` method for components to Amber controllers</span>
-<span class="k">require</span> <span class="s">&quot;motion/amber/monkey_patch&quot;</span></code></pre>
+<span class="c"># Adds a `render` method to Amber controllers that accepts MotionComponents</span>
+<span class="k">require</span> <span class="s">&quot;motion/monkey_patch/amber&quot;</span></code></pre>
 
 <h2><a id="documentation" class="anchor" href="#documentation">
   <svg class="octicon-link" aria-hidden="true">
@@ -393,7 +394,7 @@
 
 <p>For static html rendering, please review the <a href="https://www.luckyframework.org/guides/frontend/rendering-html#layouts" target="_blank">lucky framework documentation</a></p>
 
-<blockquote>Note: Lucky uses the macro keyword <code>needs</code>, motion uses <code>prop</code></blockquote>
+<blockquote>Note: Lucky uses the macro keyword <code>needs</code>, motion uses <code>props</code></blockquote>
 
 <h4><a id="props-type-safety" class="anchor" href="#props-type-safety">
   <svg class="octicon-link" aria-hidden="true">
@@ -404,7 +405,7 @@
 <p>Props allow you to pass arguements to child components that are type safe. One of the problems with ecr views & partials is, it's hard to reason what variables & data the page requires to render because everything is within scope. Props explicity display what is required for a particular component.</p>
 
 <pre><code class="language-crystal"><span class="k">class</span> <span class="t">MyFirstComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
-  prop title : <span class="t">String</span>
+  props title : <span class="t">String</span>
 
   <span class="k">def</span> <span class="m">render</span>
     html_doctype
@@ -438,7 +439,7 @@
 <p>Blocks & Procs can be passed to child components. This will allow you to create more generic & reusable components.</p>
 
 <pre><code class="language-crystal"><span class="k">class</span> <span class="t">MyFirstComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
-  prop title : <span class="t">Proc</span>(void)
+  props title : <span class="t">Proc</span>(void)
 
   <span class="k">def</span> <span class="m">render</span>
     html_doctype
@@ -480,7 +481,7 @@ m(<span class="t">MyFirstComponent</span>, title: title)</code></pre>
   </svg>
 </a>Installation</h3>
 
-<pre><code class="language-sh">yarn add @andrewc910/motion.cr</code></pre>
+<pre><code class="language-sh">npm i @awcrotwell/motion</code></pre>
 
 <p>In <code>main.js</code> add:</p>
 
@@ -510,9 +511,9 @@ const client = createClient();</code></pre>
 <span class="c"># and the dom will be updated with the new html</span>
 <span class="k">class</span> <span class="t">MyMotionComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
   <span class="c"># Let motion know this is a motion component</span>
-  prop motion_component <span class="o">=</span> <span class="n">true</span>
+  props motion_component <span class="o">=</span> <span class="n">true</span>
   <span class="c"># Add your props that you plan to pass in or default</span>
-  prop total : <span class="t">Int32</span> <span class="o">=</span> <span class="n">0</span>
+  props total : <span class="t">Int32</span> <span class="o">=</span> <span class="n">0</span>
 
   <span class="c"># Annotate any motion methods</span>
   @[<span class="t">Motion</span><span class="t">::</span><span class="t">MapMethod</span>]
