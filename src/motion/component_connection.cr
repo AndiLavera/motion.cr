@@ -9,22 +9,21 @@ module Motion
     getter render_hash : UInt64?
 
     def initialize(@component : Motion::Base)
-      timing("Connected") do
+      timing("Connected #{@component.class}") do
         @render_hash = component.render_hash
       end
     end
 
-    # TODO:
-    def close
-      #   timing("Disconnected") do
-      #     component.process_disconnect
-      #   end
+    def close(&block : Motion::Base -> Nil)
+      timing("Disconnected #{@component.class}") do
+        block.call(component)
+      end
 
-      #   true
-      # rescue => error
-      #   handle_error(error, "disconnecting the component")
+      true
+    rescue error : Exception
+      handle_error(error, "disconnecting the component")
 
-      #   false
+      false
     end
 
     def process_motion(motion : String, event : Motion::Event? = nil)
