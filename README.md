@@ -46,6 +46,7 @@ Motion is a framework for building reactive, real-time frontend UI components in
     - [Installation](#installation-1)
     - [Building Motions](#building-motions)
       - [Frontend interactions](#frontend-interactions)
+      - [Periodic Timers](#periodic-timers)
       - [Motion::Event and Motion::Element](#motionevent-and-motionelement)
   - [Limitations](#limitations)
   - [Roadmap](#roadmap)
@@ -58,16 +59,17 @@ Motion.cr has Crystal and JavaScript parts, execute both of these commands:
 
 ```sh
 dependencies:
-  motion.cr:
+  motion:
     github: andrewc910/motion.cr
+    version: 0.2.0
 ```
 
 Create a file `motion.cr` in `config/initializers` and add:
 
 ```crystal
 require "motion"
-# The next require adds the `render` method for components to Amber controllers
-require "motion/amber/monkey_patch"
+# Adds a `render` method to Amber controllers that accepts MotionComponents
+require "motion/monkey_patch/amber"
 ```
 
 ## Documentation
@@ -145,7 +147,7 @@ render MyFirstComponent
 
 For static html rendering, please review the [lucky framework documentation](https://www.luckyframework.org/guides/frontend/rendering-html#layouts)
 
-> Note: Lucky uses the macro keyword `needs`, motion uses `prop`
+> Note: Lucky uses the macro keyword `needs`, motion uses `props`
 
 #### Props & Type Safety
 
@@ -153,7 +155,7 @@ Props allow you to pass arguements to child components that are type safe. One o
 
 ```crystal
 class MyFirstComponent < Motion::Base
-  prop title : String
+  props title : String
 
   def render
     html_doctype
@@ -189,7 +191,7 @@ Blocks & Procs can be passed to child components. This will allow you to create 
 
 ```crystal
 class MyFirstComponent < Motion::Base
-  prop title : Proc(void)
+  props title : Proc(void)
 
   def render
     html_doctype
@@ -232,7 +234,7 @@ Motion.cr is similar to [Phoenix LiveView](https://github.com/phoenixframework/p
 ### Installation
 
 ```sh
-yarn add @andrewc910/motion.cr
+npm i @awcrotwell/motion
 ```
 
 In `main.js` add:
@@ -258,9 +260,9 @@ The primary way to handle user interactions on the frontend is by setting `motio
 # and the dom will be updated with the new html
 class MyMotionComponent < Motion::Base
   # Let motion know this is a motion component
-  prop motion_component = true
+  props motion_component = true
   # Add your props that you plan to pass in or default
-  prop total : Int32 = 0
+  props total : Int32 = 0
 
   # Annotate any motion methods
   @[Motion::MapMethod]
