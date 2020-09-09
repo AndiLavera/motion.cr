@@ -3,7 +3,7 @@ MESSAGE_JOIN = JSON.parse({
   "topic"      => "motion:6968",
   "identifier" => {
     "channel" => "motion:6968",
-    "version" => "0.1.0",
+    "version" => Motion::Version.to_s,
     "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==",
   },
 }.to_json)
@@ -16,7 +16,7 @@ MESSAGE_NEW = JSON.parse({
     "command"    => "process_motion",
     "identifier" => {
       "channel" => "motion:6968",
-      "version" => "0.1.0",
+      "version" => Motion::Version.to_s,
       "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==",
     },
     "data" => {
