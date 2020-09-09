@@ -1,4 +1,5 @@
 require "./version"
+require "uuid"
 
 module Motion
   # Main configuration for Motion.cr.
@@ -25,5 +26,7 @@ module Motion
     getter logger : Motion::Logger = Motion::Logger.new
     # :nodoc:
     getter version : String = Motion::Version.to_s
+
+    getter revision : String = UUID.random.to_s.hash.to_s
   end
 end

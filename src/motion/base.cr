@@ -17,6 +17,19 @@ abstract class Motion::Base
   #   io << view
   # end
 
+  # Motion gets a `revision` everytime the server
+  # is turned on. This raises an error if someone
+  # was on a webpage during a reboot & the server/client
+  # revisions no longer match. You can overwrite this
+  # to handle custom logic.
+  def self.upgrade_from(previous_revision, component)
+    raise Exceptions::UpgradeNotImplementedError.new(
+      component,
+      previous_revision,
+      Motion.config.revision
+    )
+  end
+
   # :nodoc:
   def rerender
     self.view = IO::Memory.new
