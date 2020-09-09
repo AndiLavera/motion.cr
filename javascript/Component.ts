@@ -2,8 +2,9 @@ import dispatchEvent from './dispatchEvent';
 import serializeEvent from './serializeEvent';
 import reconcile from './reconcile';
 import Client from './Client';
-
+import Subscription from './Subscription';
 import { version } from '../package.json';
+
 
 export default class Component {
   client: Client
@@ -34,7 +35,7 @@ export default class Component {
     );
   }
 
-  processMotion(name: string, event = null) {
+  processMotion(name: string, event = null): void {
     if (!this._subscription) {
       this.client.log('Dropped motion', name, 'on', this.element);
       return;
@@ -52,39 +53,39 @@ export default class Component {
     );
   }
 
-  shutdown() {
+  shutdown(): void {
     this._subscription.unsubscribe();
     delete this._subscription;
 
     this._disconnect();
   }
 
-  _beforeConnect() {
+  _beforeConnect(): void {
     this.client.log('Connecting component', this.element);
 
     dispatchEvent(this.element, 'motion:before-connect');
   }
 
-  _connect() {
+  _connect(): void {
     // debugger
     this.client.log('Component connected', this.element);
 
     dispatchEvent(this.element, 'motion:connect');
   }
 
-  _connectFailed() {
+  _connectFailed(): void {
     this.client.log('Failed to connect component', this.element);
 
     dispatchEvent(this.element, 'motion:connect-failed');
   }
 
-  _disconnect() {
+  _disconnect(): void {
     this.client.log('Component disconnected', this.element);
 
     dispatchEvent(this.element, 'motion:disconnect');
   }
 
-  _render(newState: string) {
+  _render(newState: string): void {
     dispatchEvent(this.element, 'motion:before-render');
 
     reconcile(
@@ -99,7 +100,7 @@ export default class Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  generateTopic() : string {
+  generateTopic(): string {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 }
