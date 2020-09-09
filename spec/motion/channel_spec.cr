@@ -31,15 +31,19 @@ describe Motion::Channel do
     (c = component) ? c.inspect.to_s.includes?("@motion_hit=true") : fail("No component found")
   end
 
-  it "can handle a subscriber leaving" do
+  it "can handle unsubscribe" do
     message = JSON.parse({
       "event"   => "message",
-      "topic"   => "motion:922",
+      "topic"   => "motion:6968",
       "subject" => "message_new",
       "payload" => {
         "command"    => "unsubscribe",
         "data"       => {} of String => String,
-        "identifier" => {} of String => String,
+        "identifier" => {
+          "channel" => "motion:6968",
+          "version" => "0.1.0",
+          "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==",
+        },
       },
     }.to_json)
 
