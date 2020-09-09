@@ -12,11 +12,13 @@ class Connection {
 
   disconnected: boolean;
 
-  channel: string | undefined;
+  channel: Amber.Channel | undefined;
 
   reopenDelay: number;
 
   connectionPromise: Promise<any>;
+
+  channels: Array<Amber.Channel>
 
   constructor(consumer: Consumer) {
     this.socket = new Amber.Socket('/cable');
@@ -35,7 +37,6 @@ class Connection {
       this.channels.forEach(channel => {
         if (channel.topic === topic) { channel.push('message_new', data) }
       })
-      // this.channel.push('message_new', data);
     });
   }
 
@@ -43,6 +44,7 @@ class Connection {
     this.connectionPromise.then(() => {
       data.connected();
       this.channel = this.socket.channel(data.channel);
+      this.channels.push(this.channel)
 
       this.channel.join({ identifier: data.identifier });
 

@@ -48,7 +48,7 @@ export default function parseBindings(input, element) {
   });
 }
 
-function defaultEventFor(element) {
+function defaultEventFor(element: HTMLElement) {
   const event =
     DEFAULT_EVENT[element && element.tagName] || DEFAULT_EVENT._other;
 
