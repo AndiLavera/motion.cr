@@ -41,7 +41,7 @@ describe Motion::Channel do
         "data"       => {} of String => String,
         "identifier" => {
           "channel" => "motion:6968",
-          "version" => "0.1.0",
+          "version" => Motion::Version.to_s,
           "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==",
         },
       },
@@ -58,7 +58,7 @@ describe Motion::Channel do
       "topic":      "motion:69689",
       "identifier": {
         "state":   "eyJtb3Rpb25fY29tcG9uZW50Ijp0cnVlLCJjb3VudCI6MH0AVGlja2VyQ29tcG9uZW50", # TickerComponent
-        "version": "0.1.0",
+        "version": Motion::Version.to_s,
       },
     }
 

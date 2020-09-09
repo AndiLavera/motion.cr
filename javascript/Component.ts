@@ -23,7 +23,7 @@ export default class Component {
       {
         channel: `motion:${this.generateTopic()}`,
         // TODO:
-        version: '0.1.0', // import version
+        version: '0.2.0', // import version
         state: this.element.getAttribute(this.client.stateAttribute),
       },
       {
