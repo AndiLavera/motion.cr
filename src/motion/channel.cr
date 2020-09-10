@@ -1,4 +1,5 @@
 require "json"
+require "./message"
 
 # Please leave this for generating docs
 # :nodoc:
@@ -11,16 +12,14 @@ module Motion
     property component_connections : Hash(String, Motion::ComponentConnection?) = Hash(String, Motion::ComponentConnection?).new
     property fibers : Hash(String, Fiber) = Hash(String, Fiber).new
 
-    def handle_joined(client_socket, message)
-      client_version = message["identifier"]["version"].to_s
-      raise_version_mismatch(client_version) if versions_mismatch?(client_version)
+    def handle_joined(client_socket, json)
+      message = Message.new(json)
+      raise_version_mismatch(message.version) if versions_mismatch?(message.version)
 
-      state = message["identifier"]["state"].to_s
-      topic = message["topic"].to_s
-      self.component_connections[topic] = connect_component(state)
+      self.component_connections[message.topic] = connect_component(message.state)
 
-      process_periodic_timer(topic)
-      synchronize(topic)
+      process_periodic_timer(message.topic)
+      synchronize(message.topic)
     end
 
     def handle_leave(client_socket, topic : String)
@@ -35,40 +34,27 @@ module Motion
       end
     end
 
-    def handle_message(client_socket, message)
-      topic = message["topic"].as_s
-      identifier, data, command = parse_motion(message["payload"])
+    def handle_message(client_socket, json : JSON::Any)
+      message = Message.new(json)
+      broadcast = false
 
-      case command
+      case message.command
       when "unsubscribe"
-        handle_leave(client_socket, topic)
-        broadcast = false
+        handle_leave(client_socket, message.topic)
       when "process_motion"
-        if data
-          process_motion(identifier, data, topic)
-          broadcast = true
-        end
+        process_motion(message)
+        broadcast = true
       end
 
-      synchronize(topic, broadcast)
+      synchronize(message.topic, broadcast)
     end
 
-    def process_motion(identifier, data : JSON::Any, topic : String)
-      motion, raw_event = data["name"], data["event"]
-
-      if (cc = component_connections[topic])
-        cc.process_motion(motion.to_s, Motion::Event.new(raw_event))
+    def process_motion(message : Motion::Message)
+      if (cc = component_connections[message.topic])
+        cc.process_motion(message.name, message.event)
       else
         raise "NoComponentConnectionError"
       end
-    end
-
-    private def versions_mismatch?(client_version)
-      Motion.config.version != client_version
-    end
-
-    private def raise_version_mismatch(client_version)
-      raise Exceptions::IncompatibleClientError.new(Motion.config.version, client_version)
     end
 
     private def connect_component(state)
@@ -91,14 +77,6 @@ module Motion
           cc.if_render_required(proc)
         end
       end
-    end
-
-    private def parse_motion(payload)
-      identifier = payload["identifier"]?
-      data = payload["data"]?
-      command = payload["command"]?
-
-      [identifier, data, command]
     end
 
     private def render(component, topic)
@@ -139,6 +117,14 @@ module Motion
       end
     end
 
+    private def versions_mismatch?(client_version)
+      Motion.config.version != client_version
+    end
+
+    private def raise_version_mismatch(client_version)
+      raise Exceptions::IncompatibleClientError.new(Motion.config.version, client_version)
+    end
+
     private def connected?(topic)
       !component_connections[topic]?.nil?
     end
@@ -149,7 +135,6 @@ module Motion
       true
     end
 
-    # TODO: pass error in as an argument: , error: error
     private def handle_error(error, context)
       logger.error("An error occurred while #{context} & #{error}")
     end

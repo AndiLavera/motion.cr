@@ -10,13 +10,13 @@ describe Motion::Channel do
   end
 
   it "raises an error when versions mismatch" do
-    json = {
+    json = JSON.parse({
       "topic":      "motion:6968",
       "identifier": {
         "state":   "",
         "version": "2.0.0a",
       },
-    }
+    }.to_json)
 
     expect_raises(Motion::Exceptions::IncompatibleClientError) do
       join_channel(json)
@@ -54,13 +54,13 @@ describe Motion::Channel do
   end
 
   it "can register periodic timers" do
-    json = {
+    json = JSON.parse({
       "topic":      "motion:69689",
       "identifier": {
         "state":   "eyJtb3Rpb25fY29tcG9uZW50Ijp0cnVlLCJjb3VudCI6MH0AVGlja2VyQ29tcG9uZW50", # TickerComponent
         "version": Motion::Version.to_s,
       },
-    }
+    }.to_json)
 
     channel = join_channel(json)
 
