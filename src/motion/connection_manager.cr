@@ -7,13 +7,13 @@ module Motion
     def initialize(@channel : Motion::Channel); end
 
     def create(message : Motion::Message)
-      self.component_connections[message.topic] = connect_component(message.state)
+      set_component(message.topic, message.state)
     end
 
     def destroy(message : Motion::Message)
       topic = message.topic
 
-      component_connections[topic].not_nil!.close do |component|
+      self.get(topic).close do |component|
         component.periodic_timers.each do |timer|
           if name = timer[:name]
             fibers.delete(name)
@@ -28,7 +28,7 @@ module Motion
       if (cc = component_connections[message.topic])
         cc.process_motion(message.name, message.event)
       else
-        raise "NoComponentConnectionError"
+        raise Motion::Exceptions::NoComponentConnectionError.new(message.topic)
       end
     end
 
@@ -58,6 +58,16 @@ module Motion
           end
         end
       end
+    end
+
+    def get(topic : String) : Motion::ComponentConnection
+      self.component_connections[topic]?.not_nil!
+    rescue error : NilAssertionError
+      raise Motion::Exceptions::NoComponentConnectionError.new(topic)
+    end
+
+    private def set_component(topic : String, state : String)
+      self.component_connections[topic] = connect_component(state)
     end
 
     private def connect_component(state)
