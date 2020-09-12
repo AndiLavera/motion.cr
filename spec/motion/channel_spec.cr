@@ -1,6 +1,8 @@
 require "../spec_helper"
 
 describe Motion::Channel do
+  # TODO: This spec feels more like a ConnectionManager spec
+  # Should make this more about channel & pull some logic out to a ConnectionManager spec
   it "can handle a new subscriber" do
     channel = Motion::Channel.new
     channel.handle_joined(nil, MESSAGE_JOIN)
