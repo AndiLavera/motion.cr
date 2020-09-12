@@ -25,21 +25,15 @@ module Motion
     end
 
     def process_motion(message : Motion::Message)
-      if (cc = component_connections[message.topic])
-        cc.process_motion(message.name, message.event)
-      else
-        raise Motion::Exceptions::NoComponentConnectionError.new(message.topic)
-      end
+      self.get(message.topic).process_motion(message.name, message.event)
     end
 
     def synchronize(topic : String, proc)
-      if cc = component_connections[topic]?
-        cc.if_render_required(proc)
-      end
+      self.get(topic).if_render_required(proc)
     end
 
     def process_periodic_timer(topic : String)
-      component_connections[topic].not_nil!.periodic_timers.each do |timer|
+      self.get(topic).periodic_timers.each do |timer|
         name = timer[:name].to_s
         self.fibers[name] = spawn do
           while connected?(topic) && periodic_timer_active?(name)
@@ -78,7 +72,7 @@ module Motion
     end
 
     private def connected?(topic)
-      !component_connections[topic]?.nil?
+      !self.get(topic).nil?
     end
 
     # TODO: Some way to allow users to invoke
