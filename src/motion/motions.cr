@@ -15,6 +15,7 @@ module Motion
 
     # :nodoc:
     include Rendering
+    include Broadcasts
 
     macro setup_json_hook
       macro finished
