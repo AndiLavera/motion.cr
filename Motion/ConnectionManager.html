@@ -18,7 +18,7 @@
 </svg>
 
   <meta id="repository-name" content="motion">
-  <title>Motion::Element - motion master</title>
+  <title>Motion::ConnectionManager - motion master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -66,12 +66,12 @@
       
     </li>
   
-  <li class=" " data-id="motion/Motion/ConnectionManager" data-name="motion::connectionmanager">
+  <li class=" current" data-id="motion/Motion/ConnectionManager" data-name="motion::connectionmanager">
       <a href="../Motion/ConnectionManager.html">ConnectionManager</a>
       
     </li>
   
-  <li class=" current" data-id="motion/Motion/Element" data-name="motion::element">
+  <li class=" " data-id="motion/Motion/Element" data-name="motion::element">
       <a href="../Motion/Element.html">Element</a>
       
     </li>
@@ -240,12 +240,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> Motion::Element
+  <span class="kind">class</span> Motion::ConnectionManager
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Motion/Element.html">Motion::Element</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Motion/ConnectionManager.html">Motion::ConnectionManager</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -273,8 +273,8 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L2" target="_blank">
-        motion/element.cr
+      <a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L2" target="_blank">
+        motion/connection_manager.cr
       </a>
     
     <br/>
@@ -295,7 +295,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(raw:JSON::Any)-class-method" class="signature"><strong>.new</strong>(raw : JSON::Any)</a>
+        <a href="#new(channel:Motion::Channel)-class-method" class="signature"><strong>.new</strong>(channel : Motion::Channel)</a>
         
       </li>
     
@@ -316,49 +316,57 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#[](key:String)-instance-method" class="signature"><strong>#[]</strong>(key : String)</a>
+        <a href="#channel:Motion::Channel-instance-method" class="signature"><strong>#channel</strong> : Motion::Channel</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#attributes-instance-method" class="signature"><strong>#attributes</strong></a>
+        <a href="#component_connections:Hash(String,Motion::ComponentConnection?)-instance-method" class="signature"><strong>#component_connections</strong> : Hash(String, Motion::ComponentConnection?)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#data-instance-method" class="signature"><strong>#data</strong></a>
+        <a href="#component_connections=(component_connections:Hash(String,Motion::ComponentConnection?))-instance-method" class="signature"><strong>#component_connections=</strong>(component_connections : Hash(String, Motion::ComponentConnection?))</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#form_data-instance-method" class="signature"><strong>#form_data</strong></a>
-        
-          <div class="summary"><p><span class="flag orange">TODO</span>  Test</p></div>
+        <a href="#create(message:Motion::Message)-instance-method" class="signature"><strong>#create</strong>(message : Motion::Message)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#id-instance-method" class="signature"><strong>#id</strong></a>
+        <a href="#destroy(message:Motion::Message)-instance-method" class="signature"><strong>#destroy</strong>(message : Motion::Message)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#name-instance-method" class="signature"><strong>#name</strong></a>
+        <a href="#fibers:Hash(String,Fiber)-instance-method" class="signature"><strong>#fibers</strong> : Hash(String, Fiber)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#raw:JSON::Any-instance-method" class="signature"><strong>#raw</strong> : JSON::Any</a>
+        <a href="#fibers=(fibers:Hash(String,Fiber))-instance-method" class="signature"><strong>#fibers=</strong>(fibers : Hash(String, Fiber))</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#tag_name-instance-method" class="signature"><strong>#tag_name</strong></a>
+        <a href="#get(topic:String):Motion::ComponentConnection-instance-method" class="signature"><strong>#get</strong>(topic : String) : Motion::ComponentConnection</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#value-instance-method" class="signature"><strong>#value</strong></a>
+        <a href="#process_motion(message:Motion::Message)-instance-method" class="signature"><strong>#process_motion</strong>(message : Motion::Message)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#process_periodic_timer(topic:String)-instance-method" class="signature"><strong>#process_periodic_timer</strong>(topic : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#synchronize(topic:String,proc)-instance-method" class="signature"><strong>#synchronize</strong>(topic : String, proc)</a>
         
       </li>
     
@@ -402,18 +410,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(raw:JSON::Any)-class-method">
+    <div class="entry-detail" id="new(channel:Motion::Channel)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(raw : JSON::Any)
+        def self.<strong>new</strong>(channel : Motion::Channel)
 
-        <a class="method-permalink" href="#new(raw:JSON::Any)-class-method">#</a>
+        <a class="method-permalink" href="#new(channel:Motion::Channel)-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -432,151 +440,178 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="[](key:String)-instance-method">
+    <div class="entry-detail" id="channel:Motion::Channel-instance-method">
       <div class="signature">
         
-        def <strong>[]</strong>(key : String)
+        def <strong>channel</strong> : Motion::Channel
 
-        <a class="method-permalink" href="#[](key:String)-instance-method">#</a>
+        <a class="method-permalink" href="#channel:Motion::Channel-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="attributes-instance-method">
+    <div class="entry-detail" id="component_connections:Hash(String,Motion::ComponentConnection?)-instance-method">
       <div class="signature">
         
-        def <strong>attributes</strong>
+        def <strong>component_connections</strong> : Hash(String, Motion::ComponentConnection?)
 
-        <a class="method-permalink" href="#attributes-instance-method">#</a>
+        <a class="method-permalink" href="#component_connections:Hash(String,Motion::ComponentConnection?)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="data-instance-method">
+    <div class="entry-detail" id="component_connections=(component_connections:Hash(String,Motion::ComponentConnection?))-instance-method">
       <div class="signature">
         
-        def <strong>data</strong>
+        def <strong>component_connections=</strong>(component_connections : Hash(String, Motion::ComponentConnection?))
 
-        <a class="method-permalink" href="#data-instance-method">#</a>
+        <a class="method-permalink" href="#component_connections=(component_connections:Hash(String,Motion::ComponentConnection?))-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="form_data-instance-method">
+    <div class="entry-detail" id="create(message:Motion::Message)-instance-method">
       <div class="signature">
         
-        def <strong>form_data</strong>
+        def <strong>create</strong>(message : Motion::Message)
 
-        <a class="method-permalink" href="#form_data-instance-method">#</a>
+        <a class="method-permalink" href="#create(message:Motion::Message)-instance-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p><span class="flag orange">TODO</span>  Test</p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L49" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="id-instance-method">
+    <div class="entry-detail" id="destroy(message:Motion::Message)-instance-method">
       <div class="signature">
         
-        def <strong>id</strong>
+        def <strong>destroy</strong>(message : Motion::Message)
 
-        <a class="method-permalink" href="#id-instance-method">#</a>
+        <a class="method-permalink" href="#destroy(message:Motion::Message)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="name-instance-method">
+    <div class="entry-detail" id="fibers:Hash(String,Fiber)-instance-method">
       <div class="signature">
         
-        def <strong>name</strong>
+        def <strong>fibers</strong> : Hash(String, Fiber)
 
-        <a class="method-permalink" href="#name-instance-method">#</a>
+        <a class="method-permalink" href="#fibers:Hash(String,Fiber)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L4" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="raw:JSON::Any-instance-method">
+    <div class="entry-detail" id="fibers=(fibers:Hash(String,Fiber))-instance-method">
       <div class="signature">
         
-        def <strong>raw</strong> : JSON::Any
+        def <strong>fibers=</strong>(fibers : Hash(String, Fiber))
 
-        <a class="method-permalink" href="#raw:JSON::Any-instance-method">#</a>
+        <a class="method-permalink" href="#fibers=(fibers:Hash(String,Fiber))-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L4" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="tag_name-instance-method">
+    <div class="entry-detail" id="get(topic:String):Motion::ComponentConnection-instance-method">
       <div class="signature">
         
-        def <strong>tag_name</strong>
+        def <strong>get</strong>(topic : String) : Motion::ComponentConnection
 
-        <a class="method-permalink" href="#tag_name-instance-method">#</a>
+        <a class="method-permalink" href="#get(topic:String):Motion::ComponentConnection-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="value-instance-method">
+    <div class="entry-detail" id="process_motion(message:Motion::Message)-instance-method">
       <div class="signature">
         
-        def <strong>value</strong>
+        def <strong>process_motion</strong>(message : Motion::Message)
 
-        <a class="method-permalink" href="#value-instance-method">#</a>
+        <a class="method-permalink" href="#process_motion(message:Motion::Message)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/element.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="process_periodic_timer(topic:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>process_periodic_timer</strong>(topic : String)
+
+        <a class="method-permalink" href="#process_periodic_timer(topic:String)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="synchronize(topic:String,proc)-instance-method">
+      <div class="signature">
+        
+        def <strong>synchronize</strong>(topic : String, proc)
+
+        <a class="method-permalink" href="#synchronize(topic:String,proc)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/38453c5619397ecacc990e72767994820fe18d9d/src/motion/connection_manager.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
