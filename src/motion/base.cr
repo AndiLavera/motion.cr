@@ -66,6 +66,8 @@ abstract class Motion::Base
     end
   end
 
+  def _process_model_stream; end
+
   # :nodoc:
   macro subclasses
     {

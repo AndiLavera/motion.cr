@@ -38,17 +38,17 @@ module Motion
       false
     end
 
-    # def process_broadcast(broadcast, message)
-    #   timing("Proccessed broadcast to #{broadcast}") do
-    #     component.process_broadcast broadcast, message
-    #   end
+    def process_model_stream(stream_topic)
+      timing("Proccessed model stream #{stream_topic} for #{@component.class}") do
+        component._process_model_stream
+      end
 
-    #   true
-    # rescue => error
-    #   handle_error(error, "processing a broadcast to #{broadcast}")
+      true
+    rescue error : Exception
+      handle_error(error, "processing model stream #{stream_topic} for #{@component.class}")
 
-    #   false
-    # end
+      false
+    end
 
     def process_periodic_timer(timer : Proc(Nil), name : String)
       timing("Proccessed periodic timer #{name}") do

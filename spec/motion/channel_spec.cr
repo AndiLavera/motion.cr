@@ -99,7 +99,7 @@ describe Motion::Channel do
       },
     }.to_json)
 
-    join_channel(json).process_broadcast("todos:created")
+    join_channel(json).process_model_stream("todos:created")
   end
 end
 

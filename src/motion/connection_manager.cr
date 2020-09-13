@@ -58,6 +58,8 @@ module Motion
       topics = broadcast_streams[stream_topic]?
       if topics && !topics.empty?
         topics.each do |topic|
+          component_connection = get(topic)
+          component_connection.process_model_stream(stream_topic)
           channel.synchronize(topic, true)
         end
       end
