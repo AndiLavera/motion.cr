@@ -1,7 +1,9 @@
 module Motion
   class ConnectionManager
-    property component_connections : Hash(String, Motion::ComponentConnection?) = Hash(String, Motion::ComponentConnection?).new
-    property fibers : Hash(String, Fiber) = Hash(String, Fiber).new
+    # TODO: Remove nilable
+    getter component_connections : Hash(String, Motion::ComponentConnection?) = Hash(String, Motion::ComponentConnection?).new
+    getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
+    getter broadcast_streams : Hash(String, Array(Motion::ComponentConnection)) = Hash(String, Array(Motion::ComponentConnection)).new
     getter channel : Motion::Channel
 
     def initialize(@channel : Motion::Channel); end
@@ -13,7 +15,7 @@ module Motion
     def destroy(message : Motion::Message)
       topic = message.topic
 
-      self.get(topic).close do |component|
+      get(topic).close do |component|
         component.periodic_timers.each do |timer|
           if name = timer[:name]
             fibers.delete(name)
@@ -25,15 +27,15 @@ module Motion
     end
 
     def process_motion(message : Motion::Message)
-      self.get(message.topic).process_motion(message.name, message.event)
+      get(message.topic).process_motion(message.name, message.event)
     end
 
     def synchronize(topic : String, proc)
-      self.get(topic).if_render_required(proc)
+      get(topic).if_render_required(proc)
     end
 
     def process_periodic_timer(topic : String)
-      self.get(topic).periodic_timers.each do |timer|
+      get(topic).periodic_timers.each do |timer|
         name = timer[:name].to_s
         self.fibers[name] = spawn do
           while connected?(topic) && periodic_timer_active?(name)
@@ -59,7 +61,15 @@ module Motion
     end
 
     private def set_component(topic : String, state : String)
-      self.component_connections[topic] = connect_component(state)
+      component = connect_component(state)
+      self.component_connections[topic] = component
+      if component.responds_to?(:broadcast_channel)
+        if broadcast_streams[component.broadcast_channel]?.nil?
+          broadcast_streams[component.broadcast_channel] = [topic]
+        else
+          broadcast_streams[component.broadcast_channel] << topic
+        end
+      end
     end
 
     private def connect_component(state)
@@ -70,7 +80,7 @@ module Motion
     end
 
     private def connected?(topic)
-      !self.get(topic).nil?
+      !get(topic).nil?
     end
 
     # TODO: Some way to allow users to invoke
