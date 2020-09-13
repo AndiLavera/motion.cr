@@ -45,10 +45,8 @@ module Motion
               method.call if method.is_a?(Proc(Nil))
             end
 
-            if cc = component_connections[topic]?
-              cc.process_periodic_timer(proc, name.to_s)
-              channel.synchronize(topic: topic, broadcast: true)
-            end
+            get(topic).process_periodic_timer(proc, name.to_s)
+            channel.synchronize(topic: topic, broadcast: true)
           end
         end
       end

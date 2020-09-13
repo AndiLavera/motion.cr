@@ -12,9 +12,6 @@ module Motion
   class Channel < Amber::WebSockets::Channel
     @connection_manager : Motion::ConnectionManager?
 
-    # property component_connections : Hash(String, Motion::ComponentConnection?) = Hash(String, Motion::ComponentConnection?).new
-    # property fibers : Hash(String, Fiber) = Hash(String, Fiber).new
-
     def handle_joined(client_socket, json)
       message = Message.new(json)
       raise_version_mismatch(message.version) if versions_mismatch?(message.version)

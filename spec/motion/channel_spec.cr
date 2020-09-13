@@ -1,12 +1,9 @@
 require "../spec_helper"
 
 describe Motion::Channel do
-  # TODO: This spec feels more like a ConnectionManager spec
-  # Should make this more about channel & pull some logic out to a ConnectionManager spec
   it "can handle a new subscriber" do
     channel = Motion::Channel.new
-    channel.handle_joined(nil, MESSAGE_JOIN)
-
+    channel.handle_joined(nil, MESSAGE_JOIN).should be_nil
     channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).should_not be_nil
     channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component.class.should eq(MotionRender)
   end
@@ -37,7 +34,7 @@ describe Motion::Channel do
 
     channel.handle_message(nil, MESSAGE_NEW)
     component = channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component
-    (c = component) ? c.inspect.to_s.includes?("@motion_hit=true") : fail("No component found")
+    component.inspect.to_s.includes?("@motion_hit=true").should be_true
   end
 
   it "can handle unsubscribe" do
