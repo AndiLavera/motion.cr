@@ -3,10 +3,9 @@ require "../spec_helper"
 describe Motion::Channel do
   it "can handle a new subscriber" do
     channel = Motion::Channel.new
-    channel.handle_joined(nil, MESSAGE_JOIN)
-
-    channel.component_connections[MESSAGE_JOIN["topic"]].should_not be_nil
-    channel.component_connections[MESSAGE_JOIN["topic"]].not_nil!.component.class.should eq(MotionRender)
+    channel.handle_joined(nil, MESSAGE_JOIN).should be_nil
+    channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).should_not be_nil
+    channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component.class.should eq(MotionRender)
   end
 
   it "raises an error when versions mismatch" do
@@ -23,12 +22,21 @@ describe Motion::Channel do
     end
   end
 
+  it "raises NoComponentConnectionError on mismatch topic" do
+    channel = join_channel
+    expect_raises(Motion::Exceptions::NoComponentConnectionError) do
+      channel.connection_manager.get("bad_topic")
+    end
+  end
+
   it "can process a motion" do
     channel = join_channel
 
+    channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component.view.to_s.empty?.should be_true
     channel.handle_message(nil, MESSAGE_NEW)
-    component = channel.component_connections[MESSAGE_JOIN["topic"]].not_nil!.component
-    (c = component) ? c.inspect.to_s.includes?("@motion_hit=true") : fail("No component found")
+    component = channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component
+    component.inspect.to_s.includes?("@motion_hit=true").should be_true
+    channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component.view.to_s.empty?.should be_false
   end
 
   it "can handle unsubscribe" do
@@ -50,7 +58,7 @@ describe Motion::Channel do
     channel = join_channel
 
     channel.handle_message(nil, message)
-    channel.component_connections[message["topic"]]?.should be_nil
+    channel.connection_manager.component_connections[message["topic"]]?.should be_nil
   end
 
   it "can register periodic timers" do
@@ -64,7 +72,7 @@ describe Motion::Channel do
 
     channel = join_channel(json)
 
-    channel.fibers.empty?.should be_false
+    channel.connection_manager.fibers.empty?.should be_false
   end
 
   pending("it can run periodic timers")

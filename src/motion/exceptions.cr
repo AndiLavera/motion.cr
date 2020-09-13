@@ -21,6 +21,18 @@ module Motion
       end
     end
 
+    class NoComponentConnectionError < BaseError
+      def initialize(topic)
+        super(
+          "The topic \"#{topic}\" could not be found.\n
+          This error is rare and should not occur. Please " \
+          "open an issue at https://github.com/andrewc910/motion.cr/issues " \
+          "along with providing logs, how this error occurred and " \
+          "steps to reproduce if possible."
+        )
+      end
+    end
+
     class ComponentRenderingError < ComponentError; end
 
     class MultipleRootsError < ComponentRenderingError
