@@ -54,7 +54,7 @@ module Motion
       end
     end
 
-    def process_broadcast(stream_topic)
+    def process_model_stream(stream_topic)
       topics = broadcast_streams[stream_topic]?
       if topics && !topics.empty?
         topics.each do |topic|

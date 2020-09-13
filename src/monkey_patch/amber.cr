@@ -16,9 +16,9 @@ module Amber
   # :nodoc:
   module WebSockets::ClientSocket
     # :nodoc:
-    def self.broadcast(stream_topic : String)
+    def self.stream(stream_topic : String)
       if channel = get_topic_channel("motion")
-        channel.process_broadcast(stream_topic)
+        channel.process_model_stream(stream_topic)
       end
     end
   end

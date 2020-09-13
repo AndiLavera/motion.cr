@@ -47,8 +47,8 @@ module Motion
       synchronize(message.topic, broadcast)
     end
 
-    def process_broadcast(stream_topic : String)
-      connection_manager.process_broadcast(stream_topic)
+    def process_model_stream(stream_topic : String)
+      connection_manager.process_model_stream(stream_topic)
     end
 
     def synchronize(topic = nil, broadcast = false)
