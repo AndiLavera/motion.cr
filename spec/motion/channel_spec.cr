@@ -75,7 +75,32 @@ describe Motion::Channel do
     channel.connection_manager.fibers.empty?.should be_false
   end
 
-  pending("it can run periodic timers")
+  pending("can run periodic timers")
+
+  it "can register broadcast streams" do
+    json = JSON.parse({
+      "topic":      "motion:69689",
+      "identifier": {
+        "state":   Motion.serializer.serialize(BroadcastComponent.new)[1],
+        "version": Motion::Version.to_s,
+      },
+    }.to_json)
+
+    channel = join_channel(json)
+    channel.connection_manager.broadcast_streams.empty?.should be_false
+  end
+
+  it "can process broadcast streams" do
+    json = JSON.parse({
+      "topic":      "motion:69689",
+      "identifier": {
+        "state":   Motion.serializer.serialize(BroadcastComponent.new)[1],
+        "version": Motion::Version.to_s,
+      },
+    }.to_json)
+
+    join_channel(json).process_broadcast("todos:created")
+  end
 end
 
 def join_channel(json = MESSAGE_JOIN)

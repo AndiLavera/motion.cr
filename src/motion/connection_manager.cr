@@ -3,7 +3,7 @@ module Motion
     # TODO: Remove nilable
     getter component_connections : Hash(String, Motion::ComponentConnection?) = Hash(String, Motion::ComponentConnection?).new
     getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
-    getter broadcast_streams : Hash(String, Array(Motion::ComponentConnection)) = Hash(String, Array(Motion::ComponentConnection)).new
+    getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
     getter channel : Motion::Channel
 
     def initialize(@channel : Motion::Channel); end
@@ -54,6 +54,15 @@ module Motion
       end
     end
 
+    def process_broadcast(stream_topic)
+      topics = broadcast_streams[stream_topic]?
+      if topics && !topics.empty?
+        topics.each do |topic|
+          channel.synchronize(topic, true)
+        end
+      end
+    end
+
     def get(topic : String) : Motion::ComponentConnection
       self.component_connections[topic]?.not_nil!
     rescue error : NilAssertionError
@@ -61,8 +70,13 @@ module Motion
     end
 
     private def set_component(topic : String, state : String)
-      component = connect_component(state)
-      self.component_connections[topic] = component
+      component_connection = connect_component(state)
+      self.component_connections[topic] = component_connection
+      set_broadcasts(component_connection, topic)
+    end
+
+    private def set_broadcasts(component_connection, topic)
+      component = component_connection.component
       if component.responds_to?(:broadcast_channel)
         if broadcast_streams[component.broadcast_channel]?.nil?
           broadcast_streams[component.broadcast_channel] = [topic]
@@ -72,11 +86,12 @@ module Motion
       end
     end
 
-    private def connect_component(state)
+    private def connect_component(state) : ComponentConnection
       ComponentConnection.from_state(state)
-    rescue e : Exception
+    rescue error : Exception
       # reject
-      handle_error(e, "connecting a component")
+      raise "Exception in connect_component"
+      # handle_error(e, "connecting a component")
     end
 
     private def connected?(topic)

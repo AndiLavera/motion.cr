@@ -2,9 +2,9 @@ module Motion
   module Motions
     module Broadcasts
       macro stream_from(channel, method)
-        getter broadcast_channel : String = {{channel.stringify}}
+        getter broadcast_channel : String = {{channel.id.stringify}}
 
-        def _handle_broadcast
+        def _process_broadcast
           {{method.id}}
         end
       end
