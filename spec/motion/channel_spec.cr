@@ -32,9 +32,11 @@ describe Motion::Channel do
   it "can process a motion" do
     channel = join_channel
 
+    channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component.view.to_s.empty?.should be_true
     channel.handle_message(nil, MESSAGE_NEW)
     component = channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component
     component.inspect.to_s.includes?("@motion_hit=true").should be_true
+    channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component.view.to_s.empty?.should be_false
   end
 
   it "can handle unsubscribe" do
