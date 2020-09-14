@@ -337,6 +337,45 @@ end
 
 In this example, after the component has mounted to a websockets channel, `tick` will be invoked every second and the component will be rerendered on the frontend.
 
+#### Backend Interactions
+
+Backend changes can be streamed to your Motion components in 2 steps.
+
+1. Broadcast changes after an event you care about:
+
+```crystal
+# Examples are with Granite but Jennifer ORM would work too
+class Todo < Granite::Base
+  after_create :broadcast_created
+
+  def broadcast_created
+    # Invoke `stream` on the socket motion connects through
+    MotionSocket.stream("todos:created")
+  end
+end
+```
+
+2. Configure your Motion component to listen to a channel:
+
+```crystal
+class TodosComponent < Motion::Base
+  props todos : Todo = Todo.order(created_at: :desc).limit(10)
+  # `stream_from` takes 2 arguements
+  # the first is the channel we want to stream from
+  # the second is a callback method
+  stream_from "todos:created", "handle_created"
+
+  # Callback which will be invoked before rendering
+  def handle_created(name)
+    Log.info { "I am a callback" }
+  end
+end
+```
+
+This will cause any user that has a page open with `MyComponent` mounted on it to re-render that component's portion of the page when a new `Todo` is created.
+
+All invocations of `stream_from` connected methods will cause the component to re-render everywhere, and unchanged rendered HTML will not perform any changes.
+
 #### Motion::Event and Motion::Element
 
 Methods that are mapped using `@[Motion::MapMethod]` can choose to accept an `event` parameter which is a `Motion::Event`. This object has a `target` attribute which is a `Motion::Element`, the element in the DOM that triggered the motion. Useful state and attributes can be extracted from these objects, including value, selected, checked, form state, data attributes, and more.
@@ -394,42 +433,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/andrew
 ## License
 
 The shard is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-<!---
-### Backend interactions
-
-Backend changes can be streamed to your Motion components in 2 steps.
-
-1. Broadcast changes using ActionCable after an event you care about:
-
-```ruby
-class Todo < ApplicationModel
-  after_commit :broadcast_created, on: :create
-
-  def broadcast_created
-    ActionCable.server.broadcast("todos:created", name)
-  end
-end
-```
-
-2. Configure your Motion component to listen to an ActionCable channel:
-
-```ruby
-class TopTodosComponent < Motion::Base
-  stream_from "todos:created", :handle_created
-
-  def initialize(count: 5)
-    @count = count
-    @todos = Todo.order(created_at: :desc).limit(count).pluck(:name)
-  end
-
-  def handle_created(name)
-    @todos = [name, *@todos.first(@count - 1)]
-  end
-end
-```
-
-This will cause any user that has a page open with `MyComponent` mounted on it to re-render that component's portion of the page.
-
-All invocations of `stream_from` connected methods will cause the component to re-render everywhere, and unchanged rendered HTML will not perform any changes.
--->
