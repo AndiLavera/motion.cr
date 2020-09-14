@@ -10,6 +10,12 @@ end
 module Motion
   # :nodoc:
   class Channel < Amber::WebSockets::Channel
+    def self.broadcast(stream_topic : String)
+      if channel = Amber::WebSockets::ClientSocket.get_topic_channel("motion")
+        channel.process_broadcast(stream_topic)
+      end
+    end
+
     @connection_manager : Motion::ConnectionManager?
 
     def handle_joined(client_socket, json)
@@ -18,7 +24,6 @@ module Motion
 
       connection_manager.create(message)
 
-      connection_manager.process_periodic_timer(message.topic)
       synchronize(message.topic)
     end
 
@@ -39,6 +44,10 @@ module Motion
       end
 
       synchronize(message.topic, broadcast)
+    end
+
+    def process_model_stream(stream_topic : String)
+      connection_manager.process_model_stream(stream_topic)
     end
 
     def synchronize(topic = nil, broadcast = false)

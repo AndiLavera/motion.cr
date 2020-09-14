@@ -152,3 +152,20 @@ class TickerComponent < Motion::Base
     end
   end
 end
+
+class BroadcastComponent < Motion::Base
+  props count : Int32 = 0
+  props motion_component : Bool = true
+
+  stream_from "todos:created", "add"
+
+  def add
+    @count += 1
+  end
+
+  def render
+    div do
+      span @count.to_s
+    end
+  end
+end
