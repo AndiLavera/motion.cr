@@ -1,12 +1,12 @@
 module Motion
   class ConnectionManager
-    alias Adapters = Motion::Adapters::Server # | Motion::Adapter::Redis
+    alias Adapters = Motion::Adapters::Redis # Motion::Adapters::Server |
     getter adapter : Adapters
     getter channel : Motion::Channel
 
     def initialize(@channel : Motion::Channel)
       # @adapter = Motion.config.adapter == :server ? Adapters::Server.new : Adapters::Redis.new
-      @adapter = Motion::Adapters::Server.new
+      @adapter = Motion::Adapters::Redis.new
     end
 
     def create(message : Motion::Message)
@@ -51,25 +51,24 @@ module Motion
     private def attach_component(topic : String, state : String)
       component_connection = connect_component(state)
 
-      set_component_connection(component_connection, topic)
-      set_broadcasts(component_connection, topic)
-      set_periodic_timers(topic)
+      adapter.set_component_connection(topic, component_connection)
+      # adapter.set_streams(component_connection, topic)
+      # set_periodic_timers(topic)
     end
 
-    private def set_component_connection(component_connection : Motion::ComponentConnection, topic : String)
-      adapter.component_connections[topic] = component_connection
-    end
+    # private def set_component_connection(component_connection : Motion::ComponentConnection, topic : String)
+    #   adapter.component_connections[topic] = component_connection
+    # end
 
-    private def set_broadcasts(component_connection, topic)
-      component = component_connection.component
-      if component.responds_to?(:broadcast_channel)
-        if adapter.broadcast_streams[component.broadcast_channel]?.nil?
-          adapter.broadcast_streams[component.broadcast_channel] = [topic]
-        else
-          adapter.broadcast_streams[component.broadcast_channel] << topic
-        end
-      end
-    end
+    # private def set_broadcasts(component_connection, topic)
+    #   component = component_connection.component
+    #   return unless component.responds_to?(:broadcast_channel)
+    #   if adapter.broadcast_streams[component.broadcast_channel]?.nil?
+    #     adapter.broadcast_streams[component.broadcast_channel] = [topic]
+    #   else
+    #     adapter.broadcast_streams[component.broadcast_channel] << topic
+    #   end
+    # end
 
     private def set_periodic_timers(topic : String)
       get(topic).periodic_timers.each do |timer|
