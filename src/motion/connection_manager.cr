@@ -1,9 +1,7 @@
 module Motion
   class ConnectionManager
-    # TODO: Remove nilable
-    getter component_connections : Hash(String, Motion::ComponentConnection?) = Hash(String, Motion::ComponentConnection?).new
-    getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
-    getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
+    alias Adapters = Motion::Adapter::Redis | Motion::Adapter::Server
+    getter adapter : Adapters
     getter channel : Motion::Channel
 
     def initialize(@channel : Motion::Channel); end

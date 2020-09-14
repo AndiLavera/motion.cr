@@ -4,10 +4,12 @@ require "./logger"
 require "./exceptions"
 require "./motions"
 require "./annotations"
+require "./adapters"
 
 abstract class Motion::Base
   include Motion::HTML::Engine
   include Motion::Motions
+  include Motion::Adapters
 
   @[JSON::Field(ignore: true)]
   property view : IO::Memory = IO::Memory.new
