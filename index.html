@@ -211,8 +211,18 @@
       
     </li>
   
-  <li class=" " data-id="motion/Motion/Motions" data-name="motion::motions">
+  <li class="parent " data-id="motion/Motion/Motions" data-name="motion::motions">
       <a href="Motion/Motions.html">Motions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion/Motion/Motions/Broadcasts" data-name="motion::motions::broadcasts">
+      <a href="Motion/Motions/Broadcasts.html">Broadcasts</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -592,6 +602,43 @@ const client = createClient();</code></pre>
 
 <p>In this example, after the component has mounted to a websockets channel, <code>tick</code> will be invoked every second and the component will be rerendered on the frontend.</p>
 
+<h4><a id="backend-interactions" class="anchor" href="#backend-interactions">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Backend Interactions</h4>
+
+<p>Backend changes can be streamed to your Motion components in 2 steps.</p>
+
+<ol><li>Broadcast changes after an event you care about:</li></ol>
+
+<pre><code class="language-crystal"><span class="c"># Examples are with Granite ORM but Jennifer ORM works as well</span>
+<span class="k">class</span> <span class="t">Todo</span> <span class="o">&lt;</span> <span class="t">Granite</span><span class="t">::</span><span class="t">Base</span>
+  after_create <span class="n">:broadcast_created</span>
+
+  <span class="k">def</span> <span class="m">broadcast_created</span>
+    <span class="c"># Invoke `stream` on the socket motion connects through</span>
+    <span class="t">MotionSocket</span>.stream(<span class="s">&quot;todos:created&quot;</span>)
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<ol><li>Configure your Motion component to listen to a channel:</li></ol>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">TodosComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
+  props todos : <span class="t">Array</span>(<span class="t">Todo</span>) <span class="o">=</span> <span class="t">Todo</span>.order(created_at: <span class="n">:desc</span>).limit(<span class="n">10</span>)
+  <span class="c"># `stream_from` takes 2 arguements</span>
+  <span class="c"># the first is the channel we want to listen for</span>
+  <span class="c"># the second is a callback method</span>
+  stream_from <span class="s">&quot;todos:created&quot;</span>, <span class="s">&quot;handle_created&quot;</span>
+
+  <span class="c"># Callback which will be invoked before rendering</span>
+  <span class="k">def</span> <span class="m">handle_created</span>(name)
+    <span class="t">Log</span>.info { <span class="s">&quot;I am a callback&quot;</span> }
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>This will cause any user that has a page open with <code>TodosComponent</code> mounted on it to re-render that component's portion of the page when a new <code>Todo</code> is created.</p>
+
 <h4><a id="motionevent-and-motionelement" class="anchor" href="#motionevent-and-motionelement">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -665,46 +712,6 @@ const client = createClient();</code></pre>
 </a>License</h2>
 
 <p>The shard is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.</p>
-
-<p>&lt;!---</p>
-
-<h3><a id="backend-interactions" class="anchor" href="#backend-interactions">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>Backend interactions</h3>
-
-<p>Backend changes can be streamed to your Motion components in 2 steps.</p>
-
-<ol><li>Broadcast changes using ActionCable after an event you care about:</li></ol>
-
-<pre><code class="language-ruby">class Todo &lt; ApplicationModel
-  after_commit :broadcast_created, on: :create
-
-  def broadcast_created
-    ActionCable.server.broadcast("todos:created", name)
-  end
-end</code></pre>
-
-<ol><li>Configure your Motion component to listen to an ActionCable channel:</li></ol>
-
-<pre><code class="language-ruby">class TopTodosComponent &lt; Motion::Base
-  stream_from "todos:created", :handle_created
-
-  def initialize(count: 5)
-    @count = count
-    @todos = Todo.order(created_at: :desc).limit(count).pluck(:name)
-  end
-
-  def handle_created(name)
-    @todos = [name, *@todos.first(@count - 1)]
-  end
-end</code></pre>
-
-<p>This will cause any user that has a page open with <code>MyComponent</code> mounted on it to re-render that component's portion of the page.</p>
-
-<p>All invocations of <code>stream_from</code> connected methods will cause the component to re-render everywhere, and unchanged rendered HTML will not perform any changes.
---></p>
 </div>
 </body>
 </html>

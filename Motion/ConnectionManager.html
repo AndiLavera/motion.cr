@@ -211,8 +211,18 @@
       
     </li>
   
-  <li class=" " data-id="motion/Motion/Motions" data-name="motion::motions">
+  <li class="parent " data-id="motion/Motion/Motions" data-name="motion::motions">
       <a href="../Motion/Motions.html">Motions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="motion/Motion/Motions/Broadcasts" data-name="motion::motions::broadcasts">
+      <a href="../Motion/Motions/Broadcasts.html">Broadcasts</a>
+      
+    </li>
+  
+</ul>
+
       
     </li>
   
@@ -273,7 +283,7 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L2" target="_blank">
+      <a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L2" target="_blank">
         motion/connection_manager.cr
       </a>
     
@@ -316,6 +326,11 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#broadcast_streams:Hash(String,Array(String))-instance-method" class="signature"><strong>#broadcast_streams</strong> : Hash(String, Array(String))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#channel:Motion::Channel-instance-method" class="signature"><strong>#channel</strong> : Motion::Channel</a>
         
       </li>
@@ -323,10 +338,7 @@
       <li class="entry-summary">
         <a href="#component_connections:Hash(String,Motion::ComponentConnection?)-instance-method" class="signature"><strong>#component_connections</strong> : Hash(String, Motion::ComponentConnection?)</a>
         
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#component_connections=(component_connections:Hash(String,Motion::ComponentConnection?))-instance-method" class="signature"><strong>#component_connections=</strong>(component_connections : Hash(String, Motion::ComponentConnection?))</a>
+          <div class="summary"><p><span class="flag orange">TODO</span>  Remove nilable</p></div>
         
       </li>
     
@@ -346,22 +358,17 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#fibers=(fibers:Hash(String,Fiber))-instance-method" class="signature"><strong>#fibers=</strong>(fibers : Hash(String, Fiber))</a>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#get(topic:String):Motion::ComponentConnection-instance-method" class="signature"><strong>#get</strong>(topic : String) : Motion::ComponentConnection</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#process_motion(message:Motion::Message)-instance-method" class="signature"><strong>#process_motion</strong>(message : Motion::Message)</a>
+        <a href="#process_model_stream(stream_topic)-instance-method" class="signature"><strong>#process_model_stream</strong>(stream_topic)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#process_periodic_timer(topic:String)-instance-method" class="signature"><strong>#process_periodic_timer</strong>(topic : String)</a>
+        <a href="#process_motion(message:Motion::Message)-instance-method" class="signature"><strong>#process_motion</strong>(message : Motion::Message)</a>
         
       </li>
     
@@ -421,7 +428,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -440,6 +447,22 @@
     Instance Method Detail
   </h2>
   
+    <div class="entry-detail" id="broadcast_streams:Hash(String,Array(String))-instance-method">
+      <div class="signature">
+        
+        def <strong>broadcast_streams</strong> : Hash(String, Array(String))
+
+        <a class="method-permalink" href="#broadcast_streams:Hash(String,Array(String))-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L6" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="channel:Motion::Channel-instance-method">
       <div class="signature">
         
@@ -451,7 +474,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -464,26 +487,15 @@
         <a class="method-permalink" href="#component_connections:Hash(String,Motion::ComponentConnection?)-instance-method">#</a>
       </div>
       
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L3" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="component_connections=(component_connections:Hash(String,Motion::ComponentConnection?))-instance-method">
-      <div class="signature">
-        
-        def <strong>component_connections=</strong>(component_connections : Hash(String, Motion::ComponentConnection?))
-
-        <a class="method-permalink" href="#component_connections=(component_connections:Hash(String,Motion::ComponentConnection?))-instance-method">#</a>
-      </div>
+        <div class="doc">
+          
+          <p><span class="flag orange">TODO</span>  Remove nilable</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L4" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -499,7 +511,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -515,7 +527,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -531,23 +543,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L4" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="fibers=(fibers:Hash(String,Fiber))-instance-method">
-      <div class="signature">
-        
-        def <strong>fibers=</strong>(fibers : Hash(String, Fiber))
-
-        <a class="method-permalink" href="#fibers=(fibers:Hash(String,Fiber))-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -563,7 +559,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L44" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="process_model_stream(stream_topic)-instance-method">
+      <div class="signature">
+        
+        def <strong>process_model_stream</strong>(stream_topic)
+
+        <a class="method-permalink" href="#process_model_stream(stream_topic)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -579,23 +591,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L27" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="process_periodic_timer(topic:String)-instance-method">
-      <div class="signature">
-        
-        def <strong>process_periodic_timer</strong>(topic : String)
-
-        <a class="method-permalink" href="#process_periodic_timer(topic:String)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -611,7 +607,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/9819cbc547c9ea0ae839b5537f509f766589fb90/src/motion/connection_manager.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/fe91956191a0f819dd320205524143530701f026/src/motion/connection_manager.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
