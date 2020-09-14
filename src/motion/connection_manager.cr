@@ -1,10 +1,13 @@
 module Motion
   class ConnectionManager
-    alias Adapters = Motion::Adapter::Redis | Motion::Adapter::Server
+    alias Adapters = Motion::Adapters::Server # | Motion::Adapter::Redis
     getter adapter : Adapters
     getter channel : Motion::Channel
 
-    def initialize(@channel : Motion::Channel); end
+    def initialize(@channel : Motion::Channel)
+      # @adapter = Motion.config.adapter == :server ? Adapters::Server.new : Adapters::Redis.new
+      @adapter = Motion::Adapters::Server.new
+    end
 
     def create(message : Motion::Message)
       attach_component(message.topic, message.state)
@@ -16,7 +19,7 @@ module Motion
       get(topic).close do |component|
         destroy_periodic_timers(component)
         destroy_model_streams(component, topic) if component.responds_to?(:broadcast_channel)
-        component_connections.delete(topic)
+        adapter.component_connections.delete(topic)
       end
     end
 
@@ -29,7 +32,7 @@ module Motion
     end
 
     def process_model_stream(stream_topic)
-      topics = broadcast_streams[stream_topic]?
+      topics = adapter.broadcast_streams[stream_topic]?
       if topics && !topics.empty?
         topics.each do |topic|
           component_connection = get(topic)
@@ -40,7 +43,7 @@ module Motion
     end
 
     def get(topic : String) : Motion::ComponentConnection
-      self.component_connections[topic]?.not_nil!
+      adapter.component_connections[topic]?.not_nil!
     rescue error : NilAssertionError
       raise Motion::Exceptions::NoComponentConnectionError.new(topic)
     end
@@ -54,16 +57,16 @@ module Motion
     end
 
     private def set_component_connection(component_connection : Motion::ComponentConnection, topic : String)
-      self.component_connections[topic] = component_connection
+      adapter.component_connections[topic] = component_connection
     end
 
     private def set_broadcasts(component_connection, topic)
       component = component_connection.component
       if component.responds_to?(:broadcast_channel)
-        if broadcast_streams[component.broadcast_channel]?.nil?
-          broadcast_streams[component.broadcast_channel] = [topic]
+        if adapter.broadcast_streams[component.broadcast_channel]?.nil?
+          adapter.broadcast_streams[component.broadcast_channel] = [topic]
         else
-          broadcast_streams[component.broadcast_channel] << topic
+          adapter.broadcast_streams[component.broadcast_channel] << topic
         end
       end
     end
@@ -71,7 +74,7 @@ module Motion
     private def set_periodic_timers(topic : String)
       get(topic).periodic_timers.each do |timer|
         name = timer[:name].to_s
-        self.fibers[name] = spawn do
+        adapter.fibers[name] = spawn do
           while connected?(topic) && periodic_timer_active?(name)
             proc = ->do
               interval = timer[:interval]
@@ -109,14 +112,14 @@ module Motion
     private def destroy_periodic_timers(component)
       component.periodic_timers.each do |timer|
         if name = timer[:name]
-          fibers.delete(name)
+          adapter.fibers.delete(name)
           logger.info("Periodic Timer #{name} has been disabled")
         end
       end
     end
 
     private def destroy_model_streams(component, topic)
-      broadcast_streams[component.broadcast_channel].delete(topic)
+      adapter.broadcast_streams[component.broadcast_channel].delete(topic)
     end
 
     private def handle_error(error, context)

@@ -60,7 +60,7 @@ describe Motion::Channel do
     channel = join_channel
 
     channel.handle_message(nil, message)
-    channel.connection_manager.component_connections[message["topic"]]?.should be_nil
+    channel.connection_manager.adapter.component_connections[message["topic"]]?.should be_nil
   end
 
   it "can register periodic timers" do
@@ -74,7 +74,7 @@ describe Motion::Channel do
 
     channel = join_channel(json)
 
-    channel.connection_manager.fibers.empty?.should be_false
+    channel.connection_manager.adapter.fibers.empty?.should be_false
   end
 
   pending("can run periodic timers")
@@ -89,7 +89,7 @@ describe Motion::Channel do
     }.to_json)
 
     channel = join_channel(json)
-    channel.connection_manager.broadcast_streams.empty?.should be_false
+    channel.connection_manager.adapter.broadcast_streams.empty?.should be_false
   end
 
   it "can process model streams" do

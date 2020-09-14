@@ -1,4 +1,4 @@
-module Motion::Adapter
+module Motion::Adapters
   class Server
     getter component_connections : Hash(String, Motion::ComponentConnection?) = Hash(String, Motion::ComponentConnection?).new
     getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
