@@ -76,6 +76,7 @@ class LessNeedyDefaultsPage < MainLayout
 end
 
 class MotionRender < Motion::Base
+  props test_bool : Bool = false
   props motion_hit : Bool = false
 
   @[Motion::MapMethod]

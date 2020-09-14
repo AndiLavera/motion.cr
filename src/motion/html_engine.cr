@@ -64,7 +64,6 @@ module Motion::HTML::Engine
         {% value = declaration.value %}
         {% value = nil if type.stringify.ends_with?("Nil") && !value %}
         {% has_default = value || value == false || value == nil %}
-        @[JSON::Field(key: {{ var.id.stringify }})]
         property {{ var.id }} : {{ type }}{% if has_default %} = {{ value }}{% end %}
       {% end %}
 
