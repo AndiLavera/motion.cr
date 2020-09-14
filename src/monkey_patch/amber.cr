@@ -14,11 +14,14 @@ module Amber
   end
 
   # :nodoc:
-  module WebSockets::ClientSocket
+  module WebSockets
     # :nodoc:
-    def self.stream(stream_topic : String)
-      if channel = get_topic_channel("motion")
-        channel.process_model_stream(stream_topic)
+    struct ClientSocket
+      # :nodoc:
+      def self.stream(stream_topic : String)
+        if channel = get_topic_channel("motion")
+          channel.process_model_stream(stream_topic)
+        end
       end
     end
   end

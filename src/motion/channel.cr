@@ -24,7 +24,6 @@ module Motion
 
       connection_manager.create(message)
 
-      connection_manager.process_periodic_timer(message.topic)
       synchronize(message.topic)
     end
 
