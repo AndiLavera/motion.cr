@@ -1,17 +1,23 @@
 require "../spec_helper"
 
 describe Motion::Serializer do
-  it "can deserialize component" do
-    c = MotionRender.new
-    c.render
-    fragment = Myhtml::Parser.new(c.view.to_s)
-    node_with_state = fragment.body!.children.to_a[0]
-    state = node_with_state.attribute_by("data-motion-state")
+  it "can serialize a component" do
+    serializer = Motion::Serializer.new
+    digest, state = serializer.serialize(MotionRender.new(test_bool: true))
 
-    raise "Could not find motion-state" if state.nil?
-    deserialized_component = Motion::Serializer.new.deserialize(state)
+    digest.is_a?(String).should be_true
+    state.is_a?(String).should be_true
+    digest.empty?.should be_false
+    state.empty?.should be_false
+  end
 
-    deserialized_component.inspect.to_s.includes?("@test_prop=\"Test Prop\"").should be_true
-    deserialized_component.inspect.to_s.includes?("@motion_component=true").should be_true
+  it "can deserialize a component" do
+    serializer = Motion::Serializer.new
+    state = serializer.serialize(MotionRender.new(test_bool: true))[1]
+
+    deserialized_component = serializer.deserialize(state)
+
+    deserialized_component.inspect.to_s.includes?("@motion_hit=false").should be_true
+    deserialized_component.inspect.to_s.includes?("@test_bool=true").should be_true
   end
 end
