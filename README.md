@@ -344,7 +344,7 @@ Backend changes can be streamed to your Motion components in 2 steps.
 1. Broadcast changes after an event you care about:
 
 ```crystal
-# Examples are with Granite but Jennifer ORM would work too
+# Examples are with Granite ORM but Jennifer ORM works as well
 class Todo < Granite::Base
   after_create :broadcast_created
 
@@ -359,9 +359,9 @@ end
 
 ```crystal
 class TodosComponent < Motion::Base
-  props todos : Todo = Todo.order(created_at: :desc).limit(10)
+  props todos : Array(Todo) = Todo.order(created_at: :desc).limit(10)
   # `stream_from` takes 2 arguements
-  # the first is the channel we want to stream from
+  # the first is the channel we want to listen for
   # the second is a callback method
   stream_from "todos:created", "handle_created"
 
@@ -372,9 +372,7 @@ class TodosComponent < Motion::Base
 end
 ```
 
-This will cause any user that has a page open with `MyComponent` mounted on it to re-render that component's portion of the page when a new `Todo` is created.
-
-All invocations of `stream_from` connected methods will cause the component to re-render everywhere, and unchanged rendered HTML will not perform any changes.
+This will cause any user that has a page open with `TodosComponent` mounted on it to re-render that component's portion of the page when a new `Todo` is created.
 
 #### Motion::Event and Motion::Element
 
