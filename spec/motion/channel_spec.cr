@@ -33,8 +33,10 @@ describe Motion::Channel do
     channel = join_channel
 
     channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component.view.to_s.empty?.should be_true
+
     channel.handle_message(nil, MESSAGE_NEW)
     component = channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component
+
     component.inspect.to_s.includes?("@motion_hit=true").should be_true
     channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).component.view.to_s.empty?.should be_false
   end
@@ -77,7 +79,7 @@ describe Motion::Channel do
 
   pending("can run periodic timers")
 
-  it "can register broadcast streams" do
+  it "can register model streams" do
     json = JSON.parse({
       "topic":      "motion:69689",
       "identifier": {
@@ -90,7 +92,7 @@ describe Motion::Channel do
     channel.connection_manager.broadcast_streams.empty?.should be_false
   end
 
-  it "can process broadcast streams" do
+  it "can process model streams" do
     json = JSON.parse({
       "topic":      "motion:69689",
       "identifier": {
@@ -99,7 +101,10 @@ describe Motion::Channel do
       },
     }.to_json)
 
-    join_channel(json).process_model_stream("todos:created")
+    channel = join_channel(json)
+    channel.process_model_stream("todos:created")
+    component = channel.connection_manager.get("motion:69689").component
+    component.inspect.to_s.includes?("@count=1").should be_true
   end
 end
 

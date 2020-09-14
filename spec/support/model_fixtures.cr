@@ -157,9 +157,9 @@ class BroadcastComponent < Motion::Base
   props count : Int32 = 0
   props motion_component : Bool = true
 
-  stream_from "todos:created", "tick"
+  stream_from "todos:created", "add"
 
-  def tick
+  def add
     @count += 1
   end
 
