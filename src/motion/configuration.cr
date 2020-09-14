@@ -23,7 +23,9 @@ module Motion
     property adapter : Symbol = :server
 
     # Set the redis url if you are using the redis adapter
-    property redis_url : String?
+    #
+    # Defaults to `"redis://localhost:6379/0"`
+    property redis_url : String = "redis://localhost:6379/0"
 
     # Set the TTL property for components in minutes.
     #
