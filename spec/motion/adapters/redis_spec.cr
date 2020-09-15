@@ -2,8 +2,6 @@ require "./spec_helper"
 
 describe Motion::Adapters::Redis do
   before_each do
-    Motion.config.finalized = false
-
     Motion.configure do |config|
       config.adapter = :redis
     end
@@ -11,6 +9,7 @@ describe Motion::Adapters::Redis do
 
   after_each do
     Redis.new(url: Motion.config.redis_url).flushdb
+    Motion.reset_config
   end
 
   it "can make a new redis component" do

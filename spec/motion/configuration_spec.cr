@@ -1,9 +1,11 @@
 require "../spec_helper"
 
 describe Motion::Configuration do
-  it "can be initialized with a block" do
-    Motion.config.finalized = false
+  after_each do
+    Motion.reset_config
+  end
 
+  it "can be initialized with a block" do
     Motion.configure do |config|
       config.render_component_comments = false
       config.adapter = :redis
@@ -15,8 +17,6 @@ describe Motion::Configuration do
   end
 
   it "raises error when configured twice" do
-    Motion.config.finalized = false
-
     Motion.configure do |config|
       config.render_component_comments = false
     end
