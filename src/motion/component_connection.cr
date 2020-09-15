@@ -62,15 +62,28 @@ module Motion
       false
     end
 
-    def process_periodic_timer(timer : Proc(Nil), name : String)
+    # def process_periodic_timer(timer : Proc(Nil), name : String)
+    #   timing("Proccessed periodic timer #{name}") do
+    #     # component.process_periodic_timer timer
+    #     timer.call
+    #   end
+
+    #   true
+    # rescue error : Exception
+    #   handle_error(error, "processing periodic timer #{timer}")
+
+    #   false
+    # end
+
+    def process_periodic_timer(name : String, &block)
       timing("Proccessed periodic timer #{name}") do
         # component.process_periodic_timer timer
-        timer.call
+        block.call
       end
 
       true
     rescue error : Exception
-      handle_error(error, "processing periodic timer #{timer}")
+      handle_error(error, "processing periodic timer #{name}")
 
       false
     end

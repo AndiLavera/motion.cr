@@ -72,20 +72,23 @@ module Motion
     # end
 
     private def set_periodic_timers(topic : String)
-      get(topic).periodic_timers.each do |periodic_timer|
+      component = get(topic)
+
+      component.periodic_timers.each do |periodic_timer|
         name = periodic_timer[:name].to_s
+
         adapter.fibers[name] = spawn do
           while connected?(topic) && periodic_timer_active?(name)
-            proc = ->do
+            Motion.timer.process_periodic_timer(name.to_s) do
               interval = periodic_timer[:interval]
               sleep interval if interval.is_a?(Time::Span)
 
               method = periodic_timer[:method]
               method.call if method.is_a?(Proc(Nil))
-            end
 
-            Motion.timer.process_periodic_timer(proc, name.to_s)
-            channel.synchronize(topic: topic, broadcast: true)
+              channel.synchronize(topic: topic, broadcast: true)
+              adapter.set_component_connection(topic, component)
+            end
           end
         end
       end
