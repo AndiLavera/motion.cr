@@ -40,4 +40,9 @@ module Motion
   def self.logger
     @@config.logger
   end
+
+  # :nodoc:
+  def self.timer
+    @@config.timer
+  end
 end

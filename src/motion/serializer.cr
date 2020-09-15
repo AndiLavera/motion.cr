@@ -20,6 +20,12 @@ module Motion
       ]
     end
 
+    def serialize_without_digest(component : Motion::Base)
+      state = dump(component)
+      state_with_class = "#{state}#{NULL_BYTE}#{component.class}"
+      encode(state_with_class)
+    end
+
     def weak_digest(component : Motion::Base) : UInt64
       dump(component).to_s.hash
     end

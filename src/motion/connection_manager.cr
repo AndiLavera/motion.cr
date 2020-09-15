@@ -1,12 +1,12 @@
 module Motion
   class ConnectionManager
-    alias Adapters = Motion::Adapters::Redis # Motion::Adapters::Server |
+    alias Adapters = Motion::Adapters::Server # Motion::Adapters::Server |
     getter adapter : Adapters
     getter channel : Motion::Channel
 
     def initialize(@channel : Motion::Channel)
       # @adapter = Motion.config.adapter == :server ? Adapters::Server.new : Adapters::Redis.new
-      @adapter = Motion::Adapters::Redis.new
+      @adapter = Motion::Adapters::Server.new
     end
 
     def create(message : Motion::Message)
@@ -16,44 +16,42 @@ module Motion
     def destroy(message : Motion::Message)
       topic = message.topic
 
-      get(topic).close do |component|
+      timer.close(get(topic)) do |component|
         destroy_periodic_timers(component)
         destroy_model_streams(component, topic) if component.responds_to?(:broadcast_channel)
-        adapter.component_connections.delete(topic)
+        adapter.delete(topic)
       end
     end
 
     def process_motion(message : Motion::Message)
-      get(message.topic).process_motion(message.name, message.event)
+      component = Motion.timer.process_motion(get(message.topic), message.name, message.event)
+      adapter.set_component_connection(message.topic, component)
     end
 
     def synchronize(topic : String, proc)
-      get(topic).if_render_required(proc)
+      Motion.timer.if_render_required(get(topic), proc)
     end
 
     def process_model_stream(stream_topic)
       topics = adapter.broadcast_streams[stream_topic]?
       if topics && !topics.empty?
         topics.each do |topic|
-          component_connection = get(topic)
-          component_connection.process_model_stream(stream_topic)
+          Motion.timer.process_model_stream(get(topic), stream_topic)
           channel.synchronize(topic, true)
         end
       end
     end
 
-    def get(topic : String) : Motion::ComponentConnection
-      adapter.component_connections[topic]?.not_nil!
-    rescue error : NilAssertionError
-      raise Motion::Exceptions::NoComponentConnectionError.new(topic)
+    def get(topic : String) : Motion::Base
+      adapter.get(topic)
     end
 
     private def attach_component(topic : String, state : String)
-      component_connection = connect_component(state)
-
-      adapter.set_component_connection(topic, component_connection)
-      # adapter.set_streams(component_connection, topic)
-      # set_periodic_timers(topic)
+      connect_component(state) do |component|
+        adapter.set_component_connection(topic, component)
+        adapter.set_broadcast_streams(topic, component)
+        set_periodic_timers(topic)
+      end
     end
 
     # private def set_component_connection(component_connection : Motion::ComponentConnection, topic : String)
@@ -71,27 +69,27 @@ module Motion
     # end
 
     private def set_periodic_timers(topic : String)
-      get(topic).periodic_timers.each do |timer|
-        name = timer[:name].to_s
+      get(topic).periodic_timers.each do |periodic_timer|
+        name = periodic_timer[:name].to_s
         adapter.fibers[name] = spawn do
           while connected?(topic) && periodic_timer_active?(name)
             proc = ->do
-              interval = timer[:interval]
+              interval = periodic_timer[:interval]
               sleep interval if interval.is_a?(Time::Span)
 
-              method = timer[:method]
+              method = periodic_timer[:method]
               method.call if method.is_a?(Proc(Nil))
             end
 
-            get(topic).process_periodic_timer(proc, name.to_s)
+            Motion.timer.process_periodic_timer(proc, name.to_s)
             channel.synchronize(topic: topic, broadcast: true)
           end
         end
       end
     end
 
-    private def connect_component(state) : ComponentConnection
-      ComponentConnection.from_state(state)
+    private def connect_component(state, &block : Motion::Base -> Nil)
+      Motion.timer.connect(Motion.serializer.deserialize(state), &block)
     rescue error : Exception
       # reject
       raise "Exception in connect_component"
@@ -123,6 +121,10 @@ module Motion
 
     private def handle_error(error, context)
       logger.error("An error occurred while #{context} & #{error}")
+    end
+
+    private def timer
+      Motion.timer
     end
 
     private def logger

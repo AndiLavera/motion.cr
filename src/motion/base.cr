@@ -14,6 +14,7 @@ abstract class Motion::Base
   @[JSON::Field(ignore: true)]
   property view : IO::Memory = IO::Memory.new
   property motion_component : Bool = false
+  property render_hash : UInt64?
 
   # def to_s(io)
   #   io << view

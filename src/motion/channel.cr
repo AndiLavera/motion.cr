@@ -39,6 +39,9 @@ module Motion
       when "unsubscribe"
         handle_leave(client_socket, message)
       when "process_motion"
+        # TODO: Right now the component is being deserialized, process motion, serialized, stored
+        # then in channel#synchronize being deserialized to render
+        # connection_manager.process_motion should return the component for rendering
         connection_manager.process_motion(message)
         broadcast = true
       end

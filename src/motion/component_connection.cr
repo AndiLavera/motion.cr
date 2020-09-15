@@ -1,21 +1,31 @@
 module Motion
   # :nodoc:
   class ComponentConnection
-    def self.from_state(state)
-      new(component: Motion.serializer.deserialize(state))
-    end
+    # def self.from_state(state)
+    #   new(component: Motion.serializer.deserialize(state))
+    # end
 
-    getter component : Motion::Base
-    getter render_hash : UInt64?
+    # getter component : Motion::Base?
+    # getter render_hash : UInt64?
 
-    def initialize(@component : Motion::Base)
-      timing("Connected #{@component.class}") do
-        @render_hash = component.render_hash
+    def initialize; end
+
+    # def initialize(component : Motion::Base, &block : Motion::Base -> Nil)
+    #   timing("Connected #{@component.class}") do
+    #     component.render_hash = component.rerender_hash
+    #     block.call(component)
+    #   end
+    # end
+
+    def connect(component : Motion::Base, &block : Motion::Base -> Nil)
+      timing("Connected #{component.class}") do
+        component.render_hash = component.rerender_hash
+        block.call(component)
       end
     end
 
-    def close(&block : Motion::Base -> Nil)
-      timing("Disconnected #{@component.class}") do
+    def close(component : Motion::Base, &block : Motion::Base -> Nil)
+      timing("Disconnected #{component.class}") do
         block.call(component)
       end
 
@@ -26,26 +36,26 @@ module Motion
       false
     end
 
-    def process_motion(motion : String, event : Motion::Event? = nil)
+    def process_motion(component : Motion::Base, motion : String, event : Motion::Event? = nil)
       timing("Proccessed #{motion}") do
         component.process_motion(motion, event)
       end
 
-      true
-    rescue error : Exception
-      handle_error(error, "processing #{motion}")
+      component
+      # rescue error : Exception
+      #   handle_error(error, "processing #{motion}")
 
-      false
+      #   false
     end
 
-    def process_model_stream(stream_topic)
-      timing("Proccessed model stream #{stream_topic} for #{@component.class}") do
+    def process_model_stream(component : Motion::Base, stream_topic)
+      timing("Proccessed model stream #{stream_topic} for #{component.class}") do
         component._process_model_stream
       end
 
       true
     rescue error : Exception
-      handle_error(error, "processing model stream #{stream_topic} for #{@component.class}")
+      handle_error(error, "processing model stream #{stream_topic} for #{component.class}")
 
       false
     end
@@ -63,16 +73,16 @@ module Motion
       false
     end
 
-    def if_render_required(proc)
+    def if_render_required(component : Motion::Base, proc)
       timing("Rendered") do
-        next_render_hash = component.render_hash
+        next_render_hash = component.not_nil!.rerender_hash
 
-        next if @render_hash == next_render_hash
+        next if component.not_nil!.render_hash == next_render_hash
         # && !component.awaiting_forced_rerender?
 
-        proc.call(component)
+        proc.call(component.not_nil!)
 
-        @render_hash = next_render_hash
+        component.not_nil!.render_hash = next_render_hash
       end
     rescue error : Exception
       handle_error(error, "rendering the component")
@@ -82,9 +92,9 @@ module Motion
     #   component.broadcasts
     # end
 
-    def periodic_timers
-      component.periodic_timers
-    end
+    # def periodic_timers(component : Motion::Base)
+    #   component.not_nil!.periodic_timers
+    # end
 
     private def timing(context, &block)
       logger.timing(context, &block)
