@@ -3,7 +3,7 @@ require "../spec_helper"
 describe Motion::Channel do
   it "can handle a new subscriber" do
     channel = Motion::Channel.new
-    channel.handle_joined(nil, MESSAGE_JOIN).should be_nil
+    channel.handle_joined(nil, MESSAGE_JOIN).should be_true
     channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).should_not be_nil
     channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).class.should eq(MotionRender)
   end

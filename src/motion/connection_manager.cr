@@ -69,7 +69,7 @@ module Motion
       })
     end
 
-    private def attach_component(topic : String, state : String)
+    private def attach_component(topic : String, state : String) : Bool
       connect_component(state) do |component|
         adapter.set_component(topic, component)
         adapter.set_broadcast_streams(topic, component)
@@ -99,7 +99,7 @@ module Motion
       end
     end
 
-    private def connect_component(state, &block : Motion::Base -> Nil)
+    private def connect_component(state, &block : Motion::Base -> Nil) : Bool
       Motion.timer.connect(Motion.serializer.deserialize(state), &block)
       # rescue error : Exception
       #   # reject

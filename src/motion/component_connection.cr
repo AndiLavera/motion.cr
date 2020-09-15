@@ -3,14 +3,20 @@ module Motion
   class ComponentConnection
     def initialize; end
 
-    def connect(component : Motion::Base, &block : Motion::Base -> Nil)
+    def connect(component : Motion::Base, &block : Motion::Base -> Nil) : Bool
       timing("Connected #{component.class}") do
         component.render_hash = component.rerender_hash
         block.call(component)
       end
+
+      true
+    rescue error : Exception
+      handle_error(error, "disconnecting the component")
+
+      false
     end
 
-    def close(component : Motion::Base, &block : Motion::Base -> Nil)
+    def close(component : Motion::Base, &block : Motion::Base -> Nil) : Bool
       timing("Disconnected #{component.class}") do
         block.call(component)
       end
@@ -35,7 +41,7 @@ module Motion
       #   false
     end
 
-    def process_model_stream(component : Motion::Base, stream_topic, &block : Motion::Base -> Nil)
+    def process_model_stream(component : Motion::Base, stream_topic, &block : Motion::Base -> Nil) : Bool
       timing("Proccessed model stream #{stream_topic} for #{component.class}") do
         component._process_model_stream
         block.call(component)
@@ -48,7 +54,7 @@ module Motion
       false
     end
 
-    def process_periodic_timer(name : String, &block)
+    def process_periodic_timer(name : String, &block) : Bool
       timing("Proccessed periodic timer #{name}") do
         block.call
       end
@@ -60,7 +66,7 @@ module Motion
       false
     end
 
-    def if_render_required(component : Motion::Base, &block : Motion::Base -> Nil)
+    def if_render_required(component : Motion::Base, &block : Motion::Base -> Nil) : Bool
       timing("Rendered") do
         next_render_hash = component.rerender_hash
 
@@ -68,11 +74,14 @@ module Motion
         # && !component.awaiting_forced_rerender?
 
         block.call(component)
-
         component.render_hash = next_render_hash
       end
+
+      true
     rescue error : Exception
       handle_error(error, "rendering the component")
+
+      false
     end
 
     private def timing(context, &block)
