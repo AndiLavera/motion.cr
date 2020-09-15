@@ -23,23 +23,32 @@ module Motion
       end
     end
 
-    def process_motion(message : Motion::Message)
+    def process_motion(message : Motion::Message) : Motion::Base
       Motion.timer.process_motion(get(message.topic), message.name, message.event) do |component|
         adapter.set_component_connection(message.topic, component)
       end
     end
 
-    def synchronize(topic : String, proc)
-      Motion.timer.if_render_required(get(topic), proc)
+    # def synchronize(topic : String, proc)
+    #   Motion.timer.if_render_required(get(topic), proc)
+    # end
+
+    def synchronize(component? : Motion::Base?, topic : String)
+      if (component = component?)
+        Motion.timer.if_render_required(component) do |component|
+          render(component, topic)
+        end
+      end
     end
 
     def process_model_stream(stream_topic)
       topics = adapter.broadcast_streams[stream_topic]?
       if topics && !topics.empty?
         topics.each do |topic|
-          Motion.timer.process_model_stream(get(topic), stream_topic) do |component|
+          component = get(topic)
+          Motion.timer.process_model_stream(component, stream_topic) do |component|
             adapter.set_component_connection(topic, component)
-            channel.synchronize(topic, true)
+            synchronize(component, topic)
           end
         end
       end
@@ -47,6 +56,17 @@ module Motion
 
     def get(topic : String) : Motion::Base
       adapter.get(topic)
+    end
+
+    def render(component, topic)
+      html = Motion.html_transformer.add_state_to_html(component, component.rerender)
+      channel.rebroadcast!({
+        subject: "message_new",
+        topic:   topic,
+        payload: {
+          html: html,
+        },
+      })
     end
 
     private def attach_component(topic : String, state : String)
@@ -86,7 +106,8 @@ module Motion
               method = periodic_timer[:method]
               method.call if method.is_a?(Proc(Nil))
 
-              channel.synchronize(topic: topic, broadcast: true)
+              # synchronize(topic: topic, broadcast: true)
+              synchronize(component, topic)
               adapter.set_component_connection(topic, component)
             end
           end

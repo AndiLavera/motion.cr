@@ -36,17 +36,17 @@ module Motion
       false
     end
 
-    def process_motion(component : Motion::Base, motion : String, event : Motion::Event? = nil, &block : Motion::Base -> Nil)
+    def process_motion(component : Motion::Base, motion : String, event : Motion::Event? = nil, &block : Motion::Base -> Nil) : Motion::Base
       timing("Proccessed #{motion}") do
         component.process_motion(motion, event)
         block.call(component)
       end
 
-      true
-    rescue error : Exception
-      handle_error(error, "processing #{motion}")
+      component
+      # rescue error : Exception
+      #   handle_error(error, "processing #{motion}")
 
-      false
+      #   false
     end
 
     def process_model_stream(component : Motion::Base, stream_topic, &block : Motion::Base -> Nil)
@@ -88,16 +88,16 @@ module Motion
       false
     end
 
-    def if_render_required(component : Motion::Base, proc)
+    def if_render_required(component : Motion::Base, &block : Motion::Base -> Nil)
       timing("Rendered") do
-        next_render_hash = component.not_nil!.rerender_hash
+        next_render_hash = component.rerender_hash
 
-        next if component.not_nil!.render_hash == next_render_hash
+        next if component.render_hash == next_render_hash
         # && !component.awaiting_forced_rerender?
 
-        proc.call(component.not_nil!)
+        block.call(component)
 
-        component.not_nil!.render_hash = next_render_hash
+        component.render_hash = next_render_hash
       end
     rescue error : Exception
       handle_error(error, "rendering the component")

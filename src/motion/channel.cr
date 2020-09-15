@@ -24,7 +24,7 @@ module Motion
 
       connection_manager.create(message)
 
-      synchronize(message.topic)
+      # connection_manager.synchronize(message.topic)
     end
 
     def handle_leave(client_socket, message : Motion::Message)
@@ -33,49 +33,43 @@ module Motion
 
     def handle_message(client_socket, json : JSON::Any)
       message = Message.new(json)
-      broadcast = false
 
       case message.command
       when "unsubscribe"
         handle_leave(client_socket, message)
       when "process_motion"
-        # TODO: Right now the component is being deserialized, process motion, serialized, stored
-        # then in channel#synchronize being deserialized to render
-        # connection_manager.process_motion should return the component for rendering
-        connection_manager.process_motion(message)
-        broadcast = true
+        component = connection_manager.process_motion(message)
+        connection_manager.synchronize(component, message.topic)
       end
-
-      synchronize(message.topic, broadcast)
     end
 
     def process_model_stream(stream_topic : String)
       connection_manager.process_model_stream(stream_topic)
     end
 
-    def synchronize(topic = nil, broadcast = false)
-      # streaming_from component_connection.broadcasts,
-      #   to: :process_broadcast
+    # def synchronize(topic = nil, broadcast = false)
+    #   # streaming_from component_connection.broadcasts,
+    #   #   to: :process_broadcast
 
-      if broadcast
-        proc = ->(component : Motion::Base) {
-          render(component, topic)
-        }
+    #   if broadcast
+    #     proc = ->(component : Motion::Base) {
+    #       render(component, topic)
+    #     }
 
-        connection_manager.synchronize(topic, proc)
-      end
-    end
+    #     connection_manager.synchronize(topic, proc)
+    #   end
+    # end
 
-    private def render(component, topic)
-      html = Motion.html_transformer.add_state_to_html(component, component.rerender)
-      rebroadcast!({
-        subject: "message_new",
-        topic:   topic,
-        payload: {
-          html: html,
-        },
-      })
-    end
+    # private def render(component, topic)
+    #   html = Motion.html_transformer.add_state_to_html(component, component.rerender)
+    #   rebroadcast!({
+    #     subject: "message_new",
+    #     topic:   topic,
+    #     payload: {
+    #       html: html,
+    #     },
+    #   })
+    # end
 
     def connection_manager
       @connection_manager ||= Motion::ConnectionManager.new(self)
