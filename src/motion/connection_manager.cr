@@ -1,12 +1,12 @@
 module Motion
   class ConnectionManager
-    alias Adapters = Motion::Adapters::Server # Motion::Adapters::Server |
+    alias Adapters = Motion::Adapters::Server | Motion::Adapters::Redis
     getter adapter : Adapters
     getter channel : Motion::Channel
 
     def initialize(@channel : Motion::Channel)
-      # @adapter = Motion.config.adapter == :server ? Adapters::Server.new : Adapters::Redis.new
-      @adapter = Motion::Adapters::Server.new
+      @adapter = Motion.config.adapter == :server ? Motion::Adapters::Server.new : Motion::Adapters::Redis.new
+      # @adapter = Motion::Adapters::Server.new
     end
 
     def create(message : Motion::Message)
@@ -25,7 +25,7 @@ module Motion
 
     def process_motion(message : Motion::Message) : Motion::Base
       Motion.timer.process_motion(get(message.topic), message.name, message.event) do |component|
-        adapter.set_component_connection(message.topic, component)
+        adapter.set_component(message.topic, component)
       end
     end
 
@@ -47,7 +47,7 @@ module Motion
         topics.each do |topic|
           component = get(topic)
           Motion.timer.process_model_stream(component, stream_topic) do |component|
-            adapter.set_component_connection(topic, component)
+            adapter.set_component(topic, component)
             synchronize(component, topic)
           end
         end
@@ -71,7 +71,7 @@ module Motion
 
     private def attach_component(topic : String, state : String)
       connect_component(state) do |component|
-        adapter.set_component_connection(topic, component)
+        adapter.set_component(topic, component)
         adapter.set_broadcast_streams(topic, component)
         set_periodic_timers(topic)
       end
@@ -94,7 +94,7 @@ module Motion
 
               # synchronize(topic: topic, broadcast: true)
               synchronize(component, topic)
-              adapter.set_component_connection(topic, component)
+              adapter.set_component(topic, component)
             end
           end
         end

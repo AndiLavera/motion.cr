@@ -18,7 +18,7 @@ module Motion
 
     @connection_manager : Motion::ConnectionManager?
 
-    def handle_joined(client_socket, json)
+    def handle_joined(client_socket, json : JSON::Any)
       message = Message.new(json)
       raise_version_mismatch(message.version) if versions_mismatch?(message.version)
 
@@ -52,11 +52,11 @@ module Motion
       super(payload)
     end
 
-    def connection_manager
+    def connection_manager : Motion::ConnectionManager
       @connection_manager ||= Motion::ConnectionManager.new(self)
     end
 
-    private def versions_mismatch?(client_version)
+    private def versions_mismatch?(client_version) : Bool
       Motion.config.version != client_version
     end
 

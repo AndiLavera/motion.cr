@@ -4,7 +4,7 @@ module Motion::Adapters
     getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
     getter components : Hash(String, String) = Hash(String, String).new
 
-    def set_component_connection(topic : String, component : Motion::Base)
+    def set_component(topic : String, component : Motion::Base)
       components[topic] = Motion.serializer.weak_serialize(component)
     end
 

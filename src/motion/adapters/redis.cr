@@ -3,6 +3,10 @@ require "json"
 
 module Motion::Adapters
   class Redis
+    getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
+    getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
+    getter components : Hash(String, String) = Hash(String, String).new
+
     private getter redis : ::Redis
 
     def initialize
@@ -12,72 +16,53 @@ module Motion::Adapters
       redis.set("streams", "")
     end
 
-    def component_connections
-      if component_connection = redis.get("component_connections")
-        return JSON.parse(component_connections)
-      else
-        raise "RedisComponentConnectionError"
-      end
-    end
-
-    def fibers
-      if fibers = redis.get("fibers")
-        return JSON.parse(fibers)
-      else
-        raise "RedisFiberError"
-      end
-    end
-
-    def model_streams
-      if model_streams = redis.get("model_streams")
-        return JSON.parse(model_streams)
-      else
-        raise "RedisModelStreamError"
-      end
-    end
-
-    def set_component_connection(topic : String, component_connection : Motion::ComponentConnection)
-      redis.set(topic, Motion.serializer.serialize_component_connection(component_connection))
-    end
-
-    def set_streams(component_connection, topic)
-      component = component_connection.component
-      return unless component.responds_to?(:broadcast_channel)
-
-      if streams[component.broadcast_channel]?.nil?
-        streams[component.broadcast_channel] = [topic]
-      else
-        streams[component.broadcast_channel] << topic
-      end
-    end
-
-    # def set_periodic_timers(topic : String)
-    #   get(topic).periodic_timers.each do |timer|
-    #     name = timer[:name].to_s
-    #     adapter.fibers[name] = spawn do
-    #       while connected?(topic) && periodic_timer_active?(name)
-    #         proc = ->do
-    #           interval = timer[:interval]
-    #           sleep interval if interval.is_a?(Time::Span)
-
-    #           method = timer[:method]
-    #           method.call if method.is_a?(Proc(Nil))
-    #         end
-
-    #         get(topic).process_periodic_timer(proc, name.to_s)
-    #         channel.synchronize(topic: topic, broadcast: true)
-    #       end
-    #     end
+    # def components
+    #   if components = redis.get("components")
+    #     return JSON.parse(components)
+    #   else
+    #     raise "RedisComponentConnectionError"
     #   end
     # end
 
-    def fibers=(new_fiber); end
+    # def fibers
+    #   if fibers = redis.get("fibers")
+    #     return JSON.parse(fibers)
+    #   else
+    #     raise "RedisFiberError"
+    #   end
+    # end
 
-    def model_streams=(new_model_stream); end
+    # def model_streams
+    #   if model_streams = redis.get("model_streams")
+    #     return JSON.parse(model_streams)
+    #   else
+    #     raise "RedisModelStreamError"
+    #   end
+    # end
 
-    # For initial testing. Needs to be removed
-    def r
-      redis
+    def set_component(topic : String, component : Motion::Base)
+      components[topic] = Motion.serializer.weak_serialize(component)
+    end
+
+    def set_broadcast_streams(topic : String, component : Motion::Base)
+      return unless component.responds_to?(:broadcast_channel)
+      channel = component.broadcast_channel
+
+      if broadcast_streams[channel]?.nil?
+        broadcast_streams[channel] = [topic]
+      else
+        broadcast_streams[channel] << topic
+      end
+    end
+
+    def get(topic : String) : Motion::Base
+      Motion.serializer.weak_deserialize(components[topic]?.not_nil!)
+    rescue error : NilAssertionError
+      raise Motion::Exceptions::NoComponentConnectionError.new(topic)
+    end
+
+    def delete(topic : String)
+      components.delete(topic)
     end
   end
 end
