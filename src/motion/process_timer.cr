@@ -3,6 +3,8 @@ module Motion
   class ProcessTimer
     def initialize; end
 
+    # "Connects" a component to the server
+    # Sets the jsonified component including any streams & periodic timers
     def connect(component : Motion::Base, &block : Motion::Base -> Nil) : Bool
       timing("Connected #{component.class}") do
         component.render_hash = component.rerender_hash
@@ -16,6 +18,7 @@ module Motion
       false
     end
 
+    # Deletes the component, streams & timers
     def close(component : Motion::Base, &block : Motion::Base -> Nil) : Bool
       timing("Disconnected #{component.class}") do
         block.call(component)
@@ -66,6 +69,7 @@ module Motion
       false
     end
 
+    # If the component requires a render, the block will be called, render and send the new html
     def if_render_required(component : Motion::Base, &block : Motion::Base -> Nil) : Bool
       timing("Rendered") do
         next_render_hash = component.rerender_hash

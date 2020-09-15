@@ -19,13 +19,13 @@ module Motion::Adapters
       end
     end
 
-    def get(topic : String) : Motion::Base
+    def get_component(topic : String) : Motion::Base
       Motion.serializer.weak_deserialize(components[topic]?.not_nil!)
     rescue error : NilAssertionError
       raise Motion::Exceptions::NoComponentConnectionError.new(topic)
     end
 
-    def delete(topic : String) : Bool
+    def destroy_component(topic : String) : Bool
       !!components.delete(topic)
     end
 

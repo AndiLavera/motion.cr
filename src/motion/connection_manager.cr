@@ -20,15 +20,15 @@ module Motion
     def destroy(message : Motion::Message)
       topic = message.topic
 
-      Motion.timer.close(get(topic)) do |component|
+      Motion.timer.close(get_component(topic)) do |component|
         destroy_periodic_timers(component)
         destroy_model_streams(component, topic) if component.responds_to?(:broadcast_channel)
-        adapter.delete(topic)
+        adapter.destroy_component(topic)
       end
     end
 
     def process_motion(message : Motion::Message) : Motion::Base
-      Motion.timer.process_motion(get(message.topic), message.name, message.event) do |component|
+      Motion.timer.process_motion(get_component(message.topic), message.name, message.event) do |component|
         adapter.set_component(message.topic, component)
       end
     end
@@ -45,7 +45,7 @@ module Motion
       topics = adapter.get_broadcast_streams(stream_topic)
       if topics && !topics.empty?
         topics.each do |topic|
-          component = get(topic)
+          component = get_component(topic)
           Motion.timer.process_model_stream(component, stream_topic) do |component|
             adapter.set_component(topic, component)
             synchronize(component, topic)
@@ -54,8 +54,8 @@ module Motion
       end
     end
 
-    def get(topic : String) : Motion::Base
-      adapter.get(topic)
+    def get_component(topic : String) : Motion::Base
+      adapter.get_component(topic)
     end
 
     def render(component, topic)
@@ -108,7 +108,7 @@ module Motion
     end
 
     private def connected?(topic)
-      !get(topic).nil?
+      !get_component(topic).nil?
     end
 
     # TODO: Some way to allow users to invoke

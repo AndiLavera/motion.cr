@@ -4,8 +4,8 @@ describe Motion::Channel do
   it "can handle a new subscriber" do
     channel = Motion::Channel.new
     channel.handle_joined(nil, MESSAGE_JOIN).should be_true
-    channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).should_not be_nil
-    channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).class.should eq(MotionRender)
+    channel.connection_manager.get_component(MESSAGE_JOIN["topic"].as_s).should_not be_nil
+    channel.connection_manager.get_component(MESSAGE_JOIN["topic"].as_s).class.should eq(MotionRender)
   end
 
   it "raises an error when versions mismatch" do
@@ -25,17 +25,17 @@ describe Motion::Channel do
   it "raises NoComponentConnectionError on mismatch topic" do
     channel = join_channel
     expect_raises(Motion::Exceptions::NoComponentConnectionError) do
-      channel.connection_manager.get("bad_topic")
+      channel.connection_manager.get_component("bad_topic")
     end
   end
 
   it "can process a motion" do
     channel = join_channel
 
-    channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).view.to_s.empty?.should be_true
+    channel.connection_manager.get_component(MESSAGE_JOIN["topic"].as_s).view.to_s.empty?.should be_true
 
     channel.handle_message(nil, MESSAGE_NEW)
-    component = channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s)
+    component = channel.connection_manager.get_component(MESSAGE_JOIN["topic"].as_s)
 
     component.inspect.to_s.includes?("@motion_hit=true").should be_true
     # channel.connection_manager.get(MESSAGE_JOIN["topic"].as_s).view.to_s.empty?.should be_false
@@ -61,7 +61,7 @@ describe Motion::Channel do
 
     channel.handle_message(nil, message)
     expect_raises(Motion::Exceptions::NoComponentConnectionError) do
-      channel.connection_manager.adapter.get(message["topic"].as_s)
+      channel.connection_manager.adapter.get_component(message["topic"].as_s)
     end
   end
 
@@ -105,7 +105,7 @@ describe Motion::Channel do
 
     channel = join_channel(json)
     channel.process_model_stream("todos:created")
-    component = channel.connection_manager.get("motion:69689")
+    component = channel.connection_manager.get_component("motion:69689")
     component.inspect.to_s.includes?("@count=1").should be_true
   end
 end
