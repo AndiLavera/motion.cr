@@ -63,19 +63,19 @@ describe Motion::Channel do
     channel.connection_manager.adapter.components[message["topic"]]?.should be_nil
   end
 
-  # it "can register periodic timers" do
-  #   json = JSON.parse({
-  #     "topic":      "motion:69689",
-  #     "identifier": {
-  #       "state":   "eyJtb3Rpb25fY29tcG9uZW50Ijp0cnVlLCJjb3VudCI6MH0AVGlja2VyQ29tcG9uZW50", # TickerComponent
-  #       "version": Motion::Version.to_s,
-  #     },
-  #   }.to_json)
+  it "can register periodic timers" do
+    json = JSON.parse({
+      "topic":      "motion:69689",
+      "identifier": {
+        "state":   "eyJtb3Rpb25fY29tcG9uZW50Ijp0cnVlLCJjb3VudCI6MH0AVGlja2VyQ29tcG9uZW50", # TickerComponent
+        "version": Motion::Version.to_s,
+      },
+    }.to_json)
 
-  #   channel = join_channel(json)
+    channel = join_channel(json)
 
-  #   channel.connection_manager.adapter.fibers.empty?.should be_false
-  # end
+    channel.connection_manager.adapter.fibers.empty?.should be_false
+  end
 
   # pending("can run periodic timers")
 

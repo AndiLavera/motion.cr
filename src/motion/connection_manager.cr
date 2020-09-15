@@ -24,8 +24,9 @@ module Motion
     end
 
     def process_motion(message : Motion::Message)
-      component = Motion.timer.process_motion(get(message.topic), message.name, message.event)
-      adapter.set_component_connection(message.topic, component)
+      Motion.timer.process_motion(get(message.topic), message.name, message.event) do |component|
+        adapter.set_component_connection(message.topic, component)
+      end
     end
 
     def synchronize(topic : String, proc)
@@ -36,8 +37,10 @@ module Motion
       topics = adapter.broadcast_streams[stream_topic]?
       if topics && !topics.empty?
         topics.each do |topic|
-          Motion.timer.process_model_stream(get(topic), stream_topic)
-          channel.synchronize(topic, true)
+          Motion.timer.process_model_stream(get(topic), stream_topic) do |component|
+            adapter.set_component_connection(topic, component)
+            channel.synchronize(topic, true)
+          end
         end
       end
     end

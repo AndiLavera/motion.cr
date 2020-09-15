@@ -20,10 +20,14 @@ module Motion
       ]
     end
 
-    def serialize_without_digest(component : Motion::Base)
+    def weak_serialize(component : Motion::Base)
       state = dump(component)
       state_with_class = "#{state}#{NULL_BYTE}#{component.class}"
-      encode(state_with_class)
+    end
+
+    def weak_deserialize(state_with_class)
+      state, component_class = state_with_class.split(NULL_BYTE)
+      load(state, component_class)
     end
 
     def weak_digest(component : Motion::Base) : UInt64

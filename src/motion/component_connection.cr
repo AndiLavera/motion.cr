@@ -36,21 +36,23 @@ module Motion
       false
     end
 
-    def process_motion(component : Motion::Base, motion : String, event : Motion::Event? = nil)
+    def process_motion(component : Motion::Base, motion : String, event : Motion::Event? = nil, &block : Motion::Base -> Nil)
       timing("Proccessed #{motion}") do
         component.process_motion(motion, event)
+        block.call(component)
       end
 
-      component
-      # rescue error : Exception
-      #   handle_error(error, "processing #{motion}")
+      true
+    rescue error : Exception
+      handle_error(error, "processing #{motion}")
 
-      #   false
+      false
     end
 
-    def process_model_stream(component : Motion::Base, stream_topic)
+    def process_model_stream(component : Motion::Base, stream_topic, &block : Motion::Base -> Nil)
       timing("Proccessed model stream #{stream_topic} for #{component.class}") do
         component._process_model_stream
+        block.call(component)
       end
 
       true
