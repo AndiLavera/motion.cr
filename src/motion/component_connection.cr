@@ -1,21 +1,7 @@
 module Motion
   # :nodoc:
   class ComponentConnection
-    # def self.from_state(state)
-    #   new(component: Motion.serializer.deserialize(state))
-    # end
-
-    # getter component : Motion::Base?
-    # getter render_hash : UInt64?
-
     def initialize; end
-
-    # def initialize(component : Motion::Base, &block : Motion::Base -> Nil)
-    #   timing("Connected #{@component.class}") do
-    #     component.render_hash = component.rerender_hash
-    #     block.call(component)
-    #   end
-    # end
 
     def connect(component : Motion::Base, &block : Motion::Base -> Nil)
       timing("Connected #{component.class}") do

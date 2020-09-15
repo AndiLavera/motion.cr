@@ -1,10 +1,7 @@
 module Motion::Adapters
   class Server
-    # getter component_connections : Hash(String, Motion::ComponentConnection?) = Hash(String, Motion::ComponentConnection?).new
     getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
     getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
-
-    # Where components will go after changes
     getter components : Hash(String, String) = Hash(String, String).new
 
     def set_component_connection(topic : String, component : Motion::Base)

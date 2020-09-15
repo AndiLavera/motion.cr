@@ -47,29 +47,10 @@ module Motion
       connection_manager.process_model_stream(stream_topic)
     end
 
-    # def synchronize(topic = nil, broadcast = false)
-    #   # streaming_from component_connection.broadcasts,
-    #   #   to: :process_broadcast
-
-    #   if broadcast
-    #     proc = ->(component : Motion::Base) {
-    #       render(component, topic)
-    #     }
-
-    #     connection_manager.synchronize(topic, proc)
-    #   end
-    # end
-
-    # private def render(component, topic)
-    #   html = Motion.html_transformer.add_state_to_html(component, component.rerender)
-    #   rebroadcast!({
-    #     subject: "message_new",
-    #     topic:   topic,
-    #     payload: {
-    #       html: html,
-    #     },
-    #   })
-    # end
+    # Amber::WebSockets::Channel#rebroadcast! is a protected method
+    def rebroadcast!(payload)
+      super(payload)
+    end
 
     def connection_manager
       @connection_manager ||= Motion::ConnectionManager.new(self)

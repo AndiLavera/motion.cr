@@ -16,7 +16,7 @@ module Motion
     def destroy(message : Motion::Message)
       topic = message.topic
 
-      timer.close(get(topic)) do |component|
+      Motion.timer.close(get(topic)) do |component|
         destroy_periodic_timers(component)
         destroy_model_streams(component, topic) if component.responds_to?(:broadcast_channel)
         adapter.delete(topic)
@@ -77,20 +77,6 @@ module Motion
       end
     end
 
-    # private def set_component_connection(component_connection : Motion::ComponentConnection, topic : String)
-    #   adapter.component_connections[topic] = component_connection
-    # end
-
-    # private def set_broadcasts(component_connection, topic)
-    #   component = component_connection.component
-    #   return unless component.responds_to?(:broadcast_channel)
-    #   if adapter.broadcast_streams[component.broadcast_channel]?.nil?
-    #     adapter.broadcast_streams[component.broadcast_channel] = [topic]
-    #   else
-    #     adapter.broadcast_streams[component.broadcast_channel] << topic
-    #   end
-    # end
-
     private def set_periodic_timers(topic : String)
       component = get(topic)
 
@@ -148,10 +134,6 @@ module Motion
 
     private def handle_error(error, context)
       logger.error("An error occurred while #{context} & #{error}")
-    end
-
-    private def timer
-      Motion.timer
     end
 
     private def logger
