@@ -5,39 +5,7 @@ module Motion::Adapters
   class Redis
     getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
     private getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
-
-    private getter redis : ::Redis
-
-    def initialize
-      @redis = ::Redis.new(url: Motion.config.redis_url)
-      # redis.set("component_connections", "")
-      # redis.set("fibers", "")
-      # redis.set("streams", "")
-    end
-
-    # def components
-    #   if components = redis.get("components")
-    #     return JSON.parse(components)
-    #   else
-    #     raise "RedisComponentConnectionError"
-    #   end
-    # end
-
-    # def fibers
-    #   if fibers = redis.get("fibers")
-    #     return JSON.parse(fibers)
-    #   else
-    #     raise "RedisFiberError"
-    #   end
-    # end
-
-    # def model_streams
-    #   if model_streams = redis.get("model_streams")
-    #     return JSON.parse(model_streams)
-    #   else
-    #     raise "RedisModelStreamError"
-    #   end
-    # end
+    private getter redis : ::Redis = ::Redis.new(url: Motion.config.redis_url)
 
     def get_component(topic : String) : Motion::Base
       Motion.serializer.weak_deserialize(redis.get(topic).not_nil!)
@@ -53,8 +21,8 @@ module Motion::Adapters
       !!redis.del(topic)
     end
 
-    def get_broadcast_streams(stream_topic : String) : Array(::Redis::RedisValue)
-      redis.lrange(stream_topic, 0, -1)
+    def get_broadcast_streams(stream_topic : String) : Array(String)
+      redis.lrange(stream_topic, 0, -1).map(&.to_s)
     end
 
     def set_broadcast_streams(topic : String, component : Motion::Base)
