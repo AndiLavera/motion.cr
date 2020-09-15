@@ -52,7 +52,7 @@ describe Motion::Channel do
         "identifier" => {
           "channel" => "motion:6968",
           "version" => Motion::Version.to_s,
-          "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==",
+          "state"   => "eyJtYXBfbW90aW9uIjpmYWxzZSwibW90aW9uX2hpdCI6ZmFsc2V9AE1vdGlvblJlbmRlcg==", # MotionRender
         },
       },
     }.to_json)
@@ -60,7 +60,9 @@ describe Motion::Channel do
     channel = join_channel
 
     channel.handle_message(nil, message)
-    channel.connection_manager.adapter.components[message["topic"]]?.should be_nil
+    expect_raises(Motion::Exceptions::NoComponentConnectionError) do
+      channel.connection_manager.adapter.get(message["topic"].as_s)
+    end
   end
 
   it "can register periodic timers" do
@@ -89,7 +91,7 @@ describe Motion::Channel do
     }.to_json)
 
     channel = join_channel(json)
-    channel.connection_manager.adapter.broadcast_streams.empty?.should be_false
+    # channel.connection_manager.adapter.broadcast_streams.empty?.should be_false
   end
 
   it "can process model streams" do

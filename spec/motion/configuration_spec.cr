@@ -6,10 +6,12 @@ describe Motion::Configuration do
 
     Motion.configure do |config|
       config.render_component_comments = false
+      config.adapter = :redis
     end
 
     Motion.config.render_component_comments.should be_false
     Motion.config.finalized.should be_true
+    Motion.config.adapter.should eq(:redis)
   end
 
   it "raises error when configured twice" do

@@ -4,16 +4,15 @@ require "json"
 module Motion::Adapters
   class Redis
     getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
-    getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
-    getter components : Hash(String, String) = Hash(String, String).new
+    private getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
 
     private getter redis : ::Redis
 
     def initialize
-      @redis = ::Redis.new(url: "redis://localhost:6379/0")
+      @redis = ::Redis.new(url: Motion.config.redis_url)
       # redis.set("component_connections", "")
-      redis.set("fibers", "")
-      redis.set("streams", "")
+      # redis.set("fibers", "")
+      # redis.set("streams", "")
     end
 
     # def components
@@ -41,7 +40,7 @@ module Motion::Adapters
     # end
 
     def set_component(topic : String, component : Motion::Base)
-      components[topic] = Motion.serializer.weak_serialize(component)
+      redis.set(topic, Motion.serializer.weak_serialize(component))
     end
 
     def set_broadcast_streams(topic : String, component : Motion::Base)
@@ -56,13 +55,21 @@ module Motion::Adapters
     end
 
     def get(topic : String) : Motion::Base
-      Motion.serializer.weak_deserialize(components[topic]?.not_nil!)
+      Motion.serializer.weak_deserialize(redis.get(topic).not_nil!)
     rescue error : NilAssertionError
       raise Motion::Exceptions::NoComponentConnectionError.new(topic)
     end
 
-    def delete(topic : String)
-      components.delete(topic)
+    def delete(topic : String) : Bool
+      !!redis.del(topic)
+    end
+
+    def get_broadcast_streams(stream_topic : String) : Array(String)?
+      broadcast_streams[stream_topic]?
+    end
+
+    def destroy_broadcast_stream(topic : String, component : Motion::Base) : Bool
+      !!broadcast_streams[component.broadcast_channel].delete(topic)
     end
   end
 end

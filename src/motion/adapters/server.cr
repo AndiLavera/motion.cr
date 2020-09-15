@@ -1,8 +1,8 @@
 module Motion::Adapters
   class Server
     getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
-    getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
-    getter components : Hash(String, String) = Hash(String, String).new
+    private getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
+    private getter components : Hash(String, String) = Hash(String, String).new
 
     def set_component(topic : String, component : Motion::Base)
       components[topic] = Motion.serializer.weak_serialize(component)
@@ -25,8 +25,16 @@ module Motion::Adapters
       raise Motion::Exceptions::NoComponentConnectionError.new(topic)
     end
 
-    def delete(topic : String)
-      components.delete(topic)
+    def delete(topic : String) : Bool
+      !!components.delete(topic)
+    end
+
+    def get_broadcast_streams(stream_topic : String) : Array(String)?
+      broadcast_streams[stream_topic]?
+    end
+
+    def destroy_broadcast_stream(topic : String, component : Motion::Base) : Bool
+      !!broadcast_streams[component.broadcast_channel].delete(topic)
     end
   end
 end

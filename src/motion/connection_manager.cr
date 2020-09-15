@@ -4,6 +4,10 @@ module Motion
     getter adapter : Adapters
     getter channel : Motion::Channel
 
+    # TODO: Shouldn't do motion.timer.my_method(get(topic))
+    # get(topic) should be in the blocks as fetching & setting
+    # components is something that should be timed.
+
     def initialize(@channel : Motion::Channel)
       @adapter = Motion.config.adapter == :server ? Motion::Adapters::Server.new : Motion::Adapters::Redis.new
       # @adapter = Motion::Adapters::Server.new
@@ -29,10 +33,6 @@ module Motion
       end
     end
 
-    # def synchronize(topic : String, proc)
-    #   Motion.timer.if_render_required(get(topic), proc)
-    # end
-
     def synchronize(component? : Motion::Base?, topic : String)
       if (component = component?)
         Motion.timer.if_render_required(component) do |component|
@@ -41,8 +41,8 @@ module Motion
       end
     end
 
-    def process_model_stream(stream_topic)
-      topics = adapter.broadcast_streams[stream_topic]?
+    def process_model_stream(stream_topic : String)
+      topics = adapter.get_broadcast_streams(stream_topic)
       if topics && !topics.empty?
         topics.each do |topic|
           component = get(topic)
@@ -73,13 +73,11 @@ module Motion
       connect_component(state) do |component|
         adapter.set_component(topic, component)
         adapter.set_broadcast_streams(topic, component)
-        set_periodic_timers(topic)
+        set_periodic_timers(topic, component)
       end
     end
 
-    private def set_periodic_timers(topic : String)
-      component = get(topic)
-
+    private def set_periodic_timers(topic : String, component : Motion::Base)
       component.periodic_timers.each do |periodic_timer|
         name = periodic_timer[:name].to_s
 
@@ -103,10 +101,10 @@ module Motion
 
     private def connect_component(state, &block : Motion::Base -> Nil)
       Motion.timer.connect(Motion.serializer.deserialize(state), &block)
-    rescue error : Exception
-      # reject
-      raise "Exception in connect_component"
-      # handle_error(e, "connecting a component")
+      # rescue error : Exception
+      #   # reject
+      #   raise "Exception in connect_component"
+      #   # handle_error(e, "connecting a component")
     end
 
     private def connected?(topic)
@@ -128,8 +126,8 @@ module Motion
       end
     end
 
-    private def destroy_model_streams(component, topic)
-      adapter.broadcast_streams[component.broadcast_channel].delete(topic)
+    private def destroy_model_streams(component : Motion::Base, topic : String) : Bool
+      adapter.destroy_broadcast_stream(topic, component)
     end
 
     private def handle_error(error, context)
