@@ -1,22 +1,4 @@
-require "../../spec_helper"
-
-def join_channel(json = MESSAGE_JOIN)
-  channel = Motion::Channel.new
-  channel.handle_joined(nil, json)
-  channel
-end
-
-class Motion::Adapters::Redis
-  def redis_get(topic : String)
-    @redis.get(topic)
-  end
-end
-
-class Motion::Adapters::Server
-  def redis_get(topic : String)
-    # @redis.get(topic)
-  end
-end
+require "./spec_helper"
 
 describe Motion::Adapters::Redis do
   before_each do
