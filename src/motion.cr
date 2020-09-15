@@ -42,7 +42,7 @@ module Motion
   end
 
   # :nodoc:
-  def self.timer
-    @@config.timer
+  def self.action_timer
+    @@config.action_timer
   end
 end

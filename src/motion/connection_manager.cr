@@ -4,7 +4,7 @@ module Motion
     getter adapter : Adapters
     getter channel : Motion::Channel
 
-    # TODO: Shouldn't do motion.timer.my_method(get(topic))
+    # TODO: Shouldn't do Motion.action_timer.my_method(get(topic))
     # get(topic) should be in the blocks as fetching & setting
     # components is something that should be timed.
 
@@ -20,7 +20,7 @@ module Motion
     def destroy(message : Motion::Message)
       topic = message.topic
 
-      Motion.timer.close(get_component(topic)) do |component|
+      Motion.action_timer.close(get_component(topic)) do |component|
         destroy_periodic_timers(component)
         destroy_model_streams(component, topic) if component.responds_to?(:broadcast_channel)
         adapter.destroy_component(topic)
@@ -28,14 +28,14 @@ module Motion
     end
 
     def process_motion(message : Motion::Message) : Motion::Base
-      Motion.timer.process_motion(get_component(message.topic), message.name, message.event) do |component|
+      Motion.action_timer.process_motion(get_component(message.topic), message.name, message.event) do |component|
         adapter.set_component(message.topic, component)
       end
     end
 
     def synchronize(component? : Motion::Base?, topic : String)
       if (component = component?)
-        Motion.timer.if_render_required(component) do |component|
+        Motion.action_timer.if_render_required(component) do |component|
           render(component, topic)
         end
       end
@@ -46,7 +46,7 @@ module Motion
       if topics && !topics.empty?
         topics.each do |topic|
           component = get_component(topic)
-          Motion.timer.process_model_stream(component, stream_topic) do |component|
+          Motion.action_timer.process_model_stream(component, stream_topic) do |component|
             adapter.set_component(topic, component)
             synchronize(component, topic)
           end
@@ -83,7 +83,7 @@ module Motion
 
         adapter.fibers[name] = spawn do
           while connected?(topic) && periodic_timer_active?(name)
-            Motion.timer.process_periodic_timer(name.to_s) do
+            Motion.action_timer.process_periodic_timer(name.to_s) do
               interval = periodic_timer[:interval]
               sleep interval if interval.is_a?(Time::Span)
 
@@ -100,7 +100,7 @@ module Motion
     end
 
     private def connect_component(state, &block : Motion::Base -> Nil) : Bool
-      Motion.timer.connect(Motion.serializer.deserialize(state), &block)
+      Motion.action_timer.connect(Motion.serializer.deserialize(state), &block)
       # rescue error : Exception
       #   # reject
       #   raise "Exception in connect_component"

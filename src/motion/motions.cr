@@ -1,7 +1,7 @@
 require "./motions/*"
 require "./html_transformer"
 require "./serializer"
-require "./process_timer"
+require "./action_timer"
 require "./channel"
 require "./event"
 require "./element"

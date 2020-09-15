@@ -1,6 +1,6 @@
 module Motion
   # :nodoc:
-  class ProcessTimer
+  class ActionTimer
     def initialize; end
 
     # "Connects" a component to the server

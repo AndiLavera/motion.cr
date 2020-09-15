@@ -44,7 +44,7 @@ module Motion
     getter html_transformer : Motion::HTMLTransformer = Motion::HTMLTransformer.new
 
     # :nodoc:
-    getter timer : ProcessTimer = ProcessTimer.new
+    getter action_timer : ActionTimer = ActionTimer.new
 
     # :nodoc:
     getter logger : Motion::Logger = Motion::Logger.new
