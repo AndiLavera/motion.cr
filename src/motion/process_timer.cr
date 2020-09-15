@@ -1,6 +1,6 @@
 module Motion
   # :nodoc:
-  class ComponentConnection
+  class ProcessTimer
     def initialize; end
 
     def connect(component : Motion::Base, &block : Motion::Base -> Nil) : Bool
