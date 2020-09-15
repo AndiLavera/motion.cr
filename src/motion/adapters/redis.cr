@@ -53,16 +53,15 @@ module Motion::Adapters
       !!redis.del(topic)
     end
 
-    def get_broadcast_streams(stream_topic : String) : Array(String)?
-      broadcast_streams[stream_topic]?
+    def get_broadcast_streams(stream_topic : String) : Array(::Redis::RedisValue)
+      redis.lrange(stream_topic, 0, -1)
     end
 
     def set_broadcast_streams(topic : String, component : Motion::Base)
       return unless component.responds_to?(:broadcast_channel)
       channel = component.broadcast_channel
 
-      broadcast_streams[channel] ||= [] of String
-      broadcast_streams[channel] << topic
+      redis.lpush(channel, topic)
     end
 
     def destroy_broadcast_stream(topic : String, component : Motion::Base) : Bool

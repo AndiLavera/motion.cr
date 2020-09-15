@@ -1,30 +1,43 @@
 require "./spec_helper"
 
-describe Motion::Adapters::Redis do
-  before_each do
-    Motion.configure do |config|
-      config.adapter = :redis
+[Motion::Adapters::Redis, Motion::Adapters::Server].each do |adapter_class|
+  describe adapter_class do
+    before_each do
+      Redis.new(url: Motion.config.redis_url).flushdb
+
+      if adapter_class == Motion::Adapters::Redis
+        Motion.configure do |config|
+          config.adapter = :redis
+        end
+      end
     end
-  end
 
-  after_each do
-    Redis.new(url: Motion.config.redis_url).flushdb
-    Motion.reset_config
-  end
+    after_each do
+      Redis.new(url: Motion.config.redis_url).flushdb
+      Motion.reset_config
+    end
 
-  it "can make a new redis component" do
-    json = JSON.parse({
-      "topic":      "motion:69689",
-      "identifier": {
-        "state":   "eyJtb3Rpb25fY29tcG9uZW50Ijp0cnVlLCJjb3VudCI6MH0AVGlja2VyQ29tcG9uZW50", # TickerComponent
-        "version": Motion::Version.to_s,
-      },
-    }.to_json)
+    it "can set a component" do
+      adapter = adapter_class.new
+      adapter.set_component("motion:69689", TickerComponent.new)
+      adapter.get_component("motion:69689").class.should eq(TickerComponent)
+    end
 
-    channel = join_channel(json)
+    it "can delete a component" do
+      adapter = adapter_class.new
+      adapter.set_component("motion:6967", MotionRender.new)
 
-    json_component = channel.connection_manager.adapter.redis_get("motion:69689").not_nil!
-    component = Motion.serializer.weak_deserialize(json_component)
-    component.class.should eq(TickerComponent)
+      adapter.destroy_component("motion:6967").should be_true
+      expect_raises(Motion::Exceptions::NoComponentConnectionError) do
+        adapter.get_component("motion:6967")
+      end
+    end
+
+    it "can set a broadcast stream" do
+      component = BroadcastComponent.new
+      adapter = adapter_class.new
+      adapter.set_broadcast_streams("motion:87892", component)
+      adapter.get_broadcast_streams(component.broadcast_channel).should eq(["motion:87892"])
+    end
   end
 end

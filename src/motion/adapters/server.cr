@@ -18,8 +18,8 @@ module Motion::Adapters
       !!components.delete(topic)
     end
 
-    def get_broadcast_streams(stream_topic : String) : Array(String)?
-      broadcast_streams[stream_topic]?
+    def get_broadcast_streams(stream_topic : String) : Array(String)
+      broadcast_streams[stream_topic]? || [] of String
     end
 
     def set_broadcast_streams(topic : String, component : Motion::Base)
