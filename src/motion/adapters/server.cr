@@ -34,10 +34,19 @@ module Motion::Adapters
       !!broadcast_streams[component.broadcast_channel].delete(topic)
     end
 
-    def get_periodic_timers; end
+    def get_periodic_timers(name : String) : Fiber?
+      fibers[name]?
+    end
 
     def set_periodic_timers; end
 
-    def destroy_periodic_timers; end
+    def destroy_periodic_timers(component : Motion::Base)
+      component.periodic_timers.each do |timer|
+        if name = timer[:name]
+          fibers.delete(name)
+          Motion.logger.info("Periodic Timer #{name} has been disabled")
+        end
+      end
+    end
   end
 end

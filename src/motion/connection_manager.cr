@@ -76,7 +76,7 @@ module Motion
         name = periodic_timer[:name].to_s
 
         adapter.fibers[name] = spawn do
-          while connected?(topic) && periodic_timer_active?(name)
+          while connected?(name) && periodic_timer_active?(name)
             Motion.action_timer.process_periodic_timer(name.to_s) do
               interval = periodic_timer[:interval]
               sleep interval if interval.is_a?(Time::Span)
@@ -86,7 +86,7 @@ module Motion
 
               # synchronize(topic: topic, broadcast: true)
               synchronize(component, topic)
-              adapter.set_component(topic, component)
+              # adapter.set_component(topic, component) if connected?(topic)
             end
           end
         end
@@ -105,13 +105,13 @@ module Motion
       adapter.get_component(topic)
     end
 
-    private def connected?(topic)
-      !get_component(topic).nil?
+    private def connected?(name : String) : Bool
+      !!adapter.get_periodic_timers(name)
     end
 
     # TODO: Some way to allow users to invoke
     # a method to stop a particular timer
-    private def periodic_timer_active?(name)
+    private def periodic_timer_active?(name) : Bool
       true
     end
 
