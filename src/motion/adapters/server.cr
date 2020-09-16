@@ -10,12 +10,12 @@ module Motion::Adapters
       raise Motion::Exceptions::NoComponentConnectionError.new(topic)
     end
 
-    def mget_components(topics : String) : Array(Motion::Base)
-      json_components = components.values_at
+    def mget_components(topics : Array(String)) : Array(Motion::Base)
+      topics.map { |topic| get_component(topic) }
     end
 
     def set_component(topic : String, component : Motion::Base) : Bool
-      components[topic] = Motion.serializer.weak_serialize(component)
+      !!(components[topic] = Motion.serializer.weak_serialize(component))
     end
 
     def destroy_component(topic : String) : Bool

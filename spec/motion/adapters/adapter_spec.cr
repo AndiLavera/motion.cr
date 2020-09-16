@@ -23,6 +23,16 @@ require "./spec_helper"
       adapter.get_component("motion:69689").class.should eq(TickerComponent)
     end
 
+    it "can get multiple components at once" do
+      adapter = adapter_class.new
+      topics = ["motion:0", "motion:1", "motion:2", "motion:3", "motion:4"]
+
+      topics.each do |topic|
+        adapter.set_component(topic, TickerComponent.new)
+      end
+      adapter.mget_components(topics).size.should eq(5)
+    end
+
     it "can delete a component" do
       adapter = adapter_class.new
       adapter.set_component("motion:6967", MotionRender.new)
