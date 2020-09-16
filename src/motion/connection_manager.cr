@@ -75,6 +75,18 @@ module Motion
       end
     end
 
+    def process_model_stream_test(stream_topic : String)
+      topics = adapter.get_broadcast_streams(stream_topic)
+      components = adapter.mget_components(topics)
+
+      Motion.action_timer.process_model_stream(stream_topic) do
+        components.each do |component|
+          component._process_model_stream
+          synchronize(component, topic)
+        end
+      end
+    end
+
     def synchronize(component : Motion::Base, topic : String)
       Motion.action_timer.if_render_required(component) do
         render(component, topic)

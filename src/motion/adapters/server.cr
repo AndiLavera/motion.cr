@@ -16,6 +16,8 @@ module Motion::Adapters
 
     def set_component(topic : String, component : Motion::Base) : Bool
       !!(components[topic] = Motion.serializer.weak_serialize(component))
+      pp components
+      true
     end
 
     def destroy_component(topic : String) : Bool
