@@ -33,11 +33,9 @@ module Motion
       end
     end
 
-    def synchronize(component? : Motion::Base?, topic : String)
-      if (component = component?)
-        Motion.action_timer.if_render_required(component) do |component|
-          render(component, topic)
-        end
+    def synchronize(component : Motion::Base, topic : String)
+      Motion.action_timer.if_render_required(component) do |component|
+        render(component, topic)
       end
     end
 
@@ -52,10 +50,6 @@ module Motion
           end
         end
       end
-    end
-
-    def get_component(topic : String) : Motion::Base
-      adapter.get_component(topic)
     end
 
     def render(component, topic)
@@ -105,6 +99,10 @@ module Motion
       #   # reject
       #   raise "Exception in connect_component"
       #   # handle_error(e, "connecting a component")
+    end
+
+    private def get_component(topic : String) : Motion::Base
+      adapter.get_component(topic)
     end
 
     private def connected?(topic)
