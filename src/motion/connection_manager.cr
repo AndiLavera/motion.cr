@@ -21,8 +21,8 @@ module Motion
       topic = message.topic
 
       Motion.action_timer.close(get_component(topic)) do |component|
-        destroy_periodic_timers(component)
-        destroy_model_streams(component, topic) if component.responds_to?(:broadcast_channel)
+        adapter.destroy_periodic_timers(component)
+        adapter.destroy_broadcast_stream(topic, component) if component.responds_to?(:broadcast_channel)
         adapter.destroy_component(topic)
       end
     end
@@ -120,19 +120,6 @@ module Motion
     # a method to stop a particular timer
     private def periodic_timer_active?(name) : Bool
       true
-    end
-
-    private def destroy_periodic_timers(component)
-      component.periodic_timers.each do |timer|
-        if name = timer[:name]
-          adapter.fibers.delete(name)
-          logger.info("Periodic Timer #{name} has been disabled")
-        end
-      end
-    end
-
-    private def destroy_model_streams(component : Motion::Base, topic : String) : Bool
-      adapter.destroy_broadcast_stream(topic, component)
     end
 
     private def handle_error(error, context)
