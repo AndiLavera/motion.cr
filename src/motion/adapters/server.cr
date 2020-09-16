@@ -1,16 +1,20 @@
 module Motion::Adapters
-  class Server
+  class Server < Base
     getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
     private getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
     private getter components : Hash(String, String) = Hash(String, String).new
 
     def get_component(topic : String) : Motion::Base
-      Motion.serializer.weak_deserialize(components[topic]?.not_nil!)
+      weak_deserialize(components[topic]?.not_nil!)
     rescue error : NilAssertionError
       raise Motion::Exceptions::NoComponentConnectionError.new(topic)
     end
 
-    def set_component(topic : String, component : Motion::Base)
+    def mget_components(topics : String) : Array(Motion::Base)
+      json_components = components.values_at
+    end
+
+    def set_component(topic : String, component : Motion::Base) : Bool
       components[topic] = Motion.serializer.weak_serialize(component)
     end
 

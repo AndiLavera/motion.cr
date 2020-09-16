@@ -1,3 +1,4 @@
+require "./adapters/base"
 require "./adapters/**"
 
 module Motion

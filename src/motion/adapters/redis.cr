@@ -2,15 +2,18 @@ require "redis"
 require "json"
 
 module Motion::Adapters
-  class Redis
+  class Redis < Base
     getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
     private getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
     private getter redis : ::Redis::PooledClient = ::Redis::PooledClient.new(url: Motion.config.redis_url)
 
     def get_component(topic : String) : Motion::Base
-      Motion.serializer.weak_deserialize(redis.get(topic).not_nil!)
+      weak_deserialize(redis.get(topic).not_nil!)
     rescue error : NilAssertionError
       raise Motion::Exceptions::NoComponentConnectionError.new(topic)
+    end
+
+    def mget_components(topics : String) : Array(Motion::Base)
     end
 
     def set_component(topic : String, component : Motion::Base)

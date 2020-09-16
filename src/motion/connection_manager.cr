@@ -1,7 +1,6 @@
 module Motion
   class ConnectionManager
-    alias Adapters = Motion::Adapters::Server | Motion::Adapters::Redis
-    getter adapter : Adapters
+    getter adapter : Motion::Adapters::Base
     getter channel : Motion::Channel
 
     # TODO: Shouldn't do Motion.action_timer.my_method(get(topic))
@@ -10,7 +9,6 @@ module Motion
 
     def initialize(@channel : Motion::Channel)
       @adapter = Motion.config.adapter == :server ? Motion::Adapters::Server.new : Motion::Adapters::Redis.new
-      # @adapter = Motion::Adapters::Server.new
     end
 
     def create(message : Motion::Message)
