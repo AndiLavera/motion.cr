@@ -14,34 +14,38 @@ module Motion
     def create(message : Motion::Message)
       state, topic = message.state, message.topic
 
-      connect_component(state) do |component|
+      Motion.action_timer.connect do
+        component = deserialize(state)
+        component.render_hash = component.rerender_hash
+
         adapter.set_component(topic, component)
         adapter.set_broadcast_streams(topic, component)
         adapter.set_periodic_timers(topic, component) do
           render(component, topic)
         end
+
+        component
       end
     end
 
     def destroy(message : Motion::Message)
       topic = message.topic
 
-      Motion.action_timer.close(get_component(topic)) do |component|
+      Motion.action_timer.close do
+        component = get_component(topic)
         adapter.destroy_periodic_timers(component)
         adapter.destroy_broadcast_stream(topic, component)
         adapter.destroy_component(topic)
+        component
       end
     end
 
     def process_motion(message : Motion::Message) : Motion::Base
-      Motion.action_timer.process_motion(get_component(message.topic), message.name, message.event) do |component|
+      Motion.action_timer.process_motion(message.name) do
+        component = get_component(message.topic)
+        component.process_motion(message.name, message.event)
         adapter.set_component(message.topic, component)
-      end
-    end
-
-    def synchronize(component : Motion::Base, topic : String)
-      Motion.action_timer.if_render_required(component) do |component|
-        render(component, topic)
+        component
       end
     end
 
@@ -49,19 +53,28 @@ module Motion
       topics = adapter.get_broadcast_streams(stream_topic)
       if topics && !topics.empty?
         topics.each do |topic|
-          # TODO: Dont make 10 trips to redis
-          # redis can handle redis#mget can handle an array of keys
-          # make a Adapter#mget_components(topic) method
-          component = get_component(topic)
-          Motion.action_timer.process_model_stream(component, stream_topic) do |component|
+          Motion.action_timer.process_model_stream(stream_topic) do
+            # TODO: Dont make 10 trips to redis
+            # redis can handle redis#mget can handle an array of keys
+            # make a Adapter#mget_components(topic) method
+            component = get_component(topic)
+            component._process_model_stream
             # TODO: Dont call process_model_stream on each iterations
             # If someone had 100 users to update, youll blow the logs
             # process_model_stream should accepts all topics & all components
             # log the total time took and the avg per component (time / components)
             adapter.set_component(topic, component)
             synchronize(component, topic)
+
+            component
           end
         end
+      end
+    end
+
+    def synchronize(component : Motion::Base, topic : String)
+      Motion.action_timer.if_render_required(component) do
+        render(component, topic)
       end
     end
 
@@ -76,12 +89,12 @@ module Motion
       })
     end
 
-    private def connect_component(state, &block : Motion::Base -> Nil) : Bool
-      Motion.action_timer.connect(Motion.serializer.deserialize(state), &block)
-      # rescue error : Exception
-      #   # reject
-      #   raise "Exception in connect_component"
-      #   # handle_error(e, "connecting a component")
+    private def deserialize(state) : Motion::Base
+      Motion.serializer.deserialize(state)
+    rescue error : Exception
+      # reject
+      raise "Exception in connect_component"
+      # handle_error(e, "connecting a component")
     end
 
     private def get_component(topic : String) : Motion::Base

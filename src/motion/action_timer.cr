@@ -5,10 +5,10 @@ module Motion
 
     # "Connects" a component to the server
     # Sets the jsonified component including any streams & periodic timers
-    def connect(component : Motion::Base, &block : Motion::Base -> Nil) : Bool
-      timing("Connected #{component.class}") do
-        component.render_hash = component.rerender_hash
-        block.call(component)
+    def connect(&block : -> Motion::Base) : Bool
+      timing do
+        component = block.call
+        "Connected #{component.class}"
       end
 
       true
@@ -19,9 +19,10 @@ module Motion
     end
 
     # Deletes the component, streams & timers
-    def close(component : Motion::Base, &block : Motion::Base -> Nil) : Bool
-      timing("Disconnected #{component.class}") do
-        block.call(component)
+    def close(&block : -> Motion::Base) : Bool
+      timing do
+        component = block.call
+        "Disconnected #{component.class}"
       end
 
       true
@@ -31,35 +32,35 @@ module Motion
       false
     end
 
-    def process_motion(component : Motion::Base, motion : String, event : Motion::Event? = nil, &block : Motion::Base -> Nil) : Motion::Base
-      timing("Proccessed #{motion}") do
-        component.process_motion(motion, event)
-        block.call(component)
+    def process_motion(motion : String, &block : -> Motion::Base) : Motion::Base
+      processed_component = process_motion_timing(motion) do
+        block.call
       end
 
-      component
+      processed_component
       # rescue error : Exception
       #   handle_error(error, "processing #{motion}")
 
       #   false
     end
 
-    def process_model_stream(component : Motion::Base, stream_topic, &block : Motion::Base -> Nil) : Bool
-      timing("Proccessed model stream #{stream_topic} for #{component.class}") do
-        component._process_model_stream
-        block.call(component)
+    def process_model_stream(stream_topic, &block : -> Motion::Base) : Bool
+      timing do
+        component = block.call
+        "Proccessed model stream #{stream_topic} for #{component.class}"
       end
 
       true
     rescue error : Exception
-      handle_error(error, "processing model stream #{stream_topic} for #{component.class}")
+      handle_error(error, "processing model stream #{stream_topic}") # for #{component.class}
 
       false
     end
 
     def process_periodic_timer(name : String, &block) : Bool
-      timing("Proccessed periodic timer #{name}") do
+      timing do
         block.call
+        "Proccessed periodic timer #{name}"
       end
 
       true
@@ -70,15 +71,17 @@ module Motion
     end
 
     # If the component requires a render, the block will be called, render and send the new html
-    def if_render_required(component : Motion::Base, &block : Motion::Base -> Nil) : Bool
-      timing("Rendered") do
+    def if_render_required(component : Motion::Base, &block : -> Nil) : Bool
+      timing do
         next_render_hash = component.rerender_hash
 
-        next if component.render_hash == next_render_hash
+        next "No Render Required" if component.render_hash == next_render_hash
         # && !component.awaiting_forced_rerender?
 
-        block.call(component)
+        block.call
         component.render_hash = next_render_hash
+
+        "Rendered #{component.class}"
       end
 
       true
@@ -88,8 +91,12 @@ module Motion
       false
     end
 
-    private def timing(context, &block)
-      logger.timing(context, &block)
+    private def timing(&block : -> String)
+      logger.timing(&block)
+    end
+
+    private def process_motion_timing(motion : String, &block : -> Motion::Base)
+      logger.process_motion_timing(motion, &block)
     end
 
     private def handle_error(error, context)

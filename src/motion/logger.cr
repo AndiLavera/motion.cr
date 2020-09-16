@@ -11,14 +11,22 @@ module Motion
       end
     {% end %}
 
-    def timing(message, &block)
+    def timing(&block : -> String) : Nil
       start_time = Time.local
-      result = block.call
+      message = block.call
       end_time = Time.local
 
       info("#{message} (in #{format_duration(end_time - start_time)})")
+    end
 
-      result
+    def process_motion_timing(motion : String, &block : -> Motion::Base) : Motion::Base
+      start_time = Time.local
+      component = block.call
+      end_time = Time.local
+
+      info("Proccessed motion #{motion} for component #{component.class} (in #{format_duration(end_time - start_time)})")
+
+      component
     end
 
     private def format_exception(exception)
