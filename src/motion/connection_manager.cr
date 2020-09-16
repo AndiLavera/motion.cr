@@ -52,38 +52,18 @@ module Motion
 
     def process_model_stream(stream_topic : String)
       topics = adapter.get_broadcast_streams(stream_topic)
-
-      if topics && !topics.empty?
-        topics.each do |topic|
-          Motion.action_timer.process_model_stream(stream_topic) do
-            # TODO: Dont make 10 trips to redis
-            # redis can handle redis#mget can handle an array of keys
-            # make a Adapter#mget_components(topic) method
-            component = get_component(topic)
-            component._process_model_stream
-
-            synchronize(component, topic)
-            # TODO: Dont call process_model_stream on each iterations
-            # If someone had 100 users to update, youll blow the logs
-            # process_model_stream should accepts all topics & all components
-            # log the total time took and the avg per component (time / components)
-            adapter.set_component(topic, component)
-
-            component
-          end
-        end
-      end
-    end
-
-    def process_model_stream_test(stream_topic : String)
-      topics = adapter.get_broadcast_streams(stream_topic)
-      components = adapter.mget_components(topics)
+      components_with_topics = adapter.mget_components(topics)
 
       Motion.action_timer.process_model_stream(stream_topic) do
-        components.each do |component|
+        components_with_topics.each do |component_with_topic|
+          topic, component = component_with_topic
+
           component._process_model_stream
           synchronize(component, topic)
+          adapter.set_component(topic, component)
         end
+
+        components_with_topics
       end
     end
 

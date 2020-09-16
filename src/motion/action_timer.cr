@@ -44,10 +44,11 @@ module Motion
       #   false
     end
 
-    def process_model_stream(stream_topic, &block : -> Motion::Base) : Bool
-      timing do
-        component = block.call
-        "Proccessed model stream #{stream_topic} for #{component.class}"
+    def process_model_stream(stream_topic, &block : -> Array(Tuple(String, Motion::Base))) : Bool
+      process_broadcast_stream_timing do
+        components_with_topics = block.call
+        size = components_with_topics.size
+        {"Proccessed model stream #{stream_topic} for #{size} clients", size}
       end
 
       true
@@ -93,6 +94,10 @@ module Motion
 
     private def timing(&block : -> String)
       logger.timing(&block)
+    end
+
+    private def process_broadcast_stream_timing(&block : -> Tuple(String, Int32))
+      logger.process_broadcast_stream_timing(&block)
     end
 
     private def process_motion_timing(motion : String, &block : -> Motion::Base)

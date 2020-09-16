@@ -29,6 +29,15 @@ module Motion
       component
     end
 
+    def process_broadcast_stream_timing(&block : -> Tuple(String, Int32)) : Nil
+      start_time = Time.local
+      message, size = block.call
+      end_time = Time.local
+      duration = end_time - start_time
+
+      info("#{message} (in #{format_duration(duration)} with an avg time per client of #{average_duration(duration, size)})")
+    end
+
     private def format_exception(exception)
       frames = exception.backtrace.first(BACKTRACE_FRAMES).join("\n")
 
@@ -37,7 +46,11 @@ module Motion
 
     private def format_duration(duration)
       μs = duration.microseconds
-      μs < 0.1 ? "less than 0.1μs" : "#{μs.round(1)}μs"
+      "#{μs.round(1)}μs"
+    end
+
+    private def average_duration(duration, size)
+      format_duration(duration / size)
     end
   end
 end

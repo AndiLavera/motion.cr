@@ -1,7 +1,7 @@
 module Motion::Adapters
   abstract class Base
     abstract def get_component(topic : String) : Motion::Base
-    abstract def mget_components(topics : Array(String)) : Array(Motion::Base)
+    abstract def mget_components(topics : Array(String)) : Array(Tuple(String, Motion::Base))
     abstract def set_component(topic : String, component : Motion::Base) : Bool
     abstract def destroy_component(topic : String) : Bool
 

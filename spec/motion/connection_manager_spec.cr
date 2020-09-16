@@ -12,6 +12,6 @@ describe Motion::ConnectionManager do
       component_connection.adapter.set_broadcast_streams(topic, component)
     end
 
-    pp component_connection.process_model_stream_test(component.broadcast_channel)
+    component_connection.process_model_stream(component.broadcast_channel).should be_true
   end
 end

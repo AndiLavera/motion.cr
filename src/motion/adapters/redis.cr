@@ -11,8 +11,10 @@ module Motion::Adapters
       raise Motion::Exceptions::NoComponentConnectionError.new(topic)
     end
 
-    def mget_components(topics : Array(String)) : Array(Motion::Base)
-      redis.mget(topics).map { |component| weak_deserialize(component.to_s) }
+    def mget_components(topics : Array(String)) : Array(Tuple(String, Motion::Base))
+      redis.mget(topics).map_with_index do |component, idx|
+        {topics[idx], weak_deserialize(component.to_s)}
+      end
     end
 
     def set_component(topic : String, component : Motion::Base) : Bool
