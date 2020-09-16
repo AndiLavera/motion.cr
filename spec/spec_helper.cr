@@ -10,17 +10,3 @@ def join_channel(json = MESSAGE_JOIN)
   channel.handle_joined(nil, json)
   channel
 end
-
-module Motion::Adapters
-  class Redis
-    def get_test_fibers
-      @fibers
-    end
-  end
-
-  class Server
-    def get_test_fibers
-      @fibers
-    end
-  end
-end

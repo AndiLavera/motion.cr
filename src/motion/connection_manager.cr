@@ -12,7 +12,15 @@ module Motion
     end
 
     def create(message : Motion::Message)
-      attach_component(message.topic, message.state)
+      state, topic = message.state, message.topic
+
+      connect_component(state) do |component|
+        adapter.set_component(topic, component)
+        adapter.set_broadcast_streams(topic, component)
+        adapter.set_periodic_timers(topic, component) do
+          render(component, topic)
+        end
+      end
     end
 
     def destroy(message : Motion::Message)
@@ -68,36 +76,6 @@ module Motion
       })
     end
 
-    private def attach_component(topic : String, state : String) : Bool
-      connect_component(state) do |component|
-        adapter.set_component(topic, component)
-        adapter.set_broadcast_streams(topic, component)
-        set_periodic_timers(topic, component)
-      end
-    end
-
-    private def set_periodic_timers(topic : String, component : Motion::Base)
-      component.periodic_timers.each do |periodic_timer|
-        name = periodic_timer[:name].to_s
-
-        adapter.fibers[name] = spawn do
-          while connected?(name) && periodic_timer_active?(name)
-            Motion.action_timer.process_periodic_timer(name.to_s) do
-              interval = periodic_timer[:interval]
-              sleep interval if interval.is_a?(Time::Span)
-
-              method = periodic_timer[:method]
-              method.call if method.is_a?(Proc(Nil))
-
-              # synchronize(topic: topic, broadcast: true)
-              synchronize(component, topic)
-              # adapter.set_component(topic, component) if connected?(topic)
-            end
-          end
-        end
-      end
-    end
-
     private def connect_component(state, &block : Motion::Base -> Nil) : Bool
       Motion.action_timer.connect(Motion.serializer.deserialize(state), &block)
       # rescue error : Exception
@@ -108,16 +86,6 @@ module Motion
 
     private def get_component(topic : String) : Motion::Base
       adapter.get_component(topic)
-    end
-
-    private def connected?(name : String) : Bool
-      !!adapter.get_periodic_timers(name)
-    end
-
-    # TODO: Some way to allow users to invoke
-    # a method to stop a particular timer
-    private def periodic_timer_active?(name) : Bool
-      true
     end
 
     private def handle_error(error, context)

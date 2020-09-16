@@ -1,6 +1,6 @@
 module Motion::Adapters
   class Server < Base
-    getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
+    private getter periodic_timers : Array(String) = Array(String).new
     private getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
     private getter components : Hash(String, String) = Hash(String, String).new
 
@@ -43,16 +43,40 @@ module Motion::Adapters
       !!broadcast_streams[channel].delete(topic)
     end
 
-    def get_periodic_timers(name : String) : Fiber?
-      fibers[name]?
+    def get_periodic_timers : Array(String)
+      periodic_timers
     end
 
-    def set_periodic_timers; end
+    def set_periodic_timers(topic : String, component : Motion::Base, &block) : Bool
+      component.periodic_timers.each do |periodic_timer|
+        name = periodic_timer[:name].to_s
+
+        periodic_timers.push(name)
+        Motion.logger.info("Periodic Timer #{name} has been registered")
+        spawn do
+          while connected?(name) && periodic_timer_active?(name)
+            Motion.action_timer.process_periodic_timer(name.to_s) do
+              interval = periodic_timer[:interval]
+              sleep interval if interval.is_a?(Time::Span)
+
+              method = periodic_timer[:method]
+              method.call if method.is_a?(Proc(Nil))
+
+              # synchronize(topic: topic, broadcast: true)
+              block.call
+              # adapter.set_component(topic, component) if connected?(topic)
+            end
+          end
+        end
+      end
+
+      true
+    end
 
     def destroy_periodic_timers(component : Motion::Base) : Bool
       component.periodic_timers.each do |timer|
         if name = timer[:name]
-          fibers.delete(name)
+          periodic_timers.delete(name)
           Motion.logger.info("Periodic Timer #{name} has been disabled")
         end
       end

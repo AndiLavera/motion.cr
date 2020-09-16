@@ -90,7 +90,7 @@ require "../spec_helper"
 
         channel = join_channel(json)
 
-        channel.connection_manager.adapter.get_test_fibers.empty?.should be_false
+        channel.connection_manager.adapter.get_periodic_timers.empty?.should be_false
       end
 
       # pending("can run periodic timers")
