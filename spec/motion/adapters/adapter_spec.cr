@@ -49,5 +49,13 @@ require "./spec_helper"
       adapter.set_broadcast_streams("motion:87892", component)
       adapter.get_broadcast_streams(component.broadcast_channel).should eq(["motion:87892"])
     end
+
+    it "can destroy a broadcast stream" do
+      component = BroadcastComponent.new
+      adapter = adapter_class.new
+      adapter.set_broadcast_streams("motion:8792", component)
+      adapter.destroy_broadcast_stream("motion:8792", component)
+      adapter.get_broadcast_streams(component.broadcast_channel).should eq([] of String)
+    end
   end
 end

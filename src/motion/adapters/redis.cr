@@ -40,7 +40,7 @@ module Motion::Adapters
       return true unless component.responds_to?(:broadcast_channel)
 
       channel = component.broadcast_channel
-      !!broadcast_streams[channel].delete(topic)
+      !!redis.lrem(channel, 1, topic)
     end
 
     def get_periodic_timers(name : String) : Fiber?
