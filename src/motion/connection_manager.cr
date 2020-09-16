@@ -20,7 +20,7 @@ module Motion
 
       Motion.action_timer.close(get_component(topic)) do |component|
         adapter.destroy_periodic_timers(component)
-        adapter.destroy_broadcast_stream(topic, component) if component.responds_to?(:broadcast_channel)
+        adapter.destroy_broadcast_stream(topic, component)
         adapter.destroy_component(topic)
       end
     end

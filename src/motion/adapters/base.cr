@@ -6,12 +6,12 @@ module Motion::Adapters
     abstract def destroy_component(topic : String) : Bool
 
     abstract def get_broadcast_streams(stream_topic : String) : Array(String)
-    abstract def set_broadcast_streams(topic : String, component : Motion::Base)
+    abstract def set_broadcast_streams(topic : String, component : Motion::Base) : Bool
     abstract def destroy_broadcast_stream(topic : String, component : Motion::Base) : Bool
 
     abstract def get_periodic_timers(name : String) : Fiber?
     abstract def set_periodic_timers
-    abstract def destroy_periodic_timers(component : Motion::Base)
+    abstract def destroy_periodic_timers(component : Motion::Base) : Bool
 
     def weak_deserialize(component : String) : Motion::Base
       Motion.serializer.weak_deserialize(component)

@@ -26,16 +26,21 @@ module Motion::Adapters
       broadcast_streams[stream_topic]? || [] of String
     end
 
-    def set_broadcast_streams(topic : String, component : Motion::Base)
-      return unless component.responds_to?(:broadcast_channel)
+    def set_broadcast_streams(topic : String, component : Motion::Base) : Bool
+      return true unless component.responds_to?(:broadcast_channel)
       channel = component.broadcast_channel
 
       broadcast_streams[channel] ||= [] of String
       broadcast_streams[channel] << topic
+
+      true
     end
 
     def destroy_broadcast_stream(topic : String, component : Motion::Base) : Bool
-      !!broadcast_streams[component.broadcast_channel].delete(topic)
+      return true unless component.responds_to?(:broadcast_channel)
+
+      channel = component.broadcast_channel
+      !!broadcast_streams[channel].delete(topic)
     end
 
     def get_periodic_timers(name : String) : Fiber?
@@ -44,13 +49,15 @@ module Motion::Adapters
 
     def set_periodic_timers; end
 
-    def destroy_periodic_timers(component : Motion::Base)
+    def destroy_periodic_timers(component : Motion::Base) : Bool
       component.periodic_timers.each do |timer|
         if name = timer[:name]
           fibers.delete(name)
           Motion.logger.info("Periodic Timer #{name} has been disabled")
         end
       end
+
+      true
     end
   end
 end
