@@ -5,7 +5,7 @@ module Motion::Adapters
   class Redis
     getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
     private getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
-    private getter redis : ::Redis = ::Redis.new(url: Motion.config.redis_url)
+    private getter redis : ::Redis::PooledClient = ::Redis::PooledClient.new(url: Motion.config.redis_url)
 
     def get_component(topic : String) : Motion::Base
       Motion.serializer.weak_deserialize(redis.get(topic).not_nil!)
