@@ -21,7 +21,7 @@ module Motion
         adapter.set_component(topic, component)
         adapter.set_broadcast_streams(topic, component)
         adapter.set_periodic_timers(topic, component) do
-          render(component, topic)
+          synchronize(component, topic)
         end
 
         component
@@ -44,6 +44,7 @@ module Motion
       Motion.action_timer.process_motion(message.name) do
         component = get_component(message.topic)
         component.process_motion(message.name, message.event)
+        synchronize(component, message.topic)
         adapter.set_component(message.topic, component)
         component
       end
@@ -51,6 +52,7 @@ module Motion
 
     def process_model_stream(stream_topic : String)
       topics = adapter.get_broadcast_streams(stream_topic)
+
       if topics && !topics.empty?
         topics.each do |topic|
           Motion.action_timer.process_model_stream(stream_topic) do
@@ -59,12 +61,13 @@ module Motion
             # make a Adapter#mget_components(topic) method
             component = get_component(topic)
             component._process_model_stream
+
+            synchronize(component, topic)
             # TODO: Dont call process_model_stream on each iterations
             # If someone had 100 users to update, youll blow the logs
             # process_model_stream should accepts all topics & all components
             # log the total time took and the avg per component (time / components)
             adapter.set_component(topic, component)
-            synchronize(component, topic)
 
             component
           end

@@ -38,8 +38,7 @@ module Motion
       when "unsubscribe"
         handle_leave(client_socket, message)
       when "process_motion"
-        component = connection_manager.process_motion(message)
-        connection_manager.synchronize(component, message.topic)
+        connection_manager.process_motion(message)
       end
     end
 

@@ -62,9 +62,7 @@ module Motion::Adapters
               method = periodic_timer[:method]
               method.call if method.is_a?(Proc(Nil))
 
-              # synchronize(topic: topic, broadcast: true)
               block.call
-              # adapter.set_component(topic, component) if connected?(topic)
             end
           end
         end
