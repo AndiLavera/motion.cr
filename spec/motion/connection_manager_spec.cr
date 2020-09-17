@@ -16,14 +16,11 @@ require "../spec_helper"
         Motion.reset_config
       end
 
-      it "can process a motion" do
-      end
+      pending "can process a motion"
 
-      it "can create components" do
-      end
+      pending "can create components"
 
-      it "can destroy components" do
-      end
+      pending "can destroy components"
 
       it "can process multiple broadcast streams at once" do
         component_connection = Motion::ConnectionManager.new(Motion::Channel.new)
