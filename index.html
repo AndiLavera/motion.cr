@@ -270,7 +270,7 @@
 
 <p>Motion is a framework for building reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.</p>
 
-<ul><li>Motion is an Object-Oriented View Layer</li><li>Plays nicely with the Amber monolith you have.</li><li>Peacefully coexists with your existing frontend</li><li>Real-time frontend UI updates from frontend user interaction AND server-side updates.</li><li>No more frontend models, stores, or syncing; your source of truth is the database you already have.</li><li><strong>No JavaScript required!</strong></li></ul>
+<ul><li>Motion is an Object-Oriented View Layer</li><li>Peacefully coexists with your existing frontend</li><li>Real-time frontend UI updates from frontend user interaction AND server-side updates</li><li>No more frontend models, stores, or syncing; your source of truth is the database you already have</li><li><strong>Write Less Javascript</strong></li></ul>
 
 <h2><a id="table-of-contents" class="anchor" href="#table-of-contents">
   <svg class="octicon-link" aria-hidden="true">
@@ -278,7 +278,33 @@
   </svg>
 </a>Table of Contents</h2>
 
-<ul><li><a href="#motioncr" target="_blank">Motion.cr</a></li><ul><li><a href="#table-of-contents" target="_blank">Table of Contents</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#documentation" target="_blank">Documentation</a></li><li><a href="#component-guide" target="_blank">Component Guide</a></li><li><a href="#why-should-i-use-components-" target="_blank">Why should I use components?</a></li><li><a href="#testing" target="_blank">Testing</a></li><li><a href="#data-flow" target="_blank">Data Flow</a></li><li><a href="#standards" target="_blank">Standards</a></li><li><a href="#building-components" target="_blank">Building components</a></li><li><a href="#conventions" target="_blank">Conventions</a></li><li><a href="#quick-start" target="_blank">Quick start</a></li><li><a href="#html-generation" target="_blank">HTML Generation</a></li><li><a href="#props---type-safety" target="_blank">Props & Type Safety</a></li><li><a href="#blocks---procs" target="_blank">Blocks & Procs</a></li><li><a href="#motion-guide" target="_blank">Motion Guide</a></li><li><a href="#installation-1" target="_blank">Installation</a></li><li><a href="#building-motions" target="_blank">Building Motions</a></li><li><a href="#frontend-interactions" target="_blank">Frontend interactions</a></li><li><a href="#periodic-timers" target="_blank">Periodic Timers</a></li><li><a href="#motionevent-and-motionelement" target="_blank">Motion::Event and Motion::Element</a></li><li><a href="#limitations" target="_blank">Limitations</a></li><li><a href="#roadmap" target="_blank">Roadmap</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#license" target="_blank">License</a></li></ul></ul>
+<ul><li><a href="#table-of-contents" target="_blank">Table of Contents</a></li><li><a href="#installation" target="_blank">Installation</a></li><li><a href="#documentation" target="_blank">Documentation</a></li><li><a href="#component-guide" target="_blank">Component Guide</a></li></ul>
+
+<ul><li><a href="#why-should-i-use-components-" target="_blank">Why should I use components?</a></li></ul>
+
+<pre><code><span class="o">+</span> [<span class="t">Testing</span>](<span class="c">#testing)</span>
+<span class="o">+</span> [<span class="t">Data</span> <span class="t">Flow</span>](<span class="c">#data-flow)</span>
+<span class="o">+</span> [<span class="t">Standards</span>](<span class="c">#standards)</span></code></pre>
+
+<ul><li><a href="#building-components" target="_blank">Building components</a></li></ul>
+
+<pre><code><span class="o">+</span> [<span class="t">Conventions</span>](<span class="c">#conventions)</span>
+<span class="o">+</span> [<span class="t">Quick</span> start](<span class="c">#quick-start)</span>
+<span class="o">+</span> [<span class="t">DSL</span> <span class="t">HTML</span> <span class="t">Generation</span>](<span class="c">#dsl-html-generation)</span>
+<span class="o">+</span> [<span class="t">ECR</span> <span class="o">&amp;</span> <span class="t">Slang</span>](<span class="c">#ecr---slang)</span>
+<span class="o">+</span> [<span class="t">Properties</span>, <span class="t">Props</span> <span class="o">&amp;</span> <span class="t">Type</span> <span class="t">Safety</span>](<span class="c">#properties--props---type-safety)</span>
+<span class="o">+</span> [<span class="t">Blocks</span> <span class="o">&amp;</span> <span class="t">Procs</span>](<span class="c">#blocks---procs)</span></code></pre>
+
+<ul><li><a href="#motions-guide" target="_blank">Motions Guide</a></li></ul>
+
+<ul><li><a href="#installation-1" target="_blank">Installation</a></li><li><a href="#building-motions" target="_blank">Building Motions</a></li></ul>
+
+<pre><code><span class="o">+</span> [<span class="t">Frontend</span> interactions](<span class="c">#frontend-interactions)</span>
+<span class="o">+</span> [<span class="t">Periodic</span> <span class="t">Timers</span>](<span class="c">#periodic-timers)</span>
+<span class="o">+</span> [<span class="t">Backend</span> <span class="t">Interactions</span>](<span class="c">#backend-interactions)</span>
+<span class="o">+</span> [<span class="t">Motion</span><span class="t">::</span><span class="t">Event</span> and <span class="t">Motion</span><span class="t">::</span><span class="t">Element</span>](<span class="c">#motionevent-and-motionelement)</span></code></pre>
+
+<ul><li><a href="#limitations" target="_blank">Limitations</a></li><li><a href="#roadmap" target="_blank">Roadmap</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#license" target="_blank">License</a></li></ul>
 
 <h2><a id="installation" class="anchor" href="#installation">
   <svg class="octicon-link" aria-hidden="true">
@@ -286,18 +312,26 @@
   </svg>
 </a>Installation</h2>
 
-<p>Motion.cr has Crystal and JavaScript parts, execute both of these commands:</p>
+<p>Add the shard to your dependencies:</p>
 
 <pre><code class="language-sh">dependencies:
-  motion:
+  motioncr:
     github: andrewc910/motion.cr
     version: 0.2.0</code></pre>
 
 <p>Create a file <code>motion.cr</code> in <code>config/initializers</code> and add:</p>
 
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;motion&quot;</span>
-<span class="c"># Adds a `render` method to Amber controllers that accepts MotionComponents</span>
+<span class="c"># Adds a few helper methods</span>
 <span class="k">require</span> <span class="s">&quot;motion/monkey_patch/amber&quot;</span></code></pre>
+
+<p>Create a socket:</p>
+
+<pre><code class="language-sh">amber g socket Motion</code></pre>
+
+<p>Add the route:</p>
+
+<pre><code class="language-crystal">websocket <span class="s">&quot;/cable&quot;</span>, <span class="t">MotionSocket</span></code></pre>
 
 <h2><a id="documentation" class="anchor" href="#documentation">
   <svg class="octicon-link" aria-hidden="true">
@@ -401,23 +435,65 @@
 
 <pre><code class="language-crystal">render <span class="t">MyFirstComponent</span></code></pre>
 
-<h4><a id="html-generation" class="anchor" href="#html-generation">
+<h4><a id="dsl-html-generation" class="anchor" href="#dsl-html-generation">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>HTML Generation</h4>
+</a>DSL HTML Generation</h4>
 
 <p>For static html rendering, please review the <a href="https://www.luckyframework.org/guides/frontend/rendering-html#layouts" target="_blank">lucky framework documentation</a></p>
 
 <blockquote>Note: Lucky uses the macro keyword <code>needs</code>, motion uses <code>props</code></blockquote>
 
-<h4><a id="props-type-safety" class="anchor" href="#props-type-safety">
+<h4><a id="ecr-slang" class="anchor" href="#ecr-slang">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Props & Type Safety</h4>
+</a>ECR & Slang</h4>
+
+<p>You can render html templates if you prefer. You have to mix in the amber module in to the components you would like to render from.</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">MyFirstComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
+  <span class="k">include</span> <span class="t">Amber</span><span class="t">::</span><span class="t">Controller</span><span class="t">::</span><span class="t">Helpers</span><span class="t">::</span><span class="t">Render</span>
+
+  <span class="k">def</span> <span class="m">render</span>
+    render(<span class="s">&quot;users/new.ecr&quot;</span>, layout: <span class="n">false</span>)
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>In your controller:</p>
+
+<pre><code class="language-crystal">render(<span class="t">MyFirstComponent</span>)</code></pre>
+
+<h4><a id="properties-props-type-safety" class="anchor" href="#properties-props-type-safety">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Properties, Props & Type Safety</h4>
 
 <p>Props allow you to pass arguements to child components that are type safe. One of the problems with ecr views & partials is, it's hard to reason what variables & data the page requires to render because everything is within scope. Props explicity display what is required for a particular component.</p>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">MyFirstComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
+  getter title : <span class="t">String</span>
+
+  <span class="k">def</span> <span class="m">initialize</span>(@title); <span class="k">end</span>
+
+  <span class="k">def</span> <span class="m">render</span>
+    html_doctype
+    head <span class="k">do</span>
+      css_link <span class="s">&quot;/css/main.css&quot;</span>
+      utf8_charset
+      meta content: <span class="s">&quot;text/html;charset=utf-8&quot;</span>, http_equiv: <span class="s">&quot;Content-Type&quot;</span>
+      title <span class="s">&quot;My First Component&quot;</span>
+    <span class="k">end</span>
+
+    body <span class="k">do</span>
+      h1 { @title }
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
+
+<p>Or you can use the <code>props</code> keyword:</p>
 
 <pre><code class="language-crystal"><span class="k">class</span> <span class="t">MyFirstComponent</span> <span class="o">&lt;</span> <span class="t">Motion</span><span class="t">::</span><span class="t">Base</span>
   props title : <span class="t">String</span>
@@ -444,6 +520,8 @@
 <p>or rendering from a component:</p>
 
 <pre><code class="language-crystal">m(<span class="t">MyFirstComponent</span>, title: <span class="s">&quot;Hello World&quot;</span>) <span class="c"># m is shorthand for mount. mount is also acceptable</span></code></pre>
+
+<p>The if you use the props keyword, do not define an initialize method as it will do it for you. I recommend using the props macro when starting off and switching over to a custom initialization method when you need custom logic.</p>
 
 <h4><a id="blocks-procs" class="anchor" href="#blocks-procs">
   <svg class="octicon-link" aria-hidden="true">
@@ -476,11 +554,11 @@
 <pre><code class="language-crystal">title <span class="o">=</span> <span class="t">Proc</span>(void).<span class="k">new</span> { h1 <span class="s">&quot;Hello World!&quot;</span> }
 m(<span class="t">MyFirstComponent</span>, title: title)</code></pre>
 
-<h2><a id="motion-guide" class="anchor" href="#motion-guide">
+<h2><a id="motions-guide" class="anchor" href="#motions-guide">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Motion Guide</h2>
+</a>Motions Guide</h2>
 
 <p>Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:</p>
 
@@ -488,7 +566,7 @@ m(<span class="t">MyFirstComponent</span>, title: title)</code></pre>
 
 <p>Motion.cr is similar to <a href="https://github.com/phoenixframework/phoenix_live_view" target="_blank">Phoenix LiveView</a> (and even React!) in some key ways:</p>
 
-<ul><li><strong>Partial Page Replacement</strong> - Motion does not use full page replacement, but rather replaces only the component on the page with new HTML, DOM diffed for performance.</li><li><strong>Encapsulated, consistent stateful components</strong> - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.</li><li><strong>Blazing Fast</strong> - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion. Motions take less than 1ms to process with typical times being around 300μs.</li></ul>
+<ul><li><strong>Partial Page Replacement</strong> - Motion.cr does not use full page replacement, but rather replaces only the component on the page with new HTML, DOM diffed for performance.</li><li><strong>Encapsulated, consistent stateful components</strong> - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.</li><li><strong>Blazing Fast</strong> - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion.cr.</li></ul>
 
 <h3><a id="installation" class="anchor" href="#installation">
   <svg class="octicon-link" aria-hidden="true">
@@ -687,7 +765,7 @@ const client = createClient();</code></pre>
 
 <ul><li>Due to the way that your components are replaced on the page, Components that set <code>motion_component</code> to <code>true</code> are limited to a single top-level DOM element. If you have multiple DOM elements in your template at the top level, you must wrap them in a single element. This is a similar limitation that React enforced until <code>React.Fragment</code> appeared and is for a very similar reason. Because of this, your upper most component (the component you call from the controller) cannot be a set <code>motion_component</code>. The top most component will return the entire html document to the controller and there is no way to wrap an entire document in a single tag.</li></ul>
 
-<ul><li>Motion generates the <code>initialize</code> method for you. You cannot define your own. To add an instance variable to the parameters & initialize it, add a prop like <code>prop name : String = "Default Name"</code></li></ul>
+<ul><li>Components that enable motions (<code>motion_component = true</code>) cannot accept <code>Proc</code>'s as they cannot be serialized to JSON.  I am actively looking for workarounds however I have no idea if a solution will be found. </li></ul>
 
 <h2><a id="roadmap" class="anchor" href="#roadmap">
   <svg class="octicon-link" aria-hidden="true">
@@ -695,7 +773,7 @@ const client = createClient();</code></pre>
   </svg>
 </a>Roadmap</h2>
 
-<ul><li>Stream Updates from Models</li><li>Routing for a full SPA experience</li><li>AJAX?(TBD)</li></ul>
+<ul><li>Distributed system support</li><li>Sending only the new html down the wire opposed the entire component</li><li>Global key/value store</li><li>Routing for a full SPA experience? (TBD)</li></ul>
 
 <h2><a id="contributing" class="anchor" href="#contributing">
   <svg class="octicon-link" aria-hidden="true">
