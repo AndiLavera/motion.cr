@@ -19,47 +19,47 @@
 Motion is a framework for building reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.
 
 - Motion is an Object-Oriented View Layer
-- Plays nicely with the Amber monolith you have.
 - Peacefully coexists with your existing frontend
-- Real-time frontend UI updates from frontend user interaction AND server-side updates.
-- No more frontend models, stores, or syncing; your source of truth is the database you already have.
-- **No JavaScript required!**
+- Real-time frontend UI updates from frontend user interaction AND server-side updates
+- No more frontend models, stores, or syncing; your source of truth is the database you already have
+- **Write Less Javascript**
 
 ## Table of Contents
 
-- [Motion.cr](#motioncr)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [Documentation](#documentation)
-  - [Component Guide](#component-guide)
-    - [Why should I use components?](#why-should-i-use-components-)
-      - [Testing](#testing)
-      - [Data Flow](#data-flow)
-      - [Standards](#standards)
-    - [Building components](#building-components)
-      - [Conventions](#conventions)
-      - [Quick start](#quick-start)
-      - [HTML Generation](#html-generation)
-      - [Props & Type Safety](#props---type-safety)
-      - [Blocks & Procs](#blocks---procs)
-  - [Motion Guide](#motion-guide)
-    - [Installation](#installation-1)
-    - [Building Motions](#building-motions)
-      - [Frontend interactions](#frontend-interactions)
-      - [Periodic Timers](#periodic-timers)
-      - [Motion::Event and Motion::Element](#motionevent-and-motionelement)
-  - [Limitations](#limitations)
-  - [Roadmap](#roadmap)
-  - [Contributing](#contributing)
-  - [License](#license)
+- [Table of Contents](#table-of-contents)
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [Component Guide](#component-guide)
+  * [Why should I use components?](#why-should-i-use-components-)
+    + [Testing](#testing)
+    + [Data Flow](#data-flow)
+    + [Standards](#standards)
+  * [Building components](#building-components)
+    + [Conventions](#conventions)
+    + [Quick start](#quick-start)
+    + [DSL HTML Generation](#dsl-html-generation)
+    + [ECR & Slang](#ecr---slang)
+    + [Properties, Props & Type Safety](#properties--props---type-safety)
+    + [Blocks & Procs](#blocks---procs)
+- [Motions Guide](#motions-guide)
+  * [Installation](#installation-1)
+  * [Building Motions](#building-motions)
+    + [Frontend interactions](#frontend-interactions)
+    + [Periodic Timers](#periodic-timers)
+    + [Backend Interactions](#backend-interactions)
+    + [Motion::Event and Motion::Element](#motionevent-and-motionelement)
+- [Limitations](#limitations)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
 
-Motion.cr has Crystal and JavaScript parts, execute both of these commands:
+Add the shard to your dependencies:
 
 ```sh
 dependencies:
-  motion:
+  motioncr:
     github: andrewc910/motion.cr
     version: 0.2.0
 ```
@@ -68,8 +68,20 @@ Create a file `motion.cr` in `config/initializers` and add:
 
 ```crystal
 require "motion"
-# Adds a `render` method to Amber controllers that accepts MotionComponents
+# Adds a few helper methods
 require "motion/monkey_patch/amber"
+```
+
+Create a socket:
+
+```sh
+amber g socket Motion
+```
+
+Add the route:
+
+```crystal
+websocket "/cable", MotionSocket
 ```
 
 ## Documentation
@@ -143,15 +155,59 @@ end
 render MyFirstComponent
 ```
 
-#### HTML Generation
+#### DSL HTML Generation
 
 For static html rendering, please review the [lucky framework documentation](https://www.luckyframework.org/guides/frontend/rendering-html#layouts)
 
 > Note: Lucky uses the macro keyword `needs`, motion uses `props`
 
-#### Props & Type Safety
+#### ECR & Slang
+
+You can render html templates if you prefer. You have to mix in the amber module in to the components you would like to render from.
+
+```crystal
+class MyFirstComponent < Motion::Base
+  include Amber::Controller::Helpers::Render
+
+  def render
+    render("users/new.ecr", layout: false)
+  end
+end
+```
+
+In your controller:
+
+```crystal
+render(MyFirstComponent)
+```
+
+#### Properties, Props & Type Safety
 
 Props allow you to pass arguements to child components that are type safe. One of the problems with ecr views & partials is, it's hard to reason what variables & data the page requires to render because everything is within scope. Props explicity display what is required for a particular component.
+
+```crystal
+class MyFirstComponent < Motion::Base
+  getter title : String
+
+  def initialize(@title); end
+
+  def render
+    html_doctype
+    head do
+      css_link "/css/main.css"
+      utf8_charset
+      meta content: "text/html;charset=utf-8", http_equiv: "Content-Type"
+      title "My First Component"
+    end
+
+    body do
+      h1 { @title }
+    end
+  end
+end
+```
+
+Or you can use the `props` keyword:
 
 ```crystal
 class MyFirstComponent < Motion::Base
@@ -185,6 +241,8 @@ or rendering from a component:
 m(MyFirstComponent, title: "Hello World") # m is shorthand for mount. mount is also acceptable
 ```
 
+The if you use the props keyword, do not define an initialize method as it will do it for you. I recommend using the props macro when starting off and switching over to a custom initialization method when you need custom logic.
+
 #### Blocks & Procs
 
 Blocks & Procs can be passed to child components. This will allow you to create more generic & reusable components.
@@ -216,7 +274,7 @@ title = Proc(void).new { h1 "Hello World!" }
 m(MyFirstComponent, title: title)
 ```
 
-## Motion Guide
+## Motions Guide
 
 Motion.cr allows you to mount special DOM elements that can be updated real-time from frontend interactions, backend state changes, or a combination of both. Some features include:
 
@@ -227,9 +285,9 @@ Motion.cr allows you to mount special DOM elements that can be updated real-time
 
 Motion.cr is similar to [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view) (and even React!) in some key ways:
 
-- **Partial Page Replacement** - Motion does not use full page replacement, but rather replaces only the component on the page with new HTML, DOM diffed for performance.
+- **Partial Page Replacement** - Motion.cr does not use full page replacement, but rather replaces only the component on the page with new HTML, DOM diffed for performance.
 - **Encapsulated, consistent stateful components** - Components have continuous internal state that persists and updates. This means each time a component changes, new rendered HTML is generated and can replace what was there before.
-- **Blazing Fast** - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion. Motions take less than 1ms to process with typical times being around 300μs.
+- **Blazing Fast** - Communication does not have to go through the full Amber router and controller stack. No changes to your routing or controller are required to get the full functionality of Motion.cr.
 
 ### Installation
 
@@ -416,13 +474,14 @@ See the code for full API for [Event](https://andrewc910.github.io/motion.cr/Mot
 
 - Due to the way that your components are replaced on the page, Components that set `motion_component` to `true` are limited to a single top-level DOM element. If you have multiple DOM elements in your template at the top level, you must wrap them in a single element. This is a similar limitation that React enforced until `React.Fragment` appeared and is for a very similar reason. Because of this, your upper most component (the component you call from the controller) cannot be a set `motion_component`. The top most component will return the entire html document to the controller and there is no way to wrap an entire document in a single tag.
 
-- Motion generates the `initialize` method for you. You cannot define your own. To add an instance variable to the parameters & initialize it, add a prop like `prop name : String = "Default Name"`
+- Components that enable motions (`motion_component = true`) cannot accept `Proc`'s as they cannot be serialized to JSON.  I am actively looking for workarounds however I have no idea if a solution will be found. 
 
 ## Roadmap
 
-- Stream Updates from Models
-- Routing for a full SPA experience
-- AJAX?(TBD)
+- Distributed system support
+- Sending only the new html down the wire opposed the entire component
+- Global key/value store
+- Routing for a full SPA experience? (TBD)
 
 ## Contributing
 
