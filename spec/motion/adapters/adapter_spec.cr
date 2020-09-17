@@ -30,7 +30,7 @@ require "./spec_helper"
       topics.each do |topic|
         adapter.set_component(topic, TickerComponent.new)
       end
-      adapter.mget_components(topics).size.should eq(5)
+      adapter.get_components(topics).size.should eq(5)
     end
 
     it "can delete a component" do

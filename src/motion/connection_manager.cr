@@ -48,7 +48,7 @@ module Motion
 
     def process_model_stream(stream_topic : String)
       topics = adapter.get_broadcast_streams(stream_topic)
-      components_with_topics = adapter.mget_components(topics)
+      components_with_topics = adapter.get_components(topics)
 
       Motion.action_timer.process_model_stream(stream_topic) do
         components_with_topics.each do |component_with_topic|

@@ -10,7 +10,7 @@ module Motion::Adapters
       raise Motion::Exceptions::NoComponentConnectionError.new(topic)
     end
 
-    def mget_components(topics : Array(String)) : Array(Tuple(String, Motion::Base))
+    def get_components(topics : Array(String)) : Array(Tuple(String, Motion::Base))
       topics.map_with_index do |topic, idx|
         {topics[idx], get_component(topic)}
       end
