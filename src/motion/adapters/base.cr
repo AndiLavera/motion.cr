@@ -1,4 +1,5 @@
 module Motion::Adapters
+  # :nodoc:
   abstract class Base
     abstract def get_component(topic : String) : Motion::Base
     abstract def get_components(topics : Array(String)) : Array(Tuple(String, Motion::Base))

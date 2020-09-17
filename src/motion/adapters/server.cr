@@ -1,4 +1,5 @@
 module Motion::Adapters
+  # :nodoc:
   class Server < Base
     private getter periodic_timers : Array(String) = Array(String).new
     private getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new

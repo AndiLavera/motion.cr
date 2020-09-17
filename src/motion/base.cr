@@ -12,9 +12,13 @@ abstract class Motion::Base
   include Motion::Adapters
 
   @[JSON::Field(ignore: true)]
+  # :nodoc:
   property view : IO::Memory = IO::Memory.new
-  property motion_component : Bool = false
+
+  # :nodoc:
   property render_hash : UInt64?
+
+  property motion_component : Bool = false
 
   # def to_s(io)
   #   io << view
@@ -69,6 +73,7 @@ abstract class Motion::Base
     end
   end
 
+  # :nodoc:
   def _process_model_stream; end
 
   # :nodoc:

@@ -24,6 +24,7 @@ module Motion::HTML::Engine
   include RenderIfDefined
   include WithDefaults
 
+  # :nodoc:
   abstract def view
   # :nodoc:
   abstract def render

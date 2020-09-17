@@ -2,6 +2,7 @@ require "redis"
 require "json"
 
 module Motion::Adapters
+  # :nodoc:
   class Redis < Base
     private getter redis : ::Redis::PooledClient = ::Redis::PooledClient.new(url: Motion.config.redis_url)
 

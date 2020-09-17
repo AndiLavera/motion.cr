@@ -1,4 +1,5 @@
 module Motion
+  # :nodoc:
   class ConnectionManager
     getter adapter : Motion::Adapters::Base
     getter channel : Motion::Channel
