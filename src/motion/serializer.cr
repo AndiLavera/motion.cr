@@ -22,7 +22,7 @@ module Motion
 
     def weak_serialize(component : Motion::Base) : String
       state = dump(component)
-      state_with_class = "#{state}#{NULL_BYTE}#{component.class}"
+      "#{state}#{NULL_BYTE}#{component.class}"
     end
 
     def weak_deserialize(state_with_class : String) : Motion::Base

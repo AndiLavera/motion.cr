@@ -67,8 +67,6 @@ abstract class Motion::Base
       {% end %}
       timers
     end
-
-    
   end
 
   def _process_model_stream; end
