@@ -49,18 +49,15 @@ module Motion::Adapters
 
     def set_periodic_timers(topic : String, component : Motion::Base, &block) : Bool
       component.periodic_timers.each do |periodic_timer|
-        name = periodic_timer[:name].to_s
+        name = periodic_timer[:name]
 
         redis.lpush("periodic_timers", name)
         Motion.logger.info("Periodic Timer #{name} has been registered")
         spawn do
           while connected?(name) && periodic_timer_active?(name)
-            Motion.action_timer.process_periodic_timer(name.to_s) do
-              interval = periodic_timer[:interval]
-              sleep interval if interval.is_a?(Time::Span)
-
-              method = periodic_timer[:method]
-              method.call if method.is_a?(Proc(Nil))
+            Motion.action_timer.process_periodic_timer(name) do
+              sleep periodic_timer[:interval]
+              periodic_timer[:method].call
 
               block.call
             end

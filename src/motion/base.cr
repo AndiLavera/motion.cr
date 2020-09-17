@@ -53,20 +53,22 @@ abstract class Motion::Base
     end
 
     def periodic_timers
-      timers = [] of Hash(Symbol, String | Proc(Nil) | Time::Span)
+      timers = [] of NamedTuple(name: String, method: Proc(Nil), interval: Time::Span)
       {% verbatim do %}
         {% begin %}
           {% for method in @type.methods.select &.annotation(Motion::PeriodicTimer) %}
             timers << {
-              :name     => {{method.name.stringify}},
-              :method   => Proc(Void).new { {{method.name}} },
-              :interval => {{method.annotation(Motion::PeriodicTimer)[:interval]}},
+              name: {{method.name.stringify}},
+              method: Proc(Void).new { {{method.name}} },
+              interval: {{method.annotation(Motion::PeriodicTimer)[:interval]}},
             }
           {% end %}
         {% end %}
       {% end %}
       timers
     end
+
+    
   end
 
   def _process_model_stream; end
