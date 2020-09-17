@@ -3,10 +3,6 @@ module Motion
     getter adapter : Motion::Adapters::Base
     getter channel : Motion::Channel
 
-    # TODO: Shouldn't do Motion.action_timer.my_method(get(topic))
-    # get(topic) should be in the blocks as fetching & setting
-    # components is something that should be timed.
-
     def initialize(@channel : Motion::Channel)
       @adapter = Motion.config.adapter == :server ? Motion::Adapters::Server.new : Motion::Adapters::Redis.new
     end

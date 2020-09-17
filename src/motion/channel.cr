@@ -23,8 +23,6 @@ module Motion
       raise_version_mismatch(message.version) if versions_mismatch?(message.version)
 
       connection_manager.create(message)
-
-      # connection_manager.synchronize(message.topic)
     end
 
     def handle_leave(client_socket, message : Motion::Message)
