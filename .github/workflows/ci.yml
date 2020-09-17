@@ -30,16 +30,15 @@ jobs:
   test_latest:
     runs-on: ubuntu-latest
     services:
-      postgres:
-        image: postgres:10.8
-        env:
-          POSTGRES_USER: mochi
-          POSTGRES_PASSWORD: mochi
-          POSTGRES_DB: mochi_test
-        ports:
-          - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+        # Docker Hub image
+        image: redis
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Install Crystal
         run: |
@@ -53,6 +52,16 @@ jobs:
 
   test_nightly:
     runs-on: ubuntu-latest
+    services:
+      redis:
+        # Docker Hub image
+        image: redis
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Install Crystal
         run: |
