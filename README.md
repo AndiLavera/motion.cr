@@ -49,7 +49,7 @@ Motion is a framework for building reactive, real-time frontend UI components in
     + [Backend Interactions](#backend-interactions)
     + [Motion::Event and Motion::Element](#motionevent-and-motionelement)
 - [Configuration](#configuration)
-  *[Redis](#redis-backend-for-distributed-systems)
+  * [Redis](#redis-backend-for-distributed-systems)
 - [Limitations](#limitations)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
