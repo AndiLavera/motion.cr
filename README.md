@@ -59,7 +59,7 @@ Add the shard to your dependencies:
 
 ```sh
 dependencies:
-  motioncr:
+  motion:
     github: andrewc910/motion.cr
     version: 0.2.0
 ```
