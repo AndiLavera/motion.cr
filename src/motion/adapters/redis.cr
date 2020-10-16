@@ -19,7 +19,7 @@ module Motion::Adapters
     end
 
     def set_component(topic : String, component : Motion::Base) : Bool
-      !!redis.set(topic, Motion.serializer.weak_serialize(component))
+      !!redis.set(topic, Motion.serializer.weak_serialize(component), ex: (Motion.config.redis_ttl * 60))
     end
 
     def destroy_component(topic : String) : Bool
