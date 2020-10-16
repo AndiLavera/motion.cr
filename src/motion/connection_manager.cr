@@ -8,7 +8,7 @@ module Motion
       @adapter = Motion.config.adapter == :server ? Motion::Adapters::Server.new : Motion::Adapters::Redis.new
     end
 
-    def create(message : Motion::Message)
+    def create(message : Motion::Message) : Bool
       state, topic = message.state, message.topic
 
       Motion.action_timer.connect do
@@ -25,7 +25,7 @@ module Motion
       end
     end
 
-    def destroy(message : Motion::Message)
+    def destroy(message : Motion::Message) : Bool
       topic = message.topic
 
       Motion.action_timer.close do

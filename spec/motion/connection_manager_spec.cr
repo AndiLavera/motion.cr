@@ -18,7 +18,11 @@ require "../spec_helper"
 
       pending "can process a motion"
 
-      pending "can create components"
+      it "can create components" do
+        component_connection = Motion::ConnectionManager.new(Motion::Channel.new)
+        message = Motion::Message.new(MESSAGE_JOIN)
+        component_connection.create(message).should be_true
+      end
 
       pending "can destroy components"
 
