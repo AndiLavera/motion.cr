@@ -13,7 +13,7 @@
 </p>
 
 <p align="center"> 
-  <img src="./images/motion-calculator.gif" width="350" />
+  <img src="https://user-images.githubusercontent.com/49383564/96374378-64b38d80-1140-11eb-95c9-fe823a9cc44a.gif" width="350" />
 </p>
 
 Motion is a framework for building reactive, real-time frontend UI components in your Amber application using pure Crystal that are reusable, testable & encapsulated. For brevity, we will call them MotionComponents.
