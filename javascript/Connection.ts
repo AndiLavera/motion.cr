@@ -1,10 +1,11 @@
-import Amber from './Amber';
+import Socket from './Socket';
+import Channel from './Channel';
 import Consumer from './Consumer';
 import Subscriptions from './Subscriptions';
 import Subscription from './Subscription';
 
 class Connection {
-  socket: Amber.Socket;
+  socket: Socket;
 
   consumer: Consumer;
 
@@ -12,16 +13,16 @@ class Connection {
 
   disconnected: boolean;
 
-  channel: Amber.Channel | undefined;
+  channel: Channel | undefined;
 
   reopenDelay: number;
 
   connectionPromise: Promise<any>;
 
-  channels: Array<Amber.Channel>
+  channels: Array<Channel>
 
   constructor(consumer: Consumer) {
-    this.socket = new Amber.Socket('/cable');
+    this.socket = new Socket('/cable');
     this.connectionPromise = this.open.call(this);
     this.consumer = consumer;
     this.subscriptions = this.consumer.subscriptions;
@@ -32,7 +33,7 @@ class Connection {
     this.handleWindowOffload()
   }
 
-  send(data) {
+  send(data): void {
     this.connectionPromise.then(() => {
       const topic = data.identifier.channel
       this.channels.forEach(channel => {
@@ -41,8 +42,9 @@ class Connection {
     });
   }
 
-  joinChannel(data: Subscription) {
+  joinChannel(data: Subscription): void {
     this.connectionPromise.then(() => {
+      debugger
       data.connected();
       this.channel = this.socket.channel(data.channel);
       this.channels.push(this.channel)
@@ -59,18 +61,17 @@ class Connection {
     });
   }
 
-  open() {
+  open(): Promise<void> {
     return this.socket.connect();
   }
 
-  close({ allowReconnect } = { allowReconnect: true }) {
+  close({ allowReconnect } = { allowReconnect: true }): void {
     return this.socket.disconnect();
   }
 
+  // TODO
   /* eslint-disable class-methods-use-this */
-  isActive() {
-    // eslint-disable-next-line no-console
-    console.log('TODO: Connect#isActive is always true');
+  isActive(): boolean {
     return true;
   }
   /* eslint-enable class-methods-use-this */

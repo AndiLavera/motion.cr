@@ -33,23 +33,23 @@ export default class Consumer {
     return createWebSocketURL(this._url);
   }
 
-  send(data) {
+  send(data): void {
     return this.connection.send(data);
   }
 
-  joinChannel(data: Subscription) {
+  joinChannel(data: Subscription): void {
     return this.connection.joinChannel(data);
   }
 
-  connect() {
+  connect(): void {
     return this.connection.open();
   }
 
-  disconnect() {
+  disconnect(): void {
     return this.connection.close({ allowReconnect: false });
   }
 
-  ensureActiveConnection() {
+  ensureActiveConnection(): Promise<void> | boolean {
     if (!this.connection.isActive()) {
       return this.connection.open();
     }
