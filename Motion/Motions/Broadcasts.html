@@ -56,6 +56,11 @@
       
         <ul>
   
+  <li class=" " data-id="motion/Motion/Adapters" data-name="motion::adapters">
+      <a href="../../Motion/Adapters.html">Adapters</a>
+      
+    </li>
+  
   <li class=" " data-id="motion/Motion/Base" data-name="motion::base">
       <a href="../../Motion/Base.html">Base</a>
       
@@ -63,11 +68,6 @@
   
   <li class=" " data-id="motion/Motion/Configuration" data-name="motion::configuration">
       <a href="../../Motion/Configuration.html">Configuration</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/ConnectionManager" data-name="motion::connectionmanager">
-      <a href="../../Motion/ConnectionManager.html">ConnectionManager</a>
       
     </li>
   
@@ -295,7 +295,7 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/92477bde8f196ea410cfcb28e10fc5678c6ba19b/src/motion/motions/broadcasts.cr#L3" target="_blank">
+      <a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/motions/broadcasts.cr#L3" target="_blank">
         motion/motions/broadcasts.cr
       </a>
     
@@ -324,6 +324,8 @@
     
       <li class="entry-summary">
         <a href="#stream_from(channel,method)-macro" class="signature"><strong>stream_from</strong>(channel, method)</a>
+        
+          <div class="summary"><p>Set's the component to listen for messages, when a message is sent, all components listening will go through a forced rerender.</p></div>
         
       </li>
     
@@ -359,10 +361,22 @@
         <a class="method-permalink" href="#stream_from(channel,method)-macro">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Set's the component to listen for messages, when a message is sent,
+all components listening will go through a forced rerender.</p>
+
+<p><code>channel</code> is the channel the component will listen on such as <code>"todos:created"</code>.</p>
+
+<p><code>method</code> is the callback method which will be invoked before rerendering.</p>
+
+<p>In your component: <code>stream_from "todos:created", "my_callback_method"</code> Then anywhere in your application, you can do <code>MotionSocket.stream("todos:created")</code> to send a message. Replace <code>MotionSocket</code> with the socket class you use for motion.cr.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/92477bde8f196ea410cfcb28e10fc5678c6ba19b/src/motion/motions/broadcasts.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/motions/broadcasts.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>

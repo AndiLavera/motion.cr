@@ -56,6 +56,11 @@
       
         <ul>
   
+  <li class=" " data-id="motion/Motion/Adapters" data-name="motion::adapters">
+      <a href="Motion/Adapters.html">Adapters</a>
+      
+    </li>
+  
   <li class=" " data-id="motion/Motion/Base" data-name="motion::base">
       <a href="Motion/Base.html">Base</a>
       
@@ -63,11 +68,6 @@
   
   <li class=" " data-id="motion/Motion/Configuration" data-name="motion::configuration">
       <a href="Motion/Configuration.html">Configuration</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/ConnectionManager" data-name="motion::connectionmanager">
-      <a href="Motion/ConnectionManager.html">ConnectionManager</a>
       
     </li>
   
@@ -303,6 +303,10 @@
 <span class="o">+</span> [<span class="t">Periodic</span> <span class="t">Timers</span>](<span class="c">#periodic-timers)</span>
 <span class="o">+</span> [<span class="t">Backend</span> <span class="t">Interactions</span>](<span class="c">#backend-interactions)</span>
 <span class="o">+</span> [<span class="t">Motion</span><span class="t">::</span><span class="t">Event</span> and <span class="t">Motion</span><span class="t">::</span><span class="t">Element</span>](<span class="c">#motionevent-and-motionelement)</span></code></pre>
+
+<ul><li><a href="#configuration" target="_blank">Configuration</a></li></ul>
+
+<ul><li><a href="#redis-backend-for-distributed-systems" target="_blank">Redis</a></li></ul></ul>
 
 <ul><li><a href="#limitations" target="_blank">Limitations</a></li><li><a href="#roadmap" target="_blank">Roadmap</a></li><li><a href="#contributing" target="_blank">Contributing</a></li><li><a href="#license" target="_blank">License</a></li></ul>
 
@@ -756,6 +760,56 @@ const client = createClient();</code></pre>
   <span class="k">end</span></code></pre>
 
 <p>See the code for full API for <a href="https://andrewc910.github.io/motion.cr/Motion/Event.html" target="_blank">Event</a> and <a href="https://andrewc910.github.io/motion.cr/Motion/Element.html" target="_blank">Element</a>.</p>
+
+<h2><a id="configuration" class="anchor" href="#configuration">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Configuration</h2>
+
+<p>In your <code>motion.cr</code> initializer, you can configure motion.</p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;motion&quot;</span>
+<span class="k">require</span> <span class="s">&quot;motion/monkey_patch/amber&quot;</span>
+
+<span class="t">Motion</span>.configure <span class="k">do</span> <span class="o">|</span>config<span class="o">|</span>
+  <span class="c"># If true, 2 comments will be added at rendering signifying</span>
+  <span class="c"># the start &amp; end of a component. Really helpful for debugging.</span>
+  <span class="c">#</span>
+  <span class="c"># Defaults to true</span>
+  config.render_component_comments <span class="o">=</span> <span class="n">true</span>
+<span class="k">end</span></code></pre>
+
+<h3><a id="redis-backend-for-distributed-systems" class="anchor" href="#redis-backend-for-distributed-systems">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Redis Backend for Distributed Systems</h3>
+
+<p>By default, MotionComponents are serialized and stored on the server in a json format after a websockets channel has been instaniated. This would break on distributed systems as one server may process a motion but isn't storing the serialized object. Motion.cr supports storing serialized components in redis. </p>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;motion&quot;</span>
+<span class="k">require</span> <span class="s">&quot;motion/monkey_patch/amber&quot;</span>
+
+<span class="t">Motion</span>.configure <span class="k">do</span> <span class="o">|</span>config<span class="o">|</span>
+  <span class="c"># Set the adapter for where deserialized components are stored.</span>
+    <span class="c"># Accepts either `:server` or `:redis`. If set to `:server`</span>
+    <span class="c"># component connections will be stored in memory on the server.</span>
+    <span class="c"># `:redis` requires you to set the `redis_url`.</span>
+    config.adapter <span class="o">=</span> <span class="n">:redis</span>
+
+    <span class="c"># Set the redis url if you are using the redis adapter</span>
+    <span class="c">#</span>
+    <span class="c"># Defaults to `&quot;redis://localhost:6379/0&quot;`</span>
+    config.redis_url <span class="o">=</span> <span class="s">&quot;redis://localhost:6379/0&quot;</span>
+
+    <span class="c"># Set the TTL property for components in minutes.</span>
+    <span class="c">#</span>
+    <span class="c"># Motion removes components after a page offloads, however</span>
+    <span class="c"># it is best to set a ttl in case any components do not get</span>
+    <span class="c"># offloaded.</span>
+    config.redis_ttl <span class="o">=</span> <span class="n">30</span>
+<span class="k">end</span></code></pre>
 
 <h2><a id="limitations" class="anchor" href="#limitations">
   <svg class="octicon-link" aria-hidden="true">

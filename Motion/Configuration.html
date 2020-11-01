@@ -56,6 +56,11 @@
       
         <ul>
   
+  <li class=" " data-id="motion/Motion/Adapters" data-name="motion::adapters">
+      <a href="../Motion/Adapters.html">Adapters</a>
+      
+    </li>
+  
   <li class=" " data-id="motion/Motion/Base" data-name="motion::base">
       <a href="../Motion/Base.html">Base</a>
       
@@ -63,11 +68,6 @@
   
   <li class=" current" data-id="motion/Motion/Configuration" data-name="motion::configuration">
       <a href="../Motion/Configuration.html">Configuration</a>
-      
-    </li>
-  
-  <li class=" " data-id="motion/Motion/ConnectionManager" data-name="motion::connectionmanager">
-      <a href="../Motion/ConnectionManager.html">ConnectionManager</a>
       
     </li>
   
@@ -300,7 +300,7 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/92477bde8f196ea410cfcb28e10fc5678c6ba19b/src/motion/configuration.cr#L12" target="_blank">
+      <a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/configuration.cr#L12" target="_blank">
         motion/configuration.cr
       </a>
     
@@ -324,6 +324,48 @@
     Instance Method Summary
   </h2>
   <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#adapter:Symbol-instance-method" class="signature"><strong>#adapter</strong> : Symbol</a>
+        
+          <div class="summary"><p>Set the adapter for where deserialized components are stored.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#adapter=(adapter:Symbol)-instance-method" class="signature"><strong>#adapter=</strong>(adapter : Symbol)</a>
+        
+          <div class="summary"><p>Set the adapter for where deserialized components are stored.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#redis_ttl:Int32-instance-method" class="signature"><strong>#redis_ttl</strong> : Int32</a>
+        
+          <div class="summary"><p>Set the TTL property for components in minutes.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#redis_ttl=(redis_ttl:Int32)-instance-method" class="signature"><strong>#redis_ttl=</strong>(redis_ttl : Int32)</a>
+        
+          <div class="summary"><p>Set the TTL property for components in minutes.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#redis_url:String-instance-method" class="signature"><strong>#redis_url</strong> : String</a>
+        
+          <div class="summary"><p>Set the redis url if you are using the redis adapter</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#redis_url=(redis_url:String)-instance-method" class="signature"><strong>#redis_url=</strong>(redis_url : String)</a>
+        
+          <div class="summary"><p>Set the redis url if you are using the redis adapter</p></div>
+        
+      </li>
     
       <li class="entry-summary">
         <a href="#render_component_comments:Bool-instance-method" class="signature"><strong>#render_component_comments</strong> : Bool</a>
@@ -383,6 +425,150 @@
     Instance Method Detail
   </h2>
   
+    <div class="entry-detail" id="adapter:Symbol-instance-method">
+      <div class="signature">
+        
+        def <strong>adapter</strong> : Symbol
+
+        <a class="method-permalink" href="#adapter:Symbol-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Set the adapter for where deserialized components are stored.
+Accepts either <code>:server</code> or <code>:redis</code>. If set to <code>:server</code>
+component connections will be stored in memory on the server.
+<code>:redis</code> requires you to set the <code><a href="../Motion/Configuration.html#redis_url:String-instance-method">#redis_url</a></code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/configuration.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="adapter=(adapter:Symbol)-instance-method">
+      <div class="signature">
+        
+        def <strong>adapter=</strong>(adapter : Symbol)
+
+        <a class="method-permalink" href="#adapter=(adapter:Symbol)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Set the adapter for where deserialized components are stored.
+Accepts either <code>:server</code> or <code>:redis</code>. If set to <code>:server</code>
+component connections will be stored in memory on the server.
+<code>:redis</code> requires you to set the <code><a href="../Motion/Configuration.html#redis_url:String-instance-method">#redis_url</a></code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/configuration.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="redis_ttl:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>redis_ttl</strong> : Int32
+
+        <a class="method-permalink" href="#redis_ttl:Int32-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Set the TTL property for components in minutes.</p>
+
+<p>Motion removes components after a page offloads, however
+it is best to set a ttl in case any components do not get
+offloaded.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/configuration.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="redis_ttl=(redis_ttl:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>redis_ttl=</strong>(redis_ttl : Int32)
+
+        <a class="method-permalink" href="#redis_ttl=(redis_ttl:Int32)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Set the TTL property for components in minutes.</p>
+
+<p>Motion removes components after a page offloads, however
+it is best to set a ttl in case any components do not get
+offloaded.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/configuration.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="redis_url:String-instance-method">
+      <div class="signature">
+        
+        def <strong>redis_url</strong> : String
+
+        <a class="method-permalink" href="#redis_url:String-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Set the redis url if you are using the redis adapter</p>
+
+<p>Defaults to <code>"redis://localhost:6379/0"</code></p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/configuration.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="redis_url=(redis_url:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>redis_url=</strong>(redis_url : String)
+
+        <a class="method-permalink" href="#redis_url=(redis_url:String)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Set the redis url if you are using the redis adapter</p>
+
+<p>Defaults to <code>"redis://localhost:6379/0"</code></p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/configuration.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="render_component_comments:Bool-instance-method">
       <div class="signature">
         
@@ -402,7 +588,7 @@ the start & end of a component. Really helpful for debugging.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/92477bde8f196ea410cfcb28e10fc5678c6ba19b/src/motion/configuration.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/configuration.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -426,7 +612,7 @@ the start & end of a component. Really helpful for debugging.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/92477bde8f196ea410cfcb28e10fc5678c6ba19b/src/motion/configuration.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/configuration.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
