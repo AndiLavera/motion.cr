@@ -18,13 +18,11 @@ module Motion
 
     @connection_manager : Motion::ConnectionManager?
 
-    def handle_joined(client_socket, json)
+    def handle_joined(client_socket, json : JSON::Any) : Bool
       message = Message.new(json)
       raise_version_mismatch(message.version) if versions_mismatch?(message.version)
 
       connection_manager.create(message)
-
-      synchronize(message.topic)
     end
 
     def handle_leave(client_socket, message : Motion::Message)
@@ -33,52 +31,29 @@ module Motion
 
     def handle_message(client_socket, json : JSON::Any)
       message = Message.new(json)
-      broadcast = false
 
       case message.command
       when "unsubscribe"
         handle_leave(client_socket, message)
       when "process_motion"
         connection_manager.process_motion(message)
-        broadcast = true
       end
-
-      synchronize(message.topic, broadcast)
     end
 
     def process_model_stream(stream_topic : String)
       connection_manager.process_model_stream(stream_topic)
     end
 
-    def synchronize(topic = nil, broadcast = false)
-      # streaming_from component_connection.broadcasts,
-      #   to: :process_broadcast
-
-      if broadcast
-        proc = ->(component : Motion::Base) {
-          render(component, topic)
-        }
-
-        connection_manager.synchronize(topic, proc)
-      end
+    # Amber::WebSockets::Channel#rebroadcast! is a protected method
+    def rebroadcast!(payload)
+      super(payload)
     end
 
-    private def render(component, topic)
-      html = Motion.html_transformer.add_state_to_html(component, component.rerender)
-      rebroadcast!({
-        subject: "message_new",
-        topic:   topic,
-        payload: {
-          html: html,
-        },
-      })
-    end
-
-    def connection_manager
+    def connection_manager : Motion::ConnectionManager
       @connection_manager ||= Motion::ConnectionManager.new(self)
     end
 
-    private def versions_mismatch?(client_version)
+    private def versions_mismatch?(client_version) : Bool
       Motion.config.version != client_version
     end
 

@@ -20,6 +20,16 @@ module Motion
       ]
     end
 
+    def weak_serialize(component : Motion::Base) : String
+      state = dump(component)
+      "#{state}#{NULL_BYTE}#{component.class}"
+    end
+
+    def weak_deserialize(state_with_class : String) : Motion::Base
+      state, component_class = state_with_class.split(NULL_BYTE)
+      load(state, component_class)
+    end
+
     def weak_digest(component : Motion::Base) : UInt64
       dump(component).to_s.hash
     end

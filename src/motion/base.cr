@@ -4,13 +4,20 @@ require "./logger"
 require "./exceptions"
 require "./motions"
 require "./annotations"
+require "./adapters"
 
 abstract class Motion::Base
   include Motion::HTML::Engine
   include Motion::Motions
+  include Motion::Adapters
 
   @[JSON::Field(ignore: true)]
+  # :nodoc:
   property view : IO::Memory = IO::Memory.new
+
+  # :nodoc:
+  property render_hash : UInt64?
+
   property motion_component : Bool = false
 
   # def to_s(io)
@@ -50,14 +57,14 @@ abstract class Motion::Base
     end
 
     def periodic_timers
-      timers = [] of Hash(Symbol, String | Proc(Nil) | Time::Span)
+      timers = [] of NamedTuple(name: String, method: Proc(Nil), interval: Time::Span)
       {% verbatim do %}
         {% begin %}
           {% for method in @type.methods.select &.annotation(Motion::PeriodicTimer) %}
             timers << {
-              :name     => {{method.name.stringify}},
-              :method   => Proc(Void).new { {{method.name}} },
-              :interval => {{method.annotation(Motion::PeriodicTimer)[:interval]}},
+              name: {{method.name.stringify}},
+              method: Proc(Void).new { {{method.name}} },
+              interval: {{method.annotation(Motion::PeriodicTimer)[:interval]}},
             }
           {% end %}
         {% end %}
@@ -66,6 +73,7 @@ abstract class Motion::Base
     end
   end
 
+  # :nodoc:
   def _process_model_stream; end
 
   # :nodoc:

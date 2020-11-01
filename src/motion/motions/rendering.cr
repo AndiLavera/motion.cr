@@ -2,7 +2,7 @@ module Motion::Motions
   # :nodoc:
   module Rendering
     # :nodoc:
-    def render_hash
+    def rerender_hash
       Motion.serializer.weak_digest(self)
     end
   end

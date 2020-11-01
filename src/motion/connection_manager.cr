@@ -1,124 +1,96 @@
 module Motion
+  # :nodoc:
   class ConnectionManager
-    # TODO: Remove nilable
-    getter component_connections : Hash(String, Motion::ComponentConnection?) = Hash(String, Motion::ComponentConnection?).new
-    getter fibers : Hash(String, Fiber) = Hash(String, Fiber).new
-    getter broadcast_streams : Hash(String, Array(String)) = Hash(String, Array(String)).new
+    getter adapter : Motion::Adapters::Base
     getter channel : Motion::Channel
 
-    def initialize(@channel : Motion::Channel); end
-
-    def create(message : Motion::Message)
-      attach_component(message.topic, message.state)
+    def initialize(@channel : Motion::Channel)
+      @adapter = Motion.config.adapter == :server ? Motion::Adapters::Server.new : Motion::Adapters::Redis.new
     end
 
-    def destroy(message : Motion::Message)
+    def create(message : Motion::Message) : Bool
+      state, topic = message.state, message.topic
+
+      Motion.action_timer.connect do
+        component = deserialize(state)
+        component.render_hash = component.rerender_hash
+
+        adapter.set_component(topic, component)
+        adapter.set_broadcast_streams(topic, component)
+        adapter.set_periodic_timers(topic, component) do
+          synchronize(component, topic)
+        end
+
+        component
+      end
+    end
+
+    def destroy(message : Motion::Message) : Bool
       topic = message.topic
 
-      get(topic).close do |component|
-        destroy_periodic_timers(component)
-        destroy_model_streams(component, topic) if component.responds_to?(:broadcast_channel)
-        component_connections.delete(topic)
+      Motion.action_timer.close do
+        component = get_component(topic)
+        adapter.destroy_periodic_timers(component)
+        adapter.destroy_broadcast_stream(topic, component)
+        adapter.destroy_component(topic)
+        component
       end
     end
 
-    def process_motion(message : Motion::Message)
-      get(message.topic).process_motion(message.name, message.event)
+    def process_motion(message : Motion::Message) : Motion::Base
+      Motion.action_timer.process_motion(message.name) do
+        component = get_component(message.topic)
+        component.process_motion(message.name, message.event)
+        synchronize(component, message.topic)
+        adapter.set_component(message.topic, component)
+        component
+      end
     end
 
-    def synchronize(topic : String, proc)
-      get(topic).if_render_required(proc)
-    end
+    def process_model_stream(stream_topic : String)
+      topics = adapter.get_broadcast_streams(stream_topic)
+      components_with_topics = adapter.get_components(topics)
 
-    def process_model_stream(stream_topic)
-      topics = broadcast_streams[stream_topic]?
-      if topics && !topics.empty?
-        topics.each do |topic|
-          component_connection = get(topic)
-          component_connection.process_model_stream(stream_topic)
-          channel.synchronize(topic, true)
+      Motion.action_timer.process_model_stream(stream_topic) do
+        components_with_topics.each do |component_with_topic|
+          topic, component = component_with_topic
+
+          component._process_model_stream
+          synchronize(component, topic)
+          adapter.set_component(topic, component)
         end
+
+        components_with_topics
       end
     end
 
-    def get(topic : String) : Motion::ComponentConnection
-      self.component_connections[topic]?.not_nil!
-    rescue error : NilAssertionError
-      raise Motion::Exceptions::NoComponentConnectionError.new(topic)
-    end
-
-    private def attach_component(topic : String, state : String)
-      component_connection = connect_component(state)
-
-      set_component_connection(component_connection, topic)
-      set_broadcasts(component_connection, topic)
-      set_periodic_timers(topic)
-    end
-
-    private def set_component_connection(component_connection : Motion::ComponentConnection, topic : String)
-      self.component_connections[topic] = component_connection
-    end
-
-    private def set_broadcasts(component_connection, topic)
-      component = component_connection.component
-      if component.responds_to?(:broadcast_channel)
-        if broadcast_streams[component.broadcast_channel]?.nil?
-          broadcast_streams[component.broadcast_channel] = [topic]
-        else
-          broadcast_streams[component.broadcast_channel] << topic
-        end
+    def synchronize(component : Motion::Base, topic : String)
+      Motion.action_timer.if_render_required(component) do
+        render(component, topic)
       end
     end
 
-    private def set_periodic_timers(topic : String)
-      get(topic).periodic_timers.each do |timer|
-        name = timer[:name].to_s
-        self.fibers[name] = spawn do
-          while connected?(topic) && periodic_timer_active?(name)
-            proc = ->do
-              interval = timer[:interval]
-              sleep interval if interval.is_a?(Time::Span)
-
-              method = timer[:method]
-              method.call if method.is_a?(Proc(Nil))
-            end
-
-            get(topic).process_periodic_timer(proc, name.to_s)
-            channel.synchronize(topic: topic, broadcast: true)
-          end
-        end
-      end
+    def render(component, topic)
+      html = Motion.html_transformer.add_state_to_html(component, component.rerender)
+      channel.rebroadcast!({
+        subject: "message_new",
+        topic:   topic,
+        payload: {
+          html: html,
+        },
+      })
     end
 
-    private def connect_component(state) : ComponentConnection
-      ComponentConnection.from_state(state)
+    private def deserialize(state) : Motion::Base
+      Motion.serializer.deserialize(state)
     rescue error : Exception
       # reject
       raise "Exception in connect_component"
       # handle_error(e, "connecting a component")
     end
 
-    private def connected?(topic)
-      !get(topic).nil?
-    end
-
-    # TODO: Some way to allow users to invoke
-    # a method to stop a particular timer
-    private def periodic_timer_active?(name)
-      true
-    end
-
-    private def destroy_periodic_timers(component)
-      component.periodic_timers.each do |timer|
-        if name = timer[:name]
-          fibers.delete(name)
-          logger.info("Periodic Timer #{name} has been disabled")
-        end
-      end
-    end
-
-    private def destroy_model_streams(component, topic)
-      broadcast_streams[component.broadcast_channel].delete(topic)
+    private def get_component(topic : String) : Motion::Base
+      adapter.get_component(topic)
     end
 
     private def handle_error(error, context)

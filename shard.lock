@@ -8,6 +8,14 @@ shards:
     git: https://github.com/kostya/myhtml.git
     version: 1.5.2
 
+  pool:
+    git: https://github.com/ysbaddaden/pool.git
+    version: 0.2.3
+
+  redis:
+    git: https://github.com/stefanwille/crystal-redis.git
+    version: 2.6.0
+
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
     version: 0.2.1

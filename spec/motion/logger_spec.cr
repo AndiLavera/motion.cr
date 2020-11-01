@@ -10,8 +10,9 @@ describe Motion::Logger do
   end
 
   it "can properly format durations" do
-    Motion::Logger.new.timing("Connected") do
+    Motion::Logger.new.timing do
       100.times { |i| i + 1 }
+      "Connected"
     end
   end
 end

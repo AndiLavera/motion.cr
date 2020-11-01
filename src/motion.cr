@@ -40,4 +40,14 @@ module Motion
   def self.logger
     @@config.logger
   end
+
+  # :nodoc:
+  def self.action_timer
+    @@config.action_timer
+  end
+
+  # :nodoc:
+  def self.reset_config
+    @@config = Configuration.new
+  end
 end

@@ -48,6 +48,8 @@ Motion is a framework for building reactive, real-time frontend UI components in
     + [Periodic Timers](#periodic-timers)
     + [Backend Interactions](#backend-interactions)
     + [Motion::Event and Motion::Element](#motionevent-and-motionelement)
+- [Configuration](#configuration)
+  * [Redis](#redis-backend-for-distributed-systems)
 - [Limitations](#limitations)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
@@ -469,6 +471,52 @@ Methods that are mapped using `@[Motion::MapMethod]` can choose to accept an `ev
 ```
 
 See the code for full API for [Event](https://andrewc910.github.io/motion.cr/Motion/Event.html) and [Element](https://andrewc910.github.io/motion.cr/Motion/Element.html).
+
+## Configuration
+
+In your `motion.cr` initializer, you can configure motion.
+
+```crystal
+require "motion"
+require "motion/monkey_patch/amber"
+
+Motion.configure do |config|
+  # If true, 2 comments will be added at rendering signifying
+  # the start & end of a component. Really helpful for debugging.
+  #
+  # Defaults to true
+  config.render_component_comments = true
+end
+```
+
+### Redis Backend for Distributed Systems
+
+By default, MotionComponents are serialized and stored on the server in a json format after a websockets channel has been instaniated. This would break on distributed systems as one server may process a motion but isn't storing the serialized object. Motion.cr supports storing serialized components in redis. 
+
+```crystal
+require "motion"
+require "motion/monkey_patch/amber"
+
+Motion.configure do |config|
+  # Set the adapter for where deserialized components are stored.
+    # Accepts either `:server` or `:redis`. If set to `:server`
+    # component connections will be stored in memory on the server.
+    # `:redis` requires you to set the `redis_url`.
+    config.adapter = :redis
+
+    # Set the redis url if you are using the redis adapter
+    #
+    # Defaults to `"redis://localhost:6379/0"`
+    config.redis_url = "redis://localhost:6379/0"
+
+    # Set the TTL property for components in minutes.
+    #
+    # Motion removes components after a page offloads, however
+    # it is best to set a ttl in case any components do not get
+    # offloaded.
+    config.redis_ttl = 30
+end
+```
 
 ## Limitations
 
