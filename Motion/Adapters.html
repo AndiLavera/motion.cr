@@ -269,7 +269,7 @@
 
   <p>Motion has 2 adapters which can be configured through the <code><a href="../Motion/Configuration.html">Configuration</a></code> class. The 2 available selections are <code>:server</code> and <code>:redis</code>. It's recommended to use <code>:server</code> when you only have 1 node. When you have a distributed system, you can use redis as a backend.</p>
 
-<pre><code class="language-crystal"><span class="t">Motion</span>.configure <span class="k">do</span> <span class="o">|</span>config<span class="o">|</span>
+<pre><code><span class="t">Motion</span>.configure <span class="k">do</span> <span class="o">|</span>config<span class="o">|</span>
   config.adapter <span class="o">=</span> <span class="n">:redis</span>
   config.redis_url <span class="o">=</span> <span class="s">&quot;my_url&quot;</span>
   config.redis_ttl <span class="o">=</span> <span class="n">30</span> <span class="c"># In minutes</span>
@@ -312,28 +312,28 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/adapters.cr#L14" target="_blank">
+      <a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/adapters.cr#L14" target="_blank">
         motion/adapters.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/adapters/base.cr#L1" target="_blank">
+      <a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/adapters/base.cr#L1" target="_blank">
         motion/adapters/base.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/adapters/redis.cr#L4" target="_blank">
+      <a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/adapters/redis.cr#L4" target="_blank">
         motion/adapters/redis.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/adapters/server.cr#L1" target="_blank">
+      <a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/adapters/server.cr#L1" target="_blank">
         motion/adapters/server.cr
       </a>
     

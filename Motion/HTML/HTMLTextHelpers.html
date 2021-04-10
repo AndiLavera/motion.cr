@@ -306,7 +306,7 @@
   </h2>
   
     
-      <a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/html/page_helpers/html_text_helpers.cr#L2" target="_blank">
+      <a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/html/page_helpers/html_text_helpers.cr#L2" target="_blank">
         motion/html/page_helpers/html_text_helpers.cr
       </a>
     
@@ -424,7 +424,7 @@ This can be customized with the <code>highlighter</code> argument.</p>
 <p><strong>Note: This method writes HTML directly to the page. It does not return a
 String</strong></p>
 
-<pre><code class="language-crystal">highlight(<span class="s">&quot;Crystal is type-safe and compiled.&quot;</span>, phrases: [<span class="s">&quot;type-safe&quot;</span>, <span class="s">&quot;compiled&quot;</span>])</code></pre>
+<pre><code>highlight(<span class="s">&quot;Crystal is type-safe and compiled.&quot;</span>, phrases: [<span class="s">&quot;type-safe&quot;</span>, <span class="s">&quot;compiled&quot;</span>])</code></pre>
 
 <p>outputs:</p>
 
@@ -432,7 +432,7 @@ String</strong></p>
 
 <p><strong>With a custom highlighter</strong></p>
 
-<pre><code class="language-crystal">highlight(
+<pre><code>highlight(
   <span class="s">&quot;You&#39;re such a nice and attractive person.&quot;</span>,
   phrases: [<span class="s">&quot;nice&quot;</span>, <span class="s">&quot;attractive&quot;</span>],
   highlighter: <span class="s">&quot;&lt;strong&gt;\\1&lt;/strong&gt;&quot;</span>
@@ -446,7 +446,7 @@ String</strong></p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/html/page_helpers/html_text_helpers.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/html/page_helpers/html_text_helpers.cr#L73" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -472,7 +472,7 @@ singular <code>phrase</code> argument for readability.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/html/page_helpers/html_text_helpers.cr#L96" target="_blank">View source</a>]
+          [<a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/html/page_helpers/html_text_helpers.cr#L96" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -488,7 +488,7 @@ singular <code>phrase</code> argument for readability.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/html/page_helpers/html_text_helpers.cr#L100" target="_blank">View source</a>]
+          [<a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/html/page_helpers/html_text_helpers.cr#L100" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -504,7 +504,7 @@ singular <code>phrase</code> argument for readability.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/html/page_helpers/html_text_helpers.cr#L105" target="_blank">View source</a>]
+          [<a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/html/page_helpers/html_text_helpers.cr#L105" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -524,7 +524,7 @@ singular <code>phrase</code> argument for readability.</p>
 <p><strong>Note: This method writes HTML directly to the page. It does not return a
 String</strong></p>
 
-<pre><code class="language-crystal">simple_format(<span class="s">&quot;foo\n\nbar\n\nbaz&quot;</span>) <span class="k">do</span> <span class="o">|</span>paragraph<span class="o">|</span>
+<pre><code>simple_format(<span class="s">&quot;foo\n\nbar\n\nbaz&quot;</span>) <span class="k">do</span> <span class="o">|</span>paragraph<span class="o">|</span>
   text paragraph
   hr
 <span class="k">end</span></code></pre>
@@ -541,7 +541,7 @@ baz&lt;hr></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/html/page_helpers/html_text_helpers.cr#L129" target="_blank">View source</a>]
+          [<a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/html/page_helpers/html_text_helpers.cr#L129" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -558,7 +558,7 @@ baz&lt;hr></code></pre>
           
           <p>Wraps text in paragraphs based on line breaks</p>
 
-<pre><code class="language-crystal">simple_format(<span class="s">&quot;foo\n\nbar\n\nbaz&quot;</span>)</code></pre>
+<pre><code>simple_format(<span class="s">&quot;foo\n\nbar\n\nbaz&quot;</span>)</code></pre>
 
 <p>outputs:</p>
 
@@ -572,7 +572,7 @@ baz&lt;hr></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/html/page_helpers/html_text_helpers.cr#L154" target="_blank">View source</a>]
+          [<a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/html/page_helpers/html_text_helpers.cr#L154" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -604,7 +604,7 @@ overridden to break on word boundaries by setting the separator to a space
 string.</li><li><code>blk</code> (default: nil) A block to run after the text has been truncated.
 Often used to add an action to read more text, like a "Read more" link.</li></ul>
 
-<pre><code class="language-crystal">truncate(<span class="s">&quot;Four score and seven years ago&quot;</span>, length: <span class="n">20</span>) <span class="k">do</span>
+<pre><code>truncate(<span class="s">&quot;Four score and seven years ago&quot;</span>, length: <span class="n">20</span>) <span class="k">do</span>
   link <span class="s">&quot;Read more&quot;</span>, to: <span class="s">&quot;#&quot;</span>
 <span class="k">end</span></code></pre>
 
@@ -616,7 +616,7 @@ Often used to add an action to read more text, like a "Read more" link.</li></ul
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/html/page_helpers/html_text_helpers.cr#L33" target="_blank">View source</a>]
+          [<a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/html/page_helpers/html_text_helpers.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -632,7 +632,7 @@ Often used to add an action to read more text, like a "Read more" link.</li></ul
       <br/>
       <div>
         
-          [<a href="https://github.com/andrewc910/motion.cr/blob/097e39c73d683c107fee63a8029b924dbacd1ece/src/motion/html/page_helpers/html_text_helpers.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/awcrotwell/motion.cr/blob/45c8d02a3c36999420858d664ce0a9237771b49b/src/motion/html/page_helpers/html_text_helpers.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
