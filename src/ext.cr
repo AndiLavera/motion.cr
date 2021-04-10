@@ -7,7 +7,7 @@ module Motion
         @[JSON::Field(ignore: true)]
         getter view = IO::Memory.new
 
-        def render(component : Motion::Base.class)
+        def mount(component : Motion::Base.class)
           m(component)
           view.to_s
         end
