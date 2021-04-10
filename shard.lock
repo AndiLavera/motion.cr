@@ -2,21 +2,21 @@ version: 2.0
 shards:
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 0.13.2
+    version: 0.14.2
 
   myhtml:
     git: https://github.com/kostya/myhtml.git
-    version: 1.5.2
+    version: 1.5.4
 
   pool:
     git: https://github.com/ysbaddaden/pool.git
-    version: 0.2.3
+    version: 0.2.4
 
   redis:
     git: https://github.com/stefanwille/crystal-redis.git
-    version: 2.6.0
+    version: 2.7.0
 
   wordsmith:
     git: https://github.com/luckyframework/wordsmith.git
-    version: 0.2.1
+    version: 0.2.2
 
