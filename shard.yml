@@ -16,7 +16,8 @@ dependencies:
 
   redis:
     github: stefanwille/crystal-redis
-    version: ~> 2.7.0
+    # TODO: Upgrade to 2.7
+    version: ~> 2.6.0
 
 development_dependencies:
   ameba:
