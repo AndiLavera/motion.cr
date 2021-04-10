@@ -42,7 +42,6 @@ module Motion
       # ameba:disable Lint/UselessAssign
       component = load(state, component_class)
       # ameba:enable Lint/UselessAssign
-
       # if revision == serialized_revision
       #   component
       # else

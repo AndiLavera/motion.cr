@@ -8,7 +8,7 @@ module Motion
   # Main entry for configuring Motion. See `Motion::Configuration` for more details.
   #
   # In `config/initializers/motion.cr`
-  # ```crystal
+  # ```
   # Motion.configure do |config|
   #   config.render_component_comments = true
   # end
