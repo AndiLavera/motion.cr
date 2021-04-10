@@ -1,7 +1,7 @@
 # Set this annotation on any methods that can be invoked from the frontend.
 #
 # Here is a small example setting `MyComponent#add` as a motion:
-# ```crystal
+# ```
 # class MyComponent < Motion::Base
 #   props count : Int32 = 0
 #
@@ -40,7 +40,7 @@ annotation Motion::MapMethod; end
 # the type to be `Time::Span`
 #
 # Here is a small example setting `MyComponent#tick` as a periodic timer:
-# ```crystal
+# ```
 # class TickerComponent < Motion::Base
 #   props ticker : Int32 = 0
 #   props motion_component : Bool = true

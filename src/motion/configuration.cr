@@ -4,7 +4,7 @@ module Motion
   # Main configuration for Motion.cr.
   #
   # In `config/initializers/motion.cr`
-  # ```crystal
+  # ```
   # Motion.configure do |config|
   #   config.render_component_comments = true
   # end
